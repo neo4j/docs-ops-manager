@@ -1,0 +1,9 @@
+= Neo4j Ops manager
+:description: This manual describes how to use Neo4j Ops manager.
+
+Neo4j Ops manager
+
+{check-mark}
+
+(C) {copyright}
+License: link:{common-license-page-uri}[Creative Commons 4.0]
