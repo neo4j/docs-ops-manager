@@ -1,0 +1,3 @@
+:description: This section describes the database manager in Neo4j Ops Manager.
+
+= Database manager 

@@ -1,0 +1,3 @@
+:description: This section describes the configuration of Intelligent Monitoring in Neo4j Ops Manager.
+
+= Configuration of Intelligent Monitoring

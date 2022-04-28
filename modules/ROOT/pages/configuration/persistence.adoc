@@ -1,0 +1,3 @@
+:description: This section describes the configuration of security for HADR with persistence for Neo4j Ops Manager.
+
+= Configuration for HADR with persistence

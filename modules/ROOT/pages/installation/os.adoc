@@ -1,0 +1,12 @@
+:description: This section contains operating system specifics for Neo4j Ops Manager.
+
+= Operating system specifics
+
+[[os-linux]]
+== Linux
+
+[[os-windows]]
+== Windows
+
+[[os-macos]]
+== Mac OS

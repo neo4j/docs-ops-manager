@@ -1,0 +1,3 @@
+:description: This section describes the configuration manager in Neo4j Ops Manager.
+
+= Configuration manager 

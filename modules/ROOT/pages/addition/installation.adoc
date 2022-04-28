@@ -1,0 +1,15 @@
+:description: This section describes the installation process for adding a managed DBMS to Neo4j Ops Manager.
+
+= Installation process
+
+[[register]]
+== Register agent
+
+[[install]]
+== Install agent
+
+[[configure]]
+== Configure agent
+
+[[naming]]
+== Naming

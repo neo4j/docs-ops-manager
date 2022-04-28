@@ -72,4 +72,4 @@
 ** xref:feedback/product-feedback.adoc[]
 
 * Appendix
-** xref:version-compatibility.adoc[]
+** xref:appendix/version-compatibility.adoc[]

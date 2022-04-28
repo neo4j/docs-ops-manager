@@ -1,0 +1,3 @@
+:description: This section describes how to add an Aura instance to Neo4j Ops Manager.
+
+= Add an Aura instance

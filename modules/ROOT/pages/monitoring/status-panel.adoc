@@ -1,0 +1,3 @@
+:description: This section describes the status panel of the Neo4j Ops Manager.
+
+= Status panel
