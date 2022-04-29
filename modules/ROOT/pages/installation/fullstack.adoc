@@ -1,0 +1,12 @@
+:description: This section provides details on full-stack installation.
+
+= Full-stack installation
+
+[[server-package]]
+== Server package: Client, server, and APIs
+
+[[persistence]]
+== Persistence
+
+[[agent]]
+== Agent 
