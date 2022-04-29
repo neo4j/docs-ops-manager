@@ -19,25 +19,25 @@
 ** xref:configuration/persistence.adoc[]
 ** xref:configuration/server.adoc[]
 
-* Component management
-** xref:component/default.adoc[]
-** xref:component/add.adoc[]
-** xref:component/remove.adoc[]
-** xref:component/upgrade.adoc[]
+// * Component management
+// ** xref:component/default.adoc[]
+// ** xref:component/add.adoc[]
+// ** xref:component/remove.adoc[]
+// ** xref:component/upgrade.adoc[]
 
 * Adding a managed DBMS
 ** xref:addition/installation.adoc[]
 ** xref:addition/single.adoc[]
 ** xref:addition/cluster.adoc[]
-** xref:addition/aura.adoc[]
+//** xref:addition/aura.adoc[]
 
 * Monitoring
 ** xref:monitoring/dashboard.adoc[]
 ** xref:monitoring/status-panel.adoc[]
-** xref:monitoring/metric-manager.adoc[]
-** xref:monitoring/log-manager.adoc[]
-** xref:monitoring/alert-manager.adoc[]
-** xref:monitoring/notification-manager.adoc[]
+// ** xref:monitoring/metric-manager.adoc[]
+// ** xref:monitoring/log-manager.adoc[]
+// ** xref:monitoring/alert-manager.adoc[]
+// ** xref:monitoring/notification-manager.adoc[]
 
 * Administration
 ** xref:administration/security-manager.adoc[]
@@ -50,19 +50,19 @@
 ** xref:administration/license-manager.adoc[]
 
 * Operation
-** xref:operation/job-manager.adoc[]
-** xref:operation/data-manager.adoc[]
-** xref:operation/backup-manager.adoc[]
-** xref:operation/performance-manager.adoc[]
+// ** xref:operation/job-manager.adoc[]
+// ** xref:operation/data-manager.adoc[]
+// ** xref:operation/backup-manager.adoc[]
+// ** xref:operation/performance-manager.adoc[]
 ** xref:operation/upgrade-manager.adoc[]
-** xref:operation/admin-manager.adoc[]
+//** xref:operation/admin-manager.adoc[]
 
-* Integration
-** xref:integration/trap-manager.adoc[]
-** xref:integration/integration-manager.adoc[]
-** xref:integration/configuration.adoc[]
-** xref:integration/knowledge-engine.adoc[]
-** xref:integration/other-products.adoc[]
+// * Integration
+// ** xref:integration/trap-manager.adoc[]
+// ** xref:integration/integration-manager.adoc[]
+// ** xref:integration/configuration.adoc[]
+// ** xref:integration/knowledge-engine.adoc[]
+// ** xref:integration/other-products.adoc[]
 
 * Feedback and support
 ** xref:feedback/ui-products.adoc[]
