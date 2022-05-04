@@ -41,13 +41,13 @@
 
 * Administration
 ** xref:administration/security-manager.adoc[]
-** xref:administration/cluster-manager.adoc[]
-** xref:administration/object-manager.adoc[]
-** xref:administration/configuration-manager.adoc[]
-** xref:administration/database-manager.adoc[]
-** xref:administration/plugin-manager.adoc[]
-** xref:administration/deployment-manager.adoc[]
-** xref:administration/license-manager.adoc[]
+// ** xref:administration/cluster-manager.adoc[]
+// ** xref:administration/object-manager.adoc[]
+// ** xref:administration/configuration-manager.adoc[]
+// ** xref:administration/database-manager.adoc[]
+// ** xref:administration/plugin-manager.adoc[]
+// ** xref:administration/deployment-manager.adoc[]
+// ** xref:administration/license-manager.adoc[]
 
 * Operation
 // ** xref:operation/job-manager.adoc[]
