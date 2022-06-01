@@ -1,3 +1,37 @@
 :description: This section contains frequently asked questions about Ops Manager.
 
-= FAQ 
+= Frequently Asked Questions
+
+* Does NOM work with Community Edition?
+** No, currently NOM does not support Community Edition. Managed databases in NOM need to be licensed, Enterprise Edition installations.
+
+* Does NOM work with Desktop?
+** No, currently NOM does not officially support desktop at this time.
+
+* Can I deploy NOM in a cloud environment?
+** It is possible to deploy NOM into a supported cloud environment, using tarball, zip or package managed installations.
+Docker and Kubernetes support will be added later.
+
+* Can I manage both local (on-premise) and remote DBMSs with a single NOM?
+** Yes, a single NOM server can manage multiple Neo4j DBMSs from any location, as long as it is possible for the agent to access the gRPC APIs on the server through network firewalls.
+
+* Does NOM work with Aura instances?
+** Currently, NOM can only manage DBMSs which are self-managed.
+Support for managing Aura instances will be added soon.
+
+* Can I run more than one NOM instance?
+** Yes, it is possible to run more than one instance of NOM.
+For example, one NOM to manage production instances and a second NOM for development and test instances.
+These NOM implementations will be isolated from each other, and will require a full stack for each implementation (server and persistence).
+An agent can connect to a single NOM implementation.
+
+* How much does NOM cost?
+** NOM is free to use for customers with an existing Enterprise DBMS license.
+One single instance of Neo4j DBMS for NOM dedicated use is included, if required, up to the hardware limitations outlined in the prerequisites section of these docs.
+
+* Is there an evaluation edition?
+** NOM may be used for evaluation for a period of 30 days without requiring an Enterprise License for a managed DBMS.
+See the license for full terms and conditions.
+
+* Can I manage a DBMS without an agent?
+** Currently, only DBMSs covered by an agent can be managed by NOM
