@@ -10,7 +10,7 @@
 * Installation
 ** xref:installation/prerequisites.adoc[]
 ** xref:installation/os.adoc[]
-** xref:installation/fullstack.adoc[]
+** xref:installation/server.adoc[]
 ** xref:installation/cloud.adoc[]
 ** xref:installation/faq.adoc[]
 

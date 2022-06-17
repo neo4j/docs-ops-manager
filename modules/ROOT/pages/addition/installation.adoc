@@ -2,8 +2,26 @@
 
 = Installation process
 
+Adding a DBMS in NOM’s terminology means to enable the monitoring of every instance in the DBMS by installing a NOM agent on the instance host and configuring it appropriately.
+
 [[register]]
 == Register agent
+
+* Before adding the DBMS for NOM monitoring, an agent needs to be registered with NOM server which provides server communication configuration for the agent.
+* An agent can be registered with NOM server -
+** from NOM UI
+*** Creation of agent requires name and description for the agent
+*** Once registered the configuration for agent to communicate with NOM server will be:
+**** `CONFIG_SERVER_ADDRESS=<server-address>`
+**** `CONFIG_TOKEN_URL=<token_url>`
+**** `CONFIG_TOKEN_CLIENT_ID=<agent-id>`
+**** `CONFIG_TOKEN_CLIENT_SECRET=<agent-client-secret>`
+*** Save these configurations securely for later to configure the agent
+* Check if the instance of DBMS to be monitored has a supported version.
+Only Neo4j versions from 4.4 on are supported.
+* Before installing the agent to monitor an instance of the DBMS, make sure that the instance is up and running.
+You can check the status with `neo4j status` command
+
 
 [[install]]
 == Install agent

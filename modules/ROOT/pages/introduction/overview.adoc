@@ -1,3 +1,24 @@
 :description: This section provides an overview of Ops manager.
 
 = Overview of Ops Manager
+
+The graph database category, including Neo4j, is growing rapidly, along with increasing sizes of databases which are being deployed more commonly onto clustered deployments.
+Customer deployments are transitioning from self managed on-premises deployments to cloud and hybrid installations.
+With all this change, there is more pressure on DBAs, DevOps and IT Leaders to deliver applications on time and on budget through a focus on increased productivity.
+
+
+Historically, monitoring and administration of Neo4j has been performed with native command line tooling or cypher exposed through cypher-shell or Browser.
+Monitoring has been achievable through integration of 3rd party tooling, requiring separate installations, licenses and deployments with maintenance.
+None of these solutions expose natively the Neo4j context, and there has been an absence of a single place to monitor, administer and operate the customers entire Neo4j estate.
+
+Neo4j Ops Manager (abbreviated to NOM) is a tool provided to assist an administrator of Neo4j DBMS deployments and address this gap.
+It contains current and future features which allow the administrator to monitor, administer and operate these deployments within their estate.
+
+NOM is built on a core architecture designed to support multiple DBMS implementations, both single instance and clusters. This architecture contains metadata driven extensible frameworks for intelligent monitoring and a knowledge engine.
+With these features, is it possible for NOM to assist the Administrator with understanding not just what is going on, but why it is happening and make recommendations explaining what to do about it through explainable insight.
+On top of this architecture and framework are a set of “managers”, covering four pillars of Monitoring, Administration, Operations and Integration.
+
+Whilst NOM contains initially a small set of features, it will continue to add capabilities in three ways:
+* Enhance: add better capability/new features to existing components to improve the user experience
+* Expand: add new managers in each of the four pillars to provide additional capabilities
+* Enrich: add value to managers by adding actionable insights and recommendations using the frameworks

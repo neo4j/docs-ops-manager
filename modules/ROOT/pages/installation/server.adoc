@@ -1,0 +1,41 @@
+:description: This section provides details on server installation.
+
+= Server installation
+
+Server installation is a two step process.
+The first step, as described in the next section, is to setup a Neo4j DBMS to act as persistence storage for NOM.
+
+The second step is to configure arguments and/or environment variables to the specific environment you want to run NOM in and either install NOM as a service or run it as a local process.
+Both ways are described in the following sections.
+Running as a service is the recommended way of operating the NOM Server.
+
+// [[server-package]]
+// == Server package: Client, server, and APIs
+
+[[persistence]]
+== Set up NOM persistence DBMS
+
+First, set up a Neo4j DBMS for NOM.
+It is used to store all NOM data (topology, metrics, etc.).
+Please refer to the link:/operations-manual/current/installation[Operations Manual -> Installation].
+The DBMS and the NOM Server need to be running simultaneously, or the NOM Server will not work.
+
+Make sure to set a secure password for the build-in admin (`neo4j`) and/or create a specific user for the NOM Server.
+Be aware that that user needs full admin access.
+The login to the NOM Server is used in the next step.
+If the DBMS is not newly created, ensure the following:
+
+** That a database called `neo4j` exists.
+This is done via the `SHOW DATABASES` command.
+** That the database `neo4j` is empty.
+This is done via `MATCH (n) RETURN count(n)` which should return 0.
+** That it doesn't contain any indexes or constraints.
+This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
+
+[IMPORTANT]
+====
+The use or manipulation of the persistence database apart from through the NOM Server is highly discouraged and can negatively impact the stability and data correctness of NOM.
+====
+
+[[agent]]
+== Agent

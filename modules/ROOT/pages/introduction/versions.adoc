@@ -1,3 +1,45 @@
 :description: This section describes the versions and components of Ops Manager.
 
 = Versions and components
+
+There are four components in a NOM implementation where the version of the component should be considered.
+
+== NOM server
+
+This contains the server application, user interface and APIs for NOM.
+New versions of NOM are planned to be released every 8 weeks, and it is recommended to upgrade the server frequently to get bug fixes, enhancements and new functionality.
+
+As the server and agent work together, it is advisable to plan to have them running on the same version where possible.
+The server could be upgraded either before or after the agent(s), but there may be some incompatibility issues with changes in the new release.
+
+== NOM Agent
+
+The agent is a standalone goLang executable, and is deployed on the host machine of each DBMS instance to be managed.
+A new version of the agent will be released with the server every 8 weeks, although not every release would contain changes to functionality.
+It is recommended to upgrade the agent frequently to get bug fixes, enhancements and new functionality.
+
+As the server and agent work together, it is advisable to plan to have them running on the same version where possible.
+The agent(s) could be upgraded either before or after the server, but there may be some incompatibility issues with changes in the new release.
+
+== NOM Persistence database
+
+NOM makes use of a Neo4j database for persisting the monitoring and management data.
+Ideally this is a dedicated single instance for NOM, but could also be a dedicated database on a licensed machine elsewhere in the enterprise, or even an Aura Professional or Enterprise instance.
+
+NOM persistence should be deployed using Neo4j Enterprise Edition 4.4.x or later, although we would recommend using the latest version and keeping this upgraded where possible.
+
+== NOM-managed DBMS
+
+The DBMS instances which are managed by NOM need to be licensed Enterprise Edition, and version 4.4.x or later.
+
+
+== Upgrade considerations
+
+When planning to upgrade NOM to a later release, consider the following points:
+
+* Upgrading the server results in a temporary outage of NOM whilst the jar file is replaced.
+On starting the new version, any necessary changes in the persistence schema happens automatically.
+* Upgrading an agent results in a temporary outage of management of any instances registered with that agent.
+* When upgrading the persistence Neo4j, it is recommended to shut down the NOM server for the duration of the upgrade.
+* Given that NOM is a monitoring and administration system, it should require less planning and impact analysis to apply upgrades.
+Hence, frequent upgrades are recommended, especially as new features are added regularly during the initial versions.
