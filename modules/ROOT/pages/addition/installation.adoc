@@ -24,10 +24,115 @@ You can check the status with `neo4j status` command
 
 
 [[install]]
-== Install agent
+== Agent installation
+
+The following steps are required to install an agent:
+
+* Standalone binaries (only linux and windows platform binaries are available)
+** Download: <Public link to agent binary archives>
+** Extract the archive:
++
+[source, terminal, role=noheader]
+----
+tar -xvzf <agent downloaded archive>
+----
+** Add the `/bin` folder in the extracted directory to `PATH`
+* ?If the agent binary is available as part of neo4j enterprise installation in <Neo4j installation /bin> agent is already available
+* To verify the installation, run the following command:
++
+[source, terminal, role=noheader]
+----
+agent version
+----
++
+Which should output:
++
+[source, terminal, role=noheader]
+----
+<agent name> <agent version> <agent revision>
+----
+
+* Make sure the agent version is equal to that of the NOM server.
+
 
 [[configure]]
 == Configure agent
+
+An agent’s run configurations are provided through environment variables.
+The following table lists configuration keys and values to be set for them:
+
+[cols="<,<,<",options="header"]
+|===
+| Variable
+| Description
+| Example
+
+| `CONFIG_SERVER_ADDRESS`
+| Server GRPC Address
+| server:9090
+
+| `CONFIG_TOKEN_URL`
+| Server Token URL
+| +++https://server:8080/api/login/agent+++
+
+| `CONFIG_TOKEN_CLIENT_ID`
+| Client ID for the agent
+|` 3ff98478-d6d2-4e1b-b816-e758c835f076`
+
+| `CONFIG_TOKEN_CLIENT_SECRET`
+| Client secret for the agent
+| secret
+
+| `CONFIG_TLS_TRUSTED_CERTS`
+| PEM encoded trusted CA list ()
+| `/path/to/a/pem/file`
+
+| `CONFIG_LOG_LEVEL`
+| Log level (debug,info,warn,error)
+| info
+
+| `CONFIG_LOG_FILE`
+| Path to the log file
+| `/var/log/nom-agent/log.txt`
+|===
+
+[NOTE]
+====
+Since agent-server communication needs to be encrypted, you need to configure the agent so that it trusts the server's certificates.
+The file that contains the trusted certificate list (PEM encoded) can be specified through the `CONFIG_TLS_TRUSTED_CERTS` environment variable.
+While most operating systems default to the system-wide trusted certificates, that's not the case on Windows.
+For that reason, you must set this environment variable on Windows.
+====
+
+Apart from the start configuration above, for each of the monitored DBMS instance(s), the following environment variables needs to be set to allow the agent to access the instance:
+
+[cols="<,<,<",options="header"]
+|===
+| Variable
+| Description
+| Example
+
+| `CONFIG_INSTANCE_n_NAME`
+| Name of nth instance
+| my-instance-n
+
+| `CONFIG_INSTANCE_n_BOLT_URI`
+| Bolt URI for nth instance
+| bolt://localhost:7687
+
+| `CONFIG_INSTANCE_n_BOLT_USERNAME`
+| Bolt user name for nth instance
+| neo4j
+
+| `CONFIG_INSTANCE_n_BOLT_PASSWORD`
+| Bolt password for nth instance
+| password
+|===
+
+[NOTE]
+====
+Agents are supposed to monitor only local instances and should not be configured to connect to remote instances.
+====
 
 [[naming]]
 == Naming
