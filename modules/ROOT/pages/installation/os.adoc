@@ -2,11 +2,17 @@
 
 = Operating system specifics
 
-[[os-linux]]
-== Linux
+The NOM Server can be run on unix-based operating systems as well as on Windows.
+The NOM Agents can currently only be run Linux or Windows operating systems. 
+Please make sure to pick the correct agent binary that fits the operating system of the DBMS you want to monitor.
 
-[[os-windows]]
-== Windows
 
-[[os-macos]]
-== Mac OS
+
+// [[os-linux]]
+// == Linux
+//
+// [[os-windows]]
+// == Windows
+//
+// [[os-macos]]
+// == Mac OS

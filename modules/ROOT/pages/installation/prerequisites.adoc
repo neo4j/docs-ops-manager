@@ -1,3 +1,19 @@
 :description: This section provides the prerequisites for Neo4j Ops Manager.
 
-= Prerequisites 
+= Prerequisites
+
+The NOM Server and Agents can be installed via downloading their respective packages from the link:https://neo4j.com/download-center[Neo4j Download Center] and placing them on the machines you want to run them on.
+The Nom Server is designed to run on TLS-protected channels.
+For that reason, you need to prepare a certificate to secure server-agent communication.
+The same certificate need to be used for all agent installations.
+
+*NOM Server*
+
+* Java 17
+
+*Persistence DBMS:*
+
+* Neo4j 4.4
+* At least 10 GB free disk space
+* For minimum requirements, see also link:/operations-manual/current/installation/requirements/[Operations Manual -> System requirements].
+* NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to 16 GB of RAM for the use as NOMs persistence.
