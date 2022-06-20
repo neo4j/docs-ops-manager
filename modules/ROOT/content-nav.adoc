@@ -27,8 +27,8 @@
 
 * Adding a managed DBMS
 ** xref:addition/installation.adoc[]
-** xref:addition/single.adoc[]
-** xref:addition/cluster.adoc[]
+//** xref:addition/single.adoc[]
+//** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
 
 * Monitoring
