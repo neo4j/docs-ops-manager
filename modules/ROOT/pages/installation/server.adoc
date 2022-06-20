@@ -2,12 +2,16 @@
 
 = Server installation
 
-Server installation is a two step process.
+Server installation is a two-step process.
 The first step, as described in the next section, is to setup a Neo4j DBMS to act as persistence storage for NOM.
 
-The second step is to configure arguments and/or environment variables to the specific environment you want to run NOM in and either install NOM as a service or run it as a local process.
+The second step is to download and configure arguments and/or environment variables to the specific environment you want to run NOM in and either install NOM as a service or run it as a console application.
 Both ways are described in the following sections.
 Running as a service is the recommended way of operating the NOM Server.
+
+You can download the NOM Server, including the agent binaries here: https://neo4j.com/download-center/#ops-manager[Download].
+Please extract the content from the downloaded `.zip` or `.tar.gz` file to wherever directory you want to operate NOM from
+(in the following referenced as NOM server-folder).
 
 // [[server-package]]
 // == Server package: Client, server, and APIs
@@ -207,7 +211,7 @@ To stop the NOM Server, use the command:
 server.exe stop
 ----
 
-== Running as a local process
+== Running as a console application
 
 [WARNING]
 ====
