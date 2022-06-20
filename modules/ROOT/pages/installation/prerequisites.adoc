@@ -4,12 +4,13 @@
 
 The NOM Server and Agents can be installed via downloading their respective packages from the link:https://neo4j.com/download-center[Neo4j Download Center] and placing them on the machines you want to run them on.
 The Nom Server is designed to run on TLS-protected channels.
-For that reason, you need to prepare a certificate to secure server-agent communication.
-The same certificate need to be used for all agent installations.
+For that reason, you need to prepare a certificate and private key to secure server-agent communication.
+The same certificate needs to be used for all agent installations.
 
 *NOM Server*
 
 * Java 17
+* Key pair and certificate (as a PKCS12 file) to be used for TLS protected endpoints.
 
 *Persistence DBMS:*
 

@@ -20,7 +20,7 @@ It is used to store all NOM data (topology, metrics, etc.).
 Please refer to the link:/operations-manual/current/installation[Operations Manual -> Installation].
 The DBMS and the NOM Server need to be running simultaneously, or the NOM Server will not work.
 
-Make sure to set a secure password for the build-in admin (`neo4j`) and/or create a specific user for the NOM Server.
+Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
 Be aware that that user needs full admin access.
 The login to the NOM Server is used in the next step.
 If the DBMS is not newly created, ensure the following:
@@ -40,10 +40,10 @@ The use or manipulation of the persistence database apart from through the NOM S
 [[service]]
 == Running as a service
 
-=== Unix
+=== Linux (systemd)
 ==== Setting arguments in service file
 
-Navigate to the NOM server-folder under `/etc/` where a `neo4j-ops-manager-service.service` file is located.
+Navigate to the NOM server-folder under `etc/` where a `neo4j-ops-manager-service.service` file is located.
 This file includes a section that needs to be adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
 
 ==== Using environment variables
@@ -60,7 +60,7 @@ The following table contains environment variables and example values:
 | `SPRING_NEO4J_URI`
 | neo4j://localhost:7687
 
-| `SPRING_NEO4J_AUTHENTICATION_USERNAME `
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
 | neo4j
 
 | `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
@@ -129,7 +129,7 @@ sudo systemctl stop neo4j-ops-manager-server
 === Windows
 ==== Setting arguments in the service file
 
-Navigate to the NOM server-folder under `\bin\`, where a `service.xml` is located.
+Navigate to the NOM server-folder under `bin\`, where a `service.xml` is located.
 This file includes an `<arguments>` section that needs to be adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your SSL key-store file, etc.).
 
 ==== Using environment variables
@@ -146,7 +146,7 @@ The following table contains environment variables and example values:
 | `SPRING_NEO4J_URI`
 | neo4j://localhost:7687
 
-| `SPRING_NEO4J_AUTHENTICATION_USERNAME `
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
 | neo4j
 
 | `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
@@ -182,7 +182,7 @@ The following table contains environment variables and example values:
 
 ==== Installation
 
-You install the server service using `server.exe`, provided in the NOM server folder under `\bin\` by running the following command:
+You install the server service using `server.exe`, provided in the NOM server folder under `bin\` by running the following command:
 
 [source, terminal, role=noheader]
 ----
@@ -211,7 +211,7 @@ server.exe stop
 
 [WARNING]
 ====
-Although it is possible to run the NOM Server as a local service, it is not recommended.
+Although it is possible to run the NOM Server as a console application, it is not recommended.
 Best practice is to run the NOM Server as a service, as described in the previous section.
 ====
 
@@ -222,17 +222,17 @@ Navigate to the NOM Server folder and execute the following command:
 
 [source, terminal, role=noheader]
 ----
-java -jar ./../lib/server.jar
+java -jar ./lib/server.jar
         --spring.neo4j.uri=neo4j://localhost:7687
         --spring.neo4j.authentication.username=neo4j
         --spring.neo4j.authentication.password=password
         --server.port=8080
         --server.ssl.key-store-type=PKCS12
-        --server.ssl.key-store=file:./../certificates/server.pfx
+        --server.ssl.key-store=file:./certificates/server.pfx
         --server.ssl.key-store-password=changeit
         --grpc.server.port=9090
         --grpc.server.security.key-store-type=PKCS12
-        --grpc.server.security.key-store=file:./../certificates\server.pfx
+        --grpc.server.security.key-store=file:./certificates\server.pfx
         --grpc.server.security.key-store-password=changeit
         --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing
 ----
@@ -251,7 +251,7 @@ All of the arguments from the command in the last section can also be defined as
 | `SPRING_NEO4J_URI`
 | neo4j://localhost:7687
 
-| `SPRING_NEO4J_AUTHENTICATION_USERNAME `
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
 | neo4j
 
 | `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
@@ -289,7 +289,7 @@ If you set all the arguments to environment variables, you can shorten the serve
 
 [source, terminal, role=noheader]
 ----
-java -jar ./../lib/server.jar
+java -jar ./lib/server.jar
 ----
 
 === Windows
@@ -299,17 +299,17 @@ Navigate to the NOM Server folder and execute the following command:
 
 [source, terminal, role=noheader]
 ----
-java -jar .\..\lib\server.jar
+java -jar .\lib\server.jar
         --spring.neo4j.uri=neo4j://localhost:7687
         --spring.neo4j.authentication.username=neo4j
         --spring.neo4j.authentication.password=password
         --server.port=8080
         --server.ssl.key-store-type=PKCS12
-        --server.ssl.key-store=file:.\..\certificates\server.pfx
+        --server.ssl.key-store=file:.\certificates\server.pfx
         --server.ssl.key-store-password=changeit
         --grpc.server.port=9090
         --grpc.server.security.key-store-type=PKCS12
-        --grpc.server.security.key-store=file:.\..\certificates\server.pfx
+        --grpc.server.security.key-store=file:.\certificates\server.pfx
         --grpc.server.security.key-store-password=changeit
         --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing
 ----
@@ -328,7 +328,7 @@ All of the arguments from the command in the last section can also be defined as
 | `SPRING_NEO4J_URI`
 | neo4j://localhost:7687
 
-| `SPRING_NEO4J_AUTHENTICATION_USERNAME `
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
 | neo4j
 
 | `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
@@ -366,5 +366,5 @@ If you set all the arguments to environment variables, you can shorten the serve
 
 [source, terminal, role=noheader]
 ----
-java -jar .\..\lib\server.jar
+java -jar .\lib\server.jar
 ----

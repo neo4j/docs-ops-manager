@@ -14,7 +14,7 @@ The server could be upgraded either before or after the agent(s), but there may 
 
 == NOM Agent
 
-The agent is a standalone goLang executable, and is deployed on the host machine of each DBMS instance to be managed.
+The agent is a standalone executable, and is deployed on the host machine of each DBMS instance to be managed.
 A new version of the agent will be released with the server every 8 weeks, although not every release would contain changes to functionality.
 It is recommended to upgrade the agent frequently to get bug fixes, enhancements and new functionality.
 
