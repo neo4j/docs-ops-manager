@@ -1,0 +1,41 @@
+:description: This section describes monitoring in Neo4j Ops Manager.
+
+= Monitoring
+
+[[dashboards]]
+== Dashboards
+
+The dashboard page offers rich charts and tables with data related to your monitored DBMSs.
+Currently three time windows are supported Live (30 minutes), 24 hours and 3 days worth of data.
+
+The table in the *Host Metrics* tab and *Instance Metrics* tab includes static data for our DBMSs, like the cpu cores of our system (physical and logical) and memory.
+
+image::dashboard.png[width=800]
+
+Charts allow for zooming/panning by clicking and specifying the area of interest by dragging the cursor.
+To reset zoom in the chart you can press double click inside the chart.
+
+[[status-panel]]
+== Status panel
+
+In the *Status panel* page there are three main tabs containing information about your DBMS.
+
+=== System topology
+
+As with the topology view in the home page, the panel includes information about the specified DBMS.
+The image below shows a healthy Single instance monitored, with two databases, the `neo4j` and `system`.
+
+image::status-panel.png[width=800]
+
+=== Database view
+
+Like the *Status panel* view, this is a database-first view of your system.
+
+image::database-view.png[width=800]
+
+=== Tabular view
+
+This tab offers a tabular view of the DBMS.
+It serves data of our system that can be found if you execute directly to your DBMS the cypher procedure `SHOW DATABASES`.
+
+image::tabular-view.png[width=800]

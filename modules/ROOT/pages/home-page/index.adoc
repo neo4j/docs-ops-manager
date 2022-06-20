@@ -1,0 +1,45 @@
+:description: This section describes the Home Page of the Neo4j Ops Manager.
+
+= Home page
+
+The default username is `admin` and the default password is `passw0rd`.
+To change the password from the user interface, click the top right settings icon that redirects you to the global settings.
+Then click *Settings* on the left side where you can find a form to change the password.
+
+[IMPORTANT]
+====
+Make sure to always store passwords safely.
+Losing passwords leads to getting locked out of the system.
+====
+
+[[system-topology]]
+== System topology
+
+Below is a visual overview of your system.
+In the example image, two systems are monitored, one is a *Cluster* and the other a *Single instance*.
+
+The Single instance is *online*, which means that everything works as expected.
+
+However, the Cluster instance has a status of *DBMS Down*, i.e. the system is not operating at the moment.
+In case of an agent's failure, the *Instance Down* in the last nodes, displays the message *Agent Down*.
+
+image::topology.png[width=800]
+
+
+[[alerts]]
+== Alerts
+
+Home page alerts aggregates the alerts for your individual monitored systems.
+The alerts generated for a cluster that stopped responding, as described above, is illustrated in the image below.
+
+Location of the alert can help you understand the location of the problem so it can be resolved faster.
+
+image::alerts.png[width=800]
+
+[[working-with-a-dbms]]
+== Working with a DBMS
+
+To change the DBMS, click on the dropdown in the middle of the navigation bar.
+All pages below the *Home* page are then displaying data for the selected DBMS.
+
+image::dropdown.png[width=800]
