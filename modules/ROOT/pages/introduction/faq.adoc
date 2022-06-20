@@ -9,7 +9,7 @@
 ** No, currently NOM does not officially support desktop at this time.
 
 * Can I deploy NOM in a cloud environment?
-** It is possible to deploy NOM into a supported cloud environment, using tarball, zip or package managed installations.
+** It is possible to deploy NOM into a supported cloud environment, using tarball and zip installations.
 Docker and Kubernetes support will be added later.
 
 * Can I manage both local (on-premise) and remote DBMSs with a single NOM?

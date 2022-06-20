@@ -11,13 +11,13 @@
 ** xref:installation/prerequisites.adoc[]
 ** xref:installation/os.adoc[]
 ** xref:installation/server.adoc[]
-** xref:installation/cloud.adoc[]
+// ** xref:installation/cloud.adoc[]
 ** xref:installation/faq.adoc[]
 
-* Configuration
-** xref:configuration/security.adoc[]
-** xref:configuration/persistence.adoc[]
-** xref:configuration/server.adoc[]
+// * Configuration
+// ** xref:configuration/security.adoc[]
+// ** xref:configuration/persistence.adoc[]
+// ** xref:configuration/server.adoc[]
 
 // * Component management
 // ** xref:component/default.adoc[]
