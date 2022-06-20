@@ -134,5 +134,127 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 Agents are supposed to monitor only local instances and should not be configured to connect to remote instances.
 ====
 
-[[naming]]
-== Naming
+[[running-agent]]
+== Run an agent
+
+An agent can run in two modes, console or service.
+Best practice is to run an agent in service mode.
+
+. Run an agent in console mode:
++
+All configuration values for the agent should be set as environment variables before starting the agent
++
+* Command:
++
+[source, terminal, role=noheader]
+----
+agent console
+----
+
+. Run an agent in service mode:
++
+To run an agent in service means that the agent process runs in the background and monitors the instance and this is the recommended way.
+The agent lifecycle is handled by the operating system service manager.
++
+* Install the service for linux (systemd):
++
+** Run
++
+[source, terminal, role=noheader]
+----
+agent service install
+----
+** Execute
++
+[source, terminal, role=noheader]
+----
+systemctl edit neo4j-ops-manager-agent.service
+----
++
+and set environment variables by either setting Environment or EnvironmentFile options.
+For example, using the Environment options, the override file looks as follows:
++
+[source, terminal, role=noheader]
+----
+[Service]
+Environment="CONFIG_SERVER_ADDRESS=<server grpc address>" Environment="CONFIG_TOKEN_URL=<server http login url>"
+Environment="CONFIG_TOKEN_CLIENT_ID=<client id>" Environment="CONFIG_TOKEN_CLIENT_SECRET=<client secret>" Environment="CONFIG_TLS_TRUSTED_CERTS=</path/to/trusted/certs/pem/file>"
+Environment="CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>"
+Environment="CONFIG_INSTANCE_1_NAME=<instance name>" Environment="CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>"
+Environment="CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>" Environment="CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>"
+----
++
+** Start your service
++
+[source, terminal, role=noheader]
+----
+systemctl start neo4j-ops-manager-agent.service
+----
++
+or
++
+[source, terminal, role=noheader]
+----
+agent service stop??????
+----
+** Logs are available, using journalctl, via
++
+[source, terminal, role=noheader]
+----
+journalctl -u neo4j-ops-manager-agent
+----
++
+* Install the service for Windows:
+** Run
++
+[source, terminal, role=noheader]
+----
+agent service install
+----
++
+** Open registry editor and navigate to `HKLM\SYSTEM\CurrentControlSet\Services\neo4j-ops-manager-agent`.
+** Create a key of type `REG_MULTI_SZ` named `Environment` and add your environment variables, each on a separate line:
++
+[source, terminal, role=noheader]
+----
+CONFIG_SERVER_ADDRESS=<server grpc address>
+CONFIG_TOKEN_URL=<server http login url>
+CONFIG_TOKEN_CLIENT_ID=<client id>
+CONFIG_TOKEN_CLIENT_SECRET=<client secret>
+CONFIG_TLS_TRUSTED_CERTS=</path/to/the/trusted/certs/pem>
+CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>
+CONFIG_INSTANCE_1_NAME=<instance name>
+CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>
+CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>
+CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>
+----
++
+** Start your service
++
+[source, terminal, role=noheader]
+----
+agent service start
+----
++
+* To uninstall the service
++
+[source, terminal, role=noheader]
+----
+agent service uninstall
+----
+
+[[add-single]]
+== Add a single instance
+
+To add a single instance of the DBMS to monitor:
+* Install the agent, as above.
+* Configure the environment variables required by the agent.
+* Run the agent.
+
+[[add-cluster]]
+== Add a cluster
+
+To add a DBMS cluster to monitor, for every instance of the cluster:
+* Install the agent, as above.
+* Configure the environment variables required by the agent.
+* Run the agent.
