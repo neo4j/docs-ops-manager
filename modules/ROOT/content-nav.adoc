@@ -31,9 +31,10 @@
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
 
-* Monitoring
-** xref:monitoring/dashboard.adoc[]
-** xref:monitoring/status-panel.adoc[]
+* xref:/home-page/index.adoc[]
+
+* xref:monitoring/index.adoc[]
+//** xref:monitoring/status-panel.adoc[]
 // ** xref:monitoring/metric-manager.adoc[]
 // ** xref:monitoring/log-manager.adoc[]
 // ** xref:monitoring/alert-manager.adoc[]
