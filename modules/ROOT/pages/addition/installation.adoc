@@ -29,15 +29,14 @@ You can check the status with `neo4j status` command
 The following steps are required to install an agent:
 
 * Standalone binaries (only linux and windows platform binaries are available)
-** Download: <Public link to agent binary archives>
+** Download: https://neo4j.com/download-center/#ops-manager[Download]
 ** Extract the archive:
 +
 [source, terminal, role=noheader]
 ----
 tar -xvzf <agent downloaded archive>
 ----
-** Add the `/bin` folder in the extracted directory to `PATH`
-* ?If the agent binary is available as part of neo4j enterprise installation in <Neo4j installation /bin> agent is already available
+** Add the `bin` folder in the extracted directory to `PATH`
 * To verify the installation, run the following command:
 +
 [source, terminal, role=noheader]
@@ -177,11 +176,16 @@ For example, using the Environment options, the override file looks as follows:
 [source, terminal, role=noheader]
 ----
 [Service]
-Environment="CONFIG_SERVER_ADDRESS=<server grpc address>" Environment="CONFIG_TOKEN_URL=<server http login url>"
-Environment="CONFIG_TOKEN_CLIENT_ID=<client id>" Environment="CONFIG_TOKEN_CLIENT_SECRET=<client secret>" Environment="CONFIG_TLS_TRUSTED_CERTS=</path/to/trusted/certs/pem/file>"
+Environment="CONFIG_SERVER_ADDRESS=<server grpc address>"
+Environment="CONFIG_TOKEN_URL=<server http login url>"
+Environment="CONFIG_TOKEN_CLIENT_ID=<client id>"
+Environment="CONFIG_TOKEN_CLIENT_SECRET=<client secret>"
+Environment="CONFIG_TLS_TRUSTED_CERTS=</path/to/trusted/certs/pem/file>"
 Environment="CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>"
-Environment="CONFIG_INSTANCE_1_NAME=<instance name>" Environment="CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>"
-Environment="CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>" Environment="CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>"
+Environment="CONFIG_INSTANCE_1_NAME=<instance name>"
+Environment="CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>"
+Environment="CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>"
+Environment="CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>"
 ----
 +
 ** Start your service
@@ -195,7 +199,7 @@ or
 +
 [source, terminal, role=noheader]
 ----
-agent service stop??????
+systemctl stop neo4j-ops-manager-agent.service
 ----
 ** Logs are available, using journalctl, via
 +
