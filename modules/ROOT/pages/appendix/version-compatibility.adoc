@@ -12,7 +12,7 @@ Neo4j Ops Manager follows link:https://semver.org/[semantic] versioning for its 
 
 == Compatibility matrix
 
-Every Neo4j Operations Manager rlease relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
+Every Neo4j Ops Manager release relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
 Following table details the compatibility matrix for NOM:
 
 [cols="<,<,<,<,<",options="header"]
