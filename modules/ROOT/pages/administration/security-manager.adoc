@@ -15,8 +15,6 @@ In this tab, you can:
 * Modify existing users
 * Assign role to user
 
-Additionally for each action in the Security Manager panels, a Cypher command is generated.
-
 image::user-creation.png[width=800]
 
 == Roles tab
@@ -35,3 +33,8 @@ In this tab, you can:
 * Create new privileges
 * Revoke existing privileges
 * Search privileges for existing roles 
+
+[NOTE]
+====
+For each action in the Security Manager panels, a Cypher command is generated and can be viewed in the action dialog. 
+====
