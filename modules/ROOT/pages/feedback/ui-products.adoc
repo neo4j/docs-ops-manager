@@ -7,7 +7,7 @@ Neo4j Ops Manager is integrated directly with Segment, giving it the potential t
 
 No personal information is collected.
 
-.We collect two types of analytics 
+.We collect the following analytics types: 
 * Anonymous crash reports — Crash reports allow us to quickly diagnose and fix problems.
 
 * Anonymous usage statistics — This data helps us prioritize features and improvements.
