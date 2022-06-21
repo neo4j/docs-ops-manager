@@ -2,5 +2,6 @@
 
 = Product feedback and suggestions
 
-We would love to recieve your feedback. If you would like to tell us how to improve or have any great suggestions please head over to: https://feedback.neo4j.com/operations-manager[Canny]. 
+We would love to recieve your feedback. 
+If you would like to tell us how to improve or have any great suggestions please head over to: https://feedback.neo4j.com/operations-manager[Canny]. 
 You can get there at any time by using the *Send Feedback* button at the top of the UI. 
