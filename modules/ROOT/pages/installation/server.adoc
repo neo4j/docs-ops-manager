@@ -50,6 +50,11 @@ The use or manipulation of the persistence database apart from through the NOM S
 Navigate to the NOM server-folder under `etc/` where a `neo4j-ops-manager-service.service` file is located.
 This file includes a section that needs to be adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
 
+[IMPORTANT]
+====
+In case you have multiple versions of Java installed on the machine you will use for the server, you can set `JAVA_HOME` environment variable to point to the desired Java home directory in the service unit file.
+====
+
 ==== Using environment variables
 
 As an alternative to changing the arguments in the `neo4j-ops-manager-service.service` file, you can instead use environment variables to achieve the same result.
