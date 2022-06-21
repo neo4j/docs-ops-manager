@@ -12,7 +12,7 @@ A patch release is usually for bug fixes and hot fix features.
 == Compatibility Matrix
 
 Every Neo4j Operations Manager rlease relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
-Following table details the compatiblity matrix for NOM:
+Following table details the compatibility matrix for NOM:
 
 [cols="<,<,<,<,<",options="header"]
 |===
