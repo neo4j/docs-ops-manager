@@ -9,7 +9,7 @@ A major release usually includes breaking changes accross NOM server and NOM age
 A minor release includes non-breaking changes and improvements to old features and may include new features for NOM server or NOM agent or both.
 A patch release is usually for bug fixes and hot fix features.
 
-== Compatibility Matrix
+== Compatibility matrix
 
 Every Neo4j Operations Manager rlease relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
 Following table details the compatibility matrix for NOM:
