@@ -128,6 +128,18 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 | password
 |===
 
+[IMPORTANT]
+====
+`n` in the above environment variables needs to be replaced with `1`, `2`, etc. for each of the monitored DBMS instance(s) on the same host.
+For example, for a single monitored DBMS, the environment variables must be named as `CONFIG_INSTANCE_1_NAME`, `CONFIG_INSTANCE_1_BOLT_URI`, `CONFIG_INSTANCE_1_BOLT_USERNAME` and `CONFIG_INSTANCE_1_BOLT_PASSWORD`.
+====
+
+[IMPORTANT]
+====
+The instance name that you specify for `CONFIG_INSTANCE_n_NAME` will be used to identify your instance on NOM user interface.
+For this reason, it is important that you specify unique names across your cluster.
+====
+
 [NOTE]
 ====
 Agents are supposed to monitor only local instances and should not be configured to connect to remote instances.
