@@ -21,7 +21,7 @@ The same certificate needs to be used for all agent installations.
 
 Whilst an AuraDB Professional or Enterprise could be used for NOM persistence, consideration should be given to the following:
 
-* The AuraDB instance should be for exclusive use of the NOM server
-* The NOM server and persistence should ideally be located on the same LAN segment to avoid performance being impacted by WAN traffic
-* Future product developments may require features not currently available in AuraDB
+* The AuraDB instance should be for exclusive use of the NOM server.
+* The NOM server and persistence should ideally be located on the same LAN segment to avoid performance being impacted by WAN traffic.
+* Future product developments may require features not currently available in AuraDB.
 
