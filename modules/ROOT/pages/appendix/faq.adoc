@@ -1,6 +1,6 @@
 :description: This section contains frequently asked questions about Ops Manager.
 
-= Frequently Asked Questions
+= Frequently asked questions
 
 * Does NOM work with Community Edition?
 ** No, currently NOM does not support Community Edition. Managed databases in NOM need to be licensed, Enterprise Edition installations.
