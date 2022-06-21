@@ -77,7 +77,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -89,7 +89,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit
@@ -163,7 +163,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -175,7 +175,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit
@@ -268,7 +268,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -280,7 +280,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit
@@ -345,7 +345,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -357,7 +357,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit
