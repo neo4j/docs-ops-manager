@@ -1,6 +1,5 @@
-:description: This section describes the architecture of Ops Manager.
-
 = Architecture
+:description: This section describes the architecture of Ops Manager.
 
 The Ops Manager architecture is shown in this diagram:
 

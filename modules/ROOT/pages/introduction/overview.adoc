@@ -1,6 +1,5 @@
-:description: This section provides an overview of Ops manager.
-
 = Overview of Ops Manager
+:description: This section provides an overview of Ops manager.
 
 The graph database category, including Neo4j, is growing rapidly, along with increasing sizes of databases which are being deployed more commonly onto clustered deployments.
 Customer deployments are transitioning from self managed on-premises deployments to cloud and hybrid installations.

@@ -1,6 +1,5 @@
-:description: This section describes the Home Page of the Neo4j Ops Manager.
-
 = Home page
+:description: This section describes the Home Page of the Neo4j Ops Manager.
 
 The default username is `admin` and the default password is `passw0rd`.
 To change the password from the user interface, click the top right settings icon that redirects you to the global settings.

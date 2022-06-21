@@ -1,6 +1,5 @@
-:description: This section describes monitoring in Neo4j Ops Manager.
-
 = Monitoring
+:description: This section describes monitoring in Neo4j Ops Manager.
 
 [[dashboards]]
 == Dashboard
@@ -22,7 +21,7 @@ In the *Status panel* page there are three main tabs containing information abou
 
 === System topology
 
-This tab offers a toplology view of the specified DBMS. 
+This tab offers a toplology view of the specified DBMS.
 It is similar to the topology view in the home page, but provides more detail.
 The image below shows a healthy Single instance monitored, with two databases, the `neo4j` and `system`.
 
@@ -37,6 +36,6 @@ image::database-view.png[width=800]
 === Tabular view
 
 This tab offers a tabular view of the DBMS.
-It displays data that can be found if you directly execute the cypher procedure `SHOW DATABASES` on your DBMS. 
+It displays data that can be found if you directly execute the cypher procedure `SHOW DATABASES` on your DBMS.
 
 image::tabular-view.png[width=800]

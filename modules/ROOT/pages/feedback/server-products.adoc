@@ -1,6 +1,5 @@
-:description: This section describes server product analytics in Neo4j Ops Manager.
-
 = Server product analytics
+:description: This section describes server product analytics in Neo4j Ops Manager.
 
 [[compliance]]
 == Compliance

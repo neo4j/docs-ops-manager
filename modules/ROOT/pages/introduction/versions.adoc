@@ -1,6 +1,5 @@
-:description: This section describes the versions and components of Ops Manager.
-
 = Versions and components
+:description: This section describes the versions and components of Ops Manager.
 
 There are four components in a NOM implementation where the version of the component should be considered.
 

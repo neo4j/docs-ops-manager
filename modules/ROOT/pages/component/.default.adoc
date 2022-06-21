@@ -1,3 +1,2 @@
-:description: This section describesthe default components of Neo4j Ops Manager.
-
 = Default components
+:description: This section describesthe default components of Neo4j Ops Manager.

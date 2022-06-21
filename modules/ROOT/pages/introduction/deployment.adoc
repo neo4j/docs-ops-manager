@@ -1,6 +1,5 @@
-:description: This section describes the different types of deployments in Ops Manager.
-
 = Types of deployment
+:description: This section describes the different types of deployments in Ops Manager.
 
 As seen previously, there are three components which make up the architecture for NOM.
 These may be deployed in a number of ways depending on the platform and technologies used.
