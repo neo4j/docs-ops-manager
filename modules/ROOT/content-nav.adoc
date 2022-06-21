@@ -5,7 +5,6 @@
 ** xref:introduction/architecture.adoc[]
 ** xref:introduction/deployment.adoc[]
 ** xref:introduction/versions.adoc[]
-** xref:introduction/faq.adoc[]
 
 * Installation
 ** xref:installation/prerequisites.adoc[]
@@ -75,3 +74,4 @@
 
 * Appendix
 ** xref:appendix/version-compatibility.adoc[]
+** xref:appendix/faq.adoc[]
