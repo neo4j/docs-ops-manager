@@ -130,13 +130,11 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 
 [IMPORTANT]
 ====
-`n` in the above environment variables needs to be replaced with `1`, `2`, etc. for each of the monitored DBMS instances on the same host.
-For example, for a single monitored DBMS, the environment variables must be named as `CONFIG_INSTANCE_1_NAME`, `CONFIG_INSTANCE_1_BOLT_URI`, `CONFIG_INSTANCE_1_BOLT_USERNAME` and `CONFIG_INSTANCE_1_BOLT_PASSWORD`.
-====
+Environment variable considerations:
 
-[IMPORTANT]
-====
-The instance name that you specify for `CONFIG_INSTANCE_n_NAME` will be used to identify your instance on NOM.
+* `n` in the above environment variables needs to be replaced with `1`, `2`, etc. for each of the monitored DBMS instances on the same host.
+For example, for a single monitored DBMS, the environment variables must be named as `CONFIG_INSTANCE_1_NAME`, `CONFIG_INSTANCE_1_BOLT_URI`, `CONFIG_INSTANCE_1_BOLT_USERNAME` and `CONFIG_INSTANCE_1_BOLT_PASSWORD`.
+* The instance name that you specify for `CONFIG_INSTANCE_n_NAME` will be used to identify your instance on NOM.
 For this reason, it is important that you specify unique names across your cluster.
 ====
 
