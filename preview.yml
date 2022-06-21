@@ -6,6 +6,7 @@ site:
 content:
   sources:
   - url: ./
+    edit_url: 'https://github.com/neo4j/docs-ops-manager/blob/{refname}/{path}'
     branches: HEAD
     exclude:
     - '!**/_includes/*'
