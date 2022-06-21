@@ -3,6 +3,6 @@
 = Upgrade manager 
 
 Upgrade manager offers an opportunity to explore the upgrade options for your monitored Neo4j DBMSs.
-Available versions are listed with release notes, and a download link. 
+Available versions are listed with release notes, and a link to the product download page. 
 
 image::upgrades.png[width=800]
