@@ -18,4 +18,4 @@ Then click *Analytics* on the left side where you can find the controls to opt i
 
 image::analytics.png[width=800]
 
-Once you have opted out - the the default user until you choose to opt in again. 
+Once you have opted out - no analytics will be sent for the current Neo4j Ops Manager user until you choose to opt in again. 
