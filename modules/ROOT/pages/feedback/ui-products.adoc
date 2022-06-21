@@ -1,7 +1,7 @@
 :description: This section describes the user interface product analytics in Neo4j Ops Manager.
 
 = User interface product analytics
-Product analytics, is used to track events and analytics for Neo4j Ops Manager.
+Product analytics is used to track events and analytics for Neo4j Ops Manager.
 
 Neo4j Ops Manager is integrated directly with Segment, giving it the potential to send analytics data.
 
