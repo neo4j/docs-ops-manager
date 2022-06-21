@@ -136,7 +136,7 @@ For example, for a single monitored DBMS, the environment variables must be name
 
 [IMPORTANT]
 ====
-The instance name that you specify for `CONFIG_INSTANCE_n_NAME` will be used to identify your instance on NOM user interface.
+The instance name that you specify for `CONFIG_INSTANCE_n_NAME` will be used to identify your instance on NOM.
 For this reason, it is important that you specify unique names across your cluster.
 ====
 
