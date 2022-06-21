@@ -12,7 +12,7 @@
 ** xref:installation/os.adoc[]
 ** xref:installation/server.adoc[]
 // ** xref:installation/cloud.adoc[]
-** xref:installation/faq.adoc[]
+// ** xref:installation/faq.adoc[]
 
 // * Configuration
 // ** xref:configuration/security.adoc[]
@@ -25,8 +25,8 @@
 // ** xref:component/remove.adoc[]
 // ** xref:component/upgrade.adoc[]
 
-* Adding a managed DBMS
-** xref:addition/installation.adoc[]
+// * Adding a managed DBMS
+* xref:addition/index.adoc[]
 //** xref:addition/single.adoc[]
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]

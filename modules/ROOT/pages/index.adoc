@@ -1,9 +1,10 @@
 = Neo4j Ops manager
 :description: This manual describes how to use Neo4j Ops manager.
 
-Neo4j Ops manager
-
-{check-mark}
-
 (C) {copyright}
 License: link:{common-license-page-uri}[Creative Commons 4.0]
+
+=== Neo4j Ops Manager
+
+Neo4j Ops Manager is a tool to allow the DBA, or administrator, to Monitor, Administer and Operate all the Neo4j DBMSs in the Enterprise from a simple Web interface
+

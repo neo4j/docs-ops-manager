@@ -1,6 +1,6 @@
 :description: This section describes the installation process for adding a managed DBMS to Neo4j Ops Manager.
 
-= Installation process
+= Adding a managed DBMS
 
 Adding a DBMS in NOM’s terminology means to enable the monitoring of every instance in the DBMS by installing a NOM agent on the instance host and configuring it appropriately.
 
@@ -24,7 +24,7 @@ You can check the status with `neo4j status` command
 
 
 [[install]]
-== Agent installation
+== Install agent
 
 The following steps are required to install an agent:
 
@@ -134,7 +134,7 @@ Agents are supposed to monitor only local instances and should not be configured
 ====
 
 [[running-agent]]
-== Run an agent
+== Run agent
 
 An agent can run in two modes, console or service.
 Best practice is to run an agent in service mode.
@@ -250,15 +250,19 @@ agent service uninstall
 [[add-single]]
 == Add a single instance
 
-To add a single instance of the DBMS to monitor:
-* Install the agent, as above.
+To add a single instance DBMS to monitor:
+
+* Register agent.
+* Install agent.
 * Configure the environment variables required by the agent.
 * Run the agent.
 
 [[add-cluster]]
 == Add a cluster
 
-To add a DBMS cluster to monitor, for every instance of the cluster:
-* Install the agent, as above.
+To add a cluster DBMS to monitor, for *every* instance of the cluster:
+
+* Register agent.
+* Install agent.
 * Configure the environment variables required by the agent.
 * Run the agent.

@@ -3,7 +3,7 @@
 = Monitoring
 
 [[dashboards]]
-== Dashboards
+== Dashboard
 
 The dashboard page offers rich charts and tables with data related to your monitored DBMSs.
 Currently three time windows are supported Live (30 minutes), 24 hours and 3 days worth of data.
@@ -22,20 +22,21 @@ In the *Status panel* page there are three main tabs containing information abou
 
 === System topology
 
-As with the topology view in the home page, the panel includes information about the specified DBMS.
+This tab offers a toplology view of the specified DBMS. 
+It is similar to the topology view in the home page but provides more detail.
 The image below shows a healthy Single instance monitored, with two databases, the `neo4j` and `system`.
 
 image::status-panel.png[width=800]
 
 === Database view
 
-Like the *Status panel* view, this is a database-first view of your system.
+This tab offers a database-first view of your DBMS.
 
 image::database-view.png[width=800]
 
 === Tabular view
 
 This tab offers a tabular view of the DBMS.
-It serves data of our system that can be found if you execute directly to your DBMS the cypher procedure `SHOW DATABASES`.
+It shows data that can be found if you directly execute the cypher procedure `SHOW DATABASES` on your DBMS. 
 
 image::tabular-view.png[width=800]
