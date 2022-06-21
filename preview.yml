@@ -20,6 +20,12 @@ ui:
 urls:
   html_extension_style: indexify
 
+antora:
+  extensions:
+  - require: "@neo4j-antora/antora-modify-sitemaps"
+    sitemap_version: '~'
+    move_sitemaps_to_components: 'true' 
+
 asciidoc:
   extensions:
   - "@neo4j-documentation/remote-include"
