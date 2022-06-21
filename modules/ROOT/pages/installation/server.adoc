@@ -1,0 +1,373 @@
+= Server installation
+:description: This section provides details on server installation.
+
+Server installation is a two-step process.
+The first step, as described in the next section, is to setup a Neo4j DBMS to act as persistence storage for NOM.
+
+The second step is to download and configure arguments and/or environment variables to the specific environment you want to run NOM in and either install NOM as a service or run it as a console application.
+Both ways are described in the following sections.
+Running as a service is the recommended way of operating the NOM Server.
+
+You can download the NOM Server, including the agent binaries here: https://neo4j.com/download-center/#ops-manager[Download].
+Please extract the content from the downloaded `.zip` or `.tar.gz` file to wherever directory you want to operate NOM from
+(in the following referenced as NOM server-folder).
+
+// [[server-package]]
+// == Server package: Client, server, and APIs
+
+[[persistence]]
+== Set up NOM persistence DBMS
+
+First, set up a Neo4j DBMS for NOM.
+It is used to store all NOM data (topology, metrics, etc.).
+Please refer to the link:/operations-manual/current/installation[Operations Manual -> Installation].
+The DBMS and the NOM Server need to be running simultaneously, or the NOM Server will not work.
+
+Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
+Be aware that that user needs full admin access.
+The login to the NOM Server is used in the next step.
+If the DBMS is not newly created, ensure the following:
+
+** That a database called `neo4j` exists.
+This is done via the `SHOW DATABASES` command.
+** That the database `neo4j` is empty.
+This is done via `MATCH (n) RETURN count(n)` which should return 0.
+** That it doesn't contain any indexes or constraints.
+This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
+
+[IMPORTANT]
+====
+The use or manipulation of the persistence database apart from through the NOM Server is highly discouraged and can negatively impact the stability and data correctness of NOM.
+====
+
+[[service]]
+== Running as a service
+
+=== Linux (systemd)
+==== Setting arguments in service file
+
+Navigate to the NOM server-folder under `etc/` where a `neo4j-ops-manager-service.service` file is located.
+This file includes a section that needs to be adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
+
+==== Using environment variables
+
+As an alternative to changing the arguments in the `neo4j-ops-manager-service.service` file, you can instead use environment variables to achieve the same result.
+The `neo4j-ops-manager-service.service` file contains the necessary information for this.
+The following table contains environment variables and example values:
+
+[cols="<,<",options="header"]
+|===
+| Environment variable name
+| Example value
+
+| `SPRING_NEO4J_URI`
+| neo4j://localhost:7687
+
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
+| neo4j
+
+| `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
+| password
+
+| `SERVER_PORT`
+| 8080
+
+| `SERVER_SSL_KEY_STORE_TYPE`
+| PKCS12
+
+| `SERVER_SSL_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `SERVER_SSL_KEY_STORE_PASSWORD`
+| changeit
+
+| `GRPC_SERVER_PORT`
+| 9090
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_TYPE`
+| PKCS12
+
+| `GRPC_SERVER_SECURITY_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
+| changeit
+
+| `JWT_SECRET`
+| please-set-a-random-secret-string-here-for-jwt-signing
+|===
+
+
+==== Installation
+
+After updating the `neo4j-ops-manager-service.service` file to reflect your configuration, it must be copied into the directory `/etc/systemd/system`.
+
+Next, execute the following commands to install the NOM Server as a service:
+
+[source, terminal, role=noheader]
+----
+sudo systemctl daemon-reload
+sudo systemctl enable neo4j-ops-manager-server
+----
+
+==== Starting and stopping
+
+Once the installation is successfully completed, you can start the NOM Server as a service with the command:
+
+[source, terminal, role=noheader]
+----
+sudo systemctl start neo4j-ops-manager-server
+----
+
+The NOM Server is now ready to use.
+
+To stop the NOM Server, use the command:
+
+[source, terminal, role=noheader]
+----
+sudo systemctl stop neo4j-ops-manager-server
+----
+
+
+=== Windows
+==== Setting arguments in the service file
+
+Navigate to the NOM server-folder under `bin\`, where a `service.xml` is located.
+This file includes an `<arguments>` section that needs to be adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your SSL key-store file, etc.).
+
+==== Using environment variables
+
+As an alternative to changing the arguments in the `service.xml` file, you can instead use environment variables to achieve the same result.
+The `service.xml` file contains the necessary information for this.
+The following table contains environment variables and example values:
+
+[cols="<,<",options="header"]
+|===
+| Environment variable name
+| Example value
+
+| `SPRING_NEO4J_URI`
+| neo4j://localhost:7687
+
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
+| neo4j
+
+| `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
+| password
+
+| `SERVER_PORT`
+| 8080
+
+| `SERVER_SSL_KEY_STORE_TYPE`
+| PKCS12
+
+| `SERVER_SSL_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `SERVER_SSL_KEY_STORE_PASSWORD`
+| changeit
+
+| `GRPC_SERVER_PORT`
+| 9090
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_TYPE`
+| PKCS12
+
+| `GRPC_SERVER_SECURITY_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
+| changeit
+
+| `JWT_SECRET`
+| please-set-a-random-secret-string-here-for-jwt-signing
+|===
+
+==== Installation
+
+You install the server service using `server.exe`, provided in the NOM server folder under `bin\` by running the following command:
+
+[source, terminal, role=noheader]
+----
+server.exe install
+----
+
+==== Starting and stopping
+
+Once the installation is successfully completed, you can start the NOM Server as a service with the command:
+
+[source, terminal, role=noheader]
+----
+server.exe start
+----
+
+The NOM Server is now ready to use.
+
+To stop the NOM Server, use the command:
+
+[source, terminal, role=noheader]
+----
+server.exe stop
+----
+
+== Running as a console application
+
+[WARNING]
+====
+Although it is possible to run the NOM Server as a console application, it is not recommended.
+Best practice is to run the NOM Server as a service, as described in the previous section.
+====
+
+=== Unix
+==== Passing arguments on command line
+
+Navigate to the NOM Server folder and execute the following command:
+
+[source, terminal, role=noheader]
+----
+java -jar ./lib/server.jar
+        --spring.neo4j.uri=neo4j://localhost:7687
+        --spring.neo4j.authentication.username=neo4j
+        --spring.neo4j.authentication.password=password
+        --server.port=8080
+        --server.ssl.key-store-type=PKCS12
+        --server.ssl.key-store=file:./certificates/server.pfx
+        --server.ssl.key-store-password=changeit
+        --grpc.server.port=9090
+        --grpc.server.security.key-store-type=PKCS12
+        --grpc.server.security.key-store=file:./certificates\server.pfx
+        --grpc.server.security.key-store-password=changeit
+        --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing
+----
+
+Make sure to replace the arguments with values adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
+
+==== Using environment variables
+
+All of the arguments from the command in the last section can also be defined as environment variables with the given name mapping.
+
+[cols="<,<",options="header"]
+|===
+| Environment variable name
+| Example value
+
+| `SPRING_NEO4J_URI`
+| neo4j://localhost:7687
+
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
+| neo4j
+
+| `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
+| password
+
+| `SERVER_PORT`
+| 8080
+
+| `SERVER_SSL_KEY_STORE_TYPE`
+| PKCS12
+
+| `SERVER_SSL_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `SERVER_SSL_KEY_STORE_PASSWORD`
+| changeit
+
+| `GRPC_SERVER_PORT`
+| 9090
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_TYPE`
+| PKCS12
+
+| `GRPC_SERVER_SECURITY_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
+| changeit
+
+| `JWT_SECRET`
+| please-set-a-random-secret-string-here-for-jwt-signing
+|===
+
+If you set all the arguments to environment variables, you can shorten the server start command to the following (provided that you have navigated to the NOM Server folder):
+
+[source, terminal, role=noheader]
+----
+java -jar ./lib/server.jar
+----
+
+=== Windows
+==== Passing arguments on the command line
+
+Navigate to the NOM Server folder and execute the following command:
+
+[source, terminal, role=noheader]
+----
+java -jar .\lib\server.jar
+        --spring.neo4j.uri=neo4j://localhost:7687
+        --spring.neo4j.authentication.username=neo4j
+        --spring.neo4j.authentication.password=password
+        --server.port=8080
+        --server.ssl.key-store-type=PKCS12
+        --server.ssl.key-store=file:.\certificates\server.pfx
+        --server.ssl.key-store-password=changeit
+        --grpc.server.port=9090
+        --grpc.server.security.key-store-type=PKCS12
+        --grpc.server.security.key-store=file:.\certificates\server.pfx
+        --grpc.server.security.key-store-password=changeit
+        --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing
+----
+
+Make sure to replace the arguments with values adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
+
+==== Using environment variables
+
+All of the arguments from the command in the last section can also be defined as environment variables with the given name mapping.
+
+[cols="<,<",options="header"]
+|===
+| Environment variable name
+| Example value
+
+| `SPRING_NEO4J_URI`
+| neo4j://localhost:7687
+
+| `SPRING_NEO4J_AUTHENTICATION_USERNAME`
+| neo4j
+
+| `SPRING_NEO4J_AUTHENTICATION_PASSWORD`
+| password
+
+| `SERVER_PORT`
+| 8080
+
+| `SERVER_SSL_KEY_STORE_TYPE`
+| PKCS12
+
+| `SERVER_SSL_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `SERVER_SSL_KEY_STORE_PASSWORD`
+| changeit
+
+| `GRPC_SERVER_PORT`
+| 9090
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_TYPE`
+| PKCS12
+
+| `GRPC_SERVER_SECURITY_KEY_STORE`
+| `./../certificates/server.pfx`
+
+| `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
+| changeit
+
+| `JWT_SECRET`
+| please-set-a-random-secret-string-here-for-jwt-signing
+|===
+
+If you set all the arguments to environment variables, you can shorten the server start command to the following (provided that you have navigated to the NOM Server folder):
+
+[source, terminal, role=noheader]
+----
+java -jar .\lib\server.jar
+----

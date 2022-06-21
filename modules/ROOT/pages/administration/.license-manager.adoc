@@ -1,0 +1,2 @@
+= License manager
+:description: This section describes the license manager in Neo4j Ops Manager.

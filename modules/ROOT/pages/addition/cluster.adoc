@@ -1,0 +1,2 @@
+= Add a cluster
+:description: This section describes how to add a cluster to Neo4j Ops Manager.

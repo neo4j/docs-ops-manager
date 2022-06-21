@@ -1,0 +1,2 @@
+= Extending Knowledge Engine
+:description: This section describes extending the Knowledge Engine in Neo4j Ops Manager.

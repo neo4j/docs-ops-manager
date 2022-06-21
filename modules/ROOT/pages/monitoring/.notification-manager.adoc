@@ -1,0 +1,2 @@
+= Notification manager
+:description: This section describes the notification manager in Neo4j Ops Manager.

@@ -1,0 +1,2 @@
+= Upgrade a component
+:description: This section describes how to upgrade components in Neo4j Ops Manager.

@@ -1,0 +1,2 @@
+= Performance manager
+:description: This section describes the performance manager.

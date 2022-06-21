@@ -1,0 +1,2 @@
+= Cluster manager
+:description: This section describes the cluster manager in Neo4j Ops Manager.

@@ -1,0 +1,2 @@
+= Admin manager
+:description: This section describes the admin manager in Neo4j Ops Manager.

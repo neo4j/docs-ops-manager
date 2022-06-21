@@ -1,0 +1,30 @@
+= Version compatibility
+:description: This section provides a version compatibility matrix for Neo4j Ops Manager.
+
+== Versioning scheme
+
+Neo4j Ops Manager follows link:https://semver.org/[semantic] versioning for its releases.
+
+* A major release can include breaking changes across NOM server and NOM agent features.
+* A minor release can include non-breaking changes and improvements to old features, and may include new features for NOM server, NOM agent, or both.
+* A patch release is usually for bug fixes and hot-fix features.
+
+== Compatibility matrix
+
+Every Neo4j Ops Manager release relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
+Following table details the compatibility matrix for NOM:
+
+[cols="<,<,<,<,<",options="header"]
+|===
+| NOM Release
+| NOM Server
+| NOM Agent
+| NOM Persistence (Neo4j Enterprise)
+| Neo4j DBMS
+
+| 1.0.0
+| 1.0.0
+| 1.0.0
+| >4.4.2
+| >4.4.2
+|===

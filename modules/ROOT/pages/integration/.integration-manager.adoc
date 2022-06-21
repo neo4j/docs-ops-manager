@@ -1,0 +1,2 @@
+= Integration manager
+:description: This section describes the integration manager in Neo4j Ops Manager.

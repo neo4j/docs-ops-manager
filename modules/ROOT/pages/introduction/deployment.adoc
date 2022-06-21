@@ -1,0 +1,22 @@
+= Types of deployment
+:description: This section describes the different types of deployments in Ops Manager.
+
+As seen previously, there are three components which make up the architecture for NOM.
+These may be deployed in a number of ways depending on the platform and technologies used.
+
+Initially, NOM will be made available for customers deploying in self-managed environments, including in their own data centers (on-premises), private cloud or on one of the Neo4j supported public clouds.
+
+Currently, support is available for Linux and Windows using tarball or zip file installations.
+Support for package managers will be added in a later release, along with support for docker and kubernetes.
+
+Support for Aura instances and the ability to run NOM as a Service will be provided at a later date.
+
+The agent should be deployed as a service on the host operating system of each Neo4j DBMS instance to be managed by NOM.
+Where more than one instance is hosted on the same host, only a single agent is required.
+
+The NOM server should be installed on a server with Java 17. This could be a dedicated server, or a shared application server.
+
+The NOM persistence database should be created on a Neo4j instance.
+Ideally this would be a dedicated single instance for NOM with only the NOM persistence database deployed (in which case a license is supplied).
+It is also possible to use an existing, licensed Neo4j instance or cluster and create a database for NOM to use exclusively.
+In this case, the DBMS should be licensed separately. It is also possible to use an Aura Instance (Professional or Enterprise) for NOM persistence.

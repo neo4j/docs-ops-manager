@@ -1,0 +1,7 @@
+= Help and learn
+:description: This section describes available support channels for Ops Manager.
+
+If you ever need any assistance, please click on the *Help and Learn* icon in the UI.
+This will provide access to the product documentation, the Neo4j Community pages, or our Neo4j discussion boards on Discord.
+
+image::helpandlearn.png[width=800]

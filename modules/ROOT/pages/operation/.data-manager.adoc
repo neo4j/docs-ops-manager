@@ -1,0 +1,2 @@
+= Data manager
+:description: This section describes the data manager in Neo4j Ops Manager.

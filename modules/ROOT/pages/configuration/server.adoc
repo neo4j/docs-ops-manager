@@ -1,0 +1,2 @@
+= Configuration for HADR with server
+:description: This section describes the configuration of security for HADR with server for Neo4j Ops Manager.

@@ -1,0 +1,2 @@
+= Plugin manager
+:description: This section describes the plugin manager in Neo4j Ops Manager.
