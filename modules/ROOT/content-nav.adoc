@@ -67,10 +67,11 @@
 
 * Feedback and support
 ** xref:feedback/ui-products.adoc[]
-** xref:feedback/server-products.adoc[]
-** xref:feedback/online-feedback.adoc[]
-** xref:feedback/package-feedback.adoc[]
+// ** xref:feedback/server-products.adoc[]
+// ** xref:feedback/online-feedback.adoc[]
+// ** xref:feedback/package-feedback.adoc[]
 ** xref:feedback/product-feedback.adoc[]
+** xref:feedback/support.adoc[]
 
 * Appendix
 ** xref:appendix/version-compatibility.adoc[]
