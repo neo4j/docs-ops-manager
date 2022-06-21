@@ -4,7 +4,7 @@
 
 == Versioning Scheme
 
-Neo4j Operations Manager follows the link:https://semver.org/[Semantic] versioning for it's releases.
+Neo4j Ops Manager follows the link:https://semver.org/[Semantic] versioning for it's releases.
 A major release usually includes breaking changes accross NOM server and NOM agent features.
 A minor release includes non-breaking changes and improvements to old features and may include new features for NOM server or NOM agent or both.
 A patch release is usually for bug fixes and hot fix features.
