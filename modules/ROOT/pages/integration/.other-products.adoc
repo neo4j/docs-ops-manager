@@ -1,6 +1,5 @@
-:description: This section describes the integration with other products in Neo4j Ops Manager.
-
 = Integration with other products
+:description: This section describes the integration with other products in Neo4j Ops Manager.
 
 [[time-series]]
 == Time series data

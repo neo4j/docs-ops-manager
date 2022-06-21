@@ -1,3 +1,2 @@
-:description: This section describes how to remove components from Neo4j Ops Manager.
-
 = Remove a component
+:description: This section describes how to remove components from Neo4j Ops Manager.

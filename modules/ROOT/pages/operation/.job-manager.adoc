@@ -1,3 +1,2 @@
+= Job manager
 :description: This section describes the job manager in Neo4j Ops Manager.
-
-= Job manager 

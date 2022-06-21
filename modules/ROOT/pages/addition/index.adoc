@@ -1,6 +1,5 @@
-:description: This section describes the installation process for adding a managed DBMS to Neo4j Ops Manager.
-
 = Adding a managed DBMS
+:description: This section describes the installation process for adding a managed DBMS to Neo4j Ops Manager.
 
 Adding a DBMS in NOM’s terminology means to enable the monitoring of every instance in the DBMS by installing a NOM agent on the instance host and configuring it appropriately.
 

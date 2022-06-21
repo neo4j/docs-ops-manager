@@ -1,3 +1,2 @@
-:description: This section describes cloud deployment of Neo4j Ops Manager.
-
 = Cloud deployment
+:description: This section describes cloud deployment of Neo4j Ops Manager.

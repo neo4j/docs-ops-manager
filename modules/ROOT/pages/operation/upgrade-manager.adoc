@@ -1,8 +1,7 @@
+= Upgrade manager
 :description: This section describes the upgrade manager in Neo4j Ops Manager.
 
-= Upgrade manager 
-
 Upgrade manager offers an opportunity to explore the upgrade options for your monitored Neo4j DBMSs.
-Available versions are listed with release notes, and a link to the product download page. 
+Available versions are listed with release notes, and a link to the product download page.
 
 image::upgrades.png[width=800]

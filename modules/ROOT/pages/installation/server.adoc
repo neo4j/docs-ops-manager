@@ -1,6 +1,5 @@
-:description: This section provides details on server installation.
-
 = Server installation
+:description: This section provides details on server installation.
 
 Server installation is a two-step process.
 The first step, as described in the next section, is to setup a Neo4j DBMS to act as persistence storage for NOM.

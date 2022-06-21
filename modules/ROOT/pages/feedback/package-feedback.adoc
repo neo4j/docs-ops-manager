@@ -1,3 +1,2 @@
-:description: This section describes package feedback in Neo4j Ops Manager.
-
 = Package feedback
+:description: This section describes package feedback in Neo4j Ops Manager.

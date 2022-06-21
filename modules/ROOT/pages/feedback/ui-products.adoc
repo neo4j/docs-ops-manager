@@ -1,21 +1,21 @@
+= User interface product analytics
 :description: This section describes the user interface product analytics in Neo4j Ops Manager.
 
-= User interface product analytics
 Product analytics is used to track events and analytics for Neo4j Ops Manager.
 
 Neo4j Ops Manager is integrated directly with Segment, giving it the potential to send analytics data.
 
 No personal information is collected.
 
-.We collect the following analytics types: 
+.We collect the following analytics types:
 * Anonymous crash reports — Crash reports enable us to quickly diagnose and fix problems.
 * Anonymous usage statistics — This data helps us prioritize features and improvements.
 
 It is possible for you to opt out of allowing these types of analytics to be collected:
- 
+
 . Click the top right settings icon that redirects you to the global settings.
-. Click *Analytics*, where you can find the controls to opt in, or opt out of analytics collection. 
+. Click *Analytics*, where you can find the controls to opt in, or opt out of analytics collection.
 
 image::analytics.png[width=800]
 
-Once you have opted out, no analytics will be sent for the current Neo4j Ops Manager user until you choose to opt in again. 
+Once you have opted out, no analytics will be sent for the current Neo4j Ops Manager user until you choose to opt in again.

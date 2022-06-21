@@ -1,3 +1,2 @@
+= Alert manager
 :description: This section describes the alert manager in Neo4j Ops Manager.
-
-= Alert manager 

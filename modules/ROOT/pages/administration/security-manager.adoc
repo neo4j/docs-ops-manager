@@ -1,6 +1,5 @@
-:description: This section describes the security manager in Neo4j Ops Manager.
-
 = Security manager
+:description: This section describes the security manager in Neo4j Ops Manager.
 
 *Security Manager* consists of three tabs; *Users*, *Roles* and *Privileges*.
 
@@ -32,9 +31,9 @@ In this tab, you can:
 
 * Create new privileges
 * Revoke existing privileges
-* Search privileges for existing roles 
+* Search privileges for existing roles
 
 [NOTE]
 ====
-For each action in the Security Manager panels, a Cypher command is generated and can be viewed in the action dialog. 
+For each action in the Security Manager panels, a Cypher command is generated and can be viewed in the action dialog.
 ====

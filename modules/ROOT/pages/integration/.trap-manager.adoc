@@ -1,3 +1,2 @@
+= Trap manager
 :description: This section describes the trap manager in Neo4j Ops Manager.
-
-= Trap manager 

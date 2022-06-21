@@ -1,6 +1,5 @@
-:description: This section provides a version compatibility matrix for Neo4j Ops Manager.
-
 = Version compatibility
+:description: This section provides a version compatibility matrix for Neo4j Ops Manager.
 
 == Versioning scheme
 
