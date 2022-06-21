@@ -2,7 +2,7 @@
 
 = Version compatibility
 
-== Versioning Scheme
+== Versioning scheme
 
 Neo4j Ops Manager follows the link:https://semver.org/[Semantic] versioning for it's releases.
 A major release usually includes breaking changes accross NOM server and NOM agent features.
