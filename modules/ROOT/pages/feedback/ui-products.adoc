@@ -11,9 +11,10 @@ No personal information is collected.
 * Anonymous crash reports — Crash reports enable us to quickly diagnose and fix problems.
 * Anonymous usage statistics — This data helps us prioritize features and improvements.
 
-It is possible for you to opt out of allowing these types of analytics to be collected. 
-Click the top right settings icon that redirects you to the global settings.
-Then click *Analytics* on the left side where you can find the controls to opt in or out of analytics collection. 
+It is possible for you to opt out of allowing these types of analytics to be collected:
+ 
+. Click the top right settings icon that redirects you to the global settings.
+. Click *Analytics*, where you can find the controls to opt in, or opt out of analytics collection. 
 
 image::analytics.png[width=800]
 
