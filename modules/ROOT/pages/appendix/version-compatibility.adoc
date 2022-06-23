@@ -3,7 +3,7 @@
 
 == Versioning scheme
 
-Neo4j Ops Manager follows link:https://semver.org/[semantic] versioning for its releases.
+Neo4j Ops Manager follows link:https://semver.org/[semantic versioning] for its releases.
 
 * A major release can include breaking changes across NOM server and NOM agent features.
 * A minor release can include non-breaking changes and improvements to old features, and may include new features for NOM server, NOM agent, or both.

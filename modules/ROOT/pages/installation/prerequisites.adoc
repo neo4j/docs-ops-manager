@@ -15,7 +15,7 @@ The same certificate needs to be used for all agent installations.
 
 * Neo4j 4.4 Enterprise Edition
 * At least 10 GB free disk space
-* For minimum requirements, see also link:/operations-manual/current/installation/requirements/[Operations Manual -> System requirements].
+* For minimum requirements, see also link:/docs/operations-manual/current/installation/requirements/[Operations Manual -> System requirements].
 * NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to 16 GB of RAM for the use as NOMs persistence.
 
 Whilst an AuraDB Professional or Enterprise could be used for NOM persistence, consideration should be given to the following:
