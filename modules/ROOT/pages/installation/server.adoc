@@ -20,7 +20,7 @@ Please extract the content from the downloaded `.zip` or `.tar.gz` file to where
 
 First, set up a Neo4j DBMS for NOM.
 It is used to store all NOM data (topology, metrics, etc.).
-Please refer to the link:/operations-manual/current/installation[Operations Manual -> Installation].
+Please refer to the link:/docs/operations-manual/current/installation[Operations Manual -> Installation].
 The DBMS and the NOM Server need to be running simultaneously, or the NOM Server will not work.
 
 Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
