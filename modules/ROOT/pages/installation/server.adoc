@@ -20,7 +20,7 @@ Please extract the content from the downloaded `.zip` or `.tar.gz` file to where
 
 First, set up a Neo4j DBMS for NOM.
 It is used to store all NOM data (topology, metrics, etc.).
-Please refer to the link:/operations-manual/current/installation[Operations Manual -> Installation].
+Please refer to the link:/docs/operations-manual/current/installation[Operations Manual -> Installation].
 The DBMS and the NOM Server need to be running simultaneously, or the NOM Server will not work.
 
 Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
@@ -49,6 +49,11 @@ The use or manipulation of the persistence database apart from through the NOM S
 Navigate to the NOM server-folder under `etc/` where a `neo4j-ops-manager-service.service` file is located.
 This file includes a section that needs to be adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
 
+[IMPORTANT]
+====
+In case you have multiple versions of Java installed on the machine you will use for the server, you can set `JAVA_HOME` environment variable to point to the desired Java home directory in the service unit file.
+====
+
 ==== Using environment variables
 
 As an alternative to changing the arguments in the `neo4j-ops-manager-service.service` file, you can instead use environment variables to achieve the same result.
@@ -76,7 +81,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -88,7 +93,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit
@@ -162,7 +167,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -174,7 +179,7 @@ The following table contains environment variables and example values:
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit
@@ -267,7 +272,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -279,7 +284,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit
@@ -344,7 +349,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `SERVER_SSL_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `SERVER_SSL_KEY_STORE_PASSWORD`
 | changeit
@@ -356,7 +361,7 @@ All of the arguments from the command in the last section can also be defined as
 | PKCS12
 
 | `GRPC_SERVER_SECURITY_KEY_STORE`
-| `./../certificates/server.pfx`
+| `file:./../certificates/server.pfx`
 
 | `GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD`
 | changeit

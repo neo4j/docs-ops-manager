@@ -6,21 +6,35 @@ Adding a DBMS in NOM’s terminology means to enable the monitoring of every ins
 [[register]]
 == Register agent
 
-* Before adding the DBMS for NOM monitoring, an agent needs to be registered with NOM server which provides server communication configuration for the agent.
-* An agent can be registered with NOM server -
-** from NOM UI
-*** Creation of agent requires name and description for the agent
-*** Once registered the configuration for agent to communicate with NOM server will be:
-**** `CONFIG_SERVER_ADDRESS=<server-address>`
-**** `CONFIG_TOKEN_URL=<token_url>`
-**** `CONFIG_TOKEN_CLIENT_ID=<agent-id>`
-**** `CONFIG_TOKEN_CLIENT_SECRET=<agent-client-secret>`
-*** Save these configurations securely for later to configure the agent
-* Check if the instance of DBMS to be monitored has a supported version.
-Only Neo4j versions from 4.4 on are supported.
-* Before installing the agent to monitor an instance of the DBMS, make sure that the instance is up and running.
-You can check the status with `neo4j status` command
+Before adding the DBMS for NOM monitoring, an agent needs to be registered with NOM server which provides server communication configuration for the agent.
 
+. Click the top right settings icon that redirects you to the global settings.
+. Click *Agents*, where you will see a list of all registered agents along with their last contact times and versions.
++
+image::agents.png[width=800]
++
+. Click *Register New Agent* button, and enter the name and description for your new agent followed by clicking *Register* button.
++
+image:agent-new.png[width=800]
++
+. The agent will be created and randomly generated agent credentials will be displayed on the screen.
++
+image:agent-credentials.png[width=800]
++
+[NOTE]
+====
+The credentials and other key agent configuration values are displayed as environment variable declarations.
+You can copy them over to your instance host for ease of agent configuration.
+====
++
+. After you have captured the credentials, click the confirmation checkbox and *Finish* button.
+Newly created agent will be displayed on the list of agents.
+
+[IMPORTANT]
+====
+Check if the instance of DBMS to be monitored has a supported version.
+Only Neo4j Enterprise Edition versions from 4.4.0 on are supported.
+====
 
 [[install]]
 == Install agent
