@@ -240,7 +240,7 @@ java -jar ./lib/server.jar
         --server.ssl.key-store-password=changeit
         --grpc.server.port=9090
         --grpc.server.security.key-store-type=PKCS12
-        --grpc.server.security.key-store=file:./certificates\server.pfx
+        --grpc.server.security.key-store=file:./certificates/server.pfx
         --grpc.server.security.key-store-password=changeit
         --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing
 ----
