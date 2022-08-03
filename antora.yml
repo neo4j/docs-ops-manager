@@ -1,6 +1,6 @@
 name: ops-manager
 title: Neo4j Ops manager
-version: ~
+version: '1.0'
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/content-nav.adoc
