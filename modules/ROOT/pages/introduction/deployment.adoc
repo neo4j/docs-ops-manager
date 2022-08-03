@@ -7,7 +7,10 @@ These may be deployed in a number of ways depending on the platform and technolo
 Initially, NOM will be made available for customers deploying in self-managed environments, including in their own data centers (on-premises), private cloud or on one of the Neo4j supported public clouds.
 
 Currently, support is available for Linux and Windows using tarball or zip file installations.
-Support for package managers will be added in a later release, along with support for docker and kubernetes.
+
+The NOM server could be deployed as a docker container with newly published images.
+
+Support for package managers will be added in a later release, along with support for kubernetes.
 
 Support for Aura instances and the ability to run NOM as a Service will be provided at a later date.
 

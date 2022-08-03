@@ -8,8 +8,8 @@
 ** No, currently NOM does not officially support desktop at this time.
 
 * Can I deploy NOM in a cloud environment?
-** It is possible to deploy NOM into a supported cloud environment, using tarball and zip installations.
-Docker and Kubernetes support will be added later.
+** It is possible to deploy NOM into a supported cloud environment, using tarball and zip installations. It is also possible to deploy NOM server as a docker container if the cloud environment uses containers.
+Kubernetes support will be added later.
 
 * Can I manage both local (on-premise) and remote DBMSs with a single NOM?
 ** Yes, a single NOM server can manage multiple Neo4j DBMSs from any location, as long as it is possible for the agent to access the gRPC APIs on the server through network firewalls.
