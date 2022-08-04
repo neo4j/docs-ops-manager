@@ -6,6 +6,9 @@
 ** xref:introduction/deployment.adoc[]
 ** xref:introduction/versions.adoc[]
 
+// * Upgrading
+* xref:upgrade/index.adoc[]
+
 * Installation
 ** xref:installation/prerequisites.adoc[]
 ** xref:installation/os.adoc[]
