@@ -3,7 +3,7 @@
 
 The NOM Server can be run on unix-based operating systems as well as on Windows.
 The NOM Agents can currently only be run on Linux or Windows operating systems.
-Please make sure to pick the correct agent binary that fits the operating system of the DBMS you want to monitor.
+Please make sure to pick the correct agent binary that fits the operating system and architecture of the Neo4j instance you want to monitor.
 
 
 

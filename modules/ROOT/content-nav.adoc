@@ -10,6 +10,7 @@
 ** xref:installation/prerequisites.adoc[]
 ** xref:installation/os.adoc[]
 ** xref:installation/server.adoc[]
+** xref:installation/self-signed-certificate.adoc[]
 // ** xref:installation/cloud.adoc[]
 // ** xref:installation/faq.adoc[]
 

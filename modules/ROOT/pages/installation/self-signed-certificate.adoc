@@ -1,0 +1,67 @@
+= Self-Signed Certificate Generation
+:description: This section contains instructions to generate a self-signed certificate for test purposes.
+
+[IMPORTANT]
+====
+Self-signed certificates are not recommended to be used in production environments.
+For production environments, please use a trusted certificate issuer.
+This section outlines a practical way to generate a self-signed certificate for test and demo purposes.
+====
+
+The NOM Server contains a utility to generate a self-signed certificate that's suitable for your environment.
+
+To invoke the utility and get help on usage, please navigate to the NOM Server folder and execute the following command:
+
+[source, terminal, role=noheader]
+----
+$> java -jar ./lib/server.jar ssc --help
+
+utility to generate self signed certificate for TEST purposes only
+
+sample usage:
+
+to generate a self signed certificate for 'localhost', which could either be
+accessed through DNS names of 'localhost.localdomain' or 'my.custom.domain', or
+with IP addresses of '127.0.0.1' or '192.168.100.5';
+
+$> java -jar ./lib/server.jar ssc -n localhost -o /tmp -p changeit \
+   -d localhost.localdomain,my.custom.domain \
+   -i 127.0.0.1,192.168.100.5
+
+it will create /tmp/localhost.cer and /tmp/localhost.pfx files upon completion.
+
+options (required options marked with *):
+  -d, --dns=<dns>[,<dns>...]
+                            list of dns names you will use to access the
+                              server, eg. --dns=localhost.localdomain,test.
+                              local.domain
+  -i, --ip=<ip>[,<ip>...]   list of IP addresses you will use to access the
+                              server, eg. --ip=127.0.0.1,192.168.100.55
+* -n, --name=<name>         common name to be used in generated certificate,
+                              eg. --name=localhost
+* -o, --output=<output>     target directory, eg. --output=.
+* -p, --password=<password> password for generated PKCS12 file
+  -h, --help                help
+----
+
+Let's assume we are generating a certificate for running the server on `localhost`.
+`localhost` is the primary name that will be set as Subject Name field on the certificate and will also be used as name of generated files.
+For the certificate to be identified as valid, it also needs to include alternative names that we will use to access the server.
+Assume that we also have a bunch of virtual machines that will access the server through IP addresses `192.168.10.1` and `172.16.10.1`.
+Furthermore, we setup a local DNS alias `nom.example.com` for our `localhost`.
+
+In order to generate a self-signed certificate for the above example, we will need to execute the following command;
+
+[source, terminal, role=noheader]
+----
+java -jar ./lib/server.jar ssc -n localhost \
+	-o ./certificates \
+	-p changeit \
+	-d nom.example.com \
+	-i 192.168.10.1,172.16.10.1
+----
+
+It will generate a key pair and a self-signed certificate and create `localhost.cer` and `localhost.pfx` files inside `./certificates` directory.
+`localhost.pfx` will be assigned the password `changeit` which is provided to the command as an argument.
+
+You can then use these two files to configure the server and agents for TLS encrypted communication.
