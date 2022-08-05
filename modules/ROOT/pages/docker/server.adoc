@@ -1,2 +1,2 @@
 = Server
-:description: This page describes how to run NOM server in a container.
+:description: This page describes how to run a NOM server in a Docker container.

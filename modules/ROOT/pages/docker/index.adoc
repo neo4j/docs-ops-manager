@@ -1,6 +1,5 @@
 = Docker
 :description: This chapter describes the NOM containerization.
 
-This chapter describes the following::
 * xref:./introduction.adoc[Introduction] - Dockerizing the server
-* xref:./server.adoc[Server] - Running a NOM server in a docker container
+* xref:./server.adoc[Server] - Running a NOM server in a Docker container
