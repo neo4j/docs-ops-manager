@@ -13,9 +13,11 @@
 // ** xref:installation/cloud.adoc[]
 // ** xref:installation/faq.adoc[]
 
+// Docker
 * xref:docker/index.adoc[Docker]
 ** xref:docker/introduction.adoc[]
 ** xref:docker/server.adoc[]
+** xref:docker/compose.adoc[]
 
 // * Configuration
 // ** xref:configuration/security.adoc[]

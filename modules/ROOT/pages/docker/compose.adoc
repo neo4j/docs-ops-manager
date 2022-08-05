@@ -1,0 +1,67 @@
+= Docker compose Support
+:description: this page describes the docker compose privisioning instructions for the NOM server and NOM persistence
+
+Docker compose can be used to provision a set of related containers as services to experiment with or to run in test environments.
+
+But Docker doesn't recommend using compose for production.
+
+Following are a set of steps to create a two container compose setup to experiment with NOM server container and an Enterprise Neo4j persistence container as storage:
+
+* Define a storage service that uses an Enterprise Neo4j image. Follow the below template and replace appropriate user defined values.
++
+[source, yaml, role=noheader]
+----
+storage:
+    hostname: <user defined>
+    image: neo4j:<user defined 4.4.x>-enterprise
+    networks:
+      - <user defined>
+    ports:
+      - <map http and bolt ports>
+    environment:
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_AUTH: <user defined username>/<user defined password>
+      NEO4J_dbms_default__advertised__address: <user defined>
+      NEO4J_dbms_connector_http_listen__address: <user defined>
+      NEO4J_dbms_connector_bolt_listen__address: <user defined to be used in the NOM server>
+    healthcheck:
+      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a <NEO4J_dbms_connector_bolt_listen__address> -u <user defined username> -p <user defined password> || exit 1" ]
+----
+
+* Define a server service that uses NOM server image. Follow the below template and replace appropriate user defined values. 
++
+[source, yaml, role=noheader]
+----
+  server:
+    hostname: server
+    image: neo4j-ops-manager:latest
+    networks:
+      - <user defined but should be the same as storage service>
+    ports:
+      - "<user defined>:8080"
+      - "<user defined>:9090"
+    environment:
+      SPRING_NEO4J_URI: <bolt address from the storage service defined before>
+      SPRING_NEO4J_USERNAME: <username from the storage service defined before>
+      SPRING_NEO4J_PASSWORD: <password from the storage service defined before>
+      SERVER_SSL_KEY_STORE_TYPE: PKCS12
+      SERVER_SSL_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
+      SERVER_SSL_KEY_STORE_PASSWORD: <user defined for mounted certs>
+      GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
+      GRPC_SERVER_SECURITY_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
+      GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <user defined for mounted certs>
+      CORS_ALLOWEDHEADERS: "*"
+      CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
+      JWT_SECRET: <user defined>
+    volumes:
+      - <path to certs self signed certs>:<mounted path to certs self signed certs>
+----
++
+NOTE: Self signed certificates can be generated within the container using a server sub command as mentioned here Refer to *xref:../installation/self-signed-certificate.adoc[Installation > Self-Signed-Certificate]*. In this case mounting the certs into the container is not required.
+
+* Once the services are defined and saved to a compose file, run the follwing command:
++
+[source, shell, role=noheader]
+----
+docker compose -f <compose file> up 
+----
