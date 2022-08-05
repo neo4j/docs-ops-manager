@@ -1,5 +1,5 @@
-= Upgrading from an earlier version
 :description: This section describes the upgrade process from an earlier version of NOM.
+= Upgrading from an earlier version
 
 [[server]]
 == Upgrading server
