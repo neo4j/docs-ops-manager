@@ -42,8 +42,17 @@ Only Neo4j Enterprise Edition versions from 4.4.0 on are supported.
 The following steps are required to install an agent:
 
 * Standalone binaries (only linux and windows platform binaries are available)
-** Download: https://neo4j.com/download-center/#ops-manager[Download]
-** Extract the archive:
+** Get the agent archive using one of the follwing methods: 
+*** Download: https://neo4j.com/download-center/#ops-manager[Download] 
+*** Extract from Neo4j Ops Manager Server archive (agents/<arch>.<archive_extension>)
+*** Extract from Neo4j installation archive (products/neo4j-ops-manager-agent-<version>-<arch>.<archive_extension>)
++
+[IMPORTANT]
+====
+The Neo4j Ops Manager agent binaries will be available in the Neo4j installation archive from Neo4j 4.4.10
+====
++
+** Extract the agent archive:
 +
 [source, terminal, role=noheader]
 ----
