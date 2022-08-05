@@ -6,13 +6,13 @@
 
 [NOTE]
 ====
-Before starting the upgrade process, it is recommended to backup your existing NOM installation folder.
+Before starting the upgrade process, it is recommended to back up your existing NOM installation folder.
 ====
 
 [[server-linux]]
 === On Linux
 
-. Backup any files you've modified inside the current NOM server directory.
+. Back up any files you've modified inside the current NOM server directory.
 This usually includes `etc/neo4j-ops-manager-server.service` and any files inside `certificates/` directories.
 . Download latest NOM server package for your platform.
 . Stop NOM server by running `systemctl stop neo4j-ops-manager-server`.
@@ -24,7 +24,7 @@ This usually includes `etc/neo4j-ops-manager-server.service` and any files insid
 [[server-windows]]
 === On Windows
 
-. Backup any files you've modified inside the current NOM server directory.
+. Back up any files you've modified inside the current NOM server directory.
 This usually includes `bin/server.xml` and any files inside `certificates/` directories.
 . Download latest NOM server package for your platform.
 . Stop NOM server by running `./bin/server.exe stop` inside current NOM server directory.
