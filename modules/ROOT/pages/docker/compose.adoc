@@ -93,38 +93,38 @@ services:
     healthcheck:
       test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://storage:9001 -u neo4j -p passw0rd || exit 1" ]
 
-server:
-  hostname: server
-  image: neo4j-ops-manager:latest
-  depends_on:
-    storage:
-      condition: service_healthy
-  networks:
-    - lan
-  ports:
-    - "8081:8080"
-    - "9091:9090"
-  environment:
-    SPRING_NEO4J_URI: bolt://storage:9001
-    SPRING_NEO4J_USERNAME: neo4j
-    SPRING_NEO4J_PASSWORD: passw0rd
-    SERVER_SSL_KEY_STORE_TYPE: PKCS12
-    SERVER_SSL_KEY_STORE: file:/certificates/localhost.pfx
-    SERVER_SSL_KEY_STORE_PASSWORD: changeit
-    GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
-    GRPC_SERVER_SECURITY_KEY_STORE: file:/certificates/localhost.pfx
-    GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: changeit
-    CORS_ALLOWEDHEADERS: "*"
-    CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
-    JWT_SECRET: EBWTWIDWIRTJIRN4I34354346HB65J6N
-  volumes:
-    - type: bind
-      source: ~/certificates
-      target: /certificates
-  entrypoint:
-    - "sh"
-    - "-c"
-    - "java -jar app.jar ssc -n localhost -o /certificates -p changeit -d localhost.localdomain -i 127.0.0.1 && java -jar app.jar"
+  server:
+    hostname: server
+    image: neo4j-ops-manager:latest
+    depends_on:
+      storage:
+        condition: service_healthy
+    networks:
+      - lan
+    ports:
+      - "8081:8080"
+      - "9091:9090"
+    environment:
+      SPRING_NEO4J_URI: bolt://storage:9001
+      SPRING_NEO4J_USERNAME: neo4j
+      SPRING_NEO4J_PASSWORD: passw0rd
+      SERVER_SSL_KEY_STORE_TYPE: PKCS12
+      SERVER_SSL_KEY_STORE: file:/certificates/localhost.pfx
+      SERVER_SSL_KEY_STORE_PASSWORD: changeit
+      GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
+      GRPC_SERVER_SECURITY_KEY_STORE: file:/certificates/localhost.pfx
+      GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: changeit
+      CORS_ALLOWEDHEADERS: "*"
+      CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
+      JWT_SECRET: EBWTWIDWIRTJIRN4I34354346HB65J6N
+    volumes:
+      - type: bind
+        source: ~/certificates
+        target: /certificates
+    entrypoint:
+      - "sh"
+      - "-c"
+      - "java -jar app.jar ssc -n localhost -o /certificates -p changeit -d localhost.localdomain -i 127.0.0.1 && java -jar app.jar"
 ----
 
 IMPORTANT: Certificates will be generated as by products of running the above compose file at `~/certificates` directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
