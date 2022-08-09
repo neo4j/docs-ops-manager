@@ -49,7 +49,7 @@ The following steps are required to install an agent:
 +
 [IMPORTANT]
 ====
-The Neo4j Ops Manager agent binaries will be available in the Neo4j installation archive from Neo4j 4.4.10
+The Neo4j Ops Manager agent binaries are available in the Neo4j installation archive from Neo4j 4.4.10
 ====
 +
 ** Extract the agent archive:
