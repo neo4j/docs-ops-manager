@@ -1,0 +1,49 @@
+:description: This section describes the upgrade process from an earlier version of NOM.
+= Upgrading from an earlier version
+
+[[server]]
+== Upgrading server
+
+[NOTE]
+====
+Before starting the upgrade process, it is recommended to back up your existing NOM installation folder.
+====
+
+[[server-linux]]
+=== On Linux
+
+. Back up any files you've modified inside the current NOM server directory.
+This usually includes `etc/neo4j-ops-manager-server.service` and any files inside `certificates/` directories.
+. Download latest NOM server package for your platform.
+. Stop NOM server by running `systemctl stop neo4j-ops-manager-server`.
+. Extract the downloaded package into the existing installation directory.
+. Copy the backed up files back into their corresponding locations.
+. Start NOM server by running `systemctl start neo4j-ops-manager-server`.
+. Verify that the server is operating as expected by checking logs.
+
+[[server-windows]]
+=== On Windows
+
+. Back up any files you've modified inside the current NOM server directory.
+This usually includes `bin/server.xml` and any files inside `certificates/` directories.
+. Download latest NOM server package for your platform.
+. Stop NOM server by running `./bin/server.exe stop` inside current NOM server directory.
+. Extract the downloaded package into the existing installation directory.
+. Copy the backed up files back into their corresponding locations.
+. Start NOM server by running `./bin/server.exe start`.
+. Verify that the server is operating as expected by checking logs.
+
+[[agent]]
+== Upgrading agents
+
+[NOTE]
+----
+Each NOM server package contains corresponding NOM agent packages for every supported platform.
+You can either use them or download the corresponding agent binaries from Download Center.
+----
+
+. Get the corresponding NOM agent package for your platform.
+. Stop NOM agent by running `./bin/agent service stop`.
+. Extract the downloaded package into the existing installation directory.
+. Start NOM agent by running `./bin/agent service start`.
+. Verify that the agent is operating as expected by checking logs.
