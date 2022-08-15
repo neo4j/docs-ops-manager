@@ -1,0 +1,131 @@
+= Docker compose Support
+:description: this page describes the docker compose privisioning instructions for the NOM server and NOM persistence
+
+Docker compose can be used to provision a set of related containers as services to experiment with or to run in test environments.
+
+But Docker doesn't recommend using compose for production.
+
+Following are a set of steps to create a two container compose setup to experiment with NOM server container and an Enterprise Neo4j persistence container as storage:
+
+* Define a storage service that uses an Enterprise Neo4j image. Follow the below template and replace appropriate user defined values.
++
+[source, yaml, role=noheader]
+----
+storage:
+    hostname: <user defined>
+    image: neo4j:<user defined 4.4.x>-enterprise
+    networks:
+      - <user defined>
+    ports:
+      - <map http and bolt ports>
+    environment:
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_AUTH: <user defined username>/<user defined password>
+      NEO4J_dbms_default__advertised__address: <user defined>
+      NEO4J_dbms_connector_http_listen__address: <user defined>
+      NEO4J_dbms_connector_bolt_listen__address: <user defined to be used in the NOM server>
+    healthcheck:
+      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a <NEO4J_dbms_connector_bolt_listen__address> -u <user defined username> -p <user defined password> || exit 1" ]
+----
+
+* Define a server service that uses NOM server image. Follow the below template and replace appropriate user defined values. 
++
+[source, yaml, role=noheader]
+----
+  server:
+    hostname: server
+    image: neo4j-ops-manager:latest
+    networks:
+      - <user defined but should be the same as storage service>
+    ports:
+      - "<user defined>:8080"
+      - "<user defined>:9090"
+    environment:
+      SPRING_NEO4J_URI: <bolt address from the storage service defined before>
+      SPRING_NEO4J_USERNAME: <username from the storage service defined before>
+      SPRING_NEO4J_PASSWORD: <password from the storage service defined before>
+      SERVER_SSL_KEY_STORE_TYPE: PKCS12
+      SERVER_SSL_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
+      SERVER_SSL_KEY_STORE_PASSWORD: <user defined for mounted certs>
+      GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
+      GRPC_SERVER_SECURITY_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
+      GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <user defined for mounted certs>
+      CORS_ALLOWEDHEADERS: "*"
+      CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
+      JWT_SECRET: <user defined>
+    volumes:
+      - <path to certs self signed certs>:<mounted path to certs self signed certs>
+----
++
+NOTE: Self signed certificates can be generated within the container using a server sub command as mentioned here Refer to *xref:../installation/self-signed-certificate.adoc[Installation > Self-Signed-Certificate]*. In this case mounting the certs into the container is not required.
+
+* Once the services are defined and saved to a compose file, run the follwing command:
++
+[source, shell, role=noheader]
+----
+docker compose -f <compose file> up <folder for context, typically current folder>
+----
+
+====
+Following is an example Docker compose file that can be used to start up a NOM server and Enerprise Neo4j Persistence system without any customization. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring:
+
+.docker-compose.yaml
+[source, yaml]
+----
+networks:
+  lan:
+
+services:
+  storage:
+    hostname: storage
+    image: neo4j:4.4.8-enterprise
+    networks:
+      - lan
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_AUTH: neo4j/passw0rd
+      NEO4J_dbms_default__advertised__address: storage
+      NEO4J_dbms_connector_http_listen__address: storage:9000
+      NEO4J_dbms_connector_bolt_listen__address: storage:9001
+    healthcheck:
+      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://storage:9001 -u neo4j -p passw0rd || exit 1" ]
+
+  server:
+    hostname: server
+    image: neo4j-ops-manager:latest
+    depends_on:
+      storage:
+        condition: service_healthy
+    networks:
+      - lan
+    ports:
+      - "8081:8080"
+      - "9091:9090"
+    environment:
+      SPRING_NEO4J_URI: bolt://storage:9001
+      SPRING_NEO4J_USERNAME: neo4j
+      SPRING_NEO4J_PASSWORD: passw0rd
+      SERVER_SSL_KEY_STORE_TYPE: PKCS12
+      SERVER_SSL_KEY_STORE: file:/certificates/localhost.pfx
+      SERVER_SSL_KEY_STORE_PASSWORD: changeit
+      GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
+      GRPC_SERVER_SECURITY_KEY_STORE: file:/certificates/localhost.pfx
+      GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: changeit
+      CORS_ALLOWEDHEADERS: "*"
+      CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
+      JWT_SECRET: EBWTWIDWIRTJIRN4I34354346HB65J6N
+    volumes:
+      - type: bind
+        source: ~/certificates
+        target: /certificates
+    entrypoint:
+      - "sh"
+      - "-c"
+      - "java -jar app.jar ssc -n localhost -o /certificates -p changeit -d localhost.localdomain -i 127.0.0.1 && java -jar app.jar"
+----
+
+IMPORTANT: Certificates will be generated as by products of running the above compose file at `~/certificates` directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
+====

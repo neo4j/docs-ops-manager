@@ -9,7 +9,8 @@
 
 * Can I deploy NOM in a cloud environment?
 ** It is possible to deploy NOM into a supported cloud environment, using tarball and zip installations.
-Docker and Kubernetes support will be added later.
+It is also possible to deploy NOM server in a Docker container if the cloud environment uses containers.
+Kubernetes support will be added later.
 
 * Can I manage both local (on-premise) and remote DBMSs with a single NOM?
 ** Yes, a single NOM server can manage multiple Neo4j DBMSs from any location, as long as it is possible for the agent to access the gRPC APIs on the server through network firewalls.
