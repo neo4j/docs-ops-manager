@@ -11,7 +11,7 @@ Refer to *xref:../installation/server.adoc[Installation]* for the list of config
 
 == Security
 NOM server security involves configuring keys and certificates for the TLS connections that the server makes with the UI and the agents. 
-For NOM server container, keys and certificates should be mounted into the container as shown below:
+For NOM server container, keys, and certificates should be mounted into the container as shown below:
 
 . As command line options
 +

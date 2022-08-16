@@ -69,7 +69,11 @@ docker compose -f <compose file> up <folder for context, typically current folde
 ====
 Following is an example Docker compose file that can be used to start up a NOM server and Enerprise Neo4j Persistence system without any customization. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring:
 
-IMPORTANT: Create a directory `~/.nom/ssc` before running Docker compose. Certificates will be generated as by products of running below compose file at `~/.nom/ssc` directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
+IMPORTANT: Create a directory *`~/.nom/ssc`* before running Docker compose.
+
+NOTE: Certificates will be generated as by-products of running below compose file at *`~/.nom/ssc`* directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
+
+NOTE: For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
 
 .docker-compose.yaml
 [source, yaml]
