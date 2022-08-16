@@ -46,8 +46,8 @@ options (required options marked with *):
 
 If you are generating a certificate for running the server on `localhost`, `localhost` is the primary name set as Subject Name field on the certificate and is also used as the name of generated files.
 For the certificate to be identified as valid, it also needs to include alternative names used to access the server.
-Assume you also have a number of virtual machines that access the server through IP addresses `192.168.10.1` and `172.16.10.1`.
-Furthermore, we setup a local DNS alias `nom.example.com` for our `localhost`.
+Assume there will also be a number of virtual machines that access the server through IP addresses `192.168.10.1` and `172.16.10.1`.
+Furthermore, a local DNS alias `nom.example.com` will be set up for `localhost`.
 
 In order to generate a self-signed certificate for the above example, execute the following command;
 
