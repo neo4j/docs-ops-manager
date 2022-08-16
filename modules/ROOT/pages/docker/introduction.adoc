@@ -1,13 +1,13 @@
 = Introduction
 :description: describes the containerization of the NOM server
 
-For every NOM release a Docker image for the NOM server is published to the https://hub.docker.com/r/neo4j/neo4j-ops-manager/tags[Docker Hub verified repository].
+For every NOM release, a Docker image for the NOM server is published to the https://hub.docker.com/r/neo4j/neo4j-ops-manager-server/tags[Docker Hub verified repository].
 
 == Getting the NOM server Docker image
-Latest NOM server image can be pulled from the verified repository for NOM server
+Latest NOM server image for the minor release can be pulled from the verified repository for NOM server
 [,shell]
 ----
-docker pull neo4j-ops-manager
+docker pull neo4j/neo4j-ops-manager-server:1.1
 ----
 
-NOTE: Latest image can also be referenced with the latest patch or minor version tags for eg. `neo4j-ops-manager:1.1.0` or `neo4j-ops-manager:1.0`
+NOTE: Latest image can also be referenced with the latest patch or `latest` version tags for eg. `neo4j/neo4j-ops-manager-server:1.1.0` or `neo4j/neo4j-ops-manager-server:latest`
