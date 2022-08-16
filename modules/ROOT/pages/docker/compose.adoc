@@ -69,6 +69,8 @@ docker compose -f <compose file> up <folder for context, typically current folde
 ====
 Following is an example Docker compose file that can be used to start up a NOM server and Enerprise Neo4j Persistence system without any customization. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring:
 
+IMPORTANT: Create a directory `~/.nom/ssc` before running Docker compose. Certificates will be generated as by products of running below compose file at `~/.nom/ssc` directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
+
 .docker-compose.yaml
 [source, yaml]
 ----
@@ -95,15 +97,15 @@ services:
 
   server:
     hostname: server
-    image: neo4j-ops-manager:latest
+    image: neo4j/neo4j-ops-manager-server:latest
     depends_on:
       storage:
         condition: service_healthy
     networks:
       - lan
     ports:
-      - "8081:8080"
-      - "9091:9090"
+      - "8080:8080"
+      - "9090:9090"
     environment:
       SPRING_NEO4J_URI: bolt://storage:9001
       SPRING_NEO4J_USERNAME: neo4j
@@ -116,16 +118,14 @@ services:
       GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: changeit
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
-      JWT_SECRET: EBWTWIDWIRTJIRN4I34354346HB65J6N
+      JWT_SECRET: please-set-a-random-secret-string-here-for-jwt-signing
     volumes:
       - type: bind
-        source: ~/certificates
+        source: ~/.nom/ssc
         target: /certificates
     entrypoint:
       - "sh"
       - "-c"
       - "java -jar app.jar ssc -n localhost -o /certificates -p changeit -d localhost.localdomain -i 127.0.0.1 && java -jar app.jar"
 ----
-
-IMPORTANT: Certificates will be generated as by products of running the above compose file at `~/certificates` directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
 ====
