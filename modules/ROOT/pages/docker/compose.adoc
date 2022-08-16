@@ -71,7 +71,7 @@ Following is an example Docker compose file that can be used to start up a NOM s
 
 IMPORTANT: Create a directory *`~/.nom/ssc`* before running Docker compose.
 
-NOTE: Certificates will be generated as by-products of running below compose file at *`~/.nom/ssc`* directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
+NOTE: Certificates are generated as by-products of running below compose file at *`~/.nom/ssc`* directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
 
 NOTE: For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
 
