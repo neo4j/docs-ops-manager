@@ -28,7 +28,7 @@ $> java -jar ./lib/server.jar ssc -n localhost -o /tmp -p changeit \
    -d localhost.localdomain,my.custom.domain \
    -i 127.0.0.1,192.168.100.5
 
-it will create /tmp/localhost.cer and /tmp/localhost.pfx files upon completion.
+it creates /tmp/localhost.cer and /tmp/localhost.pfx files upon completion.
 
 options (required options marked with *):
   -d, --dns=<dns>[,<dns>...]
