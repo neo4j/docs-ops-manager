@@ -34,7 +34,7 @@ storage:
 ----
   server:
     hostname: server
-    image: neo4j-ops-manager:latest
+    image: neo4j/neo4j-ops-manager-server:latest
     networks:
       - <user defined but should be the same as storage service>
     ports:
