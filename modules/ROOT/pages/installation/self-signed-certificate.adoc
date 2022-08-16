@@ -32,12 +32,12 @@ it creates /tmp/localhost.cer and /tmp/localhost.pfx files upon completion.
 
 options (required options marked with *):
   -d, --dns=<dns>[,<dns>...]
-                            list of dns names you will use to access the
+                            list of dns names to use to access the
                               server, eg. --dns=localhost.localdomain,test.
                               local.domain
-  -i, --ip=<ip>[,<ip>...]   list of IP addresses you will use to access the
+  -i, --ip=<ip>[,<ip>...]   list of IP addresses to use to access the
                               server, eg. --ip=127.0.0.1,192.168.100.55
-* -n, --name=<name>         common name to be used in generated certificate,
+* -n, --name=<name>         common name to use in generated certificate,
                               eg. --name=localhost
 * -o, --output=<output>     target directory, eg. --output=.
 * -p, --password=<password> password for generated PKCS12 file
