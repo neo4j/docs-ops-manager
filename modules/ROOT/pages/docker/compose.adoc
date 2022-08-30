@@ -42,8 +42,8 @@ storage:
       - "<user defined>:9090"
     environment:
       SPRING_NEO4J_URI: <bolt address from the storage service defined before>
-      SPRING_NEO4J_USERNAME: <username from the storage service defined before>
-      SPRING_NEO4J_PASSWORD: <password from the storage service defined before>
+      SPRING_NEO4J_AUTHENTICATION_USERNAME: <username from the storage service defined before>
+      SPRING_NEO4J_AUTHENTICATION_PASSWORD: <password from the storage service defined before>
       SERVER_SSL_KEY_STORE_TYPE: PKCS12
       SERVER_SSL_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
       SERVER_SSL_KEY_STORE_PASSWORD: <user defined for mounted certs>
@@ -112,8 +112,8 @@ services:
       - "9090:9090"
     environment:
       SPRING_NEO4J_URI: bolt://storage:9001
-      SPRING_NEO4J_USERNAME: neo4j
-      SPRING_NEO4J_PASSWORD: passw0rd
+      SPRING_NEO4J_AUTHENTICATION_USERNAME: neo4j
+      SPRING_NEO4J_AUTHENTICATION_PASSWORD: passw0rd
       SERVER_SSL_KEY_STORE_TYPE: PKCS12
       SERVER_SSL_KEY_STORE: file:/certificates/localhost.pfx
       SERVER_SSL_KEY_STORE_PASSWORD: changeit
