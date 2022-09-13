@@ -22,7 +22,7 @@ Follow the steps below to add *every* instance in the cluster:
 To be monitored by NOM an instance of a DBMS must: 
 
 
-* Be running a Neo4j Enterprise Edition version that is 4.4.0 or higher
+* Be running a Neo4j Enterprise Edition v4.4.0 or higher
 
 * Have the following config settings set in neo4j.conf: 
 
