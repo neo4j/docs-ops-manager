@@ -26,16 +26,26 @@ The DBMS and the NOM Server need to be running simultaneously, or the NOM Server
 Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
 Be aware that that user needs full admin access.
 The login to the NOM Server is used in the next step.
-If the DBMS is not newly created, ensure the following:
 
-** That a database called `neo4j` exists.
-This is done via the `SHOW DATABASES` command.
-** That the database `neo4j` is empty.
-This is done via `MATCH (n) RETURN count(n)` which should return 0.
-** That it doesn't contain any indexes or constraints.
-This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
 
 [IMPORTANT]
+====
+If the DBMS is not newly created, ensure the following:
+
+** That the default database for the user exists.
+This is done via the `SHOW DATABASES` command.
+** That the default database for the user is empty.
+This is done via `MATCH (n) RETURN count(n)` which should return 0.
+** That the default database for the user doesn't contain any indexes or constraints.
+This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
+
+
+The default database for a user is either the home database for that user if it is set or the default database for the DBMS. 
+The default database for the DBMS is 'neo4j' if not explicitly configured.
+====
+
+
+[WARNING]
 ====
 The use or manipulation of the persistence database apart from through the NOM Server is highly discouraged and can negatively impact the stability and data correctness of NOM.
 ====
