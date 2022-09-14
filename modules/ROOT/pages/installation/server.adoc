@@ -40,7 +40,7 @@ This is done via `MATCH (n) RETURN count(n)` which should return 0.
 This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
 
 
-Default database for a user is either the home database for that user if it is set or the default database for the DBMS. 
+The default database for a user is either the home database for that user if it is set or the default database for the DBMS. 
 The default database for the DBMS will be 'neo4j' if not explicitly configured.
 ====
 
