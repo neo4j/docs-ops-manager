@@ -41,7 +41,7 @@ This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
 
 
 The default database for a user is either the home database for that user if it is set or the default database for the DBMS. 
-The default database for the DBMS will be 'neo4j' if not explicitly configured.
+The default database for the DBMS is 'neo4j' if not explicitly configured.
 ====
 
 
