@@ -24,7 +24,7 @@ To be monitored by NOM an instance of a DBMS must:
 
 * be running a Neo4j Enterprise Edition v4.4.0 or higher
 
-* Have the following config settings set in neo4j.conf: 
+* have the following config settings set in neo4j.conf: 
 
 ** `metrics.prometheus.endpoint=127.0.0.1:2004`
 
