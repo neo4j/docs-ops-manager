@@ -3,10 +3,47 @@
 
 Adding a DBMS in NOM’s terminology means to enable the monitoring of every instance in the DBMS by installing a NOM agent on the instance host and configuring it appropriately.
 
-[[register]]
-== Register agent
+[[add-single]]
+== Add a single instance DBMS
 
-Before adding the DBMS for NOM monitoring, an agent needs to be registered with NOM server which provides server communication configuration for the agent.
+Follow the steps below to add the single DBMS instance:
+
+[[add-cluster]]
+== Add a cluster
+
+Follow the steps below to add *every* instance in the cluster:
+
+
+== Add a DBMS instance
+
+[[prerequisites]]
+=== Prerequisites
+
+To be monitored by NOM an instance of a DBMS must: 
+
+
+* be running a Neo4j Enterprise Edition v4.4.0 or higher
+
+* have the following config settings set in neo4j.conf: 
+
+** `metrics.prometheus.endpoint=127.0.0.1:2004`
+
+** `metrics.prometheus.enabled=true`
+
+** `metrics.enabled=true`
+
+** `metrics.filter=*`
+
+** `metrics.jmx.enabled=true`
+
+** `metrics.namespaces.enabled=true`
+
+
+
+[[register]]
+=== Register agent
+
+Before adding a DBMS instance for NOM monitoring, one agent needs to be registered with the NOM server which provides server communication configuration for the agent.
 
 . Click the top right settings icon that redirects you to the global settings.
 . Click *Agents*, where you will see a list of all registered agents along with their last contact times and versions.
@@ -30,14 +67,10 @@ You can copy them over to your instance host for ease of agent configuration.
 . After you have captured the credentials, click the confirmation checkbox and *Finish* button.
 Newly created agent will be displayed on the list of agents.
 
-[IMPORTANT]
-====
-Check if the instance of DBMS to be monitored has a supported version.
-Only Neo4j Enterprise Edition versions from 4.4.0 on are supported.
-====
+
 
 [[install]]
-== Install agent
+=== Install agent
 
 The following steps are required to install an agent:
 
@@ -68,7 +101,7 @@ Which should output:
 
 
 [[configure]]
-== Configure agent
+=== Configure agent
 
 An agent’s run configurations are provided through environment variables.
 The following table lists configuration keys and values to be set for them:
@@ -157,7 +190,7 @@ Agents are supposed to monitor only local instances and should not be configured
 ====
 
 [[running-agent]]
-== Run agent
+=== Run agent
 
 An agent can run in two modes, console or service.
 Best practice is to run an agent in service mode.
@@ -269,23 +302,3 @@ agent service start
 ----
 agent service uninstall
 ----
-
-[[add-single]]
-== Add a single instance
-
-To add a single instance DBMS to monitor:
-
-* Register agent.
-* Install agent.
-* Configure the environment variables required by the agent.
-* Run the agent.
-
-[[add-cluster]]
-== Add a cluster
-
-To add a cluster DBMS to monitor, for *every* instance of the cluster:
-
-* Register agent.
-* Install agent.
-* Configure the environment variables required by the agent.
-* Run the agent.
