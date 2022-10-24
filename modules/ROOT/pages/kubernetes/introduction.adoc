@@ -1,0 +1,7 @@
+= Introduction
+:description: describes NOM support for Kubernetes deployments
+
+Containerization of NOM server directly enables the Kubernetes deployment options.
+
+Custom Kubernetes manfests can be created for various deployment targets on premises or in cloud. 
+We provide a basic Helm Chart for NOM server to ease the deployment process on Kubernetes environments.

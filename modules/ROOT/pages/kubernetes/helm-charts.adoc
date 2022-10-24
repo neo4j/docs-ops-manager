@@ -1,0 +1,98 @@
+= Helm Charts
+:description: describes the usage for NOM server Helm Chart
+
+== Prerequisites
+- `helm` command line tool
+- `kubectl` command line tool
+- Access to a Kubernetes enviroment (cloud or on premises or local with a `LoadBalancer` resource implementation)
+
+== NOM server Helm Chart
+* Download the NOM server Helm Chart from link:[Neo4j download centre]
+
+* Following is a basic configuration for NOM server Helm Chart provided as a `values.yaml` file
+----
+config:
+  grpc:
+    advertisedHost: <service endpoint to GRPC for agents to connect>
+
+secrets:
+  storage:
+    uri: "<NOM persistence URI>"
+    username: "<NOM persistence user name>"
+    password: "<NOM persistence password>"
+  jwt:
+    token: "<jwt secret as specified in server installation>"
+  tls:
+    password: "<PKCS12 certificate file password for server TLS config>"
+
+service:
+  http:
+    ipAddress: "<Provisioned LoadBalancer service IP address for HTTP connections>"
+  grpc:
+    ipAddress: "<Provisioned LoadBalancer service IP address for GRPC connections>"
+----
+
+* Run the following command to install the NOM server to your Kubernetes cluster
+[source, shell, role=noheader]
+----
+helm install -f values.yaml --set pkcs12CertFileContent=<From PKCS12 server certificate> <Helm release name> /path/to/neo4j-ops-manager-server-1.2.1.tgz
+----
+
+* If command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command
+
+* Default `values.yaml` is given below for more customization options
+
+.values.yaml
+[source, yaml]
+----
+# Default values for neo4j-ops-manager-server.
+config:
+  logFileName: "app.log"
+  logLevel: info
+  maxHeapSize: 8g
+  jwtTTL: 2h
+  grpc:
+    advertisedHost:
+
+secrets:
+  storage:
+    uri: ""
+    username: ""
+    password: ""
+  jwt:
+    token: ""
+  tls:
+    password: ""
+    pkcs12CertFileContent: ""
+
+service:
+  http:
+    ipAddress: ""
+  grpc:
+    ipAddress: ""
+    port: 9090
+
+image:
+  name: neo4j/neo4j-ops-manager-server
+  pullPolicy: Always
+
+hpa:
+  spec:
+    targetCPUUtilizationPercentage: 70
+
+nameOverride:
+
+resources:
+  limits:
+    cpu: "2"
+    memory: "8G"
+  requests:
+    cpu: "0.2"
+    memory: "4G"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+----

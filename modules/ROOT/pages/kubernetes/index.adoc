@@ -1,0 +1,5 @@
+= Kubernetes
+:description: this chapter describes the NOM server kubernetes deployment
+
+* xref:./introduction.adoc[Introduction] - About NOM server Kubernetes deployment
+* xref:./helm-charts.adoc[Helm Charts] - About NOM server Helm chart and how to deploy

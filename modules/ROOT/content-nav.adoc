@@ -23,6 +23,11 @@
 ** xref:docker/server.adoc[]
 ** xref:docker/compose.adoc[]
 
+// Kubernetes
+* xref:kubernetes/index.adoc[Kubernetes]
+** xref:kubernetes/introduction.adoc[]
+** xref:kubernetes/helm-charts.adoc[]
+
 // * Configuration
 // ** xref:configuration/security.adoc[]
 // ** xref:configuration/persistence.adoc[]
