@@ -1,13 +1,15 @@
+:description: dThis section describes the usage for NOM server Helm Chart.
+[[helm-charts]]
 = Helm Charts
-:description: describes the usage for NOM server Helm Chart
+
 
 == Prerequisites
-- `helm` command line tool
-- `kubectl` command line tool
-- Access to a Kubernetes enviroment (cloud or on premises or local with a `LoadBalancer` resource implementation)
+- `helm` command line tool.
+- `kubectl` command line tool.
+- Access to a Kubernetes enviroment (cloud, on-prem, or local with a `LoadBalancer` resource implementation).
 
 == NOM server Helm Chart
-* Download the NOM server Helm Chart from link:[Neo4j download centre]
+* Download the NOM server Helm Chart from link:https://neo4j.com/download-center/[Neo4j Dowload Center].
 
 * Following is a basic configuration for NOM server Helm Chart provided as a `values.yaml` file
 ----
@@ -38,9 +40,9 @@ service:
 helm install -f values.yaml --set pkcs12CertFileContent=<From PKCS12 server certificate> <Helm release name> /path/to/neo4j-ops-manager-server-1.2.1.tgz
 ----
 
-* If command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command
+* If the command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command.
 
-* Default `values.yaml` is given below for more customization options
+* Default `values.yaml` is given below for more customization options:
 
 .values.yaml
 [source, yaml]
