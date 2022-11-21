@@ -1,2 +1,0 @@
-= Metric manager
-:description: This section describes the Metric manager of Neo4j Ops Manager.

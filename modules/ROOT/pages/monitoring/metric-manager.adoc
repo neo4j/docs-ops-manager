@@ -1,0 +1,12 @@
+= Metric manager
+:description: This section describes the Metric manager of Neo4j Ops Manager.
+
+The metrics page offers rich charts and tables with data related to your monitored DBMSs.
+Currently three time windows are supported Live (30 minutes), 24 hours and 3 days worth of data.
+
+The table in the *Host Metrics* tab and *Instance Metrics* tab includes static data for our DBMSs, like the cpu cores of our system (physical and logical) and memory.
+
+image::dashboard.png[width=800]
+
+Charts allow for zooming/panning by clicking and specifying the area of interest by dragging the cursor.
+To reset zoom in the chart you can press double click inside the chart.

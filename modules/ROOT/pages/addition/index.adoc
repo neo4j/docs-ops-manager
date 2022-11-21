@@ -174,6 +174,31 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 | password
 |===
 
+To enable the log streaming functionality, there are also a few optional environment variables. If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature will be treated as disabled.
+
+[cols="<,<,<",options="header"]
+|===
+| Variable
+| Description
+| Example
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_PORT`
+| Port for connecting the agent to the Neo4j log4j appender
+| 9500
+
+| `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
+| Path to the instance log4j config. If set, will append the appropriate log appender automatically (including the above specified port).
+| /var/lib/neo4j/conf/server-logs.xml
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_MIN_DURATION`
+| Minimum duration in milliseconds for a query to be logged (optional)
+| 100
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_DISABLE_OBFUSCATION`
+| Disable the string literal obfuscation in queries (optional)
+| true
+|===
+
 [IMPORTANT]
 ====
 Environment variable considerations:
