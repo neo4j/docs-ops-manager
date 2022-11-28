@@ -174,7 +174,8 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 | password
 |===
 
-To enable the log streaming functionality, there are also a few optional environment variables. If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature will be treated as disabled.
+To enable the log streaming functionality, there are also a few optional environment variables. 
+If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled.
 
 [cols="<,<,<",options="header"]
 |===
