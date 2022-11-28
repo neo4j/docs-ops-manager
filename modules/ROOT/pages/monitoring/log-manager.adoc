@@ -6,7 +6,7 @@ At first, an aggregated **Summary** view of queries performed within the last 15
 
 image::logs.png[width=800]
 
-It is possible view individual query executions under the **Details** tab, or by hovering over an aggregated query and clicking the arrow button that appears to the right.
+It is possible to view individual query executions under the **Details** tab, or by hovering over an aggregated query and clicking the arrow button that appears to the right.
 
 Individual queries are retained for 24 hours, after which they will be aggregated into one hour blocks. You will still be able to view information such as average time to execute the query, and how many times it was executed within the time window. After 7 days, the queries will be further aggregated into 24 hour blocks, and retained for an additional 30 days.
 
