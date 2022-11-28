@@ -1,8 +1,14 @@
 = Log manager
 :description: This section describes the log manager of Neo4j Ops Manager.
 
-The log manager allows you to filter, sort and browse query logs from each of your monitored DBMS instances. By default, an aggregated view of queries performed within the last 15 minutes will be displayed.
+The log manager allows you to filter, sort and browse query logs from each of your monitored DBMS instances. At first, an aggregated view of queries performed within the last 15 minutes will be displayed.
 
 image::logs.png[width=800]
 
+It is possible view individual query executions under the Details tab, or by hovering over an aggregated query and clicking the arrow button that appears to the right.
+
 Individual queries are retained for 24 hours, after which they will be aggregated into one hour blocks. You will still be able to view information such as average time to execute the query, and how many times it was executed within the time window. After 7 days, the queries will be further aggregated into 24 hour blocks, and retained for an additional 30 days.
+
+For more fine-grained filtering and custom time windows, use the Request log modal dialog.
+
+image::querylog-modal.png[width=800]
