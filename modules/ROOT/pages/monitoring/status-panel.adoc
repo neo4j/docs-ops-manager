@@ -7,7 +7,7 @@ In the *Status panel* page there are three main tabs containing information abou
 
 This tab offers a toplology view of the specified DBMS.
 It is similar to the topology view in the home page, but provides more detail.
-The image below shows a healthy Single instance monitored, with two databases, the `neo4j` and `system`.
+The image below shows a healthy Single instance monitored, with two databases, `neo4j` and `system`.
 
 image::status-panel.png[width=800]
 
