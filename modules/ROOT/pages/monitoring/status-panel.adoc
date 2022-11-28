@@ -14,6 +14,6 @@ image::status-panel.png[width=800]
 == Tabular view
 
 This tab offers a tabular view of the DBMS.
-It displays data that can be found if you directly execute the cypher procedure `SHOW DATABASES` on your DBMS.
+It displays the data found if the Cypher procedure `SHOW DATABASES` is directly executed on the DBMS.
 
 image::tabular-view.png[width=800]
