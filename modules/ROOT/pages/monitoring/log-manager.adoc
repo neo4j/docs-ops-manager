@@ -8,7 +8,9 @@ image::logs.png[width=800]
 
 It is possible to view individual query executions under the **Details** tab, or by hovering over an aggregated query and clicking the arrow button that appears to the right.
 
-Individual queries are retained for 24 hours, after which they will be aggregated into one hour blocks. You will still be able to view information such as average time to execute the query, and how many times it was executed within the time window. After 7 days, the queries will be further aggregated into 24 hour blocks, and retained for an additional 30 days.
+Individual queries are retained for 24 hours, after which they are aggregated into one-hour blocks. 
+You can still view information, such as average time to execute the query, and how many times it was executed within the time window. 
+After 7 days, the queries are further aggregated into 24-hour blocks and retained for an additional 30 days.
 
 For more fine-grained filtering and custom time windows, use the **Request log** modal dialog.
 
