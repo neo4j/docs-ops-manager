@@ -11,12 +11,6 @@ The image below shows a healthy Single instance monitored, with two databases, t
 
 image::status-panel.png[width=800]
 
-== Database view
-
-This tab offers a database-first view of your DBMS.
-
-image::database-view.png[width=800]
-
 == Tabular view
 
 This tab offers a tabular view of the DBMS.
