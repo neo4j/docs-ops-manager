@@ -1,2 +1,0 @@
-= Log manager
-:description: This section describes the log manager of Neo4j Ops Manager.
