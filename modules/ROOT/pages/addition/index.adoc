@@ -174,7 +174,8 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 | password
 |===
 
-To enable the log streaming functionality, there are also a few optional environment variables. If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature will be treated as disabled.
+To enable the log streaming functionality, there are also a few optional environment variables. 
+If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled.
 
 [cols="<,<,<",options="header"]
 |===
@@ -187,7 +188,8 @@ To enable the log streaming functionality, there are also a few optional environ
 | 9500
 
 | `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
-| Path to the instance log4j config. If set, will append the appropriate log appender automatically (including the above specified port).
+| Path to the instance log4j config. 
+If set, appends the appropriate log appender automatically (including the port specified above).
 | /var/lib/neo4j/conf/server-logs.xml
 
 | `CONFIG_INSTANCE_n_QUERY_LOG_MIN_DURATION`
