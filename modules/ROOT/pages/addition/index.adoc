@@ -46,6 +46,9 @@ To be monitored by NOM an instance of a DBMS must:
 Before adding a DBMS instance for NOM monitoring, one agent needs to be registered with the NOM server which provides server communication configuration for the agent.
 
 . Click the top right settings icon that redirects you to the global settings.
++
+image::agents-settings-icon.png[width=800]
++
 . Click *Agents*, where you will see a list of all registered agents along with their last contact times and versions.
 +
 image::agents.png[width=800]
@@ -329,3 +332,21 @@ agent service start
 ----
 agent service uninstall
 ----
+
+=== Rename DBMS
+
+. Select new DBMS in the navigaiton dropdown and navigate to Status panel
++
+image::status-panel-before-renaming-dbms.png[width=800]
++
+. Open Context menu for DBMS node and select Edit
++
+image::status-panel-context-menu-edit-dbms.png[width=800]
++
+. Type new name
++
+image::status-panel-renaming-dbms.png[width=800]
++
+. Press enter or click away from edit field to confirm new name
++
+image::status-panel-after-renaming-dbms.png[width=800]
