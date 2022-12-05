@@ -3,8 +3,8 @@
 
 [IMPORTANT]
 ====
-Metrics related to a component that has been removed (either directly or indirectly) will be removed as part of the scheduled daily clean up process for metrics.
-They are not visible once the component has been removed but may remain in the persistence storage until the clean-up process has run. 
+Metrics related to a component that has been removed (either directly or indirectly) are removed as part of the scheduled daily clean-up process for metrics.
+They are not visible once the component has been removed but may remain in the persistence storage until the clean-up process has run.
 ====
 
 
