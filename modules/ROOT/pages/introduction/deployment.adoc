@@ -10,7 +10,9 @@ Currently, support is available for Linux and Windows using tarball or zip file 
 
 The NOM server can be deployed as a Docker container with newly published images.
 
-Support for package managers will be added in a later release, along with support for Kubernetes.
+Currently, suppport for Kubernetes deployments is available only for NOM server with Helm Charts.
+
+Support for package managers will be added in a later release.
 
 Support for Aura instances and the ability to run NOM as a Service will be provided at a later date.
 

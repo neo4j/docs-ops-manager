@@ -1,0 +1,10 @@
+:description: This chapter describes the NOM server kubernetes deployment.
+[[kubernetes]]
+= Kubernetes
+
+Containerization of a NOM server directly enables the Kubernetes deployment options.
+
+Custom Kubernetes manifests can be created for various deployment targets on-prem or in cloud. 
+A basic Helm Chart for the NOM server is provided to ease the deployment process on Kubernetes environments.
+
+* xref:./helm-charts.adoc[Helm Charts]
