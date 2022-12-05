@@ -4,7 +4,7 @@
 [IMPORTANT]
 ====
 Metrics related to a component that has been removed (either directly or indirectly) will be removed as part of the scheduled daily clean up process for metrics.
-They will not be visible once the component has been removed but may remain in the persistence storage until the clean up process has run. 
+They are not visible once the component has been removed but may remain in the persistence storage until the clean-up process has run. 
 ====
 
 
@@ -12,11 +12,11 @@ They will not be visible once the component has been removed but may remain in t
 == Agent
 
 === Conditions
-It is only possible to remove agents that have either never contacted the server or more time than the 'agent cleanup safe-period' has passed since the last contact. 
+Only agents that have never contacted the server or where the `agent cleanup safe-period` has been exceeded since last contact, can be removed.
 
 [NOTE]
 ====
-'agent cleanup safe-period' can be set with *topology.agent.cleanup.safe-period* aplication property.
+`agent cleanup safe-period` can be set with the *topology.agent.cleanup.safe-period* application property.
 
 The default value is *PT1H*.
 ====
@@ -29,21 +29,21 @@ image::agents-remove-hover.png[width=800]
 
 === Related components that will be removed
 
-* *All* Instances monitored by this agent
-* *All* Database instances belonging to instances monitored by this agent
-* *Any* databases that will no longer have any database instances
-* *Any* DBMSs that will no longer contain any instances
+* *All* Instances monitored by this agent.
+* *All* Database instances belonging to instances monitored by this agent.
+* *Any* databases that will no longer have any database instances.
+* *Any* DBMSs that will no longer contain any instances.
 
 
 [[instance]]
 == Instance
 
 === Conditions
-It is only possible to remove instances which have been offline for longer than the 'instance cleanup safe-period'
+It is only possible to remove instances that have been offline for longer than the 'instance cleanup safe-period'
 
 [NOTE]
 ====
-'instance cleanup safe-period' can be set with *topology.instance.cleanup.safe-period* aplication property.
+`instance cleanup safe-period` can be set with the *topology.instance.cleanup.safe-period* application property.
 
 The default value is *PT1H*.
 ====
@@ -56,19 +56,19 @@ image::status-panel-remove-instance.png[width=800]
 
 === Related components that will be removed
 
-* *All* Database instances belonging to this instance
-* *Any* databases that will no longer have any database instances
-* *Any* DBMSs that will no longer contain any instances
+* *All* Database instances belonging to this instance.
+* *Any* databases that will no longer have any database instances.
+* *Any* DBMSs that will no longer contain any instances.
 
 [[dbms]]
 == DBMS
 
 === Conditions
-It is only possible to remove DBMSs if all of it's instances have been offline for longer than the 'instance cleanup safe-period'
+It is only possible to remove DBMSs if all of its instances have been offline for longer than the `instance cleanup safe-period`.
 
 [NOTE]
 ====
-'instance cleanup safe-period' can be set with *topology.database-instance.cleanup.safe-period* aplication property.
+`instance cleanup safe-period` can be set with the *topology.database-instance.cleanup.safe-period* application property.
 
 The default value is *PT1H*.
 ====
@@ -80,19 +80,19 @@ image::status-panel-remove-dbms.png[width=800]
 
 
 === Related components that will be removed
-* *All* Instances belonging to this DBMS
-* *All* Database instances belonging to this DBMS
-* *All* databases belonging to this DBMS
+* *All* Instances belonging to this DBMS.
+* *All* Database instances belonging to this DBMS.
+* *All* databases belonging to this DBMS.
 
 [[database-instance]]
 == Database Instance
 
 === Conditions
-It is only possible to remove a database instance if the logical database was dropped more time ago than the 'database instance cleanup safe-period'
+It is only possible to remove a database instance if the time passed since the logical database was dropped exceeds the `database instance cleanup safe-period`.
 
 [NOTE]
 ====
-'database instance cleanup safe-period' can be set with *topology.instance.cleanup.safe-period* aplication property.
+`database instance cleanup safe-period` can be set with the *topology.instance.cleanup.safe-period* application property.
 
 The default value is *PT1H*.
 ====
@@ -106,4 +106,4 @@ image::status-panel-remove-db-instance.png[width=800]
 
 
 === Related components that will be removed
-* *Any* databases that will no longer have any database instances
+* *Any* databases that will no longer have any database instances.
