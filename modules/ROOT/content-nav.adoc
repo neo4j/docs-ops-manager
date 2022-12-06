@@ -32,17 +32,18 @@
 // ** xref:configuration/persistence.adoc[]
 // ** xref:configuration/server.adoc[]
 
-// * Component management
-// ** xref:component/default.adoc[]
-// ** xref:component/add.adoc[]
-// ** xref:component/remove.adoc[]
-// ** xref:component/upgrade.adoc[]
-
 // * Adding a managed DBMS
 * xref:addition/index.adoc[]
 //** xref:addition/single.adoc[]
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
+
+* Component management
+// ** xref:component/default.adoc[]
+// ** xref:component/add.adoc[]
+** xref:component/remove.adoc[]
+// ** xref:component/upgrade.adoc[]
+
 
 * xref:/home-page/index.adoc[]
 

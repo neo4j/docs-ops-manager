@@ -13,7 +13,7 @@ The same certificate needs to be used for all agent installations.
 
 *Persistence DBMS:*
 
-* Neo4j 4.4 Enterprise Edition
+* Neo4j Enterprise Edition 4.4 or 5.x  
 * At least 10 GB free disk space
 * For minimum requirements, see also link:/docs/operations-manual/current/installation/requirements/[Operations Manual -> System requirements].
 * NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to 16 GB of RAM for the use as NOMs persistence.
