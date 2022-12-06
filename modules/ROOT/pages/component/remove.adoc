@@ -16,7 +16,7 @@ Only agents that have never contacted the server or where the `agent cleanup saf
 
 [NOTE]
 ====
-`agent cleanup safe-period` can be set with the *topology.agent.cleanup.safe-period* application property.
+`agent cleanup safe-period` can be set with the `topology.agent.cleanup.safe-period` application property.
 
 The default value is *PT1H*.
 ====
@@ -39,11 +39,11 @@ image::agents-remove-hover.png[width=800]
 == Instance
 
 === Conditions
-It is only possible to remove instances that have been offline for longer than the 'instance cleanup safe-period'
+It is only possible to remove instances that have been offline for longer than the `instance cleanup safe-period`.
 
 [NOTE]
 ====
-`instance cleanup safe-period` can be set with the *topology.instance.cleanup.safe-period* application property.
+`instance cleanup safe-period` can be set with the `topology.instance.cleanup.safe-period` application property.
 
 The default value is *PT1H*.
 ====
@@ -64,11 +64,11 @@ image::status-panel-remove-instance.png[width=800]
 == DBMS
 
 === Conditions
-It is only possible to remove DBMSs if all of its instances have been offline for longer than the `instance cleanup safe-period`.
+It is only possible to remove a DBMS if all of its instances have been offline for longer than the `instance cleanup safe-period`.
 
 [NOTE]
 ====
-`instance cleanup safe-period` can be set with the *topology.database-instance.cleanup.safe-period* application property.
+`instance cleanup safe-period` can be set with the `topology.database-instance.cleanup.safe-period` application property.
 
 The default value is *PT1H*.
 ====
