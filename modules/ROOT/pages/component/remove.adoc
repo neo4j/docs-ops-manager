@@ -92,7 +92,7 @@ It is only possible to remove a database instance if the time passed since the l
 
 [NOTE]
 ====
-`database instance cleanup safe-period` can be set with the *topology.instance.cleanup.safe-period* application property.
+`database instance cleanup safe-period` can be set with the `topology.instance.cleanup.safe-period` application property.
 
 The default value is *PT1H*.
 ====
