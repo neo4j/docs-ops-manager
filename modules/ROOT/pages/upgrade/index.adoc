@@ -3,6 +3,16 @@
 
 [[server]]
 == Upgrading server
+[IMPORTANT]
+====
+
+*Please read if upgrading to Neo4j Ops Manager 1.3.*
+
+All metrics will be deleted as part of the migration that runs on upgrade to version 1.3.
+
+This is due to a major change to the metric storage model making previous metrics incompatible with this version. 
+
+====
 
 [NOTE]
 ====

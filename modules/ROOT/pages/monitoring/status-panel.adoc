@@ -1,2 +1,20 @@
 = Status panel
 :description: This section describes the status panel of the Neo4j Ops Manager.
+
+The *Status panel* provides detail about the components in a specific DBMS.
+
+== Topology
+
+This tab offers a toplology view of the specified DBMS.
+It is similar to the topology view in the home page, but provides more detail.
+The images below show a healthy Single instance with two databases, `neo4j` and `system`.
+
+image::status-panel-instance-context-menu.png[width=800]
+image::status-panel.png[width=800]
+
+== Table
+
+This tab offers a tabular view of the DBMS.
+It displays the data found if the Cypher procedure `SHOW DATABASES` is directly executed on the DBMS.
+
+image::tabular-view.png[width=800]

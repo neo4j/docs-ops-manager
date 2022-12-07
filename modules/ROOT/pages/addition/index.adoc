@@ -46,6 +46,9 @@ To be monitored by NOM an instance of a DBMS must:
 Before adding a DBMS instance for NOM monitoring, one agent needs to be registered with the NOM server which provides server communication configuration for the agent.
 
 . Click the top right settings icon that redirects you to the global settings.
++
+image::agents-settings-icon.png[width=800]
++
 . Click *Agents*, where you will see a list of all registered agents along with their last contact times and versions.
 +
 image::agents.png[width=800]
@@ -172,6 +175,33 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 | `CONFIG_INSTANCE_n_BOLT_PASSWORD`
 | Bolt password for nth instance
 | password
+|===
+
+To enable the log streaming functionality, there are also a few optional environment variables. 
+If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled.
+
+[cols="<,<,<",options="header"]
+|===
+| Variable
+| Description
+| Example
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_PORT`
+| Port for connecting the agent to the Neo4j log4j appender
+| 9500
+
+| `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
+| Path to the instance log4j config. 
+If set, appends the appropriate log appender automatically (including the port specified above).
+| /var/lib/neo4j/conf/server-logs.xml
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_MIN_DURATION`
+| Minimum duration in milliseconds for a query to be logged (optional)
+| 100
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_DISABLE_OBFUSCATION`
+| Disable the string literal obfuscation in queries (optional)
+| true
 |===
 
 [IMPORTANT]
@@ -302,3 +332,21 @@ agent service start
 ----
 agent service uninstall
 ----
+
+=== Rename DBMS
+
+. Select new DBMS in the navigaiton dropdown and navigate to Status panel
++
+image::status-panel-before-renaming-dbms.png[width=800]
++
+. Open Context menu for DBMS node and select Edit
++
+image::status-panel-context-menu-edit-dbms.png[width=800]
++
+. Type new name
++
+image::status-panel-renaming-dbms.png[width=800]
++
+. Press enter or click away from edit field to confirm new name
++
+image::status-panel-after-renaming-dbms.png[width=800]
