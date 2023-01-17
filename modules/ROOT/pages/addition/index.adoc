@@ -199,6 +199,10 @@ If set, appends the appropriate log appender automatically (including the port s
 | Minimum duration in milliseconds for a query to be logged (optional)
 | 100
 
+| `CONFIG_INSTANCE_n_QUERY_LOG_MIN_DURATION_FILTER_ERRORS`
+| Enable filter for errors under the minimum duration in milliseconds (optional)
+| true
+
 | `CONFIG_INSTANCE_n_QUERY_LOG_DISABLE_OBFUSCATION`
 | Disable the string literal obfuscation in queries (optional)
 | true
