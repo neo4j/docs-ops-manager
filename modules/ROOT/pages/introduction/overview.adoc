@@ -17,6 +17,7 @@ With these features, is it possible for NOM to assist the Administrator with und
 On top of this architecture and framework are a set of “managers”, covering four pillars of Monitoring, Administration, Operations and Integration.
 
 Whilst NOM contains initially a small set of features, it will continue to add capabilities in three ways:
+
 * Enhance: add better capability/new features to existing components to improve the user experience
 * Expand: add new managers in each of the four pillars to provide additional capabilities
 * Enrich: add value to managers by adding actionable insights and recommendations using the frameworks
