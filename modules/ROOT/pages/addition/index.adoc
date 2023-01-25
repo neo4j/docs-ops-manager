@@ -337,20 +337,28 @@ agent service start
 agent service uninstall
 ----
 
-=== Rename DBMS
+=== Check agent and DBMS
+Ensure agent has contacted NOM server, is online and is reporting DBMS correctly
 
-. Select new DBMS in the navigaiton dropdown and navigate to Status panel
+. Return to Agents listing in global settings
 +
-image::status-panel-before-renaming-dbms.png[width=800]
+image::agents.png[width=800]
+. Identify the newly created agent
+. Check that there is a value for 'Last contact time'
+    ** If the agent has never contacted NOM server then go back to where the agent is running and check the logs.
+    It may be that the server address is configured incorrectly or the TLS certificates are not correctly specified. 
+. Verify that the agent has a current status of 'Online' 
+    ** If the agent is not currently online then go to where it is running and check the logs
+. Click on the configuration icon and check all the configuration is as expected
+. Navigate to the home page and wait for DBMS to appear, this can take a few minutes
+. Select Alerts tab and check there are no alerts for the new DBMS
+
+=== Rename DBMS
+. Select System Topology 
 +
 . Open Context menu for DBMS node and select Edit
 +
-image::status-panel-context-menu-edit-dbms.png[width=800]
+image::home-dbms-context-menu.png[width=800]
 +
 . Type new name
 +
-image::status-panel-renaming-dbms.png[width=800]
-+
-. Press enter or click away from edit field to confirm new name
-+
-image::status-panel-after-renaming-dbms.png[width=800]
