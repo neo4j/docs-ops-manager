@@ -27,7 +27,7 @@ This is due to a major change to the metric storage model making previous metric
 [NOTE]
 ====
 
-The initial startup of 1.4 after upgrade may take longer than usual especially if the persistence store contains a large amount of query log data.
+The initial startup of 1.4 after upgrade may take longer than usual, especially if the persistence store contains a large amount of query log data.
 
 This is due to additions to the query log model which require existing data to be migrated.
 
