@@ -3,10 +3,18 @@
 
 [[server]]
 == Upgrading server
-[IMPORTANT]
+
+[NOTE]
+====
+Before starting the upgrade process, it is recommended to back up your existing NOM installation folder.
 ====
 
-*Please read if upgrading to Neo4j Ops Manager 1.3.*
+[[server-version-notes]]
+=== Version specific notes
+
+==== 1.3
+[IMPORTANT]
+====
 
 All metrics will be deleted as part of the migration that runs on upgrade to version 1.3.
 
@@ -14,9 +22,15 @@ This is due to a major change to the metric storage model making previous metric
 
 ====
 
+==== 1.4 
+
 [NOTE]
 ====
-Before starting the upgrade process, it is recommended to back up your existing NOM installation folder.
+
+The initial startup of 1.4 after upgrade may take longer than usual, especially if the persistence store contains a large amount of query log data.
+
+This is due to additions to the query log model which require existing data to be migrated.
+
 ====
 
 [[server-linux]]
