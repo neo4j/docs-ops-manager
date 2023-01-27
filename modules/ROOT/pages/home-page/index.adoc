@@ -37,6 +37,6 @@ image::alerts.png[width=800]
 [[working-with-a-dbms]]
 == Working with a DBMS
 
-To select a DBMS, double click on the DBMS in the System topology.
+To select a DBMS, double-click on the DBMS in the System topology.
 All pages below the *Home* page are then displaying data for the selected DBMS.
 

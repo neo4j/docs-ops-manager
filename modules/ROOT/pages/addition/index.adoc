@@ -338,20 +338,20 @@ agent service uninstall
 ----
 
 === Check agent and DBMS
-Ensure agent has contacted NOM server, is online and is reporting DBMS correctly
+Ensure agent has contacted NOM server, is online and is reporting DBMS correctly.
 
 . Return to Agents listing in global settings
 +
 image::agents.png[width=800]
-. Identify the newly created agent
-. Check that there is a value for 'Last contact time'
+. Identify the newly created agent.
+. Check that there is a value for _Last contact time_.
     ** If the agent has never contacted NOM server then go back to where the agent is running and check the logs.
     It may be that the server address is configured incorrectly or the TLS certificates are not correctly specified. 
-. Verify that the agent has a current status of 'Online' 
-    ** If the agent is not currently online then go to where it is running and check the logs
+. Verify that the agent has a current status of `Online`. 
+    ** If the agent is not currently online then go to where it is running and check the logs.
 . Click on the configuration icon and check all the configuration is as expected
-. Navigate to the home page and wait for DBMS to appear, this can take a few minutes
-. Select Alerts tab and check there are no alerts for the new DBMS
+. Navigate to the home page and wait for DBMS to appear, this can take a few minutes.
+. Select the _Alerts_ tab and make sure that there are no alerts for the new DBMS.
 
 === Rename DBMS
 . Select System Topology 
