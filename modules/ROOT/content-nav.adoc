@@ -9,31 +9,26 @@
 // * Upgrading
 * xref:upgrade/index.adoc[]
 
-* Installation
-** xref:installation/prerequisites.adoc[]
-** xref:installation/os.adoc[]
+* xref:installation/index.adoc[]
+** xref:installation/persistence.adoc[]
 ** xref:installation/server.adoc[]
+** xref:installation/docker/index.adoc[]
+***  xref:installation/docker/introduction.adoc[]
+*** xref:installation/docker/server.adoc[]
+*** xref:installation/docker/compose.adoc[]
+** xref:installation/kubernetes/index.adoc[]
+*** xref:installation/kubernetes/helm-charts.adoc[]
 ** xref:installation/self-signed-certificate.adoc[]
-// ** xref:installation/cloud.adoc[]
-// ** xref:installation/faq.adoc[]
 
-// Docker
-* xref:docker/index.adoc[Docker]
-** xref:docker/introduction.adoc[]
-** xref:docker/server.adoc[]
-** xref:docker/compose.adoc[]
-
-// Kubernetes
-* xref:kubernetes/index.adoc[Kubernetes]
-** xref:kubernetes/helm-charts.adoc[]
 
 // * Configuration
 // ** xref:configuration/security.adoc[]
 // ** xref:configuration/persistence.adoc[]
 // ** xref:configuration/server.adoc[]
 
-// * Adding a managed DBMS
-* xref:addition/index.adoc[]
+* Adding managed instances
+** xref:addition/instance-requirements.adoc[]
+** xref:addition/index.adoc[]
 //** xref:addition/single.adoc[]
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]

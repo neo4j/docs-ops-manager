@@ -1,4 +1,4 @@
-:description: dThis section describes the usage for NOM server Helm Chart.
+:description: This section describes the usage for NOM server Helm Chart.
 [[helm-charts]]
 = Helm Charts
 

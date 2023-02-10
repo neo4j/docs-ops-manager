@@ -1,2 +1,0 @@
-= FAQ
-:description: This section contains frequently asked questions about installation of Neo4j Ops Manager.
