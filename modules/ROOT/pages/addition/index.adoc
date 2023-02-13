@@ -70,9 +70,9 @@ Which should output:
 === Configure agent
 
 An agent’s run configurations are provided through environment variables.
-The following tables list configuration keys and values to be set for them.
+The tables here list configuration keys and values to be set for them.
 
-The following environement variables need to be set to allow the agent to communicate with the NOM Server.
+The following environment variables need to be set to allow the agent to communicate with the NOM Server.
 Copy these from the `Agent Credentials` dialog in the register step.
 
 [cols="<,<,<",options="header"]
@@ -98,7 +98,7 @@ Copy these from the `Agent Credentials` dialog in the register step.
 | secret
 |===
 
-The following environement variables specify start configuration for the agent:
+The following environment variables specify start configuration for the agent:
 [cols="<,<,<",options="header"]
 |===
 | Variable
@@ -198,7 +198,7 @@ Agents are supposed to monitor only local instances and should not be configured
 
 [NOTE]
 ====
-Refer to *xref:../addition/instance-requirements[Neo4j instance requirements]* to ensure that all instances meet the rquirements to be managed by NOM.
+Refer to *xref:../addition/instance-requirements[Neo4j instance requirements]* to ensure that all instances meet the requirements to be managed by NOM.
 ====
 
 [[running-agent]]
@@ -328,5 +328,5 @@ image::agents.png[width=800]
 . Verify that the agent has a current status of `Online`. 
     ** If the agent is not currently online then go to where it is running and check the logs.
 . Hover over the newly added agent and click the cog icon to show agent configuration. Check configuration is as expected.
-. Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear)
+. Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
 . Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.

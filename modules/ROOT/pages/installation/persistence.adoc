@@ -1,7 +1,7 @@
 = NOM persistence DBMS
 
 Server installation is a two-step process.
-The first step, as described in this section, is to setup a Neo4j DBMS to act as persistence storage for NOM.
+The first step, as described in this section, is to set up a Neo4j DBMS to act as persistence storage for NOM.
 
 
 The NOM persistence DBMS is used to store all NOM data (topology, metrics, etc.).
@@ -19,7 +19,7 @@ NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to
 
 === Install and prepare
 
-* Please refer to the link:/docs/operations-manual/current/installation[Operations Manual -> Installation] for how to install Neo4j.
+* Please refer to the link:/docs/operations-manual/current/installation[Operations Manual -> Installation] for information on how to install Neo4j.
 
 * Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
 Be aware that that user needs full admin access.
