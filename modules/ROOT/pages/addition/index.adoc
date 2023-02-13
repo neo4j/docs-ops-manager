@@ -8,7 +8,7 @@ NOM agents should be installed for every host in the managed estate:
 * An agent can and should manage all instances on a single host even if they are members of different DBMSs.
 
 [[register]]
-=== Register agent
+== Register agent
 
 Before installing an agent - it needs to be registered with the NOM server to provide server communication configuration.
 
@@ -40,7 +40,7 @@ Newly created agent will be displayed on the list of agents.
 
 
 [[install]]
-=== Install agent
+== Install agent
 
 The following steps are required to install an agent:
 
@@ -67,7 +67,7 @@ Which should output:
 
 
 [[configure]]
-=== Configure agent
+== Configure agent
 
 An agent’s run configurations are provided through environment variables.
 The tables here list configuration keys and values to be set for them.
@@ -202,7 +202,7 @@ Refer to *xref:../addition/instance-requirements[Neo4j instance requirements]* t
 ====
 
 [[running-agent]]
-=== Run agent
+== Run agent
 
 An agent can run in two modes, console or service.
 Best practice is to run an agent in service mode.
@@ -315,7 +315,7 @@ agent service start
 agent service uninstall
 ----
 
-=== Check agent and DBMS(s)
+== Check agent and DBMS(s)
 Ensure agent has contacted NOM server, is online and is reporting DBMS(s) correctly.
 
 . Return to Agents listing in global settings

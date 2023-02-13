@@ -7,7 +7,7 @@ In order to be managed by NOM a Neo4j instance **must**:
 
 For the metrics collection feature to work correctlty these configuration values need to be set: 
 
-=== For 4.4.x versions: 
+== For 4.4.x versions: 
 
 ** `metrics.prometheus.endpoint=127.0.0.1:2004`
 
@@ -21,7 +21,7 @@ For the metrics collection feature to work correctlty these configuration values
 
 ** `metrics.namespaces.enabled=true`
 
-=== For 5.x versions: 
+== For 5.x versions: 
 
 ** `server.metrics.prometheus.endpoint=127.0.0.1:2004`
 
