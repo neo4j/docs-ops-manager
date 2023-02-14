@@ -166,7 +166,7 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 
 | `CONFIG_INSTANCE_n_BOLT_URI`
 | Bolt URI for nth instance
-| bolt://localhost:7687
+| bolt://localhost:7687 or bolt+s://localhost:7687 or bolt+ssc://localhost:7687, depending on the local database setup
 
 | `CONFIG_INSTANCE_n_BOLT_USERNAME`
 | Bolt user name for nth instance
