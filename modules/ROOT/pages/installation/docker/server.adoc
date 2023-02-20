@@ -1,4 +1,4 @@
-= Server Docker Container
+= Server docker container
 :description: This page describes how to run a NOM server in a Docker container.
 
 NOM server in a Docker container can be run in several contexts such as a Docker compose environment or a in a Kubernetes cluster etc.
@@ -7,7 +7,7 @@ In this chapter, we only focus on running a standalone NOM server in a Docker co
 == Configuration
 NOM server container run configuration involves setting required environment variables or passing them as commandline arguments.
 
-Refer to *xref:../installation/server.adoc[Installation]* for the list of configuration options to be provided to NOM server.
+Refer to *xref:../installation/server.adoc#config_ref[Server installation]* for the list of configuration options to be provided to NOM server.
 
 == Security
 NOM server security involves configuring keys and certificates for the TLS connections that the server makes with the UI and the agents. 

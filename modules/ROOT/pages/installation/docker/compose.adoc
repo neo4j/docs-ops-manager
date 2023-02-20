@@ -1,4 +1,4 @@
-= Docker compose Support
+= Docker compose support
 :description: this page describes the docker compose privisioning instructions for the NOM server and NOM persistence
 
 Docker compose can be used to provision a set of related containers as services to experiment with or to run in test environments.

@@ -2,5 +2,5 @@
 :description: This chapter describes the NOM containerisation.
 
 * xref:./introduction.adoc[Introduction] - About the NOM server Docker image
-* xref:./server.adoc[Server Docker Container] - About running a NOM server Docker container
+* xref:./server.adoc[Server docker container] - About running a NOM server Docker container
 * xref:./compose.adoc[Compose] - About running a NOM server Docker container and a persistence container using Docker compose
