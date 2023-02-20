@@ -83,6 +83,9 @@
 ** xref:feedback/product-feedback.adoc[]
 ** xref:feedback/support.adoc[]
 
+* xref:first-look/index.adoc[]
+** xref:first-look/linux-first-look.adoc[]
+
 * Appendix
 ** xref:appendix/version-compatibility.adoc[]
 ** xref:appendix/faq.adoc[]
