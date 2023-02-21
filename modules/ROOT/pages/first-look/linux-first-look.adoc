@@ -15,7 +15,7 @@ Extracted directory location will be referred to as NEO4J_HOME form now on.
 === Change password
 Navigate to NEO4j_HOME and run:
 
-[source, terminal, role=noheader]
+[source, terminal]
 ----
 ./bin/neo4j-admin dbms set-initial-password lovelypassword
 ----
@@ -29,9 +29,9 @@ Navigate to NEO4j_HOME and run:
 See link:https://neo4j.com/docs/operations-manual/current/installation/linux/tarball/[Neo4j Linux installation documentation] for more details about installing and running Neo4j.
 
 == Server installation
-=== Unpack NOM server bundled with Neo4j
+=== Unpack NOM server from Neo4j package
    
-[source, terminal, role=noheader]
+[source, terminal]
 ----
    tar -xzf NEO4J_HOME/products/neo4j-ops-manager-server-*-unix.tar.gz
 ----
@@ -42,7 +42,7 @@ Extracted directory will now be known as NOM_SERVER_HOME.
 
 Navigate to NOM_SERVER_HOME and run:
 
-[source, terminal, role=noheader]
+[source, terminal]
 ----
 java -jar ./lib/server.jar ssc -n localhost \
         -o ./certificates \
@@ -54,7 +54,7 @@ More information on Self Signed certificates *xref:installation/self-signed-cert
 
 === Run NOM server as console application 
 
-[source, terminal, role=noheader]
+[source, terminal]
 ----
     java -jar ./lib/server.jar \
         --spring.neo4j.uri=neo4j: neo4j://localhost:7687\
@@ -98,7 +98,7 @@ Edit the export command below as follows:
 * Replace the bolt URIs, usernames and passwords  with the correct ones for your cluster. 
 * Remove any instance configurations you don't need or add configurations if you have more than three instances in your cluster. 
 
-[source, terminal, role=noheader]
+[source, terminal]
 ----
 export \
 <OUTPUT_FROM_REGISTER_AGENT>
@@ -129,7 +129,7 @@ Full documentation on configuring an agent is *xref:addition/index.adoc#configur
 
 === Run agent as console application
 
-[source, terminal, role=noheader]
+[source, terminal]
 ----
 ./bin/agent console
 ----

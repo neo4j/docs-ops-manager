@@ -3,7 +3,7 @@
 These tutorials are intended to be used to quickly get NOM up and managing a Neo4j DBMS for demo or evaluation purposes. 
 They make a number of assumptions and take shortcuts that would not be appropriate in production environments. 
 
-* xref:./linux-first-look.adoc[Linux] - Run NOM on a machine with a linux OS
+* xref:./linux-first-look.adoc[Linux] - Run NOM on a linux machine which has a dbms already running.
 //* xref:./windows-first-look.adoc[Windows] -  Run NOM on a machine with Windows
 //* xref:./mac-first-look.adoc[Mac] -  Run NOM on a machine with MacOS
-//* xref:./docker-first-look.adoc[Docker] - Run NOM using docker
+* xref:./docker-first-look.adoc[Docker] - Run NOM and a managed Neo4j instance using docker compose.
