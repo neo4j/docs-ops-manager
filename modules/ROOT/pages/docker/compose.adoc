@@ -67,7 +67,7 @@ docker compose -f <compose file> up <folder for context, typically current folde
 ----
 
 ====
-Following is an example Docker compose file that can be used to start up a NOM server and Enerprise Neo4j Persistence system without any customization. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring:
+Following is an example Docker compose file that can be used to start up a NOM server and Enterprise Neo4j Persistence system without any customization. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring:
 
 IMPORTANT: Create a directory *`~/.nom/ssc`* before running Docker compose.
 
