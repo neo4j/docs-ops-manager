@@ -10,7 +10,7 @@ NOM agents should be installed for every host in the managed estate:
 [[register]]
 == Register agent
 
-Before installing an agent - it needs to be registered with the NOM server to provide server communication configuration.
+Before installing an agent, it needs to be registered with the NOM server to provide server communication configuration.
 
 . Click the top right settings icon that redirects you to the global settings.
 +
