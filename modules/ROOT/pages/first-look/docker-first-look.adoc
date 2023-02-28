@@ -42,6 +42,11 @@ NOTE: For *`sudo`* docker compose command, make sure the correct path to *`.nom/
 Following is a docker compose file that can be used to start up a NOM server and Enerprise Neo4j Persistence system without any customization. 
 Copy this to your local machine as `docker-compose.yaml`.
 
+Edit the yaml as follows:
+
+*  replace all three occurences of <PERSISTENCE_PASSWORD> with a secure password. 
+*  replace all three occurences of <SSC_PASSWORD> with a secure password.
+
 .docker-compose.yaml
 [source, yaml]
 ----
@@ -59,12 +64,12 @@ services:
       - "9001:9001"
     environment:
       NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
-      NEO4J_AUTH: neo4j/passw0rd
+      NEO4J_AUTH: neo4j/<PERSISTENCE_PASSWORD>
       NEO4J_dbms_default__advertised__address: storage
       NEO4J_dbms_connector_http_listen__address: storage:9000
       NEO4J_dbms_connector_bolt_listen__address: storage:9001
     healthcheck:
-      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://storage:9001 -u neo4j -p passw0rd || exit 1" ]
+      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://storage:9001 -u neo4j -p <PERSISTENCE_PASSWORD> || exit 1" ]
 
   server:
     hostname: server
@@ -80,13 +85,13 @@ services:
     environment:
       SPRING_NEO4J_URI: bolt://storage:9001
       SPRING_NEO4J_AUTHENTICATION_USERNAME: neo4j
-      SPRING_NEO4J_AUTHENTICATION_PASSWORD: passw0rd
+      SPRING_NEO4J_AUTHENTICATION_PASSWORD: <PERSISTENCE_PASSWORD>
       SERVER_SSL_KEY_STORE_TYPE: PKCS12
       SERVER_SSL_KEY_STORE: file:/certificates/server.pfx
-      SERVER_SSL_KEY_STORE_PASSWORD: changeit
+      SERVER_SSL_KEY_STORE_PASSWORD: <SSC_PASSWORD>
       GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
       GRPC_SERVER_SECURITY_KEY_STORE: file:/certificates/server.pfx
-      GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: changeit
+      GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <SSC_PASSWORD>
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*], http://server:[*]"
       JWT_SECRET: please-set-a-random-secret-string-here-for-jwt-signing
@@ -97,10 +102,10 @@ services:
     entrypoint:
       - "sh"
       - "-c"
-      - "java -jar app.jar ssc -n server -o /certificates -p changeit -d server -i 127.0.0.1 && java -jar app.jar"
+      - "java -jar app.jar ssc -n server -o /certificates -p <SSC_PASSWORD> -d server -i 127.0.0.1 && java -jar app.jar"
 ----
 
-Docuemntation for NOM server docker image is *xref:installation/docker/server.adoc[here]*.
+Documentation for NOM server docker image is *xref:installation/docker/server.adoc[here]*.
 
 === Run docker compose 
 Run the follwing command:
@@ -127,6 +132,7 @@ Full documentation on registering an agent is *xref:addition/index.adoc#register
 Copy compose file below into `docker-compose.instance.yaml` and edit as follows: 
 
 * Replace `<CONFIG_TOKEN_CLIENT_ID from register agent step>` and `<CONFIG_TOKEN_CLIENT_SECRET from register agent step>` with the values shown during the reigister agent step in the NOM UI. 
+* Replace all three occurences of <NEO4J_INSTANCE_PASSWORD> with a secure password. 
 
 .docker-compose.instance.yaml
 [source, yaml]
@@ -150,12 +156,12 @@ services:
       CONFIG_INSTANCE_1_NAME: "single-instance"
       CONFIG_INSTANCE_1_BOLT_URI: "bolt://db-single:10001"
       CONFIG_INSTANCE_1_BOLT_USERNAME: "neo4j"
-      CONFIG_INSTANCE_1_BOLT_PASSWORD: "passw0rd"
+      CONFIG_INSTANCE_1_BOLT_PASSWORD: <NEO4J_INSTANCE_PASSWORD>
       CONFIG_INSTANCE_1_QUERY_LOG_PORT: "9500"
       CONFIG_INSTANCE_1_LOG_CONFIG_PATH: "/var/lib/neo4j/conf/server-logs.xml"
       CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION: "1"
       NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
-      NEO4J_AUTH: neo4j/passw0rd
+      NEO4J_AUTH: neo4j/<NEO4J_INSTANCE_PASSWORD>
       NEO4J_EDITION: "enterprise"
       NEO4J_server_default__advertised__address: db-single
       NEO4J_server_http_listen__address: db-single:10000
@@ -169,7 +175,7 @@ services:
           source: ~/.nom/ssc
           target: /certificates
     healthcheck:
-      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://db-single:10001 -u neo4j -p passw0rd || exit 1" ]
+      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://db-single:10001 -u neo4j -p <NEO4J_INSTANCE_PASSWORD> || exit 1" ]
       interval: 10s
       timeout: 10s
       retries: 3
@@ -192,6 +198,7 @@ docker compose -f docker-compose.instance.yaml exec sh -c tar -xvf products/neo4
 ----
 
 == Explore NOM UI
-Go to NOM UI and wait for DBMS to appear - this may take a few minutes. You should be able to see that the agent has connected in the agents listing. 
+Go to NOM UI and wait for DBMS to appear - this may take a few minutes. 
+You should be able to see that the agent has connected in the agents listing. 
 Once DBMS is shown in home page, double click on the name (initially a generated string) to edit it. 
-Double click on the DBMS to see metrics, status, security panel,logs and upgrade pages for the DBMS. 
+Double click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS. 
