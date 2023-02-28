@@ -1,49 +1,16 @@
-= Adding a managed DBMS
-:description: This section describes the installation process for adding a managed DBMS to Neo4j Ops Manager.
+= Installation and configuration of NOM agents
+:description: This section describes the installation process for a NOM agent.
 
-Adding a DBMS in NOM’s terminology means to enable the monitoring of every instance in the DBMS by installing a NOM agent on the instance host and configuring it appropriately.
+NOM agents should be installed for every host in the managed estate:
 
-[[add-single]]
-== Add a single instance DBMS
-
-Follow the steps below to add the single DBMS instance:
-
-[[add-cluster]]
-== Add a cluster
-
-Follow the steps below to add *every* instance in the cluster:
-
-
-== Add a DBMS instance
-
-[[prerequisites]]
-=== Prerequisites
-
-To be monitored by NOM an instance of a DBMS must: 
-
-
-* be running a Neo4j Enterprise Edition v4.4.0 or higher
-
-* have the following config settings set in neo4j.conf: 
-
-** `metrics.prometheus.endpoint=127.0.0.1:2004`
-
-** `metrics.prometheus.enabled=true`
-
-** `metrics.enabled=true`
-
-** `metrics.filter=*`
-
-** `metrics.jmx.enabled=true`
-
-** `metrics.namespaces.enabled=true`
-
-
+* To manage a Neo4j instance, there needs to be a NOM agent running on the same host.
+* To fully manage a clustered DBMS - there must be an agent for every host that hosts an instance of the DBMS.
+* An agent can and should manage all instances on a single host even if they are members of different DBMSs.
 
 [[register]]
-=== Register agent
+== Register agent
 
-Before adding a DBMS instance for NOM monitoring, one agent needs to be registered with the NOM server which provides server communication configuration for the agent.
+Before installing an agent, it needs to be registered with the NOM server to provide server communication configuration.
 
 . Click the top right settings icon that redirects you to the global settings.
 +
@@ -64,7 +31,7 @@ image:agent-credentials.png[width=800]
 [NOTE]
 ====
 The credentials and other key agent configuration values are displayed as environment variable declarations.
-You can copy them over to your instance host for ease of agent configuration.
+You can copy them over to the host for ease of agent configuration.
 ====
 +
 . After you have captured the credentials, click the confirmation checkbox and *Finish* button.
@@ -73,18 +40,14 @@ Newly created agent will be displayed on the list of agents.
 
 
 [[install]]
-=== Install agent
+== Install agent
 
 The following steps are required to install an agent:
 
 * Standalone binaries (only linux and windows platform binaries are available)
 ** Download: https://neo4j.com/download-center/#ops-manager[Download]
 ** Extract the archive:
-+
-[source, terminal, role=noheader]
-----
-tar -xvzf <agent downloaded archive>
-----
+
 ** Add the `bin` folder in the extracted directory to `PATH`
 * To verify the installation, run the following command:
 +
@@ -104,10 +67,13 @@ Which should output:
 
 
 [[configure]]
-=== Configure agent
+== Configure agent
 
 An agent’s run configurations are provided through environment variables.
-The following table lists configuration keys and values to be set for them:
+The tables here list configuration keys and values to be set for them.
+
+The following environment variables need to be set to allow the agent to communicate with the NOM Server.
+Copy these from the `Agent Credentials` dialog in the register step.
 
 [cols="<,<,<",options="header"]
 |===
@@ -130,7 +96,14 @@ The following table lists configuration keys and values to be set for them:
 | `CONFIG_TOKEN_CLIENT_SECRET`
 | Client secret for the agent
 | secret
+|===
 
+The following environment variables specify start configuration for the agent:
+[cols="<,<,<",options="header"]
+|===
+| Variable
+| Description
+| Example
 | `CONFIG_TLS_TRUSTED_CERTS`
 | PEM encoded trusted CA list ()
 | `/path/to/a/pem/file`
@@ -149,10 +122,10 @@ The following table lists configuration keys and values to be set for them:
 Since agent-server communication needs to be encrypted, you need to configure the agent so that it trusts the server's certificates.
 The file that contains the trusted certificate list (PEM encoded) can be specified through the `CONFIG_TLS_TRUSTED_CERTS` environment variable.
 While most operating systems default to the system-wide trusted certificates, that's not the case on Windows.
-For that reason, you must set this environment variable on Windows.
+For that reason, you **must** set this environment variable on Windows.
 ====
 
-Apart from the start configuration above, for each of the monitored DBMS instance(s), the following environment variables needs to be set to allow the agent to access the instance:
+For each managed DBMS instance on the host, the following environment variables need to be set to allow the agent to access the instance:
 
 [cols="<,<,<",options="header"]
 |===
@@ -165,7 +138,7 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 | my-instance-n
 
 | `CONFIG_INSTANCE_n_BOLT_URI`
-| Bolt URI for nth instance
+| Bolt URI for nth instance with bolt or bolt+s protocol
 | bolt://localhost:7687 or bolt+s://localhost:7687 or bolt+ssc://localhost:7687, depending on the local database setup
 
 | `CONFIG_INSTANCE_n_BOLT_USERNAME`
@@ -223,8 +196,13 @@ For this reason, it is important that you specify unique names across your clust
 Agents are supposed to monitor only local instances and should not be configured to connect to remote instances.
 ====
 
+[NOTE]
+====
+Refer to *xref:../addition/instance-requirements[Neo4j instance requirements]* to ensure that all instances meet the requirements to be managed by NOM.
+====
+
 [[running-agent]]
-=== Run agent
+== Run agent
 
 An agent can run in two modes, console or service.
 Best practice is to run an agent in service mode.
@@ -337,8 +315,8 @@ agent service start
 agent service uninstall
 ----
 
-=== Check agent and DBMS
-Ensure agent has contacted NOM server, is online and is reporting DBMS correctly.
+== Check agent and DBMS(s)
+Ensure agent has contacted NOM server, is online and is reporting DBMS(s) correctly.
 
 . Return to Agents listing in global settings
 +
@@ -350,15 +328,5 @@ image::agents.png[width=800]
 . Verify that the agent has a current status of `Online`. 
     ** If the agent is not currently online then go to where it is running and check the logs.
 . Hover over the newly added agent and click the cog icon to show agent configuration. Check configuration is as expected.
-. Navigate to the home page and wait for DBMS to appear, this can take a few minutes.
-. Select the _Alerts_ tab and make sure that there are no alerts for the new DBMS.
-
-=== Rename DBMS
-. Select System Topology 
-+
-. Open Context menu for DBMS node and select Edit
-+
-image::home-dbms-context-menu.png[width=800]
-+
-. Type new name
-+
+. Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
+. Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.

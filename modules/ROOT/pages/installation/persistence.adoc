@@ -1,0 +1,56 @@
+= NOM persistence DBMS
+
+Server installation is a two-step process.
+The first step, as described in this section, is to set up a Neo4j DBMS to act as persistence storage for NOM.
+
+
+The NOM persistence DBMS is used to store all NOM data (topology, metrics, etc.).
+The DBMS and the NOM Server need to be running simultaneously, or the NOM Server will not work.
+
+
+== Self managed DBMS
+
+NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to 16 GB of RAM for the use as NOMs persistence.
+
+=== Specifications
+* Neo4j Enterprise Edition 4.4 or 5.x
+* At least 10 GB free disk space
+* For minimum requirements, see also link:/docs/operations-manual/current/installation/requirements/[Operations Manual -> System requirements].
+
+=== Install and prepare
+
+* Please refer to the link:/docs/operations-manual/current/installation[Operations Manual -> Installation] for information on how to install Neo4j.
+
+* Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
+Be aware that that user needs full admin access.
+The login to the NOM Server is needed for server installation.
+
+== AuraDB
+
+An AuraDB Professional or Enterprise could be used for NOM persistence however consideration should be given to the following:
+
+* The AuraDB instance should be for exclusive use of the NOM server.
+* The NOM server and persistence should ideally be located on the same LAN segment to avoid performance being impacted by WAN traffic.
+* Future product developments may require features not currently available in AuraDB.
+
+[IMPORTANT]
+====
+If the DBMS is not newly created, ensure the following:
+
+** That the default database for the user exists.
+This is done via the `SHOW DATABASES` command.
+** That the default database for the user is empty.
+This is done via `MATCH (n) RETURN count(n)` which should return 0.
+** That the default database for the user doesn't contain any indexes or constraints.
+This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
+
+
+The default database for a user is either the home database for that user if it is set or the default database for the DBMS. 
+The default database for the DBMS is 'neo4j' if not explicitly configured.
+====
+
+
+[WARNING]
+====
+The use or manipulation of the persistence database apart from through the NOM Server is highly discouraged and can negatively impact the stability and data correctness of NOM.
+====
