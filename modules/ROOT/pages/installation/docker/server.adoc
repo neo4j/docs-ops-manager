@@ -1,4 +1,4 @@
-= Server docker container
+= Server Docker container
 :description: This page describes how to run a NOM server in a Docker container.
 
 NOM server in a Docker container can be run in several contexts such as a Docker compose environment or a in a Kubernetes cluster etc.
