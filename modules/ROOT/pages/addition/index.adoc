@@ -1,5 +1,5 @@
 = Installation and configuration of NOM agents
-:description: This section describes the installation process for a NOM agent
+:description: This section describes the installation process for a NOM agent.
 
 NOM agents should be installed for every host in the managed estate:
 
