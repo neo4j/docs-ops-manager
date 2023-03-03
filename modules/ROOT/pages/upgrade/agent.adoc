@@ -11,14 +11,11 @@ It is recommended to always keep agents up-to-date with the version of the insta
 Starting with version 1.5.0, the NOM agent is capable of self-updating, either manually triggered or automatically (recommended).
 ====
 
-With automatic updates, the NOM server contains an update payload that will bring a connected agent up-to-date with the server version.
+The server can automatically keep all connected agents up-to-date using the *Auto-update* toggle switch on the top right of the Agents page.
+
+With automatic updates, the NOM server contains an embedded update payload that will bring a connected agent up-to-date with the server version.
 
 image::agent-updates.png[width=800]
-
-[[agent-auto-update]]
-== Auto-update
-
-The server can automatically keep all connected agents up-to-date using the *Auto-update* toggle switch on the top right of the Agents page.
 
 [[agent-semi-auto-update]]
 == Update specific agents
@@ -29,10 +26,10 @@ The table on the Agents page will display the versions of all connected agents, 
 == Manual update
 
 [NOTE]
-----
+====
 Each NOM server package contains corresponding NOM agent packages for every supported platform.
 You can either use them or download the corresponding agent binaries from Download Center.
-----
+====
 
 . Get the corresponding NOM agent package for your platform.
 . Stop NOM agent by running `./bin/agent service stop`.
