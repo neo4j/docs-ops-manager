@@ -17,11 +17,6 @@
 *** xref:installation/kubernetes/helm-charts.adoc[]
 ** xref:installation/self-signed-certificate.adoc[]
 
-// * Upgrading
-* xref:upgrade/index.adoc[]
-** xref:upgrade/server.adoc[]
-** xref:upgrade/agent.adoc[]
-
 // * Configuration
 // ** xref:configuration/security.adoc[]
 // ** xref:configuration/persistence.adoc[]
@@ -33,6 +28,11 @@
 //** xref:addition/single.adoc[]
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
+
+// * Upgrading
+* xref:upgrade/index.adoc[]
+** xref:upgrade/server.adoc[]
+** xref:upgrade/agent.adoc[]
 
 * Component management
 // ** xref:component/default.adoc[]
