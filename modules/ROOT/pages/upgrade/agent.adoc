@@ -1,0 +1,41 @@
+:description: This section describes the update process for the NOM agent.
+= Agent update
+
+It is recommended to always keep agents up-to-date with the version of the installed NOM server.
+
+[[agent-automatic]]
+== Automatic updates
+
+[NOTE]
+====
+Starting with version 1.5.0, the NOM agent is capable of self-updating, either manually triggered or automatically (recommended).
+====
+
+With automatic updates, the NOM server contains an update payload that will bring a connected agent up-to-date with the server version.
+
+image::agent-updates.png[width=800]
+
+[[agent-auto-update]]
+== Auto-update
+
+The server can automatically keep all connected agents up-to-date using the *Auto-update* toggle switch on the top right of the Agents page.
+
+[[agent-semi-auto-update]]
+== Update specific agents
+
+The table on the Agents page will display the versions of all connected agents, as well as an update badge for any agents that are running an older version of the agent. If auto-updates are disabled, agents can be updated individually by opening the context menu in the right-most column and selecting *Update*.
+
+[[agent-manual]]
+== Manual update
+
+[NOTE]
+----
+Each NOM server package contains corresponding NOM agent packages for every supported platform.
+You can either use them or download the corresponding agent binaries from Download Center.
+----
+
+. Get the corresponding NOM agent package for your platform.
+. Stop NOM agent by running `./bin/agent service stop`.
+. Extract the downloaded package into the existing installation directory.
+. Start NOM agent by running `./bin/agent service start`.
+. Verify that the agent is operating as expected by checking logs.
