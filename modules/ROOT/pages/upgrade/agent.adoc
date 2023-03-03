@@ -13,7 +13,7 @@ Starting with version 1.5.0, the NOM agent is capable of self-updating, either m
 
 The server can automatically keep all connected agents up-to-date using the *Auto-update* toggle switch on the top right of the Agents page.
 
-With automatic updates, the NOM server contains an embedded update payload that will bring a connected agent up-to-date with the server version.
+With automatic updates, the NOM server contains an embedded _signed_ update payload that will bring a connected agent up-to-date with the server version. The agent will only ever apply an update that is signed using an internal Neo4j signing key. No internet connectivity is required for agent updates to work.
 
 image::agent-updates.png[width=800]
 
