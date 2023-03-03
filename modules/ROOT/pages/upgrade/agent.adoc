@@ -8,7 +8,8 @@ It is recommended to always keep agents up-to-date with the version of the insta
 
 [NOTE]
 ====
-Starting with version 1.5.0, the NOM agent is capable of self-updating, either manually triggered or automatically (recommended).
+Starting with version 1.5.0, the NOM server is capable of updating agents. 
+The server can be configured to automatically update all agents or updates can be triggered for specific agents. 
 ====
 
 The server can automatically keep all connected agents up-to-date using the *Auto-update* toggle switch on the top right of the Agents page.
