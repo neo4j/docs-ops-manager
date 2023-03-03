@@ -6,9 +6,6 @@
 ** xref:introduction/deployment.adoc[]
 ** xref:introduction/versions.adoc[]
 
-// * Upgrading
-* xref:upgrade/index.adoc[]
-
 * xref:installation/index.adoc[]
 ** xref:installation/persistence.adoc[]
 ** xref:installation/server.adoc[]
@@ -20,6 +17,10 @@
 *** xref:installation/kubernetes/helm-charts.adoc[]
 ** xref:installation/self-signed-certificate.adoc[]
 
+// * Upgrading
+* xref:upgrade/index.adoc[]
+** xref:upgrade/server.adoc[]
+** xref:upgrade/agent.adoc[]
 
 // * Configuration
 // ** xref:configuration/security.adoc[]

@@ -1,4 +1,4 @@
-= Updating
+= Updating to a newer version
 :description: This section describes the upgrade process from an earlier version of NOM.
 
 It is recommended to always keep NOM up-to-date with the latest available version.
