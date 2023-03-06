@@ -2,7 +2,7 @@
 :description: This chapter describes how to install NOM server and persistence.
 
 * xref:./persistence.adoc[NOM Persistence DBMS] - Set up a DBMS for NOM to use
-* xref:./server.adoc[Server Installation] - Install and configure NOM server on Windows or Linux
+* xref:./server.adoc[Server installation] - Install and configure NOM server on Windows or Linux
 * xref:./docker/index.adoc[Docker] - Install NOM server using Docker
 * xref:./kubernetes/index.adoc[Kubernetes] - Deploy NOM server on Kubernetes
 * xref:installation/self-signed-certificate.adoc[] - Generate self-signed certificates for use with NOM
