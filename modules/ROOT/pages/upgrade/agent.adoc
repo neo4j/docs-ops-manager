@@ -32,7 +32,7 @@ If auto-updates are disabled, agents can be updated individually by opening the 
 [NOTE]
 ====
 Each NOM server package contains corresponding NOM agent packages for every supported platform.
-You can either use them or download the corresponding agent binaries from Download Center.
+You can either use those or download the corresponding agent binaries from Download Center.
 ====
 
 . Get the corresponding NOM agent package for your platform.
