@@ -1,0 +1,57 @@
+= User Management (Administrators)
+:description: This section describes the user management in Neo4j Ops Manager.
+
+*User Management* allows setting up NOM users for persons who are in charge of managing
+the Neo4j deployment and reflecting their roles by assigning appropriate permissions.
+
+These tasks can only be accomplished by any NOM user who has the role *NOM Admin*.
+
+[NOTE]
+====
+The default NOM user `admin` has the role *NOM Admin* and is therefore can be used to create new NOM users
+(including other *Administrators*) and assign permissions.
+====
+
+The NOM user management is performed in the *Administrators* section of the NOM settings page.
+
+== NOM User Administration Tasks
+
+=== Creating a user
+
+Click on *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
+
+==== Assigning Permissions
+
+Users having the role *NOM admin* (see checkbox on the *"User info"* tab), have full feature access, for all DBMSs.
+Therefore the tab *"DBMS access control"* is not relevant for *NOM admins*.
+
+Other users will have the role *Administrator* assigned. In this case, every permission can be given explicitly or
+implicitly having the
+xxx
+
+=== Modifying a user
+
+Locate the user to be modified, and use the tabs *"User info"* and *"DBMS access control"* to modify user. All
+modifications performed are persisted when the *"Save"* button is clicked. Clicking *"Cancel"* removes undoes
+the modifications. This also applies to removing assigned DBMS or globs from the table in *"DBMS access control"*.
+Until being saved or cancelled, removed entries are marked visually (grayed out).
+
+[NOTE]
+====
+A user with role *NOM Admin* can not degrade her role to *Administrator*.
+====
+
+=== Remove a user
+
+Locate the user to be removed, click it and press the "Remove user" button at the bottom of the sidebar.
+
+[NOTE]
+====
+User can not remove himself.
+====
+
+[NOTE]
+====
+Should user modification or removal result in globs being unused (e.g. not referenced by other users), these globs will be removed
+as well.
+====

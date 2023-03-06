@@ -52,6 +52,7 @@
 
 * Administration
 ** xref:administration/security-manager.adoc[]
+** xref:administration/user-manager.adoc[]
 // ** xref:administration/cluster-manager.adoc[]
 // ** xref:administration/object-manager.adoc[]
 // ** xref:administration/configuration-manager.adoc[]
