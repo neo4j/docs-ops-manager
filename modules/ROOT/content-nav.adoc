@@ -29,16 +29,16 @@
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
 
-// * Upgrading
-* xref:upgrade/index.adoc[]
-** xref:upgrade/server.adoc[]
-** xref:upgrade/agent.adoc[]
+// * Updating to a newer version
+* xref:update/index.adoc[]
+** xref:update/server.adoc[]
+** xref:update/agent.adoc[]
 
 * Component management
 // ** xref:component/default.adoc[]
 // ** xref:component/add.adoc[]
 ** xref:component/remove.adoc[]
-// ** xref:component/upgrade.adoc[]
+// ** xref:component/update.adoc[]
 
 
 * xref:/home-page/index.adoc[]
