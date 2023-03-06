@@ -1,21 +1,21 @@
 = Architecture
 :description: This section describes the architecture of Ops Manager.
 
-The Ops Manager architecture is shown in this diagram:
+The Neo4j Ops Manager (NOM) architecture is shown in this diagram:
 
 image::architecture.png[width=500]
 
-The user connects to NOM using a web interface and a browser.
-This web application communicates with the NOM server using GraphQL API requests.
+* *Front end* - The user connects to NOM using a web interface.
+This web application communicates with the NOM Server using GraphQL API requests.
 
-The NOM server is a Java application, packaged in a JAR file which is deployed to a Java server (running Java 17).
+* *NOM Server* - The NOM server is a Java application, packaged in a JAR file which is deployed to a Java server (running Java 17).
 
-The NOM server requires a Neo4j database (persistence) to store the operational data, and the recommendation is that this is a dedicated Neo4j single instance running just NOM to minimise impact on other databases.
+* *NOM persistence* - The NOM server requires a Neo4j database (persistence) to store the operational data, and the recommendation is that this is a dedicated Neo4j single instance running just NOM to minimise impact on other databases.
 
-Each DBMS instance to be managed by NOM will have a NOM agent deployed alongside the instance on the host.
+* *Neo4j host* - NOM monitors one or several hosts that comprise at least the following components:
+
+- *NOM Agent* - Each DBMS instance to be managed by NOM will have a NOM _agent_ deployed alongside the instance on the host.
 The agent acts as a local proxy for the NOM server (and administrator), being able to execute both DBMS and operating system commands.
 The agent always initiates the connection to the server which is via TLS encrypted gRPC API.
 
-Two architectural frameworks of Intelligent Monitoring and Knowledge Engine are run on the NOM server.
-
-From a deployment perspective there are 3 components in the architecture to be planned and implemented; the NOM server JAR file application (hosting APIs, NOM application and UI), a Neo4j database for persistence and an agent on each host containing one or more managed instances.
+- *Neo4j* - The monitored DBMS.

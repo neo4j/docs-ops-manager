@@ -1,0 +1,7 @@
+= Updating to a newer version
+:description: This section describes the upgrade process from an earlier version of NOM.
+
+It is recommended to always keep NOM up-to-date with the latest available version.
+
+* xref:./server.adoc[Server update] - Updating the NOM server to a new version
+* xref:./agent.adoc[Agent update] - Options for keeping agents up-to-date

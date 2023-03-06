@@ -1,0 +1,42 @@
+:description: This section describes the update process for the NOM agent.
+= Agent update
+
+It is recommended to always keep agents up-to-date with the version of the installed NOM server.
+
+[[agent-automatic]]
+== Automatic updates
+
+[NOTE]
+====
+Starting with version 1.5.0, the NOM server is capable of updating agents. 
+The server can be configured to automatically update all agents or updates can be triggered for specific agents. 
+====
+
+The server can automatically keep all connected agents up-to-date using the *Auto-update* toggle switch on the top right of the Agents page.
+
+With automatic updates, the NOM server contains an embedded _signed_ update payload that brings a connected agent up-to-date with the server version. 
+The agent only ever applies an update that is signed using an internal Neo4j signing key. 
+No internet connection is required for agent updates to work.
+
+image::agent-updates.png[width=800]
+
+[[agent-semi-auto-update]]
+== Update specific agents
+
+The table on the Agents page displays the versions of all connected agents, as well as an update badge for any agents that are running an older version of the agent. 
+If auto-updates are disabled, agents can be updated individually by opening the context menu in the right-most column and selecting *Update*.
+
+[[agent-manual]]
+== Manual update
+
+[NOTE]
+====
+Each NOM server package contains corresponding NOM agent packages for every supported platform.
+You can either use those or download the corresponding agent binaries from Download Center.
+====
+
+. Get the corresponding NOM agent package for your platform.
+. Stop NOM agent by running `./bin/agent service stop`.
+. Extract the downloaded package into the existing installation directory.
+. Start NOM agent by running `./bin/agent service start`.
+. Verify that the agent is operating as expected by checking logs.
