@@ -36,20 +36,20 @@ This is due to additions to the query log model which require existing data to b
 . Back up any files you've modified inside the current NOM server directory.
 This usually includes `etc/neo4j-ops-manager-server.service` and any files inside `certificates/` directories.
 . Download the latest NOM server package for your platform.
-. Stop NOM server by running `systemctl stop neo4j-ops-manager-server`.
+. Stop the NOM server by running `systemctl stop neo4j-ops-manager-server`.
 . Extract the downloaded package into the existing installation directory.
 . Copy the backed up files back into their corresponding locations.
-. Start NOM server by running `systemctl start neo4j-ops-manager-server`.
-. Verify that the server is operating as expected by checking logs.
+. Start the NOM server by running `systemctl start neo4j-ops-manager-server`.
+. Verify that the server is operating as expected by checking the logs.
 
 [[server-windows]]
 == On Windows
 
 . Back up any files you've modified inside the current NOM server directory.
 This usually includes `bin/server.xml` and any files inside `certificates/` directories.
-. Download latest NOM server package for your platform.
-. Stop NOM server by running `./bin/server.exe stop` inside current NOM server directory.
+. Download the latest NOM server package for your platform.
+. Stop the NOM server by running `./bin/server.exe stop` inside the current NOM server directory.
 . Extract the downloaded package into the existing installation directory.
 . Copy the backed up files back into their corresponding locations.
-. Start NOM server by running `./bin/server.exe start`.
-. Verify that the server is operating as expected by checking logs.
+. Start the NOM server by running `./bin/server.exe start`.
+. Verify that the server is operating as expected by checking the logs.
