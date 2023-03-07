@@ -4,7 +4,7 @@
 *User Management* allows setting up NOM users for persons who are in charge of managing
 the Neo4j deployment and reflecting their roles by assigning appropriate permissions.
 
-These tasks can only be accomplished by any NOM user who has the role *NOM Admin*.
+These tasks can only be accomplished by a NOM user who has the role *NOM Admin*.
 
 [NOTE]
 ====
@@ -22,12 +22,55 @@ Click on *"Create user"* button to open the sidebar containing the tabs *"User i
 
 ==== Assigning Permissions
 
-Users having the role *NOM admin* (see checkbox on the *"User info"* tab), have full feature access, for all DBMSs.
-Therefore the tab *"DBMS access control"* is not relevant for *NOM admins*.
+If a user has the role *NOM admin* (see checkbox on the *"User info"* tab), it will have full feature access, for
+all DBMSs. Therefore, the tab *"DBMS access control"* is not relevant for *NOM admins*.
 
 Other users will have the role *Administrator* assigned. In this case, every permission can be given explicitly or
-implicitly having the
-xxx
+implicitly by assigning it to a DBMS glob pattern. Global permissions can be assigned on the *"User info"* tab and DBMS-specific
+permissions on the *"DBMS access control"*. See the following table for permission description.
+
+
+|===
+|Permission (scope) |Access levels |Description
+
+|*Agent* (global)
+|No access, view, edit
+|Access to the *"Agents"* page of the NOM settings area.
+
+|*Status* (DBMS-specific)
+|View, edit
+|Access to the *"Status"* page for assigned DBMS(s).
+
+|*Security* (DBMS-specific)
+|No access, view, edit
+|Access to the *"Security panel"* page for assigned DBMS(s).
+
+|*Status* (DBMS-specific)
+|No access, view
+|Access to the *"Logs"* page for assigned DBMS(s).
+
+|*Upgrades* (DBMS-specific)
+|No access, View, edit
+|Access to the *"Upgrade"* page for assigned DBMS(s).
+|===
+
+==== Working with glob patterns
+
+Should the Neo4j deployment have many DBMSs, it can be efficient to assign DBMS-specific permissions to a set
+of DBMSs with a single line in the permission table. The glob patterns are checked against the DBMS name, which
+can be set using NOM.
+
+[NOTE]
+====
+The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. For a description of how these
+wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article]
+====
+
+If a DBMS name
+
+by specifying a glob patternwhich restrics
+
+
 
 === Modifying a user
 
@@ -41,7 +84,7 @@ Until being saved or cancelled, removed entries are marked visually (grayed out)
 A user with role *NOM Admin* can not degrade her role to *Administrator*.
 ====
 
-=== Remove a user
+=== Removing a user
 
 Locate the user to be removed, click it and press the "Remove user" button at the bottom of the sidebar.
 
