@@ -9,7 +9,7 @@ These tasks can only be accomplished by a NOM user who has the role *NOM Admin*.
 [NOTE]
 ====
 The default NOM user `admin` has the role *NOM Admin* and is therefore can be used to create new NOM users
-(including other *Administrators*) and assign permissions.
+(including other *Administrators*) and configure permissions.
 ====
 
 The NOM user management is performed in the *Administrators* section of the NOM settings page.
@@ -20,18 +20,19 @@ The NOM user management is performed in the *Administrators* section of the NOM 
 
 Click on *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
 
-==== Assigning Permissions
+==== Assigning Permissions On Features
 
 If a user has the role *NOM admin* (see checkbox on the *"User info"* tab), it will have full feature access, for
 all DBMSs. Therefore, the tab *"DBMS access control"* is not relevant for *NOM admins*.
 
-Other users will have the role *Administrator* assigned. In this case, every permission can be given explicitly or
-implicitly by assigning it to a DBMS glob pattern. Global permissions can be assigned on the *"User info"* tab and DBMS-specific
-permissions on the *"DBMS access control"*. See the following table for permission description.
+Other users will have the role *Administrator* assigned. In this case, access to every feature can be given explicitly or
+implicitly by assigning access levels to a DBMS glob pattern. Access levels for global features can be set on the
+*"User info"* tab and DBMS-specific features can be secured on the *"DBMS access control"*.
+See the following table for permission description.
 
 
 |===
-|Permission (scope) |Access levels |Description
+|Feature (scope) |Access levels |Description
 
 |*Agent* (global)
 |No access, view, edit
@@ -54,29 +55,37 @@ permissions on the *"DBMS access control"*. See the following table for permissi
 |Access to the *"Upgrade"* page for assigned DBMS(s).
 |===
 
+[IMPORTANT]
+====
+If DBMS is renamed or migrated after being assigned explicit permissions, the permissions will remain unchanged.
+====
+
 ==== Working with glob patterns
 
 Should the Neo4j deployment have many DBMSs, it can be efficient to assign DBMS-specific permissions to a set
 of DBMSs with a single line in the permission table. The glob patterns are checked against the DBMS name, which
 can be set using NOM.
 
-[NOTE]
-====
 The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. For a description of how these
 wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article]
+
+[NOTE]
 ====
+*Rules for multiple permissions on a DBMS:*
 
-If a DBMS name
-
-by specifying a glob patternwhich restrics
-
-
+1. If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every
+permission the most restrictive is applied. *Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security"
+feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature. User's resulting access level
+to the feature "Security" will be "View" since it is more restrictive.
+2. If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob
+pattern that matches this DBMS name. This means, that the permissions assigned to a glob pattern are *ignored* completely.
+====
 
 === Modifying a user
 
 Locate the user to be modified, and use the tabs *"User info"* and *"DBMS access control"* to modify user. All
 modifications performed are persisted when the *"Save"* button is clicked. Clicking *"Cancel"* removes undoes
-the modifications. This also applies to removing assigned DBMS or globs from the table in *"DBMS access control"*.
+the modifications. This also applies to removing assigned DBMS or glob patterns from the table in *"DBMS access control"*.
 Until being saved or cancelled, removed entries are marked visually (grayed out).
 
 [NOTE]
