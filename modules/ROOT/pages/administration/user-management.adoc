@@ -70,10 +70,10 @@ The function "Copy other's access" can be used in cases when several NOM users w
 This function appends permissions of another user (selected in the popup) to the permissions of the current user. Permissions
 that where already assigned are not appended.
 
-==== Working with glob patterns
+==== Working with DBMS glob patterns
 
 Should the Neo4j deployment have many DBMSs, it can be efficient to assign DBMS-specific permissions to a set
-of DBMSs with a single line in the permission table. The glob patterns are checked against the DBMS name, which
+of DBMSs with a single line in the permission table. The DBMS glob patterns are checked against the DBMS name, which
 can be set using NOM.
 
 The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. For a description of how these
@@ -98,7 +98,7 @@ pattern that matches this DBMS name. This means, that the permissions assigned t
 
 Locate the user to be modified, and use the tabs *"User info"* and *"DBMS access control"* to modify user. All
 modifications performed are persisted when the *"Save"* button is clicked. Clicking *"Cancel"* removes undoes
-the modifications. This also applies to removing assigned DBMS or glob patterns from the table in *"DBMS access control"*.
+the modifications. This also applies to removing assigned DBMS or DBMS glob patterns from the table in *"DBMS access control"*.
 Until being saved or cancelled, removed entries are marked visually (grayed out).
 
 [NOTE]
@@ -117,6 +117,6 @@ User can not remove himself.
 
 [NOTE]
 ====
-Should user modification or removal result in globs being unused (e.g. not referenced by other users), these globs will be removed
+Should user modification or removal result in DBMS globs patterns being unused (e.g. not referenced by other users), these globs will be removed
 as well.
 ====
