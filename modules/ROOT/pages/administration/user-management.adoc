@@ -1,4 +1,4 @@
-= User Management (Administrators)
+= NOM user management
 :description: This section describes the user management in Neo4j Ops Manager.
 
 *User Management* allows setting up NOM users for persons who are in charge of managing
@@ -12,15 +12,20 @@ The default NOM user `admin` has the role *NOM Admin* and is therefore can be us
 (including other *Administrators*) and configure their access to NOM features.
 ====
 
-The NOM user management is performed in the *Administrators* section of the NOM settings page.
+== Scope of NOM users
 
-== NOM User Administration Tasks
+NOM users can only be used to access the functionality of the NOM server and are not related to other systems
+(Neo4j database, operating system, etc.)
+
+== NOM user administration tasks
+
+The NOM user management is performed in the *Administrators* section of the NOM settings page.
 
 === Creating a user
 
 Click on *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
 
-==== Assigning Access Level On Features
+==== Assigning access levels on features
 
 If a user has the role *NOM admin* (see checkbox on the *"User info"* tab), it will have full feature access, for
 all DBMSs. Therefore, the tab *"DBMS access control"* is not relevant for *NOM admins*.
