@@ -9,6 +9,19 @@ Before starting the update process, it is recommended to back up your existing N
 [[server-version-notes]]
 == Version specific notes
 
+=== 1.5
+
+This version introduces multi-user capabilities. As part of this move, the product analytics and crash analytics opt-out toggles have moved to a global setting accessible only by the NOM server admin.
+
+To configure the opt-out toggles, please refer to *xref:../installation/server.adoc#config_ref[Server configuration reference
+]*
+
+=== 1.4
+
+The initial startup of 1.4 after update may take longer than usual, especially if the persistence store contains a large amount of query log data.
+
+This is due to additions to the query log model which require existing data to be migrated.
+
 === 1.3
 [IMPORTANT]
 ====
@@ -16,17 +29,6 @@ Before starting the update process, it is recommended to back up your existing N
 All metrics will be deleted as part of the migration that runs on update to version 1.3.
 
 This is due to a major change to the metric storage model making previous metrics incompatible with this version. 
-
-====
-
-=== 1.4
-
-[NOTE]
-====
-
-The initial startup of 1.4 after update may take longer than usual, especially if the persistence store contains a large amount of query log data.
-
-This is due to additions to the query log model which require existing data to be migrated.
 
 ====
 
