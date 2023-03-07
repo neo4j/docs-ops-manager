@@ -35,7 +35,6 @@ implicitly by assigning access levels to a DBMS glob pattern. Access levels for 
 *"User info"* tab and DBMS-specific features can be secured on the *"DBMS access control"*.
 See the following table for permission description.
 
-
 |===
 |NOM Feature (scope) |Access levels |Description
 
@@ -65,6 +64,12 @@ See the following table for permission description.
 If DBMS is renamed or migrated after being assigned explicit permissions, the permissions will remain unchanged.
 ====
 
+==== Duplicating permissions of another user
+
+The function "Copy other's access" can be used in cases when several NOM users with similar permissions must be created.
+This function appends permissions of another user (selected in the popup) to the permissions of the current user. Permissions
+that where already assigned are not appended.
+
 ==== Working with glob patterns
 
 Should the Neo4j deployment have many DBMSs, it can be efficient to assign DBMS-specific permissions to a set
@@ -73,6 +78,9 @@ can be set using NOM.
 
 The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. For a description of how these
 wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article]
+
+Glob patterns are created by using the "Assign DBMSs" pop-up and can be reused for several NOM users. To verify the set
+of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
 
 [NOTE]
 ====
