@@ -2,14 +2,14 @@
 :description: This section describes the user management in Neo4j Ops Manager.
 
 *User Management* allows setting up NOM users for persons who are in charge of managing
-the Neo4j deployment and reflecting their roles by assigning appropriate permissions.
+the Neo4j deployment and reflecting their roles by assigning appropriate access levels.
 
 These tasks can only be accomplished by a NOM user who has the role *NOM Admin*.
 
 [NOTE]
 ====
 The default NOM user `admin` has the role *NOM Admin* and is therefore can be used to create new NOM users
-(including other *Administrators*) and configure permissions.
+(including other *Administrators*) and configure their access to NOM features.
 ====
 
 The NOM user management is performed in the *Administrators* section of the NOM settings page.
@@ -20,7 +20,7 @@ The NOM user management is performed in the *Administrators* section of the NOM 
 
 Click on *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
 
-==== Assigning Permissions On Features
+==== Assigning Access Level On Features
 
 If a user has the role *NOM admin* (see checkbox on the *"User info"* tab), it will have full feature access, for
 all DBMSs. Therefore, the tab *"DBMS access control"* is not relevant for *NOM admins*.
@@ -32,7 +32,7 @@ See the following table for permission description.
 
 
 |===
-|Feature (scope) |Access levels |Description
+|NOM Feature (scope) |Access levels |Description
 
 |*Agent* (global)
 |No access, view, edit
@@ -74,7 +74,7 @@ wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#
 *Rules for multiple permissions on a DBMS:*
 
 1. If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every
-permission the most restrictive is applied. *Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security"
+feature the most restrictive access level is applied. *Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security"
 feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature. User's resulting access level
 to the feature "Security" will be "View" since it is more restrictive.
 2. If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob
