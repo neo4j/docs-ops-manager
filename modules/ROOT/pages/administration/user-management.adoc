@@ -108,7 +108,7 @@ Locate the user to be removed, click it and press the "Remove user" button at th
 
 [NOTE]
 ====
-User can not remove himself.
+Users cannot remove themselves.
 ====
 
 [NOTE]
