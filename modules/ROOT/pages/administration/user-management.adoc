@@ -70,7 +70,7 @@ Permissions already assigned are not appended.
 ==== Working with DBMS glob patterns
 
 Should the Neo4j deployment have many DBMSs, it can be efficient to assign DBMS-specific permissions to a set of DBMSs with a single line in the permission table.
-of DBMSs with a single line in the permission table. The DBMS glob patterns are checked against the DBMS name, which
+The DBMS glob patterns are checked against the DBMS name, which can be set using NOM.
 can be set using NOM.
 
 The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. For a description of how these
