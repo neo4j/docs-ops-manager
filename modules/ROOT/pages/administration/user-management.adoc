@@ -113,6 +113,6 @@ Users cannot remove themselves.
 
 [NOTE]
 ====
-Should user modification or removal result in DBMS globs patterns being unused (e.g. not referenced by other users), these globs will be removed
+Should user modification or removal result in DBMS globs patterns being unused (e.g. not referenced by other users), these globs are removed as well.
 as well.
 ====
