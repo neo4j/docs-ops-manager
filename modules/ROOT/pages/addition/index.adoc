@@ -150,8 +150,9 @@ For each managed DBMS instance on the host, the following environment variables 
 | password
 |===
 
-To enable the log streaming functionality, there are also a few optional environment variables. 
-If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled.
+To enable the query log collection functionality, there are also a few additional environment variables.
+If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled. 
+The rest of NOM still works.
 
 [cols="<,<,<",options="header"]
 |===
@@ -198,7 +199,7 @@ Agents are supposed to monitor only local instances and should not be configured
 
 [NOTE]
 ====
-Refer to *xref:../addition/instance-requirements[Neo4j instance requirements]* to ensure that all instances meet the requirements to be managed by NOM.
+Refer to *xref:../addition/../addition/instance-requirements.adoc[Neo4j instance requirements]* to ensure that all instances meet the requirements to be managed by NOM.
 ====
 
 [[running-agent]]
