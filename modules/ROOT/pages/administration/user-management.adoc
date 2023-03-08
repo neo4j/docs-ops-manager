@@ -1,7 +1,7 @@
 = NOM user management
 :description: This section describes the user management in Neo4j Ops Manager.
 
-*User Management* allows setting up NOM users for persons who are in charge of managing
+*User Management* allows setting up NOM users for persons who are in charge of managing the Neo4j deployment and reflecting their roles by assigning appropriate access levels.
 the Neo4j deployment and reflecting their roles by assigning appropriate access levels.
 
 These tasks can only be accomplished by a NOM user who has the role *NOM Admin*.
