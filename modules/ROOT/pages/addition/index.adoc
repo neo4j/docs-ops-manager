@@ -19,12 +19,19 @@ Follow the steps below to add *every* instance in the cluster:
 [[prerequisites]]
 === Prerequisites
 
-To be monitored by NOM an instance of a DBMS must: 
+In order to be managed by NOM a Neo4j instance **must**:
 
+* be running a Neo4j Enterprise Edition v4.4.0 or higher (including all 5.x versions).
 
-* be running a Neo4j Enterprise Edition v4.4.0 or higher
+For the query log collection feature to work correctly, `db.logs.query.enabled` needs to be set to `INFO` or `VERBOSE` in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.
+Also, make sure that the config value `db.logs.query.threshold` is set to a reasonable value, `0`, commented out or is removed.
+This setting acts as an lower bound for any completed query to appear in the logs.
+Thus, if this value is set too high, the queries you want to monitor might not get logged.
+Setting this value to zero will log every query.
 
-* have the following config settings set in neo4j.conf: 
+For the metrics collection feature to work correctly. these configuration values need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.:
+
+== For 4.4.x versions:
 
 ** `metrics.prometheus.endpoint=127.0.0.1:2004`
 
@@ -37,6 +44,20 @@ To be monitored by NOM an instance of a DBMS must:
 ** `metrics.jmx.enabled=true`
 
 ** `metrics.namespaces.enabled=true`
+
+== For 5.x versions:
+
+** `server.metrics.prometheus.endpoint=127.0.0.1:2004`
+
+** `server.metrics.prometheus.enabled=true`
+
+** `server.metrics.enabled=true`
+
+** `server.metrics.filter=*`
+
+** `server.metrics.jmx.enabled=true`
+
+** `server.metrics.namespaces.enabled=true`
 
 
 
@@ -177,8 +198,9 @@ Apart from the start configuration above, for each of the monitored DBMS instanc
 | password
 |===
 
-To enable the log streaming functionality, there are also a few optional environment variables. 
-If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled.
+To enable the query log collection functionality, there are also a few additional environment variables.
+If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled. 
+The rest of NOM still works.
 
 [cols="<,<,<",options="header"]
 |===
@@ -221,6 +243,11 @@ For this reason, it is important that you specify unique names across your clust
 [NOTE]
 ====
 Agents are supposed to monitor only local instances and should not be configured to connect to remote instances.
+====
+
+[NOTE]
+====
+Refer to *xref:../addition/../addition/index.adoc#prerequisites[Prerequisites]* to ensure that all instances meet the requirements to be managed by NOM.
 ====
 
 [[running-agent]]
