@@ -99,7 +99,7 @@ Until being saved or cancelled, removed entries are marked visually (grayed out)
 
 [NOTE]
 ====
-A user with role *NOM Admin* can not degrade her role to *Administrator*.
+A user with role *NOM Admin* cannot degrade their role to *Administrator*.
 ====
 
 === Removing a user
