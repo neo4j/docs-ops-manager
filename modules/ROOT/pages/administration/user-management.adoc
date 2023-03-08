@@ -85,7 +85,6 @@ To verify the set of DBMSs that match the glob pattern, use the icon next to the
 . If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every feature the most restrictive access level is applied.
  *Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security" feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature.
 User's resulting access level to the feature "Security" is "View", since it is more restrictive.
-to the feature "Security" will be "View" since it is more restrictive.
 2. If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob
 pattern that matches this DBMS name. This means, that the permissions assigned to a glob pattern are *ignored* completely.
 ====
