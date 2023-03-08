@@ -86,7 +86,7 @@ To verify the set of DBMSs that match the glob pattern, use the icon next to the
  *Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security" feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature.
 User's resulting access level to the feature "Security" is "View", since it is more restrictive.
 . If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob pattern that matches this DBMS name.
-pattern that matches this DBMS name. This means, that the permissions assigned to a glob pattern are *ignored* completely.
+This means that the permissions assigned to a glob pattern are *ignored* completely.
 ====
 
 === Modifying a user
