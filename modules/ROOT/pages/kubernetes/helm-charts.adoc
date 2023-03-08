@@ -9,7 +9,7 @@
 - Access to a Kubernetes enviroment (cloud, on-prem, or local with a `LoadBalancer` resource implementation).
 
 == NOM server Helm Chart
-* Download the NOM server Helm Chart from link:https://neo4j.com/download-center/[Neo4j Dowload Center].
+* Download the NOM server Helm Chart from link:https://neo4j.com/download-center/[Neo4j Download Center].
 
 * Following is a basic configuration for NOM server Helm Chart provided as a `values.yaml` file
 ----
