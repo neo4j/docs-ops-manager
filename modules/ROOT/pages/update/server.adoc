@@ -38,7 +38,7 @@ This is due to a major change to the metric storage model making previous metric
 
 . Back up any files you've modified inside the current NOM server directory.
 This usually includes `etc/neo4j-ops-manager-server.service` and any files inside `certificates/` directories.
-. Download the latest NOM server package for your platform.
+. Download the new NOM server package for your platform.
 . Stop the NOM server by running `systemctl stop neo4j-ops-manager-server`.
 . Extract the downloaded package into the existing installation directory.
 . Copy the backed up files back into their corresponding locations.
@@ -50,7 +50,7 @@ This usually includes `etc/neo4j-ops-manager-server.service` and any files insid
 
 . Back up any files you've modified inside the current NOM server directory.
 This usually includes `bin/server.xml` and any files inside `certificates/` directories.
-. Download the latest NOM server package for your platform.
+. Download the new NOM server package for your platform.
 . Stop the NOM server by running `./bin/server.exe stop` inside the current NOM server directory.
 . Extract the downloaded package into the existing installation directory.
 . Copy the backed up files back into their corresponding locations.
