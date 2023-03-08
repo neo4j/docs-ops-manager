@@ -7,7 +7,7 @@ These tasks can only be accomplished by a NOM user who has the role *NOM Admin*.
 
 [NOTE]
 ====
-The default NOM user `admin` has the role *NOM Admin* and is therefore can be used to create new NOM users (including other *Administrators*) and configure their access to NOM features.
+The default NOM user `admin` has the role *NOM Admin* and can therefore be used to create new NOM users (including other *Administrators*) and configure their access to NOM features.
 ====
 
 == Scope of NOM users
@@ -24,10 +24,10 @@ Click on *"Create user"* button to open the sidebar containing the tabs *"User i
 
 ==== Assigning access levels on features
 
-If a user has the role *NOM admin* (see checkbox on the *"User info"* tab), it has full feature access, for all DBMSs.
+If a user has the role *NOM Admin* (checkbox *NOM Admin* on the *"User info"* tab is *ON*), it has full feature access, for all DBMSs.
 Therefore, the tab *"DBMS access control"* is not relevant for *NOM admins*.
 
-Other users may have the role *Administrator* assigned. 
+Other users may have the role *Administrator* assigned (checkbox *NOM Admin* on the *"User info"* tab is *OFF*).
 In this case, access to every feature can be given explicitly or implicitly by assigning access levels to a DBMS glob pattern.
 Access levels for global features can be set on the *"User info"* tab and DBMS-specific features can be secured on the *"DBMS access control"*.
 See the following table for permission description.
