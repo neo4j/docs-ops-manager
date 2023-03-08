@@ -4,10 +4,13 @@ In order to be managed by NOM a Neo4j instance **must**:
 
 * be running a Neo4j Enterprise Edition v4.4.0 or higher (including all 5.x versions).
 
-For the query log collection feature to work correctly `db.logs.query.enabled` needs to be set to `INFO` or `VERBOSE` in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.
-Also make sure that the config value `db.logs.query.threshold` is set to a reasonable value, `0`, commented out or is removed. This setting acts as an lower bound for any completed query to appear in the logs. Thus, if this value is set too high, the queries you want to monitor might not get logged. Setting this value to zero will log every query.
+For the query log collection feature to work correctly, `db.logs.query.enabled` needs to be set to `INFO` or `VERBOSE` in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.
+Also, make sure that the config value `db.logs.query.threshold` is set to a reasonable value, `0`, commented out or is removed. 
+This setting acts as an lower bound for any completed query to appear in the logs. 
+Thus, if this value is set too high, the queries you want to monitor might not get logged. 
+Setting this value to zero will log every query.
 
-For the metrics collection feature to work correctly these configuration values need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.:
+For the metrics collection feature to work correctly. these configuration values need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.:
 
 == For 4.4.x versions: 
 
