@@ -77,7 +77,6 @@ For a description of how these wildcards work see for example https://en.wikiped
 
 Glob patterns are created by using the "Assign DBMSs" pop-up and can be reused for several NOM users. 
 To verify the set of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
-of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
 
 [NOTE]
 ====
