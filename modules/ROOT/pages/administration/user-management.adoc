@@ -74,7 +74,6 @@ The DBMS glob patterns are checked against the DBMS name, which can be set using
 
 The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. 
 For a description of how these wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article].
-wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article]
 
 Glob patterns are created by using the "Assign DBMSs" pop-up and can be reused for several NOM users. To verify the set
 of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
