@@ -30,7 +30,6 @@ Therefore, the tab *"DBMS access control"* is not relevant for *NOM admins*.
 Other users may have the role *Administrator* assigned. 
 In this case, access to every feature can be given explicitly or implicitly by assigning access levels to a DBMS glob pattern.
 Access levels for global features can be set on the *"User info"* tab and DBMS-specific features can be secured on the *"DBMS access control"*.
-*"User info"* tab and DBMS-specific features can be secured on the *"DBMS access control"*.
 See the following table for permission description.
 
 |===
