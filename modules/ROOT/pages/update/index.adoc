@@ -5,7 +5,6 @@ It is recommended to always keep NOM up-to-date with the latest available versio
 You can update from any older NOM version to any newer version. 
 A version downgrade is not possible. 
 The natural order of NOM versions follows the *xref:../appendix/version-compatibility.adoc#versioning_scheme[semantic versioning scheme]*.
-*xref:../appendix/version-compatibility.adoc#versioning_scheme[semantic versioning scheme]*.
 
 * xref:./server.adoc[Server update] - Updating the NOM server to a new version
 * xref:./agent.adoc[Agent update] - Options for keeping agents up-to-date
