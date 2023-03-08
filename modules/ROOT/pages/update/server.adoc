@@ -11,7 +11,8 @@ Before starting the update process, it is recommended to back up your existing N
 
 === 1.5
 
-This version introduces multi-user capabilities. As part of this move, the product analytics and crash analytics opt-out toggles have moved to a global setting accessible only by the NOM server admin.
+This version introduces multi-user capabilities. 
+As a result, the product analytics and crash analytics opt-out toggles have moved to a global setting accessible only by the NOM server admin.
 
 To configure the opt-out toggles, please refer to *xref:../installation/server.adoc#config_ref[Server configuration reference
 ]*
