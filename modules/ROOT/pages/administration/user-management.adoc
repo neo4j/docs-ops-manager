@@ -92,7 +92,8 @@ This means that the permissions assigned to a glob pattern are *ignored* complet
 === Modifying a user
 
 Locate the user to be modified, and use the tabs *"User info"* and *"DBMS access control"* to modify user. 
-modifications performed are persisted when the *"Save"* button is clicked. Clicking *"Cancel"* removes undoes
+All modifications performed are persisted when the *"Save"* button is clicked. 
+Clicking *"Cancel"* removes the modifications.
 the modifications. This also applies to removing assigned DBMS or DBMS glob patterns from the table in *"DBMS access control"*.
 Until being saved or cancelled, removed entries are marked visually (grayed out).
 
