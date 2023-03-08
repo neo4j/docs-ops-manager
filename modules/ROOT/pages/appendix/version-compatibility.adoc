@@ -1,7 +1,8 @@
 = Version compatibility
 :description: This section provides a version compatibility matrix for Neo4j Ops Manager.
 
-== Versioning scheme [[versioning_scheme]]
+[[versioning_scheme]]
+== Versioning scheme 
 
 Neo4j Ops Manager follows link:https://semver.org/[semantic versioning] for its releases.
 
