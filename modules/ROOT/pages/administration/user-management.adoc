@@ -65,7 +65,7 @@ If the DBMS is renamed or migrated after being assigned explicit permissions, th
 
 The function "Copy other's access" can be used in cases when several NOM users with similar permissions must be created.
 This function appends permissions of another user (selected in the popup) to the permissions of the current user. 
-that where already assigned are not appended.
+Permissions already assigned are not appended.
 
 ==== Working with DBMS glob patterns
 
