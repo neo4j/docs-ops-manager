@@ -58,7 +58,7 @@ See the following table for permission description.
 
 [IMPORTANT]
 ====
-If DBMS is renamed or migrated after being assigned explicit permissions, the permissions will remain unchanged.
+If the DBMS is renamed or migrated after being assigned explicit permissions, the permissions remain unchanged.
 ====
 
 ==== Duplicating permissions of another user
