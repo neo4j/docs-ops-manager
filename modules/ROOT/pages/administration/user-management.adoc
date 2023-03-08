@@ -13,7 +13,6 @@ The default NOM user `admin` has the role *NOM Admin* and is therefore can be us
 == Scope of NOM users
 
 NOM users can only be used to access the functionality of the NOM server and are not related to other systems (Neo4j database, operating system, etc.).
-(Neo4j database, operating system, etc.)
 
 == NOM user administration tasks
 
