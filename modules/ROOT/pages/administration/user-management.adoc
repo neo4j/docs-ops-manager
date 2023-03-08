@@ -8,7 +8,6 @@ These tasks can only be accomplished by a NOM user who has the role *NOM Admin*.
 [NOTE]
 ====
 The default NOM user `admin` has the role *NOM Admin* and is therefore can be used to create new NOM users (including other *Administrators*) and configure their access to NOM features.
-(including other *Administrators*) and configure their access to NOM features.
 ====
 
 == Scope of NOM users
