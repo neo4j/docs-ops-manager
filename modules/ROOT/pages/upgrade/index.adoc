@@ -1,61 +1,61 @@
 :description: This section describes the upgrade process from an earlier version of NOM.
 = Upgrading from an earlier version
 
+It is recommended to always keep NOM up-to-date with the latest available version.
+You can update from any older NOM version to any newer version.
+A version downgrade is not possible.
+The natural order of NOM versions follows the *xref:../appendix/version-compatibility.adoc#versioning_scheme[semantic versioning scheme]*.
+
 [[server]]
 == Upgrading server
 
 [NOTE]
 ====
-Before starting the upgrade process, it is recommended to back up your existing NOM installation folder.
+Before starting the update process, it is recommended to back up your existing NOM installation folder.
 ====
 
 [[server-version-notes]]
-=== Version specific notes
+== Version specific notes
 
-==== 1.3
+=== 1.4
+
+The initial startup of 1.4 after update may take longer than usual, especially if the persistence store contains a large amount of query log data.
+
+This is due to additions to the query log model which require existing data to be migrated.
+
+=== 1.3
 [IMPORTANT]
 ====
 
-All metrics will be deleted as part of the migration that runs on upgrade to version 1.3.
+All metrics will be deleted as part of the migration that runs on update to version 1.3.
 
-This is due to a major change to the metric storage model making previous metrics incompatible with this version. 
-
-====
-
-==== 1.4 
-
-[NOTE]
-====
-
-The initial startup of 1.4 after upgrade may take longer than usual, especially if the persistence store contains a large amount of query log data.
-
-This is due to additions to the query log model which require existing data to be migrated.
+This is due to a major change to the metric storage model making previous metrics incompatible with this version.
 
 ====
 
 [[server-linux]]
-=== On Linux
+== On Linux
 
 . Back up any files you've modified inside the current NOM server directory.
 This usually includes `etc/neo4j-ops-manager-server.service` and any files inside `certificates/` directories.
-. Download latest NOM server package for your platform.
-. Stop NOM server by running `systemctl stop neo4j-ops-manager-server`.
+. Download the new NOM server package for your platform.
+. Stop the NOM server by running `systemctl stop neo4j-ops-manager-server`.
 . Extract the downloaded package into the existing installation directory.
 . Copy the backed up files back into their corresponding locations.
-. Start NOM server by running `systemctl start neo4j-ops-manager-server`.
-. Verify that the server is operating as expected by checking logs.
+. Start the NOM server by running `systemctl start neo4j-ops-manager-server`.
+. Verify that the server is operating as expected by checking the logs.
 
 [[server-windows]]
-=== On Windows
+== On Windows
 
 . Back up any files you've modified inside the current NOM server directory.
 This usually includes `bin/server.xml` and any files inside `certificates/` directories.
-. Download latest NOM server package for your platform.
-. Stop NOM server by running `./bin/server.exe stop` inside current NOM server directory.
+. Download the new NOM server package for your platform.
+. Stop the NOM server by running `./bin/server.exe stop` inside the current NOM server directory.
 . Extract the downloaded package into the existing installation directory.
 . Copy the backed up files back into their corresponding locations.
-. Start NOM server by running `./bin/server.exe start`.
-. Verify that the server is operating as expected by checking logs.
+. Start the NOM server by running `./bin/server.exe start`.
+. Verify that the server is operating as expected by checking the logs.
 
 [[agent]]
 == Upgrading agents
