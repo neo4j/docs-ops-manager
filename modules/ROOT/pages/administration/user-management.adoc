@@ -82,7 +82,7 @@ To verify the set of DBMSs that match the glob pattern, use the icon next to the
 ====
 *Rules for multiple permissions on a DBMS:*
 
-1. If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every
+. If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every feature the most restrictive access level is applied.
 feature the most restrictive access level is applied. *Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security"
 feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature. User's resulting access level
 to the feature "Security" will be "View" since it is more restrictive.
