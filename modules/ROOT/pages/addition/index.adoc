@@ -257,7 +257,7 @@ Environment="CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>"
 Environment="CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>"
 Environment="CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>"
 Environment="CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>"
-Environment="CONFIG_INSTANCE_1_LOG_CONFIG_PATH=/var/lib/neo4j/conf/server-logs.xml"
+Environment="CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to server-logs.xml>"
 ----
 +
 Please refer to the full list of options <<configure,here>>.
@@ -306,7 +306,7 @@ CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>
 CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>
 CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>
 CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>
-CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to Neo4j server-logs.xml>
+CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to server-logs.xml>
 ----
 +
 Please refer to the full list of options <<configure,here>>.

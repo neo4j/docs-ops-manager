@@ -1,6 +1,6 @@
 = Neo4j instance requirements
 
-In order to be managed by NOM a Neo4j instance **must**:
+In order to be managed by NOM, a Neo4j instance **must**:
 
 * be running a Neo4j Enterprise Edition v4.4.0 or higher (including all 5.x versions).
 
