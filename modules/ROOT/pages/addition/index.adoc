@@ -240,7 +240,7 @@ systemctl edit neo4j-ops-manager-agent.service
 ----
 +
 and set environment variables by either setting Environment or EnvironmentFile options.
-For example, using the Environment options, the override file looks as follows:
+For example, using the Environment options, the override file can look as follows:
 +
 [source, terminal, role=noheader]
 ----
@@ -255,8 +255,12 @@ Environment="CONFIG_INSTANCE_1_NAME=<instance name>"
 Environment="CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>"
 Environment="CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>"
 Environment="CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>"
+Environment="CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>"
+Environment="CONFIG_INSTANCE_1_LOG_CONFIG_PATH=/var/lib/neo4j/conf/server-logs.xml"
 ----
 +
+Please refer to the full list of options <<configure,here>>.
+
 ** Start your service
 +
 [source, terminal, role=noheader]
@@ -286,7 +290,7 @@ agent service install
 ----
 +
 ** Open registry editor and navigate to `HKLM\SYSTEM\CurrentControlSet\Services\neo4j-ops-manager-agent`.
-** Create a key of type `REG_MULTI_SZ` named `Environment` and add your environment variables, each on a separate line:
+** Create a key of type `REG_MULTI_SZ` named `Environment` and add your environment variables, each on a separate line, for example:
 +
 [source, terminal, role=noheader]
 ----
@@ -300,8 +304,12 @@ CONFIG_INSTANCE_1_NAME=<instance name>
 CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>
 CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>
 CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>
+CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>
+CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to Neo4j server-logs.xml>
 ----
 +
+Please refer to the full list of options <<configure,here>>.
+
 ** Start your service
 +
 [source, terminal, role=noheader]
