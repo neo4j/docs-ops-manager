@@ -150,6 +150,7 @@ For each managed DBMS instance on the host, the following environment variables 
 | password
 |===
 
+[[querylog]]
 To enable the query log collection functionality, there are also a few additional environment variables.
 If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled. 
 The rest of NOM still works.
