@@ -50,6 +50,7 @@ For the metrics collection feature to work correctly. these configuration values
 ** `server.metrics.namespaces.enabled=true`
 
 == User privileges
+
 The agent logs on to the DBMS with the configured user to enable certain features such as viewing relationship and label types, managing privileges and viewing configuration values.
 If you do not want to use the built-in admin user, a role with the minimum set of privileges required for full functionality can be created with:
 
