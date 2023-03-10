@@ -6,9 +6,7 @@ At first, an aggregated **Summary** view of queries performed within the last 15
 
 [NOTE]
 ====
-
-If you are not seeing any log messages, or you see a message saying that logs are not enabled, please refer to *xref:../addition/instance-requirements.adoc[Neo4j instance requirements]* and *xref:../addition/index.adoc#querylog[Configure agent]*.
-
+If you are not seeing any log messages, or if you see a message saying that logs are not enabled, please refer to *xref:../addition/instance-requirements.adoc[Neo4j instance requirements]* and *xref:../addition/index.adoc#querylog[Configure agent]*.
 ====
 
 image::logs.png[width=800]
