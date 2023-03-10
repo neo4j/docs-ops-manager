@@ -1,13 +1,12 @@
 = Docker first look guide
-:description: this page describes the docker compose provisioning instructions for the NOM server and NOM persistence and how to start agents 
-on running Neo4j docker containers.
+:description: this page describes the docker compose provisioning instructions for the NOM server and NOM persistence and how to start agents on running Neo4j docker containers.
 
 
 Docker compose can be used to provision a set of related containers as services to experiment with or to run in test environments.
 
-But Docker doesn't recommend using compose for production.
+Docker does not recommend using compose for production.
 
-The manual installation, configuring and running of agents on the Neo4j containers will be lost if the container is stopped. 
+The manual installation, configuring and running of agents on the Neo4j containers is lost if the container is stopped. 
 
 == Prerequisites
 * unix-based operating system
@@ -16,7 +15,7 @@ The manual installation, configuring and running of agents on the Neo4j containe
 
 == Prepare hosts file
 
-You need to set up the following host names in your /etc/hosts or C:/windows/system32/drivers/etc/hosts file;
+You need to set up the following host names in your `/etc/hosts` or `C:/windows/system32/drivers/etc/hosts file`;
 [source,, role=noheader]
 ----
 127.0.0.1   storage server db-single
@@ -35,7 +34,10 @@ The compose file below specifies that:
 
 These certificates are used by the server itself but are also required to configure the NOM agent. 
 
-NOTE: For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
+[NOTE]
+====
+For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
+====
 
 === Copy docker compose file
 
@@ -122,7 +124,7 @@ Login as admin:passw0rd and accept license terms.
 == Set up instance and agent
 
 === Register agent 
-In NOM UI - navigate to Agent settings (clicking on the sad robot will take you to the correct page) and add a new agent.
+In NOM UI - navigate to Agent settings (clicking on the sad robot takes you to the correct page) and add a new agent.
 Copy environment variables that are provided. 
 
 Full documentation on registering an agent is *xref:addition/index.adoc#register[here]*. 
@@ -200,5 +202,5 @@ docker compose -f docker-compose.instance.yaml exec sh -c tar -xvf products/neo4
 == Explore NOM UI
 Go to NOM UI and wait for DBMS to appear - this may take a few minutes. 
 You should be able to see that the agent has connected in the agents listing. 
-Once DBMS is shown in home page, double click on the name (initially a generated string) to edit it. 
+Once the DBMS is shown in the home page, double click on the name (initially a generated string) to edit it. 
 Double click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS. 
