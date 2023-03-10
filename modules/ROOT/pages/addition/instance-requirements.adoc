@@ -8,9 +8,7 @@ In order to be managed by NOM, a Neo4j instance **must**:
 
 [NOTE]
 ====
-
 Log manager is only compatible with Neo4j version 5+.
-
 ====
 
 For the query log collection feature to work correctly, `db.logs.query.enabled` needs to be set to `INFO` or `VERBOSE` in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.
