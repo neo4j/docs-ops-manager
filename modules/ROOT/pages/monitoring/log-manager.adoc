@@ -4,6 +4,11 @@
 The log manager allows you to filter, sort and browse query logs from each of your monitored DBMS instances. 
 At first, an aggregated **Summary** view of queries performed within the last 15 minutes is displayed.
 
+[NOTE]
+====
+If you are not seeing any log messages, or if you see a message saying that logs are not enabled, please refer to *xref:../addition/instance-requirements.adoc[Neo4j instance requirements]* and *xref:../addition/index.adoc#querylog[Configure agent]*.
+====
+
 image::logs.png[width=800]
 
 It is possible to view individual query executions under the **Details** tab, or by hovering over an aggregated query and clicking the arrow button that appears to the right.
