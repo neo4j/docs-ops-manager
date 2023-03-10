@@ -241,7 +241,7 @@ systemctl edit neo4j-ops-manager-agent.service
 ----
 +
 and set environment variables by either setting Environment or EnvironmentFile options.
-For example, using the Environment options, the override file can look as follows:
+For example, using the Environment options, the override file can look like this:
 +
 [source, terminal, role=noheader]
 ----
