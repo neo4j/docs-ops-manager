@@ -32,8 +32,9 @@
 // ** xref:configuration/persistence.adoc[]
 // ** xref:configuration/server.adoc[]
 
-// * Adding a managed DBMS
-* xref:addition/index.adoc[]
+* Adding managed instances
+** xref:addition/instance-requirements.adoc[]
+** xref:addition/index.adoc[]
 //** xref:addition/single.adoc[]
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
