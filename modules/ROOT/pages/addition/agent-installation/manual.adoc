@@ -1,0 +1,32 @@
+= Manually register an agent
+:description: this page describes the manual registration, installtion, configuration and running of NOM agents to monitor a Neo4j instance.
+
+[[register]]
+== Register agent
+
+Before installing an agent, it needs to be registered with the NOM server to provide server communication configuration.
+
+. Click the top right settings icon that redirects you to the global settings.
++
+image::agents-settings-icon.png[width=800]
++
+. Click *Agents*, where you will see a list of all registered agents along with their last contact times and versions.
++
+image::agents.png[width=800]
++
+. Click *Register New Agent* button, and enter the name and description for your new agent followed by clicking *Register* button.
++
+image:agent-new.png[width=800]
++
+. The agent will be created and randomly generated agent credentials will be displayed on the screen.
++
+image:agent-credentials.png[width=800]
++
+[NOTE]
+====
+The credentials and other key agent configuration values are displayed as environment variable declarations.
+You can copy them over to the host for ease of agent configuration.
+====
++
+. After you have captured the credentials, click the confirmation checkbox and *Finish* button.
+Newly created agent will be displayed on the list of agents.

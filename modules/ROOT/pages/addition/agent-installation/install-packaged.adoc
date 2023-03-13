@@ -1,0 +1,6 @@
+= Install packaged agent
+:description: this page describes the usage of bundled agent available in Neo4j package
+
+NOM agent binaries are also packaged in the `products` folder under Neo4j home directory. These binaries have proper support for the Neo4j version that they are bundled with.
+
+Following are the steps to use these packaged agents instead of getting the binaries from Download centre as described xref:./index.adoc#install[here].

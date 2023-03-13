@@ -267,4 +267,9 @@ java -jar .\lib\server.jar
 | `OPTOUT_PRODUCT_ANALYTICS`
 | Set to true to opt out of anonymous crash analytics being sent to Neo4j (optional)
 | false
+
+| `grpc.server.security.trustCertCollection`
+| `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION`
+| file containing list of PEM encoded agent certificates (optional)
+| `file:/path/to/agent-certs.pem`
 |===
