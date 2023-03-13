@@ -11,10 +11,10 @@ The effective access levels of a NOM user are reflected in the NOM UI appropriat
 ||
 
 |NOM Admin
-|Has access to all functions of NOM and can administer NOM user, including creating other users that have the role *"NOM Admin"*.
+|Has access to all features of NOM for all DBMSs  and can administer NOM users, including creating other users that have the role *"NOM Admin"*.
 
 |Administrator
-|Has access to functions of NOM as configured by NOM Admin.
+|Has access to features of NOM as configured by NOM Admin.
 Can not administer NOM users.
 |===
 
@@ -31,40 +31,55 @@ NOM users can only be used to access the functionality of the NOM server and are
 
 The NOM user management is performed in the *Administrators* section of the NOM settings page.
 
+image::nom-administrators-section.png[width=800]
+
 === Creating a user
 
 Click on *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
+Fill in user details including specifying if role *"NOM Admin"* should be assigned to them.
 
-==== Assigning access levels on features
+[IMPORTANT]
+====
+New users will be automatically redirected to the password change page after the login.
+====
 
-If a user has the role *NOM Admin* (checkbox *NOM Admin* on the *"User info"* tab is *ON*), it has full feature access, for all DBMSs.
-Therefore, the tab *"DBMS access control"* is not relevant for *NOM admins*.
+image::nom-administrators-create-user.png[width=800]
 
-Other users may have the role *Administrator* assigned (checkbox *NOM Admin* on the *"User info"* tab is *OFF*).
-In this case, access to every feature can be given explicitly or implicitly by assigning access levels to a DBMS glob pattern.
-Access levels for global features can be set on the *"User info"* tab and DBMS-specific features can be secured on the *"DBMS access control"*.
+If the new user will have the role *NOM Admin*, no further details must be specified.
+Use the *"Create"* button to confirm user creation.
+
+Access levels for global features can be set on the *"User info"* tab.
+Access to the *"Agents"* page of the NOM settings area is currently only one global feature that requires explicit permission.
+Applicable access levels are: *"No access"*, *"view"*, *"edit"*.
+
+==== Assigning access levels on DBMS specific features
+
+Assigning access levels on DBMS specific features is performed in the *"DBMS access control"* tab.
+
+For users having the role *Administrator* (checkbox *NOM Admin* on the *"User info"* tab is *OFF*), access to every DBMS specific feature can be given explicitly or implicitly.
+Explicit permissions are be assigned directly to DBMSs.
+Implicit permissions are assigned to DBMS glob patterns.
+
+image::nom-administrators-dbms-access-control.png[width=800]
+
 See the following table for permission description.
 
 |===
-|NOM Feature (scope) |Access levels |Description
+|DBMS-specific feature |Access levels |Description
 
-|*Agent* (global)
-|No access, view, edit
-|Access to the *"Agents"* page of the NOM settings area.
-
-|*Status* (DBMS-specific)
+|*Status*
 |View, edit
 |Access to the *"Status"* page for assigned DBMS(s).
 
-|*Security* (DBMS-specific)
+|*Security*
 |No access, view, edit
 |Access to the *"Security panel"* page for assigned DBMS(s).
 
-|*Status* (DBMS-specific)
+|*Status*
 |No access, view
 |Access to the *"Logs"* page for assigned DBMS(s).
 
-|*Upgrades* (DBMS-specific)
+|*Upgrades*
 |No access, View, edit
 |Access to the *"Upgrade"* page for assigned DBMS(s).
 |===
@@ -77,6 +92,10 @@ If the DBMS is renamed or migrated after being assigned explicit permissions, th
 ==== Duplicating permissions of another user
 
 The function "Copy other's access" can be used in cases when several NOM users with similar permissions must be created.
+It can be accessed by pressing the *"..."* button next to *"Assign DBMSs"* button.
+
+image::nom-administrators-copy-others-access.png[width=400]
+
 This function appends permissions of another user (selected in the popup) to the permissions of the current user. 
 Permissions already assigned are not appended.
 
@@ -109,6 +128,11 @@ All modifications performed are persisted when the *"Save"* button is clicked.
 Clicking *"Cancel"* removes the modifications.
 This also applies to removing assigned DBMS or DBMS glob patterns from the table in *"DBMS access control"*.
 Until being saved or cancelled, removed entries are marked visually (grayed out).
+
+[IMPORTANT]
+====
+If users password is changed, they will be automatically redirected to the password change page after the login.
+====
 
 [NOTE]
 ====
