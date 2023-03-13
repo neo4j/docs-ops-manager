@@ -4,7 +4,19 @@
 *User Management* allows setting up NOM users for persons who are in charge of managing the Neo4j deployment and reflecting their roles by assigning appropriate access levels.
 The effective access levels of a NOM user are reflected in the NOM UI appropriately.
 
-These tasks can only be accomplished by a NOM user who has the role *NOM Admin*.
+== Roles of NOM users
+
+[%noheader]
+|===
+||
+
+|NOM Admin
+|Has access to all functions of NOM and can administer NOM user, including creating other users that have the role *"NOM Admin"*.
+
+|Administrator
+|Has access to functions of NOM as configured by NOM Admin.
+Can not administer NOM users.
+|===
 
 [NOTE]
 ====
