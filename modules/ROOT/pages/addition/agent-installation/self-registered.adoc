@@ -130,11 +130,11 @@ to generate a self signed certificate for 'localhost', which could either be
 accessed through DNS names of 'localhost.localdomain' or 'my.custom.domain', or
 with IP addresses of '127.0.0.1' or '192.168.100.5';
 
-$> agent ssc -n localhost -o /tmp -p changeit \
+$> agent ssc -n localhost -o /tmp \
    -d localhost.localdomain,my.custom.domain \
    -i 127.0.0.1,192.168.100.5
 
-it creates /tmp/localhost.cer and /tmp/localhost.pfx files upon completion.
+it creates /tmp/localhost.cert.pem and /tmp/localhost.key.pem files upon completion.
 
 options (required options marked with *):
   -d, --dns=<dns>[,<dns>...]
@@ -146,12 +146,10 @@ options (required options marked with *):
 * -n, --name=<name>         common name to use in generated certificate,
                               eg. --name=localhost
 * -o, --output=<output>     target directory, eg. --output=.
-* -p, --password=<password> password for generated PKCS12 file
   -h, --help                help
 ----
 
-If you are generating a certificate for running the server on `localhost`, `localhost` is the primary name set as Subject Name field on the certificate and is also used as the name of generated files.
-For the certificate to be identified as valid, it also needs to include alternative names used to access the server.
+If you are generating a certificate for an agent on `localhost`, `localhost` is the primary name set as Subject Name field on the certificate and is also used as the name of generated files.
 Assume there are also a number of virtual machines that access the server through IP addresses `192.168.10.1` and `172.16.10.1`.
 Furthermore, a local DNS alias `nom.example.com` is set up for `localhost`.
 
@@ -161,12 +159,11 @@ In order to generate a self-signed certificate for the above example, execute th
 ----
 agent ssc -n localhost \
 	-o ./certificates \
-	-p changeit \
 	-d nom.example.com \
 	-i 192.168.10.1,172.16.10.1
 ----
 
-It generates a key pair and a self-signed certificate and creates `localhost.cer` and `localhost.pfx` files inside `./certificates` directory.
-`localhost.pfx` is assigned the password `changeit` which is provided to the command as an argument.
+It generates a key pair and a self-signed certificate and creates `localhost.cert.pem` and `localhost.key.pem` files inside `./certificates` directory.
+`localhost.key.pem` is assigned the password `changeit` which is provided to the command as an argument.
 
-You can then use these two files to configure the server and agents for TLS encrypted communication.
+You can then use these two files to configure the agents for mTLS authentication with server.
