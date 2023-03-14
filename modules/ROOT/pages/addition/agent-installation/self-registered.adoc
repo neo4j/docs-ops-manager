@@ -61,7 +61,7 @@ Following optional configuration can be used to provide a persistent location fo
 | `NEO4J_CONF` if set or `conf` folder under `NEO4J_HOME` if set, else `.nom` folder in user home directory.
 |===
 
-Apart from above configuration, following optional configuration can be provided as agent meta data:
+Agent meta-data can be optionally specified using these configuration parameters:
 
 [[agent-meta-data]]
 [cols="<,<,<",options="header"]
