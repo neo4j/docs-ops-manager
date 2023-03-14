@@ -61,6 +61,11 @@ For users having the role *Administrator* (checkbox *NOM Admin* on the *"User in
 Explicit permissions are be assigned directly to DBMSs.
 Implicit permissions are assigned to DBMS glob patterns.
 
+[IMPORTANT]
+====
+If the DBMS is renamed or migrated after being assigned explicit permissions, the permissions remain unchanged.
+====
+
 image::nom-administrators-dbms-access-control.png[width=800]
 
 See the following table for permission description.
@@ -85,11 +90,6 @@ See the following table for permission description.
 |Access to the *"Upgrade"* page for assigned DBMS(s).
 |===
 
-[IMPORTANT]
-====
-If the DBMS is renamed or migrated after being assigned explicit permissions, the permissions remain unchanged.
-====
-
 ==== Duplicating permissions of another user
 
 The function "Copy other's access" can be used in cases when several NOM users with similar permissions must be created.
@@ -104,6 +104,11 @@ Permissions already assigned are not appended.
 
 Should the Neo4j deployment have many DBMSs, it can be efficient to assign DBMS-specific permissions to a set of DBMSs with a single line in the permission table.
 The DBMS glob patterns are checked against the DBMS name, which can be set using NOM.
+
+[IMPORTANT]
+====
+Since implicit DBMS permissions are always calculated based on the _current_ DBMS name, renaming a DBMS can cause changes in its permissions.
+====
 
 The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. 
 For a description of how these wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article].
