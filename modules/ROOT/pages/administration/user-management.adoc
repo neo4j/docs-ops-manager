@@ -55,16 +55,7 @@ Applicable access levels are: *"No access"*, *"view"*, *"edit"*.
 
 ==== Assigning access levels on DBMS specific features
 
-Assigning access levels on DBMS specific features is performed in the *"DBMS access control"* tab.
-
-For users having the role *Administrator* (checkbox *NOM Admin* on the *"User info"* tab is *OFF*), access to every DBMS specific feature can be given explicitly or implicitly.
-Explicit permissions are be assigned directly to DBMSs.
-Implicit permissions are assigned to DBMS glob patterns.
-
-[IMPORTANT]
-====
-If the DBMS is renamed or migrated after being assigned explicit permissions, the permissions remain unchanged.
-====
+For users having the role *Administrator* (checkbox *NOM Admin* on the *"User info"* tab is *OFF*), access to every DBMS specific feature can be configured in the *"DBMS access control"* tab.
 
 image::nom-administrators-dbms-access-control.png[width=800]
 
@@ -90,6 +81,49 @@ See the following table for permission description.
 |Access to the *"Upgrade"* page for assigned DBMS(s).
 |===
 
+Permissions can be assigned explicitly or implicitly.
+DBMS which have neither explicit nor implicit permissions assigned will not be visible in the NOM UI for the user being edited.
+
+===== Explicit permissions
+
+Explicit permissions are be assigned directly to DBMSs.
+Every DBMS can be assigned its own set of permissions.
+
+[IMPORTANT]
+====
+If the DBMS is renamed or migrated after being assigned explicit permissions, the permissions remain unchanged.
+====
+
+==== Implicit permissions (DBMS glob patterns)
+
+Should the Neo4j deployment have many DBMSs, it can be efficient to implicitly assign DBMS-specific permissions to a set of DBMSs with a single line in the permission table.
+This can be done by assigning permission a DBMS glob pattern.
+During access control, the DBMS glob pattern is checked against the DBMS name.
+If using DBMS glob patterns, it is recommended to set DBMSs names first.
+This can be done in the NOM UI.
+
+[IMPORTANT]
+====
+Since implicit DBMS permissions are always calculated based on the _current_ DBMS name, renaming a DBMS can cause changes in its permissions.
+====
+
+The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`.
+For a description of how these wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article].
+
+Glob patterns are created by using the "Assign DBMSs" pop-up and can be reused for several NOM users.
+To verify the set of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
+
+[NOTE]
+====
+*Rules for multiple permissions on a DBMS:*
+
+. If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every feature the most restrictive access level is applied.
+*Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security" feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature.
+User's resulting access level to the feature "Security" is "View", since it is more restrictive.
+. If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob pattern that matches this DBMS name.
+This means that the permissions assigned to a glob pattern are *ignored* completely.
+====
+
 ==== Duplicating permissions of another user
 
 The function "Copy other's access" can be used in cases when several NOM users with similar permissions must be created.
@@ -99,33 +133,6 @@ image::nom-administrators-copy-others-access.png[width=400]
 
 This function appends permissions of another user (selected in the popup) to the permissions of the current user. 
 Permissions already assigned are not appended.
-
-==== Working with DBMS glob patterns
-
-Should the Neo4j deployment have many DBMSs, it can be efficient to assign DBMS-specific permissions to a set of DBMSs with a single line in the permission table.
-The DBMS glob patterns are checked against the DBMS name, which can be set using NOM.
-
-[IMPORTANT]
-====
-Since implicit DBMS permissions are always calculated based on the _current_ DBMS name, renaming a DBMS can cause changes in its permissions.
-====
-
-The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`. 
-For a description of how these wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article].
-
-Glob patterns are created by using the "Assign DBMSs" pop-up and can be reused for several NOM users. 
-To verify the set of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
-
-[NOTE]
-====
-*Rules for multiple permissions on a DBMS:*
-
-. If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every feature the most restrictive access level is applied.
- *Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security" feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature.
-User's resulting access level to the feature "Security" is "View", since it is more restrictive.
-. If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob pattern that matches this DBMS name.
-This means that the permissions assigned to a glob pattern are *ignored* completely.
-====
 
 === Modifying a user
 
