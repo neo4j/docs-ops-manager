@@ -33,6 +33,8 @@
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
 
+* xref:/nom-user-management/index.adoc[]
+
 * Component management
 // ** xref:component/default.adoc[]
 // ** xref:component/add.adoc[]
@@ -52,7 +54,6 @@
 
 * Administration
 ** xref:administration/security-manager.adoc[]
-** xref:administration/user-management.adoc[]
 // ** xref:administration/cluster-manager.adoc[]
 // ** xref:administration/object-manager.adoc[]
 // ** xref:administration/configuration-manager.adoc[]
