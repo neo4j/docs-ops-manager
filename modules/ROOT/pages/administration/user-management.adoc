@@ -132,7 +132,7 @@ Until being saved or cancelled, removed entries are marked visually (grayed out)
 
 [IMPORTANT]
 ====
-If users password is changed, they will be automatically redirected to the password change page after the login.
+If the user's password is changed, they will be automatically redirected to the password change page after the login.
 ====
 
 [NOTE]
