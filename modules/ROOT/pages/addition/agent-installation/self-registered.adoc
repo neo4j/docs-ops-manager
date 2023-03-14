@@ -58,7 +58,7 @@ Following optional configuration can be used to provide a persistent location fo
 | `CONFIG_AGENT_CONFIG_PATH`
 | Peristent path to a file on Neo4j instance host
 | "file://path/to/"
-| by default agent tries to save initial configuration in path `NEO4J_CONF` if set or `conf` folder under `NEO4J_HOME` if set, else the file is saved under `.nom` folder in user home directory.
+| `NEO4J_CONF` if set or `conf` folder under `NEO4J_HOME` if set, else `.nom` folder in user home directory.
 |===
 
 Apart from above configuration, following optional configuration can be provided as agent meta data:
