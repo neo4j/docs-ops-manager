@@ -1,0 +1,6 @@
+= MacOS first look guide
+
+== Prerequisites
+== Server installation
+== Set up agent
+== Rename DBMS

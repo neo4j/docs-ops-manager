@@ -6,20 +6,15 @@
 ** xref:introduction/deployment.adoc[]
 ** xref:introduction/versions.adoc[]
 
-// * Upgrading
-* xref:upgrade/index.adoc[]
-
 * xref:installation/index.adoc[]
 ** xref:installation/persistence.adoc[]
 ** xref:installation/server.adoc[]
 ** xref:installation/docker/index.adoc[]
 ***  xref:installation/docker/introduction.adoc[]
 *** xref:installation/docker/server.adoc[]
-*** xref:installation/docker/compose.adoc[]
 ** xref:installation/kubernetes/index.adoc[]
 *** xref:installation/kubernetes/helm-charts.adoc[]
 ** xref:installation/self-signed-certificate.adoc[]
-
 
 // * Configuration
 // ** xref:configuration/security.adoc[]
@@ -33,13 +28,19 @@
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
 
+// * NOM user management
 * xref:/nom-user-management/index.adoc[]
+
+// * Updating to a newer version
+* xref:update/index.adoc[]
+** xref:update/server.adoc[]
+** xref:update/agent.adoc[]
 
 * Component management
 // ** xref:component/default.adoc[]
 // ** xref:component/add.adoc[]
 ** xref:component/remove.adoc[]
-// ** xref:component/upgrade.adoc[]
+// ** xref:component/update.adoc[]
 
 
 * xref:/home-page/index.adoc[]
@@ -84,6 +85,10 @@
 // ** xref:feedback/package-feedback.adoc[]
 ** xref:feedback/product-feedback.adoc[]
 ** xref:feedback/support.adoc[]
+
+* xref:first-look/index.adoc[]
+** xref:first-look/linux-first-look.adoc[]
+** xref:first-look/docker-first-look.adoc[]
 
 * Appendix
 ** xref:appendix/version-compatibility.adoc[]

@@ -8,8 +8,11 @@ The second step is to download and configure arguments and/or environment variab
 Both ways are described below.
 Running as a service is the recommended way of operating the NOM Server.
 
-You can download the NOM Server, including the agent binaries here: https://neo4j.com/download-center/#ops-manager[Download].
-Please extract the content from the downloaded `.zip` or `.tar.gz` file to wherever directory you want to operate NOM from
+Releases of Neo4j enterprise all come bundled with the most current version of NOM at the time of that Neo4j release. 
+Please note that this does not have to be the most current version of NOM.
+You can find NOM as `.zip` or `.tar.gz` inside your Neo4j folder under `/products`.
+Alternatively, you can download any version of the NOM Server, including the agent binaries here: https://neo4j.com/download-center/#ops-manager[Download].
+In any case, please extract the content from the downloaded `.zip` or `.tar.gz` file to whichever directory you want to operate NOM from
 (in the following referenced as NOM server-folder).
 
 // [[server-package]]
@@ -257,4 +260,14 @@ java -jar .\lib\server.jar
 | `JWT_SECRET`
 | Random string used for JWT signing
 | please-set-a-random-secret-string-here-for-jwt-signing
+
+| `optout.crash_analytics`
+| `OPTOUT_CRASH_ANALYTICS`
+| Set to true to opt out of anonymous product analytics being sent to Neo4j (optional)
+| false
+
+| `optout.product_analytics`
+| `OPTOUT_PRODUCT_ANALYTICS`
+| Set to true to opt out of anonymous crash analytics being sent to Neo4j (optional)
+| false
 |===

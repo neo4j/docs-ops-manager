@@ -1,13 +1,27 @@
 = Neo4j instance requirements
 
-In order to be managed by NOM a Neo4j instance **must**:
+In order to be managed by NOM, a Neo4j instance **must**:
 
 * be running a Neo4j Enterprise Edition v4.4.0 or higher (including all 5.x versions).
 
+== Query log collection
 
-For the metrics collection feature to work correctlty these configuration values need to be set: 
+[NOTE]
+====
+Log manager is only compatible with Neo4j version 5+.
+====
 
-== For 4.4.x versions: 
+For the query log collection feature to work correctly, `db.logs.query.enabled` needs to be set to `INFO` or `VERBOSE` in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.
+Also, make sure that the config value `db.logs.query.threshold` is set to a reasonable value, `0`, commented out or is removed. 
+This setting acts as an lower bound for any completed query to appear in the logs. 
+Thus, if this value is set too high, the queries you want to monitor might not get logged. 
+Setting this value to zero will log every query.
+
+== Metrics collection
+
+For the metrics collection feature to work correctly. these configuration values need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.:
+
+=== For 4.4.x versions:
 
 ** `metrics.prometheus.endpoint=127.0.0.1:2004`
 
@@ -21,7 +35,7 @@ For the metrics collection feature to work correctlty these configuration values
 
 ** `metrics.namespaces.enabled=true`
 
-== For 5.x versions: 
+=== For 5.x versions:
 
 ** `server.metrics.prometheus.endpoint=127.0.0.1:2004`
 
@@ -34,3 +48,29 @@ For the metrics collection feature to work correctlty these configuration values
 ** `server.metrics.jmx.enabled=true`
 
 ** `server.metrics.namespaces.enabled=true`
+
+== User privileges
+
+The agent logs on to the DBMS with the configured user to enable certain features such as viewing relationship and label types, managing privileges, and viewing configuration values.
+If you do not want to use the built-in admin user, a role with the minimum set of privileges required for full functionality can be created with:
+
+
+[source, cypher]
+----
+CREATE ROLE `operator`;
+
+GRANT ACCESS ON DATABASE * TO `operator`;
+GRANT MATCH {*} ON GRAPH * NODE * TO `operator`;
+GRANT MATCH {*} ON GRAPH * RELATIONSHIP * TO `operator`;
+GRANT SHOW CONSTRAINT ON DATABASE * TO `operator`;
+GRANT SHOW INDEX ON DATABASE * TO `operator`;
+
+GRANT EXECUTE PROCEDURE * ON DBMS TO `operator`;
+GRANT EXECUTE ADMIN PROCEDURES ON DBMS TO `operator`;
+GRANT SHOW SERVERS ON DBMS TO `operator`;
+
+// Required for security manager:
+GRANT USER MANAGEMENT ON DBMS TO `operator`;
+GRANT ROLE MANAGEMENT ON DBMS TO `operator`;
+GRANT PRIVILEGE MANAGEMENT ON DBMS TO `operator`;
+----
