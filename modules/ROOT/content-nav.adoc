@@ -12,7 +12,6 @@
 ** xref:installation/docker/index.adoc[]
 ***  xref:installation/docker/introduction.adoc[]
 *** xref:installation/docker/server.adoc[]
-*** xref:installation/docker/compose.adoc[]
 ** xref:installation/kubernetes/index.adoc[]
 *** xref:installation/kubernetes/helm-charts.adoc[]
 ** xref:installation/self-signed-certificate.adoc[]
@@ -87,6 +86,10 @@
 // ** xref:feedback/package-feedback.adoc[]
 ** xref:feedback/product-feedback.adoc[]
 ** xref:feedback/support.adoc[]
+
+* xref:first-look/index.adoc[]
+** xref:first-look/linux-first-look.adoc[]
+** xref:first-look/docker-first-look.adoc[]
 
 * Appendix
 ** xref:appendix/version-compatibility.adoc[]

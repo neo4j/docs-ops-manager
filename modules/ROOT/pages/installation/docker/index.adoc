@@ -3,4 +3,3 @@
 
 * xref:./introduction.adoc[Introduction] - About the NOM server Docker image
 * xref:./server.adoc[Server Docker container] - About running a NOM server Docker container
-* xref:./compose.adoc[Compose] - About running a NOM server Docker container and a persistence container using Docker compose
