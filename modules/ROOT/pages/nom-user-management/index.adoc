@@ -1,0 +1,167 @@
+= NOM user management
+:description: This section describes the user management in Neo4j Ops Manager.
+
+*User Management* allows creation and management of NOM users enabling persons who manage the Neo4j estate to be assigned appropriate access levels according to their role. 
+The effective access levels of a NOM user are reflected in the NOM UI appropriately.
+
+== Roles of NOM users
+
+[%noheader]
+|===
+||
+
+|NOM Admin
+|Has access to all features of NOM for all DBMSs  and can administer NOM users, including creating other users that have the role *"NOM Admin"*.
+
+|Administrator
+|Has access to features of NOM as configured by NOM Admin.
+Can not administer NOM users.
+|===
+
+[NOTE]
+====
+The default NOM user `admin` has the role *NOM Admin* and can therefore be used to create new NOM users (including other *Administrators*) and configure their access to NOM features.
+====
+
+== Scope of NOM users
+
+NOM users can only be used to access the functionality of the NOM server.
+They are not related to users of other systems (NOM persistence, monitored Neo4j DBMSs, operating systems etc). 
+
+== NOM user administration tasks
+
+The NOM user management is performed in the *Administrators* section of the NOM settings page.
+
+image::nom-administrators-section.png[width=800]
+
+=== Creating a user
+
+Click on *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
+Fill in user details including specifying if role *"NOM Admin"* should be assigned to them.
+
+[IMPORTANT]
+====
+New users will be automatically redirected to the password change page after the login.
+====
+
+image::nom-administrators-create-user.png[width=800]
+
+If the new user will have the role *NOM Admin*, no further details must be specified.
+Use the *"Create"* button to confirm user creation.
+
+Access levels for global features can be set on the *"User info"* tab.
+Access to the *"Agents"* page of the NOM settings area is currently only one global feature that requires explicit permission.
+Applicable access levels are: *"No access"*, *"view"*, *"edit"*.
+
+==== Assigning access levels on DBMS specific features
+
+For users having the role *Administrator* (checkbox *NOM Admin* on the *"User info"* tab is *OFF*), access to every DBMS specific feature can be configured in the *"DBMS access control"* tab.
+
+image::nom-administrators-dbms-access-control.png[width=800]
+
+See the following table for permission description.
+
+|===
+|DBMS-specific feature |Access levels |Description
+
+|*Status*
+|View, edit
+|Access to the *"Status"* page for assigned DBMS(s).
+
+|*Security*
+|No access, view, edit
+|Access to the *"Security panel"* page for assigned DBMS(s).
+
+|*Status*
+|No access, view
+|Access to the *"Logs"* page for assigned DBMS(s).
+
+|*Upgrades*
+|No access, View, edit
+|Access to the *"Upgrade"* page for assigned DBMS(s).
+|===
+
+Permissions can be assigned explicitly or implicitly.
+DBMS which have neither explicit nor implicit permissions assigned will not be visible in the NOM UI for the user being edited.
+
+===== Explicit permissions
+
+Explicit permissions are be assigned directly to DBMSs.
+Every DBMS can be assigned its own set of permissions.
+
+[IMPORTANT]
+====
+If the DBMS is renamed or migrated after being assigned explicit permissions, the permissions remain unchanged.
+====
+
+==== Implicit permissions (DBMS glob patterns)
+
+Should the Neo4j deployment have many DBMSs, it can be efficient to implicitly assign DBMS-specific permissions to a set of DBMSs with a single line in the permission table.
+This can be done by assigning permission a DBMS glob pattern.
+During access control, the DBMS glob pattern is checked against the DBMS name.
+If using DBMS glob patterns, it is recommended to set DBMSs names first.
+This can be done in the NOM UI.
+
+[IMPORTANT]
+====
+Since implicit DBMS permissions are always calculated based on the _current_ DBMS name, renaming a DBMS can cause changes in its permissions.
+====
+
+The glob syntax used in NOM supports the following wildcards: `*`, `?` and `[...]`.
+For a description of how these wildcards work see for example https://en.wikipedia.org/wiki/Glob_(programming)#Syntax[this wikipedia article].
+
+Glob patterns are created by using the "Assign DBMSs" pop-up and can be reused for several NOM users.
+To verify the set of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
+
+[NOTE]
+====
+*Rules for multiple permissions on a DBMS:*
+
+. If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every feature the most restrictive access level is applied.
+*Example*: for a user, a glob pattern `\*` defines access level "Edit" for the "Security" feature, whereas another glob pattern `*PROD*` defines access level "View" for the same feature.
+User's resulting access level to the feature "Security" is "View", since it is more restrictive.
+. If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob pattern that matches this DBMS name.
+This means that the permissions assigned to a glob pattern are *ignored* completely.
+====
+
+==== Duplicating permissions of another user
+
+The function "Copy other's access" can be used in cases when several NOM users with similar permissions must be created.
+It can be accessed by pressing the *"..."* button next to *"Assign DBMSs"* button.
+
+image::nom-administrators-copy-others-access.png[width=800]
+
+This function appends permissions of another user (selected in the popup) to the permissions of the current user. 
+Permissions already assigned are not appended.
+
+=== Modifying a user
+
+Locate the user to be modified, and use the tabs *"User info"* and *"DBMS access control"* to modify user. 
+All modifications performed are persisted when the *"Save"* button is clicked. 
+Clicking *"Cancel"* removes the modifications.
+This also applies to removing assigned DBMS or DBMS glob patterns from the table in *"DBMS access control"*.
+Until being saved or cancelled, removed entries are marked visually (grayed out).
+
+[IMPORTANT]
+====
+If the user's password is changed, they will be automatically redirected to the password change page after the login.
+====
+
+[NOTE]
+====
+A user with role *NOM Admin* cannot degrade their role to *Administrator*.
+====
+
+=== Removing a user
+
+Locate the user to be removed, click it and press the "Remove user" button at the bottom of the sidebar.
+
+[NOTE]
+====
+Users cannot remove themselves.
+====
+
+[NOTE]
+====
+Should user modification or removal result in DBMS globs patterns being unused (e.g. not referenced by other users), these globs are removed as well.
+====

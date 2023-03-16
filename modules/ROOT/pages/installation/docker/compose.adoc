@@ -59,7 +59,7 @@ storage:
 +
 NOTE: Self signed certificates can be generated within the container using a server sub command as mentioned here Refer to *xref:../installation/self-signed-certificate.adoc[Installation > Self-Signed-Certificate]*. In this case mounting the certs into the container is not required.
 
-* Once the services are defined and saved to a compose file, run the follwing command:
+* Once the services are defined and saved to a compose file, run the following command:
 +
 [source, shell, role=noheader]
 ----

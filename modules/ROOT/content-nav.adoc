@@ -28,6 +28,9 @@
 //** xref:addition/cluster.adoc[]
 //** xref:addition/aura.adoc[]
 
+// * NOM user management
+* xref:/nom-user-management/index.adoc[]
+
 // * Updating to a newer version
 * xref:update/index.adoc[]
 ** xref:update/server.adoc[]
