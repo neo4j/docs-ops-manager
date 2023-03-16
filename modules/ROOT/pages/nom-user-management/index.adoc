@@ -129,7 +129,7 @@ This means that the permissions assigned to a glob pattern are *ignored* complet
 The function "Copy other's access" can be used in cases when several NOM users with similar permissions must be created.
 It can be accessed by pressing the *"..."* button next to *"Assign DBMSs"* button.
 
-image::nom-administrators-copy-others-access.png[width=400]
+image::nom-administrators-copy-others-access.png[width=800]
 
 This function appends permissions of another user (selected in the popup) to the permissions of the current user. 
 Permissions already assigned are not appended.
