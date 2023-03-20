@@ -261,12 +261,12 @@ java -jar .\lib\server.jar
 | Random string used for JWT signing
 | please-set-a-random-secret-string-here-for-jwt-signing
 
-| `optout.crash_analytics`
+| `optout.crash-analytics`
 | `OPTOUT_CRASH_ANALYTICS`
 | Set to true to opt out of product analytics being sent to Neo4j (optional)
 | false
 
-| `optout.product_analytics`
+| `optout.product-analytics`
 | `OPTOUT_PRODUCT_ANALYTICS`
 | Set to true to opt out of crash analytics being sent to Neo4j (optional)
 | false
