@@ -263,11 +263,11 @@ java -jar .\lib\server.jar
 
 | `optout.crash_analytics`
 | `OPTOUT_CRASH_ANALYTICS`
-| Set to true to opt out of anonymous product analytics being sent to Neo4j (optional)
+| Set to true to opt out of product analytics being sent to Neo4j (optional)
 | false
 
 | `optout.product_analytics`
 | `OPTOUT_PRODUCT_ANALYTICS`
-| Set to true to opt out of anonymous crash analytics being sent to Neo4j (optional)
+| Set to true to opt out of crash analytics being sent to Neo4j (optional)
 | false
 |===
