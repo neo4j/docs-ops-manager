@@ -3,7 +3,7 @@
 
 Product analytics is used to track events and analytics for Neo4j Ops Manager.
 
-The data collected includes which tab and page is navigated to, the country from which the request originates, and email domain of the current user.
+The data collected includes which tab and page are navigated to, the country from which the request originates, and the email domain of the current user.
 
 No personally identifiable information is collected.
 
