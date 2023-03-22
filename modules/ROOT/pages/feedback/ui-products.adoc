@@ -3,13 +3,13 @@
 
 Product analytics is used to track events and analytics for Neo4j Ops Manager.
 
-Neo4j Ops Manager is integrated directly with Segment, giving it the potential to send analytics data.
+The data collected includes which tab and page are navigated to, the country from which the request originates, and the email domain of the current user.
 
-No personal information is collected.
+No personally identifiable information is collected.
 
 .We collect the following analytics types:
-* Anonymous crash reports — Crash reports enable us to quickly diagnose and fix problems.
-* Anonymous usage statistics — This data helps us prioritize features and improvements.
+* Crash reports — Crash reports enable us to quickly diagnose and fix problems.
+* Usage statistics — This data helps us prioritize features and improvements.
 
 It is possible to globally opt out of collection of these types of analytics by setting a configuration value when starting the NOM server.
 
