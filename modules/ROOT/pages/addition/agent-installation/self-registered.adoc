@@ -1,7 +1,9 @@
 = Self-registering agent
 :description: this page describes NOM agent self-registering setup.
 
-Agent self registration omits manually aquiring initial configuration from NOM UI as described in xref:./manual.adoc#register[Manually registering agent] and instead relies on additional agent configuration on Neo4j instance host to obtain initial configuration from NOM server either through mutual authentication or manual authorization of the agent from UI after installation.
+Agent self-registration omits manually acquiring initial configuration from NOM UI as described in xref:./manual.adoc#register[Manually registering agent].
+Instead minimal generic configuration about the NOM server is provided and the additional agent specific configuration is obtained from the NOM server after authorization. 
+Authorization is obtained either through mutual authentication or manual authorization of the agent from UI. 
 
 A self-registering agent is useful in an automated environment such as a Kubernetes cluster of Neo4j instances where instances are dynamically created and managed.
 
