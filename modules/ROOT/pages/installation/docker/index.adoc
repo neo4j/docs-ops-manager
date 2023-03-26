@@ -1,5 +1,5 @@
 = Docker
 :description: This chapter describes the NOM containerization.
 
-* xref:./introduction.adoc[Introduction] - About the NOM server Docker image
-* xref:./server.adoc[Server Docker container] - About running a NOM server Docker container
+* xref:./container.adoc[Server Docker container] -  About running a NOM server Docker container
+* xref:./compose.adoc[Server and Persistence provisioning] - About running a docker compose deployment of NOM Server container with Neo4j Persistence

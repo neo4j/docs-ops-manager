@@ -1,11 +1,41 @@
 = Self-registering agent
 :description: this page describes NOM agent self-registering setup.
 
+[[register]]
+== Register agent
 Agent self-registration omits manually acquiring initial configuration from NOM UI as described in xref:./manual.adoc#register[Manually registering agent].
 Instead minimal generic configuration about the NOM server is provided and the additional agent specific configuration is obtained from the NOM server after authorization. 
-Authorization is obtained either through mutual authentication or manual authorization of the agent from UI. 
+Authorization is done either through mutual authentication or manual authorization of the agent from UI. 
 
 A self-registering agent is useful in an automated environment such as a Kubernetes cluster of Neo4j instances where instances are dynamically created and managed.
+
+== Install agent
+
+The following steps are required to install an agent:
+
+* Standalone binaries (only linux and windows platform binaries are available)
+** Download: https://neo4j.com/download-center/#ops-manager[Download]
+
+NOTE: If downloading agents is not a option in some environments, NOM agents are also bundled into Neo4j packages which can be used for the installation as described xref:./install-packaged.adoc[here]
+
+** Extract the archive:
+
+** Add the `bin` folder in the extracted directory to `PATH`
+* To verify the installation, run the following command:
++
+[source, terminal, role=noheader]
+----
+agent version
+----
++
+Which should output:
++
+[source, terminal, role=noheader]
+----
+<agent name> <agent version> <agent revision>
+----
+
+* Make sure the agent version is equal to that of the NOM server.
 
 [[configure]]
 == Configuration for agent self registration with manual approval
@@ -29,22 +59,6 @@ Following are the required environment variables to be configured to enable self
 With only the above configuration, agent attempts to connect to NOM server for self-registration which results in agent going into *Standby mode* until authorized.
 
 IMPORTANT: *Standby mode* - this describes the runtime state of a self registering agent which is not authorized yet to monitor an instance. In this mode agent keeps checking with NOM server for approval status at every preset time interval (__default 30 seconds__).
-
-An agent in standby mode shows up in the list of agents in NOM UI. To enable the agent to continue it's normal execution, agent needs to be approved from NOM UI as shown below:
-
-image::agents.png[width=800]
-
-To approve the agent click on `...` agent action icon and click `Approve`:
-
-image::agents.png[width=800]
-
-An edit view to optionally update agent name or description will show as below:
-
-NOTE: an unauthorized self-registering agent will have default name derived from it's host information. It's recommended to update this name or use the optional configuration described <<agent-meta-data,here>>.
-
-image::agent-new.png[width=800]
-
-Once the agent is approved, the agent will receive initial configuration from NOM server which it persists on the instance host in a file named `nom-agent-config.yaml`.
 
 WARNING: Location of where agent saves it's initial configuration must be of persistent type else agent needs to be reregistered.
 
@@ -169,3 +183,60 @@ It generates a key pair and a self-signed certificate and creates `localhost.cer
 `localhost.key.pem` is assigned the password `changeit` which is provided to the command as an argument.
 
 You can then use these two files to configure the agents for mTLS authentication with server.
+
+[[running-agent]]
+== Run agent
+
+A self-registering agent is preferably run in console mode only and an additional command line option should be provided to enable self-registration.
+
+* Run an agent in console mode:
++
+All configuration values for the agent should be set as environment variables before starting the agent
++
+** Command:
++
+[source, terminal, role=noheader]
+----
+agent console -s
+----
++
+Or
++
+[source, terminal, role=noheader]
+----
+agent console --self-register
+----
+
+[[verify]]
+== Verify agent setup
+Ensure agent has contacted NOM server, is online and is reporting DBMS(s) correctly.
+
+. Return to Agents listing in global settings
++
+image::agents.png[width=800]
+. An agent in standby mode shows up in the list of agents in NOM UI with `Unauthorized` status. To enable the agent to continue it's normal execution, agent needs to be approved from NOM UI as shown below:
++
+image::agent-unauthorized.png[width=800]
+. To approve the agent click on `...` agent action icon and click `Approve`:
++
+image::agent-action-menu.png[width=800]
+. An edit view to optionally update agent name or description will show as below:
++
+NOTE: an unauthorized self-registering agent will have default name derived from it's host information. It's recommended to update this name or use the optional configuration described <<agent-meta-data,here>>.
++
+image::agent-approve.png[width=800]
+. Once the agent is approved, the agent will receive initial configuration from NOM server which it persists on the instance host in a file named `nom-agent-config.yaml`.
+. Upon approval agent status changes to `Offline` until agent connects to Server with initial configuration.
++
+image::agent-approved-offline.png[width=800]
+. Once the agent is successfully connected to Server and reports the instances it needs to monitor, it's status changes to `Online`.
++
+image::agent-approved-online.png[width=800]
+. Check that there is a value for _Last contact time_.
+    ** If the agent has never contacted NOM server then go back to where the agent is running and check the logs.
+    It may be that the server address is configured incorrectly or the TLS certificates are not correctly specified. 
+. Verify that the agent has a current status of `Online`. 
+    ** If the agent is not currently online then go to where it is running and check the logs.
+. Hover over the newly added agent and click the cog icon to show agent configuration. Check configuration is as expected.
+. Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
+. Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.
