@@ -226,7 +226,7 @@ NOTE: an unauthorized self-registering agent will have default name derived from
 +
 image::agent-approve.png[width=800]
 . Once the agent is approved, the agent will receive initial configuration from NOM server which it persists on the instance host in a file named `nom-agent-config.yaml`.
-. Upon approval agent status changes to `Offline` until agent connects to Server with initial configuration.
+. Upon approval, the agent status changes to `Offline` until the agent connects to the server with the initial configuration.
 +
 image::agent-approved-offline.png[width=800]
 . Once the agent is successfully connected to Server and reports the instances it needs to monitor, it's status changes to `Online`.
