@@ -222,7 +222,7 @@ image::agent-unauthorized.png[width=800]
 image::agent-action-menu.png[width=800]
 . An edit view to optionally update agent name or description will show as below:
 +
-NOTE: an unauthorized self-registering agent will have default name derived from it's host information. It's recommended to update this name or use the optional configuration described <<agent-meta-data,here>>.
+NOTE: An unauthorized self-registering agent will have a default name derived from its host information. It's recommended to update this name or use the optional configuration described <<agent-meta-data,here>>.
 +
 image::agent-approve.png[width=800]
 . Once the agent is approved, the agent will receive initial configuration from NOM server which it persists on the instance host in a file named `nom-agent-config.yaml`.
