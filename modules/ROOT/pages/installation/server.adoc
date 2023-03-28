@@ -78,13 +78,13 @@ sudo systemctl stop neo4j-ops-manager-server
 === Windows
 ==== Setting arguments in the service file
 
-Navigate to the NOM server-folder under `bin\`, where a `service.xml` is located.
+Navigate to the NOM server-folder under `bin\`, where a `server.xml` is located.
 This file includes an `<arguments>` section that needs to be adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your SSL key-store file, etc.).
 
 ==== Using environment variables
 
-As an alternative to changing the arguments in the `service.xml` file, you can instead use environment variables to achieve the same result.
-The `service.xml` file contains the necessary information for this.
+As an alternative to changing the arguments in the `server.xml` file, you can instead use environment variables to achieve the same result.
+The `server.xml` file contains the necessary information for this.
 The table <<config_ref,here>> contains environment variables and example values.
 
 ==== Installation
