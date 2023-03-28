@@ -3,3 +3,5 @@
 
 * xref:./instance-requirements.adoc[Neo4j instance requirements] - About preconditions on Neo4j instance for NOM monitoring
 * xref:./agent-installation/index.adoc[Installation and configuration of NOM agents] - About NOM agent installation process and ways to setup NOM agent
+* xref:./docker/index.adoc[Monitor Dockerized Neo4j] - About ways to monitor Neo4j instance deployed as a Docker container
+* xref:./kubernetes/index.adoc[Monitor Containerized Neo4j in Kubernetes cluster] - About ways to monitor Neo4j instances deployed in Kubernetes clusters

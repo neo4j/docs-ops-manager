@@ -1,6 +1,7 @@
 = Installation and configuration of NOM agents
 :description: This section describes the installation process for a NOM agent.
 
+== NOM Requirements for agents
 NOM agents should be installed for every host in the managed estate:
 
 * To manage a Neo4j instance, there needs to be a NOM agent running on the same host.

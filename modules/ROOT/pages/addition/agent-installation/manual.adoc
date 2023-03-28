@@ -1,4 +1,4 @@
-= Manually register an agent
+= Manually setup an agent
 :description: this page describes the manual registration, installtion, configuration and running of NOM agents to monitor a Neo4j instance.
 
 [[register]]

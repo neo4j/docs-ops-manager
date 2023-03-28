@@ -1,4 +1,4 @@
-= Docker compose support
+= NOM Server and Persistence Docker compose
 :description: this page describes the docker compose privisioning instructions for the NOM server and NOM persistence.
 
 Docker compose can be used to provision a set of related containers as services to experiment with or to run in test environments.
@@ -13,7 +13,7 @@ Following are a set of steps to create a two container compose setup to experime
 ----
 storage:
     hostname: <user defined>
-    image: neo4j:<user defined 4.4.x>-enterprise
+    image: neo4j:<Neo4j version>-enterprise
     networks:
       - <user defined>
     ports:
@@ -50,6 +50,7 @@ storage:
       GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
       GRPC_SERVER_SECURITY_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
       GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <user defined for mounted certs>
+      GRPC_SERVER_SECURITY_CLIENT_AUTH: "OPTIONAL"
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
       JWT_SECRET: <user defined>
@@ -67,7 +68,7 @@ docker compose -f <compose file> up <folder for context, typically current folde
 ----
 
 ====
-Following is an example Docker compose file that can be used to start up a NOM server and Enterprise Neo4j Persistence system without any customization. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring:
+Following is an example Docker compose file that can be used to start up a NOM server and Enterprise Neo4j Persistence system. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring and customize it with additional configuration:
 
 IMPORTANT: Create a directory *`~/.nom/ssc`* before running Docker compose.
 
@@ -84,7 +85,7 @@ networks:
 services:
   storage:
     hostname: storage
-    image: neo4j:4.4.8-enterprise
+    image: neo4j:enterprise
     networks:
       - lan
     ports:
@@ -120,6 +121,7 @@ services:
       GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
       GRPC_SERVER_SECURITY_KEY_STORE: file:/certificates/localhost.pfx
       GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: changeit
+      GRPC_SERVER_SECURITY_CLIENT_AUTH: "OPTIONAL"
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
       JWT_SECRET: please-set-a-random-secret-string-here-for-jwt-signing

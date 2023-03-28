@@ -1,4 +1,4 @@
-= Server Docker container
+= NOM Server Docker container
 :description: This page describes how to run a NOM server in a Docker container.
 
 For every NOM release, a Docker image for the NOM server is published to the https://hub.docker.com/r/neo4j/neo4j-ops-manager-server/tags[Docker Hub verified repository].
@@ -70,6 +70,7 @@ docker run -e "JAVA_OPTS=<Value>" neo4j/neo4j-ops-manager-server \
     --grpc.server.security.key-store-type=PKCS12 \
     --grpc.server.security.key-store=<Value> \
     --grpc.server.security.key-store-password=<Value> \
+    --grpc.server.security.clientAuth=OPTIONAL
     --jwt.secret=<Value>
 ----
 
@@ -90,6 +91,7 @@ docker run \
     -e "GRPC_SERVER_SECURITY_KEY_STORE_TYPE=PKCS12" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE=<Value>" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD=<Value>" \
+    -e 'GRPC_SERVER_SECURITY_CLIENT_AUTH="OPTIONAL"'
     -e "JWT_SECRET=<Value>"
     neo4j/neo4j-ops-manager-server
 ----

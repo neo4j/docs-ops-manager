@@ -4,8 +4,8 @@
 [[register]]
 == Register agent
 Agent self-registration omits manually acquiring initial configuration from NOM UI as described in xref:./manual.adoc#register[Manually registering agent].
-Instead minimal generic configuration about the NOM server is provided and the additional agent specific configuration is obtained from the NOM server after authorization. 
-Authorization is done either through mutual authentication or manual authorization of the agent from UI. 
+Instead minimal configuration about the NOM server can be provided for agent registration with the NOM server after authorization. 
+Authorization is done either through mutual authentication or manual authorization of the agent from UI.
 
 A self-registering agent is useful in an automated environment such as a Kubernetes cluster of Neo4j instances where instances are dynamically created and managed.
 
@@ -16,7 +16,7 @@ The following steps are required to install an agent:
 * Standalone binaries (only linux and windows platform binaries are available)
 ** Download: https://neo4j.com/download-center/#ops-manager[Download]
 
-NOTE: If downloading agents is not a option in some environments, NOM agents are also bundled into Neo4j packages which can be used for the installation as described xref:./install-packaged.adoc[here]
+NOTE: If downloading agents is not an option in some environments, NOM agents are also bundled into Neo4j packages which can be used for the installation as described xref:./install-packaged.adoc[here]
 
 ** Extract the archive:
 
@@ -52,7 +52,7 @@ Following are the required environment variables to be configured to enable self
 | server:9090
 
 | `CONFIG_SERVER_HTTP_ADDRESS`
-| Server HTTP address
+| Server HTTP address (** Http address should include protocol scheme **)
 | +++https://server:8080+++
 |===
 
@@ -62,7 +62,7 @@ IMPORTANT: *Standby mode* - this describes the runtime state of a self registeri
 
 WARNING: Location of where agent saves it's initial configuration must be of persistent type else agent needs to be reregistered.
 
-Following optional configuration can be used to provide a persistent location for agent intial configuration:
+Following optional configuration can be used to provide a persistent location for agent to save it's initial configuration:
 
 [cols="<,<,<,<",options="header"]
 |===
@@ -95,6 +95,11 @@ Agent meta-data can be optionally specified using these configuration parameters
 | An agent to monitor home db
 |===
 
+[IMPORTANT]
+====
+It's recommended to set agent name and description if multiple agents are being self-registered on similar hosts as it would lead to confusion with similarly named agents appearing in UI for approval.
+====
+
 == Configuration for agent self registration with mutual authentication
 Following are the required environment variables to be configured to enable self-registration of NOM agent with mutual authentication:
 
@@ -114,11 +119,11 @@ Following are the required environment variables to be configured to enable self
 
 | `CONFIG_CLIENT_CERT`
 | PEM encoded Agent certificate for mutual TLS
-| /path/to/a/pem/file`
+| `/path/to/a/pem/file`
 
 | `CONFIG_CLIENT_KEY`
 | PEM encoded Agent key for mutual TLS
-| /path/to/a/pem/file`
+| `/path/to/a/pem/file`
 |===
 
 IMPORTANT: *In addition to above configuration, NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#config_ref[here]*
@@ -130,6 +135,8 @@ IMPORTANT: *In addition to above configuration, NOM server also needs to be conf
 Self-signed certificates are not recommended to be used in production environments.
 For production environments, it is advisable to use a trusted certificate issuer.
 This section outlines a practical way to generate a self-signed certificate for test and demo purposes.
+
+Although, if self-signed certificates are generated uniquely for each agent and can be rotated easily by configuring and updating NOM Server with those certificates, they can be used to enable mutual authentication for agents. 
 ====
 
 The NOM agent contains a utility to generate a self-signed certificate suitable for your environment.
@@ -180,16 +187,26 @@ agent ssc -n localhost \
 ----
 
 It generates a key pair and a self-signed certificate and creates `localhost.cert.pem` and `localhost.key.pem` files inside `./certificates` directory.
-`localhost.key.pem` is assigned the password `changeit` which is provided to the command as an argument.
 
 You can then use these two files to configure the agents for mTLS authentication with server.
+
+Similarly, if you need to generate agent specific keys for each agent, use a unique agent name for each agent as Subject Name (agent name will be overriden if `CONFIG_AGENT_NAME` is not set). Following is simplied agent self-signed certificate generation command tied to it's name;
+
+[source, terminal, role=noheader]
+----
+agent ssc -n nom-agent-1 -o ./certificates
+----
+
+It generates a key pair and a self-signed certificate and creates `nom-agent-1.cert.pem` and `nom-agent-1.key.pem` files inside `./certificates` directory.
 
 [[running-agent]]
 == Run agent
 
-A self-registering agent is preferably run in console mode only and an additional command line option should be provided to enable self-registration.
+To run a self-registering agent an additional command line option should be provided as `-s` for short and `--self-register`.
 
-* Run an agent in console mode:
+All configuration values for the agent should be set as environment variables before starting the agent.
+
+. Run an agent in console mode:
 +
 All configuration values for the agent should be set as environment variables before starting the agent
 +
@@ -198,13 +215,109 @@ All configuration values for the agent should be set as environment variables be
 [source, terminal, role=noheader]
 ----
 agent console -s
+
+or
+
+agent console --self-register
 ----
+
+. Run an agent in service mode:
 +
-Or
+To run an agent in service means that the agent process runs in the background and monitors the instance and this is the recommended way.
+The agent lifecycle is handled by the operating system service manager.
++
+* Install the service for linux (systemd):
++
+** Run
 +
 [source, terminal, role=noheader]
 ----
-agent console --self-register
+agent service -s install
+----
+** Execute
++
+[source, terminal, role=noheader]
+----
+systemctl edit neo4j-ops-manager-agent.service
+----
++
+and set environment variables by either setting Environment or EnvironmentFile options.
+For example, using the Environment options, the override file can look like this:
++
+[source, terminal, role=noheader]
+----
+[Service]
+Environment="CONFIG_SERVER_ADDRESS=<server grpc address>"
+Environment="CONFIG_TLS_TRUSTED_CERTS=</path/to/trusted/certs/pem/file>"
+Environment="CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>"
+Environment="CONFIG_INSTANCE_1_NAME=<instance name>"
+Environment="CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>"
+Environment="CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>"
+Environment="CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>"
+Environment="CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>"
+Environment="CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to server-logs.xml>"
+----
++
+Please refer to the full list of options <<configure,here>>.
+
+** Start your service
++
+[source, terminal, role=noheader]
+----
+systemctl start neo4j-ops-manager-agent.service
+----
++
+or
++
+[source, terminal, role=noheader]
+----
+systemctl stop neo4j-ops-manager-agent.service
+----
+** Logs are available, using journalctl, via
++
+[source, terminal, role=noheader]
+----
+journalctl -u neo4j-ops-manager-agent
+----
++
+* Install the service for Windows:
+** Run
++
+[source, terminal, role=noheader]
+----
+agent service -s install
+----
++
+** Open registry editor and navigate to `HKLM\SYSTEM\CurrentControlSet\Services\neo4j-ops-manager-agent`.
+** Create a key of type `REG_MULTI_SZ` named `Environment` and add your environment variables, each on a separate line, for example:
++
+[source, terminal, role=noheader]
+----
+CONFIG_SERVER_ADDRESS=<server grpc address>
+CONFIG_TLS_TRUSTED_CERTS=</path/to/the/trusted/certs/pem>
+CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>
+CONFIG_INSTANCE_1_NAME=<instance name>
+CONFIG_INSTANCE_1_BOLT_URI=<bolt uri of the local instance>
+CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>
+CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>
+CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>
+CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to server-logs.xml>
+----
++
+Please refer to the full list of options <<configure,here>>.
+
+** Start your service
++
+[source, terminal, role=noheader]
+----
+agent service -s start
+----
++
+* To uninstall the service
++
+[source, terminal, role=noheader]
+----
+agent service -s uninstall
 ----
 
 [[verify]]
@@ -217,7 +330,7 @@ image::agents.png[width=800]
 . An agent in standby mode shows up in the list of agents in NOM UI with `Unauthorized` status. To enable the agent to continue it's normal execution, agent needs to be approved from NOM UI as shown below:
 +
 image::agent-unauthorized.png[width=800]
-. To approve the agent click on `...` agent action icon and click `Approve`:
+. To approve the agent click on `...` agent action icon and click `Approve Agent`:
 +
 image::agent-action-menu.png[width=800]
 . An edit view to optionally update agent name or description will show as below:

@@ -1,0 +1,54 @@
+= Monitor a Neo4j instance in Docker compose setup
+
+Apart from running a standalone Neo4j container and monitoring it with an injected agent process, a declarative docker compose makes it easier to setup agent as mounted executable or to use the bundled agent in Neo4j image using a custom entry point as shown below:
+
+[[entrypoint]]
+.entrypoint.sh
+[source, shell]
+----
+#!/bin/bash -eu
+
+/startup/docker-entrypoint.sh neo4j &
+tar -xzf products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 \
+&& mv bin/agent /bin/agent \
+&& agent console -s
+----
+
+.db.service.yaml
+[source, yaml]
+----
+test_local:
+    hostname: test_local
+    image: ${NEO4J_IMAGE}
+    entrypoint: /custom/entrypoint.sh
+    depends_on:
+      server: # server service if running in the same composed environment
+        condition: service_healthy
+    networks: # same network as server service if in the same composed environment
+      - lan
+    environment:
+      CONFIG_SERVER_GRPC_ADDRESS: "server:9090"
+      CONFIG_SERVER_HTTP_ADDRESS: "https://server:8080"
+      CONFIG_TLS_TRUSTED_CERTS: "/certificates/certs/ca-chain.pem"
+#      CONFIG_TLS_CLIENT_CERT: "test_local.cert.pem" # agent cert for mTLS authentication
+#      CONFIG_TLS_CLIENT_KEY: "test_local.key.pem"  # agent key for mTLS authentication
+      CONFIG_LOG_LEVEL: "debug"
+      CONFIG_INSTANCE_1_NAME: "test_local"
+      CONFIG_INSTANCE_1_BOLT_URI: "bolt://localhost:7687"
+      CONFIG_INSTANCE_1_BOLT_USERNAME: "neo4j"
+      CONFIG_INSTANCE_1_BOLT_PASSWORD: "passw0rd"
+      CONFIG_INSTANCE_1_QUERY_LOG_PORT: "9500"
+      CONFIG_INSTANCE_1_LOG_CONFIG_PATH: "/var/lib/neo4j/conf/server-logs.xml"
+      CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION: "100"
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+      NEO4J_AUTH: neo4j/passw0rd
+      NEO4J_EDITION: "enterprise"
+      NEO4J_metrics_prometheus_enabled: "true"
+      NEO4J_metrics_prometheus_endpoint: "localhost:2004"
+      NEO4J_metrics_filter: "*"
+    volumes:
+      - /path/to/custom/entrypoint:/custom
+#      - /path/to/agent/bin:/var/lib/neo4j/bin
+----
+
+Above Neo4j instance as a Docker compose service can be used with similar instances as part of single compose deployment in test and local environments.

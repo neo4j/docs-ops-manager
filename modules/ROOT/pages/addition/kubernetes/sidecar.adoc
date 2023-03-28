@@ -1,0 +1,88 @@
+= NOM agent as a Sidecar
+
+A NOM agent can be deployed as a Sidecar container within the same pod as Neo4j instance in a Kubernetes cluster. Agent sidecar does not need to use a official agent image.
+An agent can simply be run in a lightweight linux based container such as `alpine`. The agent binary can be either mounted into container or can be extracted from Neo4j image using an init container.
+
+[WARNING]
+====
+An agent Sidecar container can not access all resources that Neo4j pod uses and the host metrics of the cluster node. For example, for disk usage metrics, agent needs access to file system or peristent volumes that Neo4j pod uses. These need to be mounted to agent Daemon pod. Agent sidecar can only report host metrics of it's own contained environment which is not a complete view of reosurce usage of cluster node.
+====
+
+Following is a sample `values.yaml` file for Neo4j Helm charts with NOM agent sidecar configured:
+
+.values.sidecar.yaml
+[source, yaml]
+----
+neo4j:
+  name: single-instance
+  edition: "enterprise"
+  password: "passw0rd"
+  acceptLicenseAgreement: "yes"
+volumes: 
+  data: 
+    mode: defaultStorageClass
+
+config:
+  metrics.prometheus.enabled: "true"
+  metrics.filter: "*"
+
+additionalVolumes:
+  - name: agent-bin
+    emptyDir: {}
+additionalVolumeMounts:
+  - name: agent-bin
+    mountPath: /agent/bin
+
+podSpec:
+  initContainers:
+    - name: agent-extractor
+      image: neo4j:enterprise
+      command: 
+        - "/bin/bash"
+        - "-c" 
+        - "tar -xvzf products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 && ls && mv bin/agent /agent/bin/agent"
+      volumeMounts:
+        - name: agent-bin
+          mountPath: /agent/bin
+
+  containers:
+    - name: nom-agent
+      image: alpine
+      command:
+        - "/agent/bin/agent"
+        - "console"
+      env:
+        - name: CONFIG_SERVER_GRPC_ADDRESS 
+          value: "server:9091"
+        - name: CONFIG_SERVER_HTTP_ADDRESS 
+          value: "https://server:8080"
+        - name: CONFIG_TLS_TRUSTED_CERTS 
+          value: "/certificates/certs/ca-chain.pem"
+        # - name: CONFIG_TLS_CLIENT_CERT 
+          # value: "/certificates/agent.cert.pem"
+        # - name: CONFIG_TLS_CLIENT_KEY 
+          # value: "/certificates/agent.key.pem"
+        - name: CONFIG_AGENT_NAME 
+          value: "nom-agent"
+        - name: CONFIG_AGENT_DESCRIPTION 
+          value: "an agent from helm chart"
+        - name: CONFIG_LOG_LEVEL 
+          value: "debug"
+        - name: CONFIG_INSTANCE_1_NAME 
+          value: "side-car-agent"
+        - name: CONFIG_INSTANCE_1_BOLT_URI 
+          value: "neo4j://localhost:7687"
+        - name: CONFIG_INSTANCE_1_BOLT_USERNAME 
+          value: "neo4j"
+        - name: CONFIG_INSTANCE_1_BOLT_PASSWORD 
+          value: "passw0rd"
+        - name: CONFIG_INSTANCE_1_QUERY_LOG_PORT 
+          value: "9500"
+        - name: CONFIG_INSTANCE_1_LOG_CONFIG_PATH 
+          value: "/var/lib/neo4j/conf/server-logs.xml"
+        - name: CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION 
+          value: "100"
+      volumeMounts:
+        - name: agent-bin
+          mountPath: /agent/bin
+----
