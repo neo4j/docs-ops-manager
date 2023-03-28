@@ -1,0 +1,7 @@
+= Kubernetes
+
+Neo4j deployments in Kubernetes environment are supported through Helm charts. To monitor a Neo4j instance as a container in a Kubernetes environment, there are several options with varying degrees of support for NOM agent.
+
+Having a transparent view of the host where the Neo4j instance is deployed is a functional requirement for NOM agent. This view includes the ability of NOM agent to monitor and collect information about host resources such as disk, memory and cpu. In environments like a Kubernetes cluster, process containment makes it difficult to get a view of actual resource usage. 
+
+Nonetheless, there are few methods to setup a NOM agent to monitor a Neo4j instance inside a Kubernetes cluster albeit less transparent.

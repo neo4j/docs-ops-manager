@@ -107,7 +107,7 @@ services:
       - "java -jar app.jar ssc -n server -o /certificates -p <SSC_PASSWORD> -d server -i 127.0.0.1 && java -jar app.jar"
 ----
 
-Documentation for NOM server docker image is *xref:installation/docker/server.adoc[here]*.
+Documentation for NOM server docker image is *xref:installation/docker/container.adoc[here]*.
 
 === Run docker compose 
 Run the follwing command:

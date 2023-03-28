@@ -1,5 +1,14 @@
-= Server Docker container
+= NOM Server Docker container
 :description: This page describes how to run a NOM server in a Docker container.
+
+For every NOM release, a Docker image for the NOM server is published to the https://hub.docker.com/r/neo4j/neo4j-ops-manager-server/tags[Docker Hub verified repository].
+
+== Getting the NOM server Docker image
+The latest NOM server image can be pulled from the verified repository by running the following command.
+[,shell]
+----
+docker pull neo4j/neo4j-ops-manager-server:latest
+----
 
 NOM server in a Docker container can be run in several contexts such as a Docker compose environment or a in a Kubernetes cluster etc.
 In this chapter, we only focus on running a standalone NOM server in a Docker container (Henceforth referred as NOM server container).
@@ -18,7 +27,7 @@ For NOM server container, keys, and certificates should be mounted into the cont
 [source, shell, role=noheader]
 ----
 docker run -v <path/to/pfx/file/on/the/host>:<path/to/pfx/file/on/the/container> \
-    neo4j/neo4j-ops-manager-server:1.1.0 \
+    neo4j/neo4j-ops-manager-server \
     --server.ssl.key-store=<path/to/pfx/file/on/the/container> \
     --grpc.server.security.key-store=<path/to/pfx/file/on/the/container>
 ----
@@ -28,7 +37,7 @@ docker run -v <path/to/pfx/file/on/the/host>:<path/to/pfx/file/on/the/container>
 [source, shell, role=noheader]
 ----
 docker run -v <path/to/pfx/file/on/the/host>:<path/to/pfx/file/on/the/container> \
-    neo4j/neo4j-ops-manager-server:1.1.0 \
+    neo4j/neo4j-ops-manager-server \
     -e "SERVER_SSL_KEY_STORE=<Value>" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE=<path/to/pfx/file/on/the/container>"
 ----
@@ -49,7 +58,7 @@ IMPORTANT: Make sure ports are set as per the below commands.
 +
 [source, shell, role=noheader]
 ----
-docker run -e "JAVA_OPTS=<Value>" neo4j/neo4j-ops-manager-server:1.1.0 \
+docker run -e "JAVA_OPTS=<Value>" neo4j/neo4j-ops-manager-server \
     --spring.neo4j.uri=<Value> \
     --spring.neo4j.authentication.username=<Value> \
     --spring.neo4j.authentication.password=<Value> \
@@ -61,6 +70,7 @@ docker run -e "JAVA_OPTS=<Value>" neo4j/neo4j-ops-manager-server:1.1.0 \
     --grpc.server.security.key-store-type=PKCS12 \
     --grpc.server.security.key-store=<Value> \
     --grpc.server.security.key-store-password=<Value> \
+    --grpc.server.security.clientAuth=OPTIONAL
     --jwt.secret=<Value>
 ----
 
@@ -81,8 +91,9 @@ docker run \
     -e "GRPC_SERVER_SECURITY_KEY_STORE_TYPE=PKCS12" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE=<Value>" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD=<Value>" \
+    -e 'GRPC_SERVER_SECURITY_CLIENT_AUTH="OPTIONAL"'
     -e "JWT_SECRET=<Value>"
-    neo4j/neo4j-ops-manager-server:1.1.0
+    neo4j/neo4j-ops-manager-server
 ----
 
 == Maintainance

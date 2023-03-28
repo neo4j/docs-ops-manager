@@ -1,0 +1,7 @@
+= Docker
+:description: describes the process of monitoring a Neo4j Docker container with NOM agent.
+
+Apart from monotoring Neo4j instances running on a host or a virtual machine, an agent can be setup to monitor containerized Neo4j instances.
+
+In this section we will list some of the methods to setup agents to monitor containerized Neo4j instances in standalone and Docker compose deployments. For Kubernetes
+deployments of Neo4j instances, checkout xref:addition/kubernetes/index.adoc[this section]

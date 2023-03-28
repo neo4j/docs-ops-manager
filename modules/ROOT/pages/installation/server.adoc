@@ -192,6 +192,11 @@ If you set all the arguments to environment variables, you can shorten the serve
 java -jar .\lib\server.jar
 ----
 
+[NOTE]
+====
+If the NOM Server is required to support self-registered agents, then addtional configuration needs to be provided to above commands as mentioned in the configuration reference table. More about agent self-registration xref:../addition/agent-installation/self-registered.adoc[here]
+====
+
 == Server configuration reference [[config_ref]]
 
 [cols="<,<,<, <",options="header"]
@@ -270,4 +275,15 @@ java -jar .\lib\server.jar
 | `OPTOUT_PRODUCT_ANALYTICS`
 | Set to true to opt out of crash analytics being sent to Neo4j (optional)
 | false
+
+| `grpc.server.security.trustCertCollection`
+| `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION`
+| file containing list of PEM encoded agent certificates. Required for agent self-registration. (optional)
+| `file:/path/to/agent-certs.pem`
+
+| `grpc.server.security.clientAuth`
+| `GRPC_SERVER_SECURITY_CLIENT_AUTH`
+| option to indicate whether to verify client certificates. Required for agent self-registration. (optional)
+| `"OPTIONAL"`
 |===
+

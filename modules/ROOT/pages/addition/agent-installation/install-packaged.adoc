@@ -1,0 +1,14 @@
+= Install packaged agent
+:description: this page describes the usage of bundled agent available in Neo4j package
+
+NOM agent binaries are also packaged in the `products` folder under Neo4j home directory. These binaries have proper support for the Neo4j version that they are bundled with.
+
+Following are the steps to use these packaged agents instead of getting the binaries from Download centre as described xref:./manual.adoc#install[here].
+
+. Extracting the bundled agent from `products` directory under neo4j home to a choosen location which is on `PATH`.
++
+[source, terminal, role=noheader]
+----
+tar -xvzf products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 && ls && mv bin/agent <agent executable location on PATH>
+----
+. Run the agent in usual modes: console or service.

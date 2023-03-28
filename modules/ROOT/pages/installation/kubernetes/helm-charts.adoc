@@ -37,7 +37,13 @@ service:
 * Run the following command to install the NOM server to your Kubernetes cluster
 [source, shell, role=noheader]
 ----
-helm install -f values.yaml --set pkcs12CertFileContent=<From PKCS12 server certificate> <Helm release name> /path/to/neo4j-ops-manager-server-1.2.1.tgz
+helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
+----
+
+* If agents are self-registered, set the additional trusted agent certificates on the server before deploying the agents
+[source, shell, role=noheader]
+----
+helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) --set secrets.mTLS.agentCerts=$(cat localhost.pem | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
 ----
 
 * If the command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command.
@@ -66,6 +72,10 @@ secrets:
   tls:
     password: ""
     pkcs12CertFileContent: ""
+  mTLS:
+    # string content of PEM encoded list of certificates appended into a .pem file
+    # used for agent self-registration
+    agentCerts: ""
 
 service:
   http:

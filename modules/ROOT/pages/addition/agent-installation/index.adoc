@@ -1,0 +1,16 @@
+= Installation and configuration of NOM agents
+:description: This section describes the installation process for a NOM agent.
+
+== NOM Requirements for agents
+NOM agents should be installed for every host in the managed estate:
+
+* To manage a Neo4j instance, there needs to be a NOM agent running on the same host.
+* To fully manage a clustered DBMS - there must be an agent for every host that hosts an instance of the DBMS.
+* An agent can and should manage all instances on a single host even if they are members of different DBMSs.
+
+== NOM agent setup process
+* Register agent with NOM server    [xref:./manual.adoc#register[Manual]]   [xref:./self-registered.adoc#register[Self-Registered]]
+* Install agent on Neo4j instance host  [xref:./manual.adoc#install[Manual]]    [xref:./self-registered.adoc#install[Self-Registered]]
+* Configure agent   [xref:./manual.adoc#configure[Manual]]  [xref:./self-registered.adoc#configure[Self-Registered]]
+* Run agent     [xref:./manual.adoc#running-agent[Manual]]  [xref:./self-registered.adoc#running-agent[Self-Registered]]
+* Verify agent setup    [xref:./manual.adoc#verify[Manual]]     [xref:./self-registered.adoc#verify[Self-Registered]]
