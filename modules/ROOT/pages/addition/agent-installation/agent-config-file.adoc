@@ -10,7 +10,7 @@ Agent looks for a file named *`nom-agent-config.yaml`* under the following direc
 
 [WARNING]
 ====
-Agent reports an error while running in self-register mode such as `| ERROR | unable to load config from file error="open /home/.nom/nom-agent-config.yaml: no such file or directory"`. It is not an issue with agent operations but default behaviour to support restarts of agents which needs to llok for its initial configuration to connect to NOM server.
+Agent initially reports an error while running in self-register mode such as `| ERROR | unable to load config from file error="open /home/.nom/nom-agent-config.yaml: no such file or directory"`. This is expected behavior, as the file will be created automatically.
 
 It is also possible to provide the entire configuration in configuration file but agent will override this file to only save configuration it requires to connect to NOM server.
 Recommended way to configure agent is through environment variables as specified xref:./self-registered.adoc[here]
