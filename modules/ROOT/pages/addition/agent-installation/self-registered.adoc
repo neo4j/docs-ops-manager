@@ -62,7 +62,7 @@ IMPORTANT: *Standby mode* - this describes the runtime state of a self registeri
 
 WARNING: Location of where agent saves it's initial configuration must be of persistent type else agent needs to be reregistered.
 
-Following optional configuration can be used to provide a persistent location for agent to save it's initial configuration:
+The following optional configuration can be used to specify the location for agent to save its initial configuration:
 
 [cols="<,<,<,<",options="header"]
 |===
