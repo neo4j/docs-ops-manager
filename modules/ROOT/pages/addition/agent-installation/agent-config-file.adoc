@@ -1,6 +1,6 @@
 = Agent configuration file
 
-Agent configuration file is used by a self-registering agent to persist it's initial configuration which it requires in restart scenarios.
+The agent configuration file is used by a self-registering agent to persist its initial configuration, which is required for restarts.
 
 Agent looks for a file named *`nom-agent-config.yaml`* under the following directories in order:
 . path set by `CONFIG_AGENT_CONFIG_PATH` environment variable
