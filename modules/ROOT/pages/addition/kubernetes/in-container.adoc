@@ -1,0 +1,63 @@
+= NOM agent as in-container process
+
+NOM agent can be run as an additional process in Neo4j container running in a pod. This pattern is not a good practice as
+containers are designed for single responsibility. However, if a quick setup for monitoring a Neo4j instance in a Kubernetes
+cluster can be done via script like below:
+
+.inject_agent.sh
+[source, shell]
+----
+#!/bin/bash -eu
+
+function inject_agent() {
+ instanceName=$1
+
+ agent_env=$(cat $2)
+
+ script="cat <<EOF > install_agent.sh
+#!/bin/bash -eu
+tar -xzf products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 \
+&& mv bin/agent /bin/agent
+
+cat <<EOT >> ~/.profile
+$agent_env
+EOT
+
+. ~/.profile
+
+exec agent console -s
+EOF"
+
+ kubectl exec $instanceName -- sh -c "$script"
+
+ kubectl exec $instanceName -- sh -c "chmod +x /tmp/install_agent.sh && /tmp/install_agent.sh"
+}
+
+inject_agent $1 $2
+----
+
+The above script requires the name of the Neo4j container running inside a pod and a `.env` style file with all the agent confiuration exported as shown below:
+.agent.env
+[source, shell]
+----
+export CONFIG_AGENT_NAME="test_local"
+export CONFIG_AGENT_DESCRIPTION="local self-registered agent"
+export CONFIG_SERVER_GRPC_ADDRESS="server:9090"
+export CONFIG_SERVER_HTTP_ADDRESS="https://server:8080"
+export CONFIG_LOG_LEVEL="debug"
+export CONFIG_INSTANCE_1_NAME="test_local"
+export CONFIG_INSTANCE_1_BOLT_URI="bolt://localhost:7687"
+export CONFIG_INSTANCE_1_BOLT_USERNAME="neo4j"
+export CONFIG_INSTANCE_1_BOLT_PASSWORD="passw0rd"
+export CONFIG_INSTANCE_1_QUERY_LOG_PORT="9500"
+export CONFIG_INSTANCE_1_LOG_CONFIG_PATH="/var/lib/neo4j/conf/server-logs.xml"
+export CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100"
+export NEO4J_ACCEPT_LICENSE_AGREEMENT="yes"
+export NEO4J_AUTH=neo4j/passw0rd
+export NEO4J_EDITION="enterprise"
+export NEO4J_metrics_prometheus_enabled="true"
+export NEO4J_metrics_prometheus_endpoint="localhost:2004"
+export NEO4J_metrics_filter="*"
+----
+
+NOTE: Since agent configuration is added to shell `.profile`, any shell executions of agent on the container should see the values set for agent.
