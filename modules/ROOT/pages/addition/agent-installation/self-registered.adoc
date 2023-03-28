@@ -60,7 +60,7 @@ With only the above configuration, agent attempts to connect to NOM server for s
 
 IMPORTANT: *Standby mode* - this describes the runtime state of a self registering agent which is not authorized yet to monitor an instance. In this mode agent keeps checking with NOM server for approval status at every preset time interval (__default 30 seconds__).
 
-WARNING: Location of where agent saves it's initial configuration must be of persistent type else agent needs to be reregistered.
+WARNING: agent config location must be of persistent type. 
 
 The following optional configuration can be used to specify the location for agent to save its initial configuration:
 
