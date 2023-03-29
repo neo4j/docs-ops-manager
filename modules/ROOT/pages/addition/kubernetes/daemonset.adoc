@@ -10,6 +10,7 @@ that Neo4j pod uses. These need to be mounted to agent Daemon pod.
 ====
 
 . Following is a sample daemonset manifest for NOM agent:
+
 .daemonset.yaml
 [source, yaml]
 ----
@@ -53,6 +54,7 @@ spec:
 ----
 
 . A simple Neo4j instance deployed through helm charts;
+
 .values.yaml
 [source, yaml]
 ----
@@ -71,6 +73,7 @@ config:
 ----
 
 . A sample agent config to mount on agent Daemon pod from cluster node path (eg. `/deployments/daemonset`);
+
 .nom-agent-config.yaml
 [source, yaml]
 ----

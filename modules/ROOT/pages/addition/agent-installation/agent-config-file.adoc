@@ -17,6 +17,7 @@ Recommended way to configure agent is through environment variables as specified
 ====
 
 Following is a minimal agent configuration that is persisted by agent for server connection:
+
 .nom-agent-config.yaml
 [source, yaml]
 ----

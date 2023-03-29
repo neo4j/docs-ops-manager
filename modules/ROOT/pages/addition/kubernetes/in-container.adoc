@@ -37,6 +37,7 @@ inject_agent $1 $2
 ----
 
 The above script requires the name of the Neo4j container running inside a pod and a `.env` style file with all the agent confiuration exported as shown below:
+
 .agent.env
 [source, shell]
 ----
