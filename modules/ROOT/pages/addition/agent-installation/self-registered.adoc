@@ -217,7 +217,7 @@ Following are the required environment variables to be configured to enable mutu
 
 IMPORTANT: *In addition to above configuration, NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#config_ref[here]*
 
-NOTE: Self-signed certificates for agents in test and demo envrionments can be generated as documented xref:./agent-self-signed-certifciates.adoc[here]
+NOTE: Self-signed certificates for agents in test and demo envrionments can be generated as documented xref:./agent-self-signed-certificates.adoc[here]
 
 [[running-agent]]
 == Run agent
