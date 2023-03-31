@@ -193,7 +193,7 @@ With only the above configuration, agent attempts to connect to NOM server for s
 
 The agent exits *Standby mode* once it has been manually approved in the UI. 
 
-=== Additional Configuration for mutual authentication
+=== Additional configuration for mutual authentication (optional)
 
 Mutual authentication eliminates the need for the manual approval step. 
 When the agent attempts to connect to NOM server for self-registration, it is immediately approved if it's certificates are trusted. 
