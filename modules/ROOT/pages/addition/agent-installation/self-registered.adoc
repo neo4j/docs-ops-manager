@@ -4,8 +4,8 @@
 [[register]]
 == Register agent
 Agent self-registration omits manually acquiring token information from NOM UI as described in xref:./manual.adoc#register[Manually registering agent].
-Instead minimal configuration about the NOM server can be provided for agent registration with the NOM server after authorization. 
-Authorization is done either through mutual authentication or manual authorization of the agent from UI.
+Instead minimal configuration about the NOM server is provided to allow agent to connect and register itself.
+Authorization is granted either through manual approval of the agent in UI or through mutual authentication.
 
 A self-registering agent is useful in an automated environment such as a Kubernetes cluster of Neo4j instances where instances are dynamically created and managed.
 
@@ -187,18 +187,19 @@ If set, appends the appropriate log appender automatically (including the port s
 |===
 
 
-With only the above configuration, agent attempts to connect to NOM server for self-registration which results in agent going into *Standby mode* until authorized.
+With only the above configuration, the agent will connect to NOM server, register itself and then enter *Standby mode*.
 
-*Standby mode* is the runtime state of a self registering agent which is not authorized yet to monitor an instance. In this mode agent keeps checking with NOM server for approval status at every preset time interval (__default 30 seconds__).
+*Standby mode* is the runtime state of a self-registering agent which is not authorized yet to monitor instances. 
+In this mode agent keeps checking with NOM server for approval status at every preset time interval (__default 30 seconds__).
 
 The agent exits *Standby mode* once it has been manually approved in the UI. 
 
 === Additional configuration for mutual authentication (optional)
 
-Mutual authentication eliminates the need for the manual approval step. 
-When the agent attempts to connect to NOM server for self-registration, it is immediately approved if it's certificates are trusted. 
+Mutual authentication eliminates the manual approval step. 
+NOM server will immediately authorize an agent that registers using a trusted certficate.
 
-Following are the required environment variables to be configured to enable mutual authentication:
+The following configuration is required to enable mutual authentication:
 
 [cols="<,<,<",options="header"]
 |===
@@ -215,16 +216,14 @@ Following are the required environment variables to be configured to enable mutu
 | `/path/to/a/pem/file`
 |===
 
-IMPORTANT: *In addition to above configuration, NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#config_ref[here]*
+IMPORTANT: *In addition to the above configuration, NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#config_ref[here]*
 
 NOTE: Self-signed certificates for agents in test and demo envrionments can be generated as documented xref:./agent-self-signed-certificates.adoc[here]
 
 [[running-agent]]
 == Run agent
 
-To run a self-registering agent an additional command line option should be provided as `-s` for short and `--self-register`.
-
-All configuration values for the agent should be set as environment variables before starting the agent.
+To run a self-registering agent an additional command line option is provided as `-s` for short and `--self-register`.
 
 . Run an agent in console mode:
 +
