@@ -350,7 +350,7 @@ Ensure agent has contacted NOM server, is online and is reporting DBMS(s) correc
 +
 image::agents.png[width=800]
 . An agent in standby mode shows up in the list of agents in NOM UI with `Unauthorized` status. 
-To enable the agent to continue it's normal execution, agent needs to be approved from NOM UI as shown below:
+To enable the agent to continue its normal execution, agent needs to be approved from NOM UI as shown below:
 +
 image::agent-unauthorized.png[width=800]
 . To approve the agent click on `...` agent action icon and click `Approve Agent`:
