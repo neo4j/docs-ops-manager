@@ -346,27 +346,31 @@ agent service -s uninstall
 == Verify agent setup
 Ensure agent has contacted NOM server, is online and is reporting DBMS(s) correctly.
 
-. Return to Agents listing in global settings
+. Return to Agents listing in global settings.
 +
 image::agents.png[width=800]
-. An agent in standby mode shows up in the list of agents in NOM UI with `Unauthorized` status. 
-To enable the agent to continue its normal execution, agent needs to be approved from NOM UI as shown below:
+. Find self-registered agent in list.
+ ** If the agent is not in the list then go back to where the agent is running and check the logs.
+    It may be that the server address is configured incorrectly or the TLS certificates are not correctly specified. 
+
+. Approve agent if required.
+** An agent in standby mode shows up in the list of agents in NOM UI with `Unauthorized` status. 
 +
 image::agent-unauthorized.png[width=800]
-. To approve the agent click on `...` agent action icon and click `Approve Agent`:
+To enable the agent to continue its normal execution, agent needs to be approved from NOM UI as shown below:
+.. Click on `...` agent action icon and click `Approve Agent`:
 +
 image::agent-action-menu.png[width=800]
-. An edit view to optionally update agent name or description will show as below:
+.. Update agent name or description if desired and click 'Approve':
 +
 image::agent-approve.png[width=800]
-. Once the agent is approved (through UI or through mutual authentication), the agent will receive token information from NOM server which it persists on the instance host in a file named `nom-agent-config.yaml`.
-. Upon approval, the agent status changes to `Offline` until the agent connects to the server with the token information.
-+
+.. Upon approval, the agent status changes to `Offline` until the agent receives token information and re-connects to NOM server.
 image::agent-approved-offline.png[width=800]
-. Once the agent is successfully connected to Server and reports the instances it needs to monitor, it's status changes to `Online`.
+.. Wait for agent status to change to `Online` indicating that the agent has successfully re-connected to the NOM server and is in normal execution mode. 
+This can take a few minutes. 
 +
 image::agent-approved-online.png[width=800]
-. Check that there is a value for _Last contact time_.
+. If the agent status is not 'Online' then go to where it is running and check the logs.
 . Hover over the newly added agent and click the cog icon to show agent configuration. Check configuration is as expected.
 . Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
 . Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.
