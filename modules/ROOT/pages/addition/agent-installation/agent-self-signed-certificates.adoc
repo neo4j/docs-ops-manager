@@ -2,7 +2,7 @@
 
 [IMPORTANT]
 ====
-Self-signed certificates are not recommended to be used in production environments.
+It is not recommended to use self-signed certificates in production environments.
 For production environments, it is advisable to use a trusted certificate issuer.
 This section outlines a practical way to generate a self-signed certificate for test and demo purposes.
 

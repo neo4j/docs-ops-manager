@@ -4,8 +4,8 @@
 [[register]]
 == Register agent
 Agent self-registration omits manually acquiring token information from NOM UI as described in xref:./manual.adoc#register[Manually registering agent].
-Instead minimal configuration about the NOM server is provided to allow agent to connect and register itself.
-Authorization is granted either through manual approval of the agent in UI or through mutual authentication.
+Instead, minimal configuration of the NOM server is provided to allow the agent to connect and register itself.
+Authorization is granted either through manual approval of the agent in the UI or through mutual authentication.
 
 A self-registering agent is useful in an automated environment such as a Kubernetes cluster of Neo4j instances where instances are dynamically created and managed.
 
@@ -123,8 +123,8 @@ The following environment variables specify start configuration for the agent:
 ====
 Since agent-server communication needs to be encrypted, you need to configure the agent so that it trusts the server's certificates.
 The file that contains the trusted certificate list (PEM encoded) can be specified through the `CONFIG_TLS_TRUSTED_CERTS` environment variable.
-While most operating systems default to the system-wide trusted certificates, that's not the case on Windows.
-For that reason, you **must** set this environment variable on Windows.
+While most operating systems default to the system-wide trusted certificates, it is not the case on Windows.
+For this reason, you **must** set this environment variable on Windows.
 ====
 
 === Instance configuration
@@ -154,7 +154,7 @@ For each managed DBMS instance on the host, the following environment variables 
 |===
 
 [[querylog]]
-To enable the query log collection functionality, there are also a few additional environment variables.
+To enable the query log collection functionality, there are a few additional environment variables.
 If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled. 
 The rest of NOM still works.
 
@@ -197,7 +197,7 @@ The agent exits *Standby mode* once it has been manually approved in the UI.
 === Additional configuration for mutual authentication (optional)
 
 Mutual authentication eliminates the manual approval step. 
-NOM server will immediately authorize an agent that registers using a trusted certficate.
+The NOM server immediately authorizes an agent that registers using a trusted certificate.
 
 The following configuration is required to enable mutual authentication:
 
@@ -216,14 +216,20 @@ The following configuration is required to enable mutual authentication:
 | `/path/to/a/pem/file`
 |===
 
-IMPORTANT: *In addition to the above configuration, NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#config_ref[here]*
+[IMPORTANT]
+====
+In addition to the above configuration, the NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#config_ref[here].
+====
 
-NOTE: Self-signed certificates for agents in test and demo envrionments can be generated as documented xref:./agent-self-signed-certificates.adoc[here]
+[NOTE]
+====
+Self-signed certificates for agents in test and demo environments can be generated as documented xref:./agent-self-signed-certificates.adoc[here].
+====
 
 [[running-agent]]
 == Run agent
 
-To run a self-registering agent an additional command line option is provided as `-s` for short and `--self-register`.
+To run a self-registering agent, an additional command line option is provided as `-s` for short and `--self-register`.
 
 . Run an agent in console mode:
 +
@@ -356,7 +362,7 @@ image::agents.png[width=800]
 ** An agent in standby mode shows up in the list of agents in NOM UI with `Unauthorized` status. 
 +
 image::agent-unauthorized.png[width=800]
-To enable the agent to continue its normal execution, agent needs to be approved from NOM UI as shown below:
+To enable the agent to continue its normal execution, the agent needs to be approved from the NOM UI as shown below:
 .. Click on `...` agent action icon and click `Approve Agent`:
 +
 image::agent-action-menu.png[width=800]
