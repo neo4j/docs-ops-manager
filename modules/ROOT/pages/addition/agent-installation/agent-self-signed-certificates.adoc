@@ -60,7 +60,9 @@ It generates a key pair and a self-signed certificate and creates `localhost.cer
 
 You can then use these two files to configure the agents for mTLS authentication with server.
 
-Similarly, if you need to generate agent specific keys for each agent, use a unique agent name for each agent as Subject Name (agent name will be overriden if `CONFIG_AGENT_NAME` is not set). Following is simplied agent self-signed certificate generation command tied to it's name;
+Similarly, if you need to generate agent specific keys for each agent, use a unique agent name for each agent as Subject Name (agent name will be overridden if `CONFIG_AGENT_NAME` is not set). 
+
+Following is a simplified command to generate a self-signed certificate tied to an agent's name: 
 
 [source, terminal, role=noheader]
 ----
