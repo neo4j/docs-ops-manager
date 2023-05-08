@@ -1,0 +1,27 @@
+= Alerts and Conditions
+:description: This section describes how to manage Alerts and Conditions in Neo4j Ops Manager.
+
+
+== Alerts on the home page
+
+TODO describe alert panel
+
+Home page alerts aggregates the alerts for your individual monitored systems.
+TODO: example referres to another section!
+The alerts generated for a cluster that has agents that have stopped reporting, as described above, is illustrated in the image below.
+
+Location of the alert can help you understand the location of the problem so it can be resolved faster.
+
+image::alerts.png[width=800]
+
+== Managing Alerts
+
+Alert details can be shown in the Alerts tab of the Alerts page of the selected DBMS.
+
+TODO: alert dismission in 1.6?
+
+== Managing Conditions
+
+Conditions can be managed in the Conditions tab of the Alert page of the selected DBMS.
+
+TODO

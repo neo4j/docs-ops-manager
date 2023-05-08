@@ -58,6 +58,9 @@
 
 * Monitoring
 //** xref:monitoring/index.adoc[]
+** xref:monitoring/concepts.adoc[]
+** xref:monitoring/alerts-conditions.adoc[]
+** xref:monitoring/notifications.adoc[]
 ** xref:monitoring/status-panel.adoc[]
 ** xref:monitoring/metric-manager.adoc[]
 ** xref:monitoring/log-manager.adoc[]
