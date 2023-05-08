@@ -2,15 +2,16 @@
 :description: This section describes how to manage Alerts and Conditions in Neo4j Ops Manager.
 
 
-== Alerts on the home page
+== Alerts on the Home page
+
+Home page alerts aggregates the alerts for your individual monitored systems.
 
 TODO describe alert panel
 
-Home page alerts aggregates the alerts for your individual monitored systems.
 TODO: example referres to another section!
 The alerts generated for a cluster that has agents that have stopped reporting, as described above, is illustrated in the image below.
 
-Location of the alert can help you understand the location of the problem so it can be resolved faster.
+Location of the alert can help you understand the location of the problem, so it can be resolved faster.
 
 image::alerts.png[width=800]
 
@@ -18,10 +19,31 @@ image::alerts.png[width=800]
 
 Alert details can be shown in the Alerts tab of the Alerts page of the selected DBMS.
 
-TODO: alert dismission in 1.6?
+[NOTE]
+====
+Only Alerts that are relevant to the selected DBMS are shown on the Alerts tab.
+====
+
+An Alert can be locally dismissed for the specified period of time.
+Dismissing an Alert temporarily removes it from the Alerts table and Alerts panel in the Home view.
+After the dismissal time the Alert will reappear in the Alerts table.
 
 == Managing Conditions
 
-Conditions can be managed in the Conditions tab of the Alert page of the selected DBMS.
+Conditions defined in the scope of the selected DBMS can be managed in the Conditions tab of the Alert page of the selected DBMS.
 
-TODO
+image::conditions-table.png[width=800]
+
+A Condition can be *enabled* or *disabled* by turning the switch to the left of the condition on and off.
+If a Condition is not enabled, it will not result in an Alert being created.
+
+All Conditions of the selected DBMS can be *enabled* or *disabled* at once by clicking the switch located in the table header.
+
+A Condition can be *deleted* using the "..." menu located at the end of every Condition table row.
+
+[IMPORTANT]
+====
+If an event-based Condition is deleted, and that event occurs, then a default Condition will be created for that event.
+Therefore, it is recommended to disable event-based Conditions instead of deleting them.
+====
+
