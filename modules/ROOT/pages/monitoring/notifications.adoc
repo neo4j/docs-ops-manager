@@ -1,4 +1,87 @@
 = Notifications
 :description: This section describes Notifications, Targets and Channels in Neo4j Ops Manager.
 
-TODO
+This section describes Notifications, Targets and Channels in Neo4j Ops Manager
+
+Notifications enable forwarding raised alerts over common Channels to specific Targets. Setting up notifications comprises two steps:
+
+* Channels configuration
+* Notifications configuration
+
+
+== Channels
+
+Channels represent the transport media while Targets represent the actual receivers.
+
+[cols="1,1"]
+|===
+|Channel type |Channel
+
+|Email (SMTP)
+|SMTP Server (NOM user emails)
+
+|Webhook
+|Webhook URLs
+|===
+
+=== Email (SMTP)
+
+NOM allows configuring a single SMTP Outbox Server with SSL, STARTTLS or no encryption. // specify NOM users are end receivers
+
+* To configure email click on *"Configure email"* button from the Channels section to open the creation modal. Fill in the email server details, test the server connection (optional) and click on  *"Confirm"*.
+
+[NOTE]
+====
+Selecting "None" security for a STARTTLS encrypted server will result in a successful connection test, but will generally fail to send an actual email for the majority of email providers.
+====
+
+image::notifications-smtp-configure.png[width=800]
+
+* To edit the email configuration click again on *"Configure email"*, edit the details and click on  *"Save"*.
+* To remove the email configuration click on the *"x"* icon on the grey "Configured Email" tag.
+
+image::notifications-smtp-remove.png[width=800]
+
+=== Webhooks
+
+NOM allows configuring multiple Webhooks and supports both custom implementations and some common providers (_Discord_, _Teams_ and _Slack_). NOM will forward an alert to a webhook via a HTTP POST request with a JSON payload. A custom webhook implementation should accept the following _Generic_ request body and return a `2XX` status to be rendered successful.
+
+
+._Generic_ webhook payload
+[source, json]
+----
+{
+    "title": "Title",
+    "description": "Description",
+    "severity": "Severity",
+    "location": "Location"
+}
+----
+
+* To configure a webhook click on *"Add webhook"* button from the Channels section to open the creation modal. Fill in the webhook details, send a test message (optional) and click on  *"Add"*.
+
+image::notifications-webhook-add.png[width=800]
+
+* Editing an existing webhook is not supported.
+* To remove a webhook click on the *"x"* icon on the grey "Added Webhooks" tag.
+
+image::notifications-webhook-remove.png[width=800]
+
+== Notifications
+
+Individual notifications can be configured when at least one channel is setup. A notification configuration defines what type of alerts, in which DBMSs should notify which channel.
+
+.Example
+[NOTE]
+====
+When an alert of type [*WARNING*, *ERROR*] is raised inside [*CS Cluster Prod*, *CS Single Prod*] notify NOM users [*nom-admin@neo4j.com*] and webhooks [*Slack#test*, *Generic#prod-errors*] 
+====
+
+* To configure a notification click on *"Add notification"* button from the Notifications section to open the creation modal. Define a name, select the DBMSs and alert levels in scope, select the channels and click on  *"Confirm"*.
+
+image::notifications-notification-configure.png[width=800]
+
+* To edit the email configuration click again on *"Configure email"*, edit the details and click on  *"Save"*.
+* To remove the email configuration click on the *"x"* icon on the grey "Configured Email" tag.
+
+image::notifications-notification-remove.png[width=800]
