@@ -29,9 +29,9 @@ Channel types represent the transport media while Channels represent the actual 
 
 === Email (SMTP)
 
-NOM allows configuring a single SMTP Outbox Server with SSL, STARTTLS or no encryption. // ❗️ specify NOM users are end receivers
+NOM allows configuring a single SMTP Outbox Server with SSL, STARTTLS or no encryption.
 
-* To configure email click on *"Configure email"* button from the Channels section to open the creation modal. Fill in the outbox server address and port, the encryption type, the username and password, test the server connection (optional) and click on  *"Confirm"*.
+* To configure the outbox server click on *"Configure email"* button from the Channels section to open the creation modal. Fill in the outbox server address and port, the encryption type, the username and password, test the server connection (optional) and click on  *"Confirm"*.
 
 [NOTE]
 ====
@@ -72,23 +72,31 @@ image::notifications-webhook-remove.png[width=800]
 
 == Notifications
 
-Individual notifications can be configured when at least one channel is setup. A notification configuration defines what type of alerts, in which DBMSs should notify which channel.
+Individual Notification Configurations (Notifications) can be configured when at least one channel is setup. A notification defines what type of alerts, in which DBMSs should notify which channel.
 
 .Example
 [NOTE]
 ====
-When an alert of type [*WARNING*, *ERROR*] is raised inside [*CS Cluster Prod*, *CS Single Prod*] notify NOM users [*nom-admin@neo4j.com*] and webhooks [*Slack#test*, *Generic#prod-errors*] 
+When an alert of type [*WARNING*, *ERROR*] is raised inside [*CS Cluster Prod*, *CS Single Prod*] notify NOM users [*nom-admin@neo4j.com*] and webhooks [*Slack#test*, *Generic#prod-errors*].
 ====
 
 * To configure a notification click on *"Add notification"* button from the Notifications section to open the creation modal. Define a name, select the DBMSs and alert levels in scope, select the channels and click on  *"Confirm"*.
 
+[NOTE]
+====
+Email notifications can only be sent to email addresses of NOM users.
+====
+
 image::notifications-notification-configure.png[width=800]
 
-* To edit the notification configuration open the context menu and click on *"Edit"*, update the details and click on  *"Save"*.
+* To edit the notification open the context menu and click on *"Edit"*, update the details and click on  *"Save"*.
 
 image::notifications-notification-edit.png[width=800]
 
-* To remove the notification configuration click on *"Delete"* context menu item.
-* To test the notification configuration click on *"Test"* context menu item. This will send a test notification to all configured channels.
+* To remove the notification click on *"Delete"* context menu item.
+* To test the notification click on *"Test"* context menu item. This will send a test message to all configured channels.
 
-// ❗️ specify what happens with notifications when a channel is removed
+[IMPORTANT]
+====
+Removing all channels that are part of a notification will result in the removal of the notification itself. 
+====
