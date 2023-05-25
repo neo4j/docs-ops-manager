@@ -2,7 +2,8 @@
 :description: This section describes the Metric manager of Neo4j Ops Manager.
 
 The metrics page offers rich charts and tables with data related to your monitored DBMSs.
-Currently three time windows are supported Live (30 minutes), 24 hours and 3 days worth of data.
+Currently six time windows are supported, from 30 minutes (live) up to 30 days.
+To allow efficient metric storage, metrics data older than 3 days is aggregated to hourly summary.
 
 The table in the *Host Metrics* tab and *Instance Metrics* tab includes static data for our DBMSs, like the CPU cores of the system (physical and logical) and memory.
 
@@ -10,3 +11,28 @@ image::dashboard.png[width=800]
 
 Charts allow for zooming/panning by clicking and specifying the area of interest by dragging the cursor.
 To reset zoom in the chart you can press double click inside the chart.
+Zoom/reset zoom affects all charts displayed on the page to allow investigating different metrics in a specific time range.
+
+== Setting metric thresholds
+
+To inform administrators about noticeable changes in metrics by showing alerts and sending notifications, NOM supports defining metric thresholds directly from the metrics chart.
+This can be accomplished using "Threshold" menu item of the  "..." menu of the metric chart.
+
+In the example below, a threshold of 6.98GB was added in the chart for "Host memory used" metric.
+
+image::metric-threshold.png[width=800]
+
+After confirming the threshold dialog:
+
+* The corresponding Condition, which will be used to trigger Alerts and Notifications, will be created and can be managed using the Conditions tab (see xref:./alerts-conditions.adoc#_managing_conditions[Managing Conditions]).
+* If the metric value will exceed the threshold during the defined grace period (5 minutes), the Condition will evaluate to `true`, causing NOM to trigger an Alert and (if configured), send Notifications (see xref:./notifications.adoc[Notifications]).
+* The metric chart will display the defined threshold in the chart as a dashed red line.
+
+Disabling the threshold can be accomplished by opening the Threshold dialog again and unchecking the "Enable threshold" checkbox.
+Doing so will remove this Condition from the system.
+
+[IMPORTANT]
+====
+Currently, some logical groups of metric charts (like "Disk used" and "Store size" chart groups) can only have a single threshold defined, which is then valid for every chart in the group.
+====
+
