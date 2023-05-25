@@ -30,9 +30,9 @@ See xref:./alerts-conditions.adoc[Alerts and Conditions] on how to manage Condit
 
 **Alerts** are shown in the NOM UI to notify the administrator about Conditions that evaluated to **true**.
 
-In case there are alerts in the managed system, Ops Manager provides following information about them:
+In case there are Alerts in the managed system, Ops Manager provides following information about them:
 
-* Total count of alerts is displayed in the sidebar.
+* Total count of Alerts is displayed in the sidebar.
 * Alert count per DBMS is displayed in the DBMS dropdown (for all accessible DBMSs) and the sidebar (for the currently selected DBMS).
 * Alert banner is displayed, allowing the administrator to show Alerts details or DBMSs metrics.
 * Detailed alert information is available from the Alerts page of the DBMS or from the Home page (in the Alert panel of the selected DBMS).
@@ -41,6 +41,6 @@ See xref:./alerts-conditions.adoc[Alerts and Conditions] on how to manage Alerts
 
 == Notifications
 
-TODO: describe what Notifications, Channels and Targets are.
+While Alerts are only displayed in the NOM browser page, Notifications enable sending information about triggered Conditions to external systems like email servers or other messaging systems.
 
 See xref:./notifications.adoc[Notifications] on how to manage Notifications, Channels and Targets.
