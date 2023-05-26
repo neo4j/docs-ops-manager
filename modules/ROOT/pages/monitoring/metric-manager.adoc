@@ -2,10 +2,14 @@
 :description: This section describes the Metric manager of Neo4j Ops Manager.
 
 The metrics page offers rich charts and tables with data related to your monitored DBMSs.
-Currently six time windows are supported, from 30 minutes (live) up to 30 days.
-To allow efficient metric storage, metrics data older than 3 days is aggregated to hourly summary.
+The time window for displayed data can be switched on top left of the metrics page.
 
-The table in the *Host Metrics* tab and *Instance Metrics* tab includes static data for our DBMSs, like the CPU cores of the system (physical and logical) and memory.
+[NOTE]
+====
+To allow efficient metric storage, metrics data older than 3 days is aggregated to hourly summary.
+====
+
+Clicking on "Show Resources" button in the *Host* tab and *Instance* tab shows a table with static data for managed DBMSs, like the number CPU cores of the system (physical and logical) and memory/disk capacities.
 
 image::dashboard.png[width=800]
 
@@ -18,7 +22,7 @@ Zoom/reset zoom affects all charts displayed on the page to allow investigating 
 To inform administrators about noticeable changes in metrics by showing alerts and sending notifications, NOM supports defining metric thresholds directly from the metrics chart.
 This can be accomplished using "Threshold" menu item of the  "..." menu of the metric chart.
 
-In the example below, a threshold of 6.98GB was added in the chart for "Host memory used" metric.
+In the example below, a threshold of 80% was added in the chart for "Host CPU Usage" metric.
 
 image::metric-threshold.png[width=800]
 

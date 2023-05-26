@@ -32,6 +32,7 @@ Dismissing an Alert temporarily removes it from the Alerts table and Alerts pane
 In the current implementation, Alert dismissal is local, meaning it is only effective for the current browser instance.
 After the dismissal time the Alert will reappear in the Alerts table.
 
+[#_managing_conditions]
 == Managing Conditions
 
 Conditions defined in the scope of the selected DBMS can be managed in the Conditions tab of the Alert page of the selected DBMS.
