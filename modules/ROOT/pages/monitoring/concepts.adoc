@@ -15,7 +15,8 @@ Examples: "Unreachable/Offline agents detected", "Incompatible agent connected".
 * **Metric-based Conditions**: a Condition evaluates to **true** when the metric(s) assigned to it change in a way so that its expression evaluates to **true**.
 Example: "Host CPU usage exceeds 80% longer than 2 minutes".
 
-A Condition can have a **grace time**. If present, grace time means that this Condition would only evaluate to **true** if all its **Evaluations** during the grace time evaluated to **true**.
+A Condition can have a **grace time**. 
+If present, grace time means that this Condition only evaluates to **true** if all its **Evaluations** during the grace time evaluate to **true**.
 
 If a Condition evaluates to **true**, Ops Manager lets the administrator know about that, as follows:
 
