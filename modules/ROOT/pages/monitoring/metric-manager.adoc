@@ -14,7 +14,7 @@ The "Show Resources" button in the *Host* tab and *Instance* tab shows a table w
 image::dashboard.png[width=800]
 
 Charts allow for zooming/panning by clicking and specifying the area of interest by dragging the cursor.
-To reset zoom in the chart you can press double click inside the chart.
+To reset zoom in the chart you can double click inside the chart.
 Zoom/reset zoom affects all charts displayed on the page to allow investigating different metrics in a specific time range.
 
 == Setting metric thresholds
