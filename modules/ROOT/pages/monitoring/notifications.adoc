@@ -1,9 +1,9 @@
 = Notifications
-:description: This section describes Notifications, Targets and Channels in Neo4j Ops Manager.
+:description: This section describes notifications, targets and channels in Neo4j Ops Manager.
 
-This section describes Notifications and Notification Channels in Neo4j Ops Manager
+This section describes notifications and notification channels in Neo4j Ops Manager
 
-Notifications enable forwarding raised alerts over common Channel types to specific Channels. 
+Notifications enable forwarding raised alerts over common channel types to specific channels.
 Setting up notifications comprises two steps:
 
 * Channels configuration
@@ -15,7 +15,7 @@ image::notifications-page.png[width=800]
 
 == Channels
 
-Channel types represent the transport media while Channels represent the actual receivers.
+Channel types represent the transport media while channels represent the actual receivers.
 
 [cols="1,1"]
 |===
@@ -77,7 +77,7 @@ image::notifications-webhook-remove.png[width=800]
 
 == Notifications
 
-Individual Notification Configurations (Notifications) can be configured when at least one channel is set up.
+Individual notification configurations (notifications) can be configured when at least one channel is set up.
  A notification defines what type of alerts, in which DBMSs should notify which channel.
 
 .Example

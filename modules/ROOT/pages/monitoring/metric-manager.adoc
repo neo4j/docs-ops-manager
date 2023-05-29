@@ -28,12 +28,12 @@ image::metric-threshold.png[width=800]
 
 After confirming the threshold dialog:
 
-* The corresponding Condition, used to trigger Alerts and Notifications, is created and can be managed using the Conditions tab (see xref:./alerts-conditions.adoc#_managing_conditions[Managing Conditions]).
-* If the metric value exceeds the threshold during the defined grace period (5 minutes), the Condition evaluates to `true`, causing NOM to trigger an Alert and (if configured), send Notifications (see xref:./notifications.adoc[Notifications]).
+* The corresponding condition, used to trigger alerts and notifications, is created and can be managed using the Conditions tab (see xref:./alerts-conditions.adoc#_managing_conditions[Managing conditions]).
+* If the metric value exceeds the threshold during the defined grace period (5 minutes), the condition evaluates to `true`, causing NOM to trigger an alert and (if configured), send notifications (see xref:./notifications.adoc[Notifications]).
 * The metric chart displays the defined threshold in the chart as a dashed red line.
 
 To disable the threshold, open the threshold dialog and uncheck the "Enable threshold" checkbox.
-This removes this Condition from the system.
+This removes this condition from the system.
 
 [IMPORTANT]
 ====
