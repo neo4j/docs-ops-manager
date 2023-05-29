@@ -9,7 +9,7 @@ The time window for displayed data can be switched on top left of the metrics pa
 To allow efficient metric storage, metrics data older than 3 days is aggregated to hourly summary.
 ====
 
-Clicking on "Show Resources" button in the *Host* tab and *Instance* tab shows a table with static data for managed DBMSs, like the number CPU cores of the system (physical and logical) and memory/disk capacities.
+The "Show Resources" button in the *Host* tab and *Instance* tab shows a table with static data for managed DBMSs, like the number CPU cores of the system (physical and logical) and memory/disk capacities.
 
 image::dashboard.png[width=800]
 
