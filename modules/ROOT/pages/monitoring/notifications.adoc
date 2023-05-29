@@ -61,7 +61,8 @@ NOM allows configuring multiple Webhooks and supports both custom implementation
 }
 ----
 
-* To configure a webhook click on *"Add webhook"* button from the Channels section to open the creation modal. Define a name, fill in the webhook type and URL, send a test message (optional) and click on  *"Add"*.
+* To configure a webhook, use the *"Add webhook"* button from the Channels section to open the creation modal. 
+Define a name, fill in the webhook type and URL, send a test message (optional), and then  *"Add"*.
 
 image::notifications-webhook-add.png[width=800]
 
