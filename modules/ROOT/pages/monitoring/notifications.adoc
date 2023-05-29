@@ -94,7 +94,8 @@ image::notifications-notification-configure.png[width=800]
 image::notifications-notification-edit.png[width=800]
 
 * To remove the notification click on *"Delete"* context menu item.
-* To test the notification click on *"Test"* context menu item. This will send a test message to all configured channels.
+* To test the notification click on *"Test"* context menu item. 
+This sends a test message to all configured channels.
 
 [IMPORTANT]
 ====
