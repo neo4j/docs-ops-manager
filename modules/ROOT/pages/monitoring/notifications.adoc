@@ -37,19 +37,21 @@ Fill in the outbox server address and port, the encryption type, the username an
 
 [NOTE]
 ====
-Selecting "None" security for a STARTTLS encrypted server will result in a successful connection test, but will generally fail to send an actual email for the majority of email providers.
+Selecting "None" security for a STARTTLS encrypted server results in a successful connection test, but generally fails to send an actual email for the majority of email providers.
 ====
 
 image::notifications-smtp-configure.png[width=800]
 
-* To edit the email configuration click again on *"Configure email"*, edit the details and click on  *"Save"*.
-* To remove the email configuration click on the *"x"* icon on the grey "Configured Email" tag.
+* To edit the email configuration, go back to *"Configure email"*, edit the details and *"Save"*.
+* To remove the email configuration use the *"x"* icon on the grey "Configured Email" tag.
 
 image::notifications-smtp-remove.png[width=800]
 
 === Webhooks
 
-NOM allows configuring multiple Webhooks and supports both custom implementations and some common providers (_Discord_, _Teams_ and _Slack_). NOM will forward an alert to a webhook via a HTTP POST request with a JSON payload. A custom webhook implementation should accept the following _Generic_ request body and return a `2XX` status to be rendered successful.
+NOM allows configuring multiple Webhooks and supports both custom implementations and some common providers (_Discord_, _Teams_ and _Slack_). 
+NOM forwards an alert to a webhook via a HTTP POST request with a JSON payload. 
+A custom webhook implementation should accept the following _Generic_ request body and return a `2XX` status to be rendered successful.
 
 
 ._Generic_ webhook payload
