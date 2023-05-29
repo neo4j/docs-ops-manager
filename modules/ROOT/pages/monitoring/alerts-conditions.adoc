@@ -40,7 +40,7 @@ Conditions defined in the scope of the selected DBMS can be managed in the Condi
 image::conditions-table.png[width=800]
 
 A Condition can be *enabled* or *disabled* with the switch to the left of the condition.
-If a Condition is not enabled, it will not result in an Alert being created.
+If a Condition is disabled, it will result in an Alert not being created.
 
 All Conditions of the selected DBMS can be *enabled* or *disabled* at once by clicking the switch located in the table header.
 
