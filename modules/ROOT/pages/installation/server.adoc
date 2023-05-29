@@ -31,7 +31,7 @@ In case you have multiple versions of Java installed on the machine you will use
 
 [NOTE]
 ====
-Attention must be paid when entering configuration values that contain special (reserved) characters.
+Pay close attention when entering configuration values that contain special (reserved) characters.
 Which characters are special (reserved) depends on the operating system and the method of installation.
 ====
 
