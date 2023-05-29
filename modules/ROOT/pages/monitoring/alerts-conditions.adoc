@@ -12,7 +12,7 @@ The color of the count labels tells the maximum severity of the Alerts this coun
 Nodes on the topology of the NOM installation also contain Alert counts.
 Clicking on a node with Alerts displays relevant Alerts in the panel to the right of the topology.
 The location of the alert can help you understand the location of the problem, so it can be resolved faster.
-The Alert generated for a metric threshold that has been exceeded is illustrated in the image below.
+The Alert generated for an exceeded metric threshold is illustrated in the image below.
 
 image::alerts-panel.png[width=800]
 
