@@ -32,7 +32,7 @@ After confirming the threshold dialog:
 * If the metric value exceeds the threshold during the defined grace period (5 minutes), the Condition evaluates to `true`, causing NOM to trigger an Alert and (if configured), send Notifications (see xref:./notifications.adoc[Notifications]).
 * The metric chart displays the defined threshold in the chart as a dashed red line.
 
-Disabling the threshold can be accomplished by opening the Threshold dialog again and unchecking the "Enable threshold" checkbox.
+To disable the threshold, open the threshold dialog and uncheck the "Enable threshold" checkbox.
 Doing so will remove this Condition from the system.
 
 [IMPORTANT]
