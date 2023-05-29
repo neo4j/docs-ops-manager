@@ -72,7 +72,8 @@ image::notifications-webhook-remove.png[width=800]
 
 == Notifications
 
-Individual Notification Configurations (Notifications) can be configured when at least one channel is setup. A notification defines what type of alerts, in which DBMSs should notify which channel.
+Individual Notification Configurations (Notifications) can be configured when at least one channel is set up.
+ A notification defines what type of alerts, in which DBMSs should notify which channel.
 
 .Example
 [NOTE]
