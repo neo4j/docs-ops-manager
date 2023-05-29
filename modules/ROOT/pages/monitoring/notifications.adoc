@@ -98,5 +98,5 @@ image::notifications-notification-edit.png[width=800]
 
 [IMPORTANT]
 ====
-Removing all channels that are part of a notification will result in the removal of the notification itself. 
+Removing all channels that are part of a notification results in the removal of the notification itself. 
 ====
