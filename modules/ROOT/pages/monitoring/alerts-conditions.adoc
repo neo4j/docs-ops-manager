@@ -42,7 +42,7 @@ image::conditions-table.png[width=800]
 A Condition can be *enabled* or *disabled* with the switch to the left of the condition.
 If a Condition is disabled, it will result in an Alert not being created.
 
-All Conditions of the selected DBMS can be *enabled* or *disabled* at once by clicking the switch located in the table header.
+*All* Conditions of the selected DBMS can be *enabled* or *disabled* at once with the switch located in the table header.
 
 A Condition can be *deleted* using the "..." menu located at the end of every Condition table row.
 
