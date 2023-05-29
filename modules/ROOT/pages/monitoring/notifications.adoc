@@ -32,7 +32,8 @@ Channel types represent the transport media while Channels represent the actual 
 
 NOM allows configuring a single SMTP Outbox Server with SSL, STARTTLS or no encryption.
 
-* To configure the outbox server click on *"Configure email"* button from the Channels section to open the creation modal. Fill in the outbox server address and port, the encryption type, the username and password, test the server connection (optional) and click on  *"Confirm"*.
+* To configure the outbox server, use then *"Configure email"* button from the Channels section to open the creation modal. 
+Fill in the outbox server address and port, the encryption type, the username and password, test the server connection (optional) and then  *"Confirm"*.
 
 [NOTE]
 ====
