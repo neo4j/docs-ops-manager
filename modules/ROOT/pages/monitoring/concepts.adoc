@@ -1,7 +1,7 @@
 = Monitoring concepts
 :description: This section describes the concepts that are important to understand how Neo4j Ops Manager can be used for monitoring systems.
 
-This section describes the concepts that are important to understand how Neo4j Ops Manager can be used for monitoring systems in an optimal way.
+This section describes important concepts for understanding how to optimally use Neo4j Ops Manager to monitor systems.
 
 == Conditions
 
