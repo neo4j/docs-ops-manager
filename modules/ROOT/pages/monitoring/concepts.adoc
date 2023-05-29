@@ -29,7 +29,7 @@ See xref:./alerts-conditions.adoc[Alerts and Conditions] on how to manage Condit
 
 == Alerts
 
-**Alerts** are shown in the NOM UI to notify the administrator about Conditions that evaluated to **true**.
+**Alerts** are shown in the NOM UI to notify the administrator about Conditions that evaluate to **true**.
 
 In case there are Alerts in the managed system, Ops Manager provides following information about them:
 
