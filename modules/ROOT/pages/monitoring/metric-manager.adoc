@@ -33,7 +33,7 @@ After confirming the threshold dialog:
 * The metric chart displays the defined threshold in the chart as a dashed red line.
 
 To disable the threshold, open the threshold dialog and uncheck the "Enable threshold" checkbox.
-Doing so will remove this Condition from the system.
+This removes this Condition from the system.
 
 [IMPORTANT]
 ====
