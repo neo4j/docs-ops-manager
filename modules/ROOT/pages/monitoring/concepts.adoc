@@ -18,7 +18,7 @@ Example: "Host CPU usage exceeds 80% longer than 2 minutes".
 A Condition can have a **grace time**. 
 If present, grace time means that this Condition only evaluates to **true** if all its **Evaluations** during the grace time evaluate to **true**.
 
-If a Condition evaluates to **true**, Ops Manager lets the administrator know about that, as follows:
+If a Condition evaluates to **true**, Ops Manager lets the administrator know in the following way:
 
 * Alerts are generated, which are shown in the NOM UI as banners, alert counts and alert lists.
 * Notifications are generated, which result in a message being sent to one of the defined targets.
