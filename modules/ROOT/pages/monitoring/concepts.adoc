@@ -20,7 +20,7 @@ If present, grace time means that this Condition only evaluates to **true** if a
 
 If a Condition evaluates to **true**, Ops Manager lets the administrator know in the following way:
 
-* Alerts are generated, which are shown in the NOM UI as banners, alert counts and alert lists.
+* Alerts are generated and shown in the NOM UI as banners, alert counts, and alert lists.
 * Notifications are generated, which result in a message being sent to one of the defined targets.
 
 Conditions can be managed per DBMS in the Conditions tab of the Alerts page.
