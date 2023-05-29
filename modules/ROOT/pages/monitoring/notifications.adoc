@@ -80,7 +80,8 @@ Individual Notification Configurations (Notifications) can be configured when at
 When an alert of type [*WARNING*, *ERROR*] is raised inside [*CS Cluster Prod*, *CS Single Prod*] notify NOM users [*nom-admin@neo4j.com*] and webhooks [*Slack#test*, *Generic#prod-errors*].
 ====
 
-* To configure a notification click on *"Add notification"* button from the Notifications section to open the creation modal. Define a name, select the DBMSs and alert levels in scope, select the channels and click on  *"Confirm"*.
+* To configure a notification use the *"Add notification"* button from the Notifications section to open the creation modal. 
+Define a name, select the DBMSs and alert levels in scope, select the channels, and  *"Confirm"*.
 
 [NOTE]
 ====
