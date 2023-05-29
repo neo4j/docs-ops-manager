@@ -3,7 +3,8 @@
 
 This section describes Notifications and Notification Channels in Neo4j Ops Manager
 
-Notifications enable forwarding raised alerts over common Channel types to specific Channels. Setting up notifications comprises two steps:
+Notifications enable forwarding raised alerts over common Channel types to specific Channels. 
+Setting up notifications comprises two steps:
 
 * Channels configuration
 * Notifications configuration
