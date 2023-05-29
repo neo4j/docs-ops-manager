@@ -42,6 +42,6 @@ See xref:./alerts-conditions.adoc[Alerts and Conditions] on how to manage Alerts
 
 == Notifications
 
-While Alerts are only displayed in the NOM browser page, Notifications enable sending information about triggered Conditions to external systems like email servers or other messaging systems.
+While Alerts are only displayed in the NOM browser page, Notifications enable sending information about triggered Conditions to external systems, such as email servers or other messaging systems.
 
 See xref:./notifications.adoc[Notifications] on how to manage Notifications, Channels and Targets.
