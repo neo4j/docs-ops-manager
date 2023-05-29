@@ -48,7 +48,7 @@ A Condition can be *deleted* using the "..." menu located at the end of every Co
 
 [IMPORTANT]
 ====
-If an event-based Condition is deleted, and that event occurs, then a default Condition will be created for that event.
+If an event-based Condition is deleted, and that event occurs, then a default Condition is created for that event.
 Therefore, it is recommended to disable event-based Conditions instead of deleting them.
 ====
 
