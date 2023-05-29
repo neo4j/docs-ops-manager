@@ -6,7 +6,7 @@ This section describes important concepts for understanding how to optimally use
 == Conditions
 
 A **Condition** specifies the constraints when the monitored entity reaches a certain state.
-Conditions are periodically evaluated, evaluation results are persisted.
+Conditions are periodically evaluated, and evaluation results are persisted.
 
 There are two **types** of Conditions:
 
