@@ -1,0 +1,55 @@
+= Alerts and conditions
+:description: This section describes how to manage alerts and conditions in Neo4j Ops Manager.
+
+
+== Alerts on the Home page
+
+Home page aggregates the alerts for your individual monitored systems.
+
+Total alert count and alert count for the currently selected DBMS are displayed in the sidebar and DBMS dropdown.
+The color of the count labels tells the maximum severity of the alerts this count aggregates.
+
+Nodes on the topology of the NOM installation also contain alert counts.
+Clicking on a node with alerts displays relevant alerts in the panel to the right of the topology.
+The location of the alert can help you understand the location of the problem, so it can be resolved faster.
+The alert generated for an exceeded metric threshold is illustrated in the image below.
+
+image::alerts-panel.png[width=800]
+
+Information about alerts is regularly updated.
+
+[#_managing_alerts]
+== Managing alerts
+
+Alert details can be shown in the alerts tab of the Alerts page of the selected DBMS.
+
+[NOTE]
+====
+Only alerts that are relevant to the selected DBMS are shown on the Alerts tab.
+====
+
+An alert can be locally dismissed for the specified period of time.
+Dismissing an alert temporarily removes it from the Alerts table and Alerts panel in the Home view.
+In the current implementation, alert dismissal is local, meaning it is only effective for the current browser instance.
+After the dismissal time the alert will reappear in the Alerts table.
+
+[#_managing_conditions]
+== Managing conditions
+
+Conditions defined in the scope of the selected DBMS can be managed in the conditions tab of the Alerts page of the selected DBMS.
+
+image::conditions-table.png[width=800]
+
+A condition can be *enabled* or *disabled* with the switch to the left of the condition.
+If a condition is disabled, it will result in an alert not being created.
+
+*All* conditions of the selected DBMS can be *enabled* or *disabled* at once with the switch located in the table header.
+
+A condition can be *deleted* using the "..." menu located at the end of every condition table row.
+
+[IMPORTANT]
+====
+If an event-based condition is deleted, and that event occurs, then a default condition is created for that event.
+Therefore, it is recommended to disable event-based conditions instead of deleting them.
+====
+

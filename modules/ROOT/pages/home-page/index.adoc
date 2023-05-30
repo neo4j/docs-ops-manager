@@ -24,16 +24,6 @@ However, the Cluster instance has a status of *Agents down*, i.e. some of the ag
 image::topology.png[width=800]
 
 
-[[alerts]]
-== Alerts
-
-Home page alerts aggregates the alerts for your individual monitored systems.
-The alerts generated for a cluster that has agents that have stopped reporting, as described above, is illustrated in the image below.
-
-Location of the alert can help you understand the location of the problem so it can be resolved faster.
-
-image::alerts.png[width=800]
-
 [[working-with-a-dbms]]
 == Working with a DBMS
 
