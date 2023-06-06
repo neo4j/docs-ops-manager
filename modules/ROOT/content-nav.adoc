@@ -103,4 +103,5 @@
 
 * Appendix
 ** xref:appendix/version-compatibility.adoc[]
+** xref:appendix/migrating-persistence.adoc[]
 ** xref:appendix/faq.adoc[]
