@@ -63,6 +63,12 @@ Following table details the compatibility matrix for NOM:
 | 1.5.x
 | 1.5.x
 | >4.4.2, >5.1.0
-| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0
+| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from Neo4j 5.4.0 onwards)
+
+| 1.6.x
+| 1.6.x
+| 1.6.x
+| >4.4.2, >5.1.0
+| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
 
 |===
