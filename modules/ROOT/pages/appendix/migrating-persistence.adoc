@@ -1,0 +1,64 @@
+= Migrating a NOM persistence database to 5.x
+:description: This section contains information on how to migrate the Neo4j Ops Manager persistence database to Neo4j 5.x.
+
+If you want to migrate a 4.4 database *that has been used by Neo4j Ops Manager as persistence storage* to a 5.x database, please follow the normal steps for migrating Neo4j as outlined in our link:/docs/upgrade-migration-guide/current/version-4[documentation].
+
+Before or after you followed the migration process, please execute the following query on the persistence database.
+You can connect to it via Cypher-Shell or Neo4j Browser.
+If you do not run this query, the Neo4j Ops Manager server might not be able to start.
+
+[WARNING]
+====
+Only run the following query if you are migrating an existing persistence database from Neo4j version 4.4 to Neo4j 5.x
+
+Do not change this query as it could have negative implications for Ops Manager like failing to start up.
+
+Do not modify the content of the persistence database any further than running this query.
+====
+
+.Query
+[source,cypher]
+----
+OPTIONAL MATCH (n:`__Neo4jMigration`{version:"056"})
+MATCH (m:`__Neo4jMigration`{version:"057"})
+FOREACH (ignoreMe in CASE WHEN n IS NULL THEN [1] ELSE [] END |
+CREATE (a:`__Neo4jMigration`{version:"056", checksum: "3451352755",description: "DropQueryLogIndexOn5", repeatable: false, source: "V056__DropQueryLogIndexOn5.cypher
+", type: "CYPHER"})
+CREATE (a)-[r:MIGRATED_TO{ at: datetime(), by: "root", connectedAs: "Ops Manager manual migration script", in: duration({seconds: 1}) }]->(m)
+)
+WITH 1 as one
+MATCH (n:`__Neo4jMigration`{version:"054"}), (d:`__Neo4jMigration`{version:"055"}), (m:`__Neo4jMigration`{version:"056"})
+OPTIONAL MATCH (n)-[r:MIGRATED_TO]->(m)
+FOREACH (ignoreMe in CASE WHEN r IS NULL THEN [1] ELSE [] END |
+DETACH DELETE d
+CREATE (n)-[r:MIGRATED_TO{ at: datetime(), by: "root", connectedAs: "Ops Manager manual migration script", in: duration({seconds: 1}) }]->(m)
+)
+WITH 1 as one
+MATCH (n:`__Neo4jMigration`{version:"057"}),(d:`__Neo4jMigration`{version:"058"}), (m:`__Neo4jMigration`{version:"059"})
+OPTIONAL MATCH (n)-[r:MIGRATED_TO]->(m)
+FOREACH (ignoreMe in CASE WHEN r IS NULL THEN [1] ELSE [] END |
+DETACH DELETE d
+CREATE (n)-[r:MIGRATED_TO{ at: datetime(), by: "root", connectedAs: "Ops Manager manual migration script", in: duration({seconds: 1}) }]->(m)
+)
+WITH 1 as one
+MATCH (n:`__Neo4jMigration`{version:"062"}), (d:`__Neo4jMigration`{version:"063"}), (m:`__Neo4jMigration`{version:"064"})
+OPTIONAL MATCH (n)-[r:MIGRATED_TO]->(m)
+FOREACH (ignoreMe in CASE WHEN r IS NULL THEN [1] ELSE [] END |
+DETACH DELETE d
+CREATE (n)-[r:MIGRATED_TO{ at: datetime(), by: "root", connectedAs: "Ops Manager manual migration script", in: duration({seconds: 1}) }]->(m)
+)
+WITH 1 as one
+MATCH (n:`__Neo4jMigration`{version:"066"}), (d:`__Neo4jMigration`{version:"067"}), (m:`__Neo4jMigration`{version:"068"})
+OPTIONAL MATCH (n)-[r:MIGRATED_TO]->(m)
+FOREACH (ignoreMe in CASE WHEN r IS NULL THEN [1] ELSE [] END |
+DETACH DELETE d
+CREATE (n)-[r:MIGRATED_TO{ at: datetime(), by: "root", connectedAs: "Ops Manager manual migration script", in: duration({seconds: 1}) }]->(m)
+)
+WITH 1 as one
+MATCH (n:`__Neo4jMigration`{version:"090"}), (d:`__Neo4jMigration`{version:"091"}), (m:`__Neo4jMigration`{version:"092"})
+OPTIONAL MATCH (n)-[r:MIGRATED_TO]->(m)
+FOREACH (ignoreMe in CASE WHEN r IS NULL THEN [1] ELSE [] END |
+DETACH DELETE d
+CREATE (n)-[r:MIGRATED_TO{ at: datetime(), by: "root", connectedAs: "Ops Manager manual migration script", in: duration({seconds: 1}) }]->(m)
+);
+----
