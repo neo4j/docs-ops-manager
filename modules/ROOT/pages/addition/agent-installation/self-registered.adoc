@@ -169,7 +169,7 @@ The rest of NOM still works.
 | 9500
 
 | `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
-| Path to the instance log4j config. 
+| Path to the instance xref:./manual.adoc#server_log_config[log4j config file].
 If set, appends the appropriate log appender automatically (including the port specified above).
 | /var/lib/neo4j/conf/server-logs.xml
 
