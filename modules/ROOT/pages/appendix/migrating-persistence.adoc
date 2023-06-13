@@ -1,11 +1,11 @@
 = Migrating a NOM persistence database to 5.x
 :description: This section contains information on how to migrate the Neo4j Ops Manager persistence database to Neo4j 5.x.
 
-If you want to migrate a 4.4 database *that has been used by Neo4j Ops Manager as persistence storage* to a 5.x database, please follow the normal steps for migrating Neo4j as outlined in our link:/docs/upgrade-migration-guide/current/version-4[documentation].
+If you want to migrate a 4.4 database *that has been used by Neo4j Ops Manager as persistence storage* to a 5.x database, please follow the normal steps for migrating Neo4j as outlined in the link:/docs/upgrade-migration-guide/current/version-4[documentation].
 
 Before or after you followed the migration process, please execute the following query on the persistence database.
 You can connect to it via Cypher-Shell or Neo4j Browser.
-If you do not run this query, the Neo4j Ops Manager server might not be able to start.
+If you do not run this query, the Neo4j Ops Manager server may be unable to start.
 
 [WARNING]
 ====
