@@ -177,6 +177,10 @@ If set, appends the appropriate log appender automatically (including the port s
 | `CONFIG_INSTANCE_n_QUERY_LOG_DISABLE_OBFUSCATION`
 | Disable the string literal obfuscation in queries (optional)
 | true
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_INCLUDE_AGENT`
+| Collect and show queries coming from the NOM agent (optional)
+| true
 |===
 
 [IMPORTANT]
