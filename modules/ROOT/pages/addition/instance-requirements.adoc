@@ -54,7 +54,7 @@ If you do not want to use the built-in admin user, a role with the minimum set o
 
 [NOTE]
 ====
-This role definition can not be used for the user with which the Ops Manager server connects to the persistence database.
+This role definition can not be used for the user with which the Ops Manager server connects to the persistence database since it has insufficient privileges.
 This `operator` role should only be used for the DBMS you want to monitor with an agent.
 ====
 
