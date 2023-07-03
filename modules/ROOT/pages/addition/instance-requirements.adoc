@@ -54,6 +54,11 @@ For the metrics collection feature to work correctly. these configuration values
 The agent logs on to the DBMS with the configured user to enable certain features such as viewing relationship and label types, managing privileges, and viewing configuration values.
 If you do not want to use the built-in admin user, a role with the minimum set of privileges required for full functionality can be created with:
 
+[NOTE]
+====
+This role definition can not be used for the user with which the Ops Manager server connects to the persistence database since it has insufficient privileges.
+This `operator` role should only be used for the DBMS you want to monitor with an agent.
+====
 
 [source, cypher]
 ----
