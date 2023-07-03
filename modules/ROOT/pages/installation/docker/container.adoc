@@ -94,5 +94,5 @@ docker run \
     neo4j/neo4j-ops-manager-server
 ----
 
-== Maintainance
-For a standalone NOM server container resource contraints can be set as documented by link:https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources[Docker runtime constraints on resources].
+== Maintenance
+For a standalone NOM server container resource constraints can be set as documented by link:https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources[Docker runtime constraints on resources].
