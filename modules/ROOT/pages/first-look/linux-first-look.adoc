@@ -67,15 +67,15 @@ More information on Self Signed certificates *xref:installation/self-signed-cert
         --spring.neo4j.authentication.password=lovelypassword \
         --server.port=8080 \
         --server.ssl.key-store-type=PKCS12 \
-        --server.ssl.key-store=file:./certificates/localhost.pfx \
+        --server.ssl.key-store=file:./certificates/server.pfx \
         --server.ssl.key-store-password=<PASSWORD> \
         --grpc.server.port=9090 \
         --grpc.server.security.key-store-type=PKCS12 \
-        --grpc.server.security.key-store=file:./certificates/localhost.pfx\
+        --grpc.server.security.key-store=file:./certificates/server.pfx\
         --grpc.server.security.key-store-password=<PASSWORD>
 ----
 
-Running as console application on Unix is documented *xref:installation/server.adoc#_unix[here]*
+Running as console application on Unix is documented *xref:installation/server.adoc#unix[here]*
 
 === Open NOM UI
 Wait for the server to start and then go to https://localhost:8080. 
@@ -86,7 +86,7 @@ Login as admin:passw0rd and accept license terms.
 In NOM UI - navigate to Agent settings (clicking on the sad robot takes you to the correct page) and add a new agent.
 Copy environment variables that are provided. 
 
-Full documentation on registering an agent is *xref:addition/index.adoc#register[here]*. 
+Full documentation on registering an agent is *xref:addition/agent-installation/index.adoc[here]*.
 
 === Unpack agent
 [source, terminal, role=noheader]
@@ -106,7 +106,7 @@ Edit the export command below as follows:
 ----
 export \
 <OUTPUT_FROM_REGISTER_AGENT>
-CONFIG_TLS_TRUSTED_CERTS=<SERVER_INSTALL_DIR>/certificates/localhost.cer \
+CONFIG_TLS_TRUSTED_CERTS=<SERVER_INSTALL_DIR>/certificates/server.cer \
 CONFIG_LOG_LEVEL=debug \
 CONFIG_INSTANCE_1_NAME=server1 \
 CONFIG_INSTANCE_1_BOLT_URI=<SERVER_1_BOLT_URI>  \
@@ -129,7 +129,7 @@ CONFIG_INSTANCE_3_LOG_CONFIG_PATH=<SERVER3_HOME_DIR>/conf/server-logs.xml
 ----
 Run the edited export command. 
 
-Full documentation on configuring an agent is *xref:addition/index.adoc#configure[here]*. 
+Full documentation on configuring an agent is *xref:addition/agent-installation/index.adoc[here]*.
 
 === Run agent as console application
 

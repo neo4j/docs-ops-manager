@@ -64,3 +64,8 @@ It generates a key pair and a self-signed certificate and creates `localhost.cer
 `localhost.pfx` is assigned the password `changeit` which is provided to the command as an argument.
 
 You can then use these two files to configure the server and agents for TLS encrypted communication.
+
+[IMPORTANT]
+====
+Please note that in the rest of documentation, certificate files are referred to as `server.cer` and `server.pfx`.
+====

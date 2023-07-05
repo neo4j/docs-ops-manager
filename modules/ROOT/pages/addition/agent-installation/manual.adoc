@@ -162,7 +162,7 @@ The rest of NOM still works.
 | 9500
 
 | `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
-| Path to the instance log4j config. 
+| Path to the instance <<server_log_config,log4j config file>>.
 If set, appends the appropriate log appender automatically (including the port specified above).
 | /var/lib/neo4j/conf/server-logs.xml
 
@@ -176,6 +176,10 @@ If set, appends the appropriate log appender automatically (including the port s
 
 | `CONFIG_INSTANCE_n_QUERY_LOG_DISABLE_OBFUSCATION`
 | Disable the string literal obfuscation in queries (optional)
+| true
+
+| `CONFIG_INSTANCE_n_QUERY_LOG_INCLUDE_AGENT`
+| Collect and show queries coming from the NOM agent (optional)
 | true
 |===
 
@@ -320,6 +324,23 @@ agent service start
 ----
 agent service uninstall
 ----
+
+[[server_log_config]]
+=== Finding out the location of server log configuration (server-logs.xml)
+
+The location of server log configuration file is configured in `neo4j.conf` (see documentation on link:https://neo4j.com/docs/operations-manual/current/configuration/configuration-settings/#config_server.logs.config[server.logs.config] configuration setting).
+
+The currently effective location of server log configuration can be found out using the following Cypher query:
+
+[source, terminal, role=noheader]
+----
+./cypher-shell "CALL dbms.listConfig() YIELD name, value WHERE name='server.logs.config' RETURN value"
+----
+
+[IMPORTANT]
+====
+Check that the server log configuration exists, otherwise NOM agent would not be able to add query log collection configuration to it.
+====
 
 [[verify]]
 == Verify agent setup

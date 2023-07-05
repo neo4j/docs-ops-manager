@@ -128,6 +128,7 @@ Although it is possible to run the NOM Server as a console application, it is no
 Best practice is to run the NOM Server as a service, as described in the previous section.
 ====
 
+[[unix]]
 === Unix
 ==== Passing arguments on command line
 
@@ -198,7 +199,7 @@ java -jar .\lib\server.jar
 
 [NOTE]
 ====
-If the NOM Server is required to support self-registered agents, then addtional configuration needs to be provided to above commands as mentioned in the configuration reference table. More about agent self-registration xref:../addition/agent-installation/self-registered.adoc[here]
+If the NOM Server is required to support self-registered agents, then additional configuration needs to be provided to above commands as mentioned in the configuration reference table. More about agent self-registration xref:../addition/agent-installation/self-registered.adoc[here]
 ====
 
 == Server configuration reference [[config_ref]]
