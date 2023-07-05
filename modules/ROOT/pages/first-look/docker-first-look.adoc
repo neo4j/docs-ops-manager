@@ -96,7 +96,6 @@ services:
       GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <SSC_PASSWORD>
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*], http://server:[*]"
-      JWT_SECRET: please-set-a-random-secret-string-here-for-jwt-signing
     volumes:
       - type: bind
         source: ~/.nom/ssc

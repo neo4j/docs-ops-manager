@@ -71,7 +71,6 @@ docker run -e "JAVA_OPTS=<Value>" neo4j/neo4j-ops-manager-server \
     --grpc.server.security.key-store=<Value> \
     --grpc.server.security.key-store-password=<Value> \
     --grpc.server.security.clientAuth=OPTIONAL
-    --jwt.secret=<Value>
 ----
 
 . As environment variables
@@ -92,7 +91,6 @@ docker run \
     -e "GRPC_SERVER_SECURITY_KEY_STORE=<Value>" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD=<Value>" \
     -e 'GRPC_SERVER_SECURITY_CLIENT_AUTH="OPTIONAL"'
-    -e "JWT_SECRET=<Value>"
     neo4j/neo4j-ops-manager-server
 ----
 

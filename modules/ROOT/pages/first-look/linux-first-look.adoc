@@ -72,8 +72,7 @@ More information on Self Signed certificates *xref:installation/self-signed-cert
         --grpc.server.port=9090 \
         --grpc.server.security.key-store-type=PKCS12 \
         --grpc.server.security.key-store=file:./certificates/localhost.pfx\
-        --grpc.server.security.key-store-password=<PASSWORD>\
-        --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing \
+        --grpc.server.security.key-store-password=<PASSWORD>
 ----
 
 Running as console application on Unix is documented *xref:installation/server.adoc#_unix[here]*
