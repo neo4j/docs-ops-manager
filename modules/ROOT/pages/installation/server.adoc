@@ -148,7 +148,6 @@ java -jar ./lib/server.jar
         --grpc.server.security.key-store-type=PKCS12
         --grpc.server.security.key-store=file:./certificates/server.pfx
         --grpc.server.security.key-store-password=changeit
-        --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing
 ----
 
 Make sure to replace the arguments with values adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
@@ -183,7 +182,6 @@ java -jar .\lib\server.jar
         --grpc.server.security.key-store-type=PKCS12
         --grpc.server.security.key-store=file:.\certificates\server.pfx
         --grpc.server.security.key-store-password=changeit
-        --jwt.secret=please-set-a-random-secret-string-here-for-jwt-signing
 ----
 
 Make sure to replace the arguments with values adjusted to your environment (e.g. the Neo4j password you used for setting up the persistence database, the proper path to your ssl key-store file, etc.).
@@ -270,7 +268,7 @@ If the NOM Server is required to support self-registered agents, then additional
 
 | `jwt.secret`
 | `JWT_SECRET`
-| Random string used for JWT signing
+| Random string used for JWT signing (optional)
 | please-set-a-random-secret-string-here-for-jwt-signing
 
 | `optout.crash-analytics`

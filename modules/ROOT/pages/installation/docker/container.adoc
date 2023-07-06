@@ -71,7 +71,6 @@ docker run -e "JAVA_OPTS=<Value>" neo4j/neo4j-ops-manager-server \
     --grpc.server.security.key-store=<Value> \
     --grpc.server.security.key-store-password=<Value> \
     --grpc.server.security.clientAuth=OPTIONAL
-    --jwt.secret=<Value>
 ----
 
 . As environment variables
@@ -79,7 +78,7 @@ docker run -e "JAVA_OPTS=<Value>" neo4j/neo4j-ops-manager-server \
 [source, shell, role=noheader]
 ----
 docker run \
-    -e "JAVA_OPTS=<Value>"
+    -e "JAVA_OPTS=<Value>" \
     -e "SPRING_NEO4J_URI=<Value>" \
     -e "SPRING_NEO4J_USERNAME=<Value>" \
     -e "SPRING_NEO4J_PASSWORD=<Value>" \
@@ -91,8 +90,7 @@ docker run \
     -e "GRPC_SERVER_SECURITY_KEY_STORE_TYPE=PKCS12" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE=<Value>" \
     -e "GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD=<Value>" \
-    -e 'GRPC_SERVER_SECURITY_CLIENT_AUTH="OPTIONAL"'
-    -e "JWT_SECRET=<Value>"
+    -e "GRPC_SERVER_SECURITY_CLIENT_AUTH=OPTIONAL" \
     neo4j/neo4j-ops-manager-server
 ----
 

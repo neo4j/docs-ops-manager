@@ -53,7 +53,6 @@ storage:
       GRPC_SERVER_SECURITY_CLIENT_AUTH: "OPTIONAL"
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
-      JWT_SECRET: <user defined>
     volumes:
       - <path to certs self signed certs>:<mounted path to certs self signed certs>
 ----
@@ -124,7 +123,6 @@ services:
       GRPC_SERVER_SECURITY_CLIENT_AUTH: "OPTIONAL"
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
-      JWT_SECRET: please-set-a-random-secret-string-here-for-jwt-signing
     volumes:
       - type: bind
         source: ~/.nom/ssc
