@@ -13,5 +13,4 @@ No personally identifiable information is collected.
 
 It is possible to globally opt out of collection of these types of analytics by setting a configuration value when starting the NOM server.
 
-To configure the opt-out toggles, please refer to *xref:../installation/server.adoc#config_ref[Server configuration reference
-]*
+To configure the opt-out toggles, please refer to *xref:../installation/server.adoc#config_ref[Server configuration reference]*
