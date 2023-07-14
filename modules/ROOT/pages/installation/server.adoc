@@ -304,7 +304,7 @@ If the NOM Server is required to support self-registered agents, then additional
 | `error`, `warn`, `info`, `debug` or `trace`
 
 | `logging.level.com.neo4j`
-| `LOGGING_LEVEL_ROOT_COM_NEO4J`
+| `LOGGING_LEVEL_COM_NEO4J`
 | Log level of the `com.neo4j` logger (its output corresponds to what NOM server itself logs). Default: `info`. (optional)
 | `error`, `warn`, `info`, `debug` or `trace`
 |===
