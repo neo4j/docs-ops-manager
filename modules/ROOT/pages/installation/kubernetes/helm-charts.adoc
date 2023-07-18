@@ -22,9 +22,9 @@ secrets:
     uri: "<NOM persistence URI>"
     username: "<NOM persistence user name>"
     password: "<NOM persistence password>"
-  # jwt secret is optional
-  jwt:
-    token: "<jwt secret as specified in server installation>"
+    # jwt secret is optional
+    # jwt:
+    #   secret: "<jwt secret as specified in server installation>"
   tls:
     password: "<PKCS12 certificate file password for server TLS config>"
 
@@ -49,7 +49,7 @@ helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server
 
 * If the command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command.
 
-* An example `values.yaml` file is given below for quick render tests of the chart using following command :
+* An example `values.yaml` file is given below for quick render tests of the chart using following command:
 [source, shell, role=noheader]
 ----
 helm template nom /path/to/neo4j-ops-manager-server-<VERSION>.tgz -f values.yaml
@@ -73,8 +73,8 @@ secrets:
     uri: "neo4j://localhost:7687"
     username: "neo4j"
     password: "password"
-#  jwt:
-#    secret: "<secret>"
+    # jwt:
+    #   secret: "<secret>"
   tls:
     password: "changeit"
     pkcs12CertFileContent: "<base64 encoded string of pkcs12 server cert content>"
