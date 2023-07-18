@@ -22,6 +22,7 @@ secrets:
     uri: "<NOM persistence URI>"
     username: "<NOM persistence user name>"
     password: "<NOM persistence password>"
+  # jwt secret is optional
   jwt:
     token: "<jwt secret as specified in server installation>"
   tls:
@@ -48,40 +49,41 @@ helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server
 
 * If the command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command.
 
-* Default `values.yaml` is given below for more customization options:
+* An example `values.yaml` file is given below for quick render tests of the chart using following command :
+[source, shell, role=noheader]
+----
+helm template nom /path/to/neo4j-ops-manager-server-<VERSION>.tgz -f values.yaml
+----
 
 .values.yaml
 [source, yaml]
 ----
-# Default values for neo4j-ops-manager-server.
+server:
+
 config:
   logFileName: "app.log"
   logLevel: info
   maxHeapSize: 8g
   jwtTTL: 2h
   grpc:
-    advertisedHost:
+    advertisedHost: "https://localhost:9090"
 
 secrets:
   storage:
-    uri: ""
-    username: ""
-    password: ""
-  jwt:
-    token: ""
+    uri: "neo4j://localhost:7687"
+    username: "neo4j"
+    password: "password"
+#  jwt:
+#    secret: "<secret>"
   tls:
-    password: ""
-    pkcs12CertFileContent: ""
-  mTLS:
-    # string content of PEM encoded list of certificates appended into a .pem file
-    # used for agent self-registration
-    agentCerts: ""
+    password: "changeit"
+    pkcs12CertFileContent: "<base64 encoded string of pkcs12 server cert content>"
 
 service:
   http:
-    ipAddress: ""
+    ipAddress: "https://localhost:8080"
   grpc:
-    ipAddress: ""
+    ipAddress: "https://localhost:9090"
     port: 9090
 
 image:
