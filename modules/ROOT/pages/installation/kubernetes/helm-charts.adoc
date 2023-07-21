@@ -195,15 +195,15 @@ Following is an example values snippet that demonstrates this usecase with inlin
 [source,yaml]
 ----
 secretsFromSecrets:
-  storageUri: # More than one secrets can be mapped to different values of NOM secrets
-    secretName: "" 
-    key: ""
+  storageUri:
+    secretName: "secret1" 
+    key: "uri"
   storageUsername:
-    secretName: ""
-    key: ""
+    secretName: "secret2"
+    key: "name"
   storagePassword: # This is the NOM value reference to map the secret value to which would translate to storage.uri
-    secretName: "" # Name of the secret to map from
-    key: "" # The key to retrieve value from mapped secret which holds the required NOM secret value
+    secretName: "secret3" # Name of the secret to map from
+    key: "password" # The key to retrieve value from mapped secret which holds the required NOM secret value
 ----
 
 [NOTE]
