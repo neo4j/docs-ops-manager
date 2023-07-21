@@ -11,28 +11,101 @@
 == NOM server Helm Chart
 * Download the NOM server Helm Chart from link:https://neo4j.com/download-center/[Neo4j Download Center].
 
-* Following is a basic configuration for NOM server Helm Chart provided as a `values.yaml` file
+* Following is the reference `values.yaml` for NOM server Helm Chart:
 ----
+# Default values for neo4j-ops-manager-server.
+server:
+
 config:
+  logFileName: "app.log"
+  logLevel: "info"
+  maxHeapSize: "8g"
+  jwtTTL: "2h"
   grpc:
-    advertisedHost: <service endpoint to GRPC for agents to connect>
+    advertisedHost: ""
+
+## An optional reference to a secret that contains some or all values for NOM secrets
+## Secret name and key should be specified
+#secretsFromSecrets:
+#  # storage keys
+#  storageUri:
+#    secretName: ""
+#    key: "" # key in Secret for Storage URI
+#  storageUsername:
+#    secretName: ""
+#    key: "" # key in Secret for Storage username
+#  storagePassword:
+#    secretName: ""
+#    key: "" # key in Secret for Storage URI
+#  # tls keys
+#  tlsPassword:
+#    secretName: ""
+#    key: "" # key in Secret for tls password
+#  # jwt keys
+#  jwtSecret:
+#    secretName: ""
+#    key: "" # key in Secret for jwt secret
 
 secrets:
   storage:
-    uri: "<NOM persistence URI>"
-    username: "<NOM persistence user name>"
-    password: "<NOM persistence password>"
-    # jwt secret is optional
-    # jwt:
-    #   secret: "<jwt secret as specified in server installation>"
+    uri: "" # NOM persistence URI
+    username: "" # NOM persistence user name
+    password: "" # NOM persistence password
+
+#  # jwt secret is optional, NOM server generates a secure cryptographic secret if not set
+#  jwt:
+#    secret: "" # jwt secret as specified in server installation
+
   tls:
-    password: "<PKCS12 certificate file password for server TLS config>"
+    password: "" # PKCS12 certificate file password for server TLS config
+    pkcs12CertFileContent: "" # A base64 encoded string of pfx/pkcs12 file content
+
+#  # mTls is optional, uncomment the below to set
+#  mTls:
+#     # string content of PEM encoded list of certificates appended into a .pem file
+#     # used for agent self-registration
+#    agentCerts: ""
 
 service:
   http:
-    ipAddress: "<Provisioned LoadBalancer service IP address for HTTP connections>"
+    # annotations for http service
+    # For example, `service.beta.kubernetes.io/azure-load-balancer-internal: "true"` is an annotation used to enable
+    # internal load balancers in Azure Kubernetes Service (AKS) when public external IP addresses are less secure for
+    # the K8s environment
+    annotations: { }
+    ipAddress: ""
   grpc:
-    ipAddress: "<Provisioned LoadBalancer service IP address for GRPC connections>"
+    # annotations for grpc service
+    # For example, `service.beta.kubernetes.io/azure-load-balancer-internal: "true"` is an annotation used to enable
+    # internal load balancers in Azure Kubernetes Service (AKS) when public external IP addresses are less secure for
+    # the K8s environment
+    annotations: { }
+    ipAddress: ""
+    port: 9090
+
+image:
+  name: neo4j/neo4j-ops-manager-server
+  pullPolicy: Always
+
+hpa:
+  spec:
+    targetCPUUtilizationPercentage: 70
+
+nameOverride:
+
+resources:
+  limits:
+    cpu: "2"
+    memory: "8G"
+  requests:
+    cpu: "0.2"
+    memory: "4G"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
 ----
 
 * Run the following command to install the NOM server to your Kubernetes cluster
@@ -44,7 +117,7 @@ helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server
 * If agents are self-registered, set the additional trusted agent certificates on the server before deploying the agents
 [source, shell, role=noheader]
 ----
-helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) --set secrets.mTLS.agentCerts=$(cat localhost.pem | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
+helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) --set secrets.mTls.agentCerts=$(cat localhost.pem | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
 ----
 
 * If the command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command.
@@ -110,3 +183,37 @@ tolerations: []
 
 affinity: {}
 ----
+
+=== Using pre-configured secrets
+
+Adding senstive information as plain text in `values.yaml` is less secure in some environments.
+Such environments would have secrets being configured externally by privileged users or secure service agents such as link:https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar[Hashicorp Vault agent].
+These securely pre-configured secrets can be used to set sensitive values for NOM server helm chart using `secretsFromSecrets` configuration.
+This value requires a `secretName` and a `key` for a NOM secret value.
+Following is an example values snippet that demonstrates this usecase with inline comments:
+
+[source,yaml]
+----
+secretsFromSecrets:
+  storageUri:
+    secretName: "secret1" 
+    key: "uri"
+  storageUsername:
+    secretName: "secret2"
+    key: "name"
+  storagePassword: # This is the NOM value reference to map the secret value to which would translate to storage.uri
+    secretName: "secret3" # Name of the secret to map from
+    key: "password" # The key to retrieve value from mapped secret which holds the required NOM secret value
+----
+
+[NOTE]
+====
+Accessing K8s secrets which are not created by the chart uses Helm's `lookup` template function.
+In some environments lookups are disabled or permissions to access secrets are more restrictive.
+To handle such cases it's advised to pass in the references to existing secrets using command line arguments to `helm install` as follows:
+
+[source,shell]
+----
+helm install -f values.yaml --set secrets.<NOM secret type such as `storage`>.<NOM secret key such as `password`>=$(kubectl get secret <secretName> -o jsonpath='{.data.<secretKey>}' | base64 -d) --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
+----
+====
