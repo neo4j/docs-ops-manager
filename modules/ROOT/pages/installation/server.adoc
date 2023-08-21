@@ -100,7 +100,7 @@ Run the following commands to permanently change the SELinux context of the file
 sudo semanage fcontext -a -t bin_t <SERVER_PATH>/bin/server
 sudo restorecon -v <SERVER_PATH>/bin/server
 ----
-<SERVER_PATH> should be replaced with the installation path of Neo4j Ops Manager Server.
+<SERVER_PATH> should be replaced with the path to the NOM server-folder.
 
 ====
 
