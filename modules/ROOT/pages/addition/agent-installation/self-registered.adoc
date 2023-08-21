@@ -209,6 +209,7 @@ In this mode agent keeps checking with NOM server for approval status at every p
 
 The agent exits *Standby mode* once it has been manually approved in the UI. 
 
+[[agent_mtls]]
 === Additional configuration for mutual authentication (optional)
 
 Mutual authentication eliminates the manual approval step. 
@@ -222,11 +223,11 @@ The following configuration is required to enable mutual authentication:
 | Description
 | Example
 
-| `CONFIG_CLIENT_CERT`
+| `CONFIG_TLS_CLIENT_CERT`
 | PEM encoded Agent certificate for mutual TLS
 | `/path/to/a/pem/file`
 
-| `CONFIG_CLIENT_KEY`
+| `CONFIG_TLS_CLIENT_KEY`
 | PEM encoded Agent key for mutual TLS
 | `/path/to/a/pem/file`
 |===
