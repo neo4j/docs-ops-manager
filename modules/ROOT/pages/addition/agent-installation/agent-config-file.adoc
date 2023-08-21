@@ -3,15 +3,16 @@
 The agent configuration file is used by a self-registering agent to persist its token information, which is required for restarts.
 
 The agent looks for a file named *`nom-agent-config.yaml`* under the following directories in order:
+
 . path set by `CONFIG_AGENT_CONFIG_PATH` environment variable
 . `conf` directory under path set by `NEO4J_HOME` environment variable
 . path set by `NEO4J_CONF` environment variable
 . `.nom` directory under user home directory by default
 
-[WARNING]
+[NOTE]
 ====
-The agent initially reports an error while running in self-register mode such as `| ERROR | unable to load config from file error="open /home/.nom/nom-agent-config.yaml: no such file or directory"`. 
-This is expected behavior, as the file is created automatically.
+The agent initially reports a warning while running in self-register mode such as `| WARNING | unable to load config from file error="open /home/.nom/nom-agent-config.yaml: no such file or directory"`. 
+This is expected behavior, as the file is created while persisting intial agent configuration.
 
 It is also possible to provide the entire configuration in configuration file but agent will override this file to only save configuration it requires to connect to NOM server.
 Recommended way to configure agent is through environment variables as specified xref:./self-registered.adoc[here]
@@ -23,7 +24,7 @@ Following is a minimal agent configuration that is persisted by agent for server
 [source, yaml]
 ----
 token:
-    url:
-    clientId: "12fwe-1534f-3454-23dfgf"
-    clientSecret: "cv34gh5657568jtyj768678=" 
+    url: "<url used for authentication>"
+    clientId: "<agent client ID>"
+    clientSecret: "<agent client secret>" 
 ----
