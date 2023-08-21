@@ -61,7 +61,7 @@ The table <<config_ref,here>> contains environment variables and example values.
 
 ==== Installation
 
-After updating the `neo4j-ops-manager-server.service` file to reflect your configuration, it must be copied into the directory `/etc/systemd/system`.
+Copy `neo4j-ops-manager-server.service` file into the directory `/etc/systemd/system`.
 
 Next, execute the following commands to install the NOM Server as a service:
 
@@ -73,7 +73,7 @@ sudo systemctl enable neo4j-ops-manager-server
 
 ==== Starting and stopping
 
-Once the installation is successfully completed, you can start the NOM Server as a service with the command:
+Start the NOM Server as a service with the command:
 
 [source, terminal, role=noheader]
 ----
@@ -89,6 +89,20 @@ To stop the NOM Server, use the command:
 sudo systemctl stop neo4j-ops-manager-server
 ----
 
+[NOTE]
+====
+*For SELinux*
+
+The SELinux context of the server binary must be changed so that it can be executed from the service. 
+Run the following commands to permanently change the SELinux context of the file:
+[source, terminal, role=noheader]
+----
+sudo semanage fcontext -a -t bin_t <SERVER_PATH>/bin/server
+sudo restorecon -v <SERVER_PATH>/bin/server
+----
+<SERVER_PATH> should be replaced with the installation path of Neo4j Ops Manager Server.
+
+====
 
 === Windows
 ==== Setting arguments in the service file
