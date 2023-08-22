@@ -94,7 +94,7 @@ sudo systemctl stop neo4j-ops-manager-server
 *For SELinux*
 
 The SELinux context of the server binary must be changed so that it can be executed from the service. 
-Run the following commands to permanently change the SELinux context of the file:
+To permanently change the SELinux context of the file, run the following commands:
 [source, terminal, role=noheader]
 ----
 sudo semanage fcontext -a -t bin_t <SERVER_PATH>/bin/server
