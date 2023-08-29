@@ -20,6 +20,17 @@ NOTE: If downloading agents is not an option in some environments, NOM agents ar
 
 ** Extract the archive:
 
+** This step is only required if using *SELinux*.
+To permanently change the SELinux context of the agent binary, run the following commands:
++
+[source, terminal, role=noheader]
+----
+sudo semanage fcontext -a -t bin_t <EXTRACTED_DIRECTORY_PATH>/bin/agent
+sudo restorecon -v <EXTRACTED_DIRECTORY_PATH>/bin/agent
+----
++
+<EXTRACTED_DIRECTORY_PATH> should be replaced with the path to the extracted directory.
+
 ** Add the `bin` folder in the extracted directory to `PATH`
 * To verify the installation, run the following command:
 +
