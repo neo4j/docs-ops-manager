@@ -40,7 +40,8 @@ For example, using the Environment options, the override file can look like this
 [source, terminal, role=noheader]
 ----
 [Service]
-Environment="CONFIG_SERVER_ADDRESS=<server grpc address>"
+Environment="CONFIG_SERVER_GRPC_ADDRESS=<server grpc address>"
+Environment="CONFIG_SERVER_HTTP_ADDRESS=<server http address>"
 Environment="CONFIG_TLS_TRUSTED_CERTS=</path/to/trusted/certs/pem/file>"
 Environment="CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>"
 Environment="CONFIG_INSTANCE_1_NAME=<instance name>"
@@ -90,7 +91,8 @@ agent service -s install
 +
 [source, terminal, role=noheader]
 ----
-CONFIG_SERVER_ADDRESS=<server grpc address>
+CONFIG_SERVER_GRPC_ADDRESS=<server grpc address>
+CONFIG_SERVER_HTTP_ADDRESS=<server http address>
 CONFIG_TLS_TRUSTED_CERTS=</path/to/the/trusted/certs/pem>
 CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>
 CONFIG_INSTANCE_1_NAME=<instance name>
