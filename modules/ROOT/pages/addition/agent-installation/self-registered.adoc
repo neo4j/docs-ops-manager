@@ -161,6 +161,7 @@ image::agent-action-menu.png[width=800]
 +
 image::agent-approve.png[width=800]
 .. Upon approval, the agent status changes to `Offline` until the agent receives token information and re-connects to NOM server.
++
 image::agent-approved-offline.png[width=800]
 .. Wait for agent status to change to `Online` indicating that the agent has successfully re-connected to the NOM server and is in normal execution mode. 
 This can take a few minutes. 
