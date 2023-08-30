@@ -185,7 +185,7 @@ image::agent-approved-online.png[width=800]
 | server:9090
 
 | `CONFIG_SERVER_HTTP_ADDRESS`
-| Server HTTP address (** Http address should include protocol scheme **)
+| Server HTTP address (** should include protocol scheme **)
 | +++https://server:8080+++
 
 |`CONFIG_TLS_TRUSTED_CERTS`
@@ -211,7 +211,7 @@ The following optional configuration can be used to specify the location for  xr
 | Default
 
 | `CONFIG_AGENT_CONFIG_PATH`
-| Peristent path to a file on Neo4j instance host
+| Persistent path to a file on Neo4j instance host
 | "file://path/to/"
 | `NEO4J_CONF` if set or `conf` folder under `NEO4J_HOME` if set, else `.nom` folder in user home directory.
 |===
@@ -328,24 +328,6 @@ For each managed DBMS instance on the host, the following environment variables 
 
 [[querylog]]
 ==== Query log collection configuration
-To enable the query log collection functionality, there are a few additional environment variables.
-If `CONFIG_INSTANCE_n_QUERY_LOG_PORT` is not set, the feature is treated as disabled. 
-The rest of NOM still works.
-
-The location of server log configuration file is configured in `neo4j.conf` (see documentation on link:https://neo4j.com/docs/operations-manual/current/configuration/configuration-settings/#config_server.logs.config[server.logs.config] configuration setting).
-
-The currently effective location of server log configuration can be found out using the following Cypher query:
-
-[source, terminal, role=noheader]
-----
-./cypher-shell "CALL dbms.listConfig() YIELD name, value WHERE name='server.logs.config' RETURN value"
-----
-
-[IMPORTANT]
-====
-Check that the server log configuration exists, otherwise NOM agent will not be able to add query log collection configuration to it.
-====
-
 
 [cols="<,<,<",options="header"]
 |===
@@ -354,11 +336,13 @@ Check that the server log configuration exists, otherwise NOM agent will not be 
 | Example
 
 | `CONFIG_INSTANCE_n_QUERY_LOG_PORT`
-| Port for connecting the agent to the Neo4j log4j appender
+| Port for connecting the agent to the Neo4j log4j appender.
+If not set, the query log collection feature is treated as disabled.
+The rest of NOM still works.
 | 9500
 
 | `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
-| Path to the instance xref:querylog[log4j config file].
+| Path to the instance xref:../addition/../addition/instance-requirements.adoc#server_log_config[log4j config file].
 If set, appends the appropriate log appender automatically (including the port specified above).
 | /var/lib/neo4j/conf/server-logs.xml
 
