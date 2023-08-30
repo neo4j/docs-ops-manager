@@ -356,7 +356,7 @@ Check that the server log configuration exists, otherwise NOM agent will not be 
 | 9500
 
 | `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
-| Path to the instance xref:./manual.adoc#server_log_config[log4j config file].
+| Path to the instance xref:querylog[log4j config file].
 If set, appends the appropriate log appender automatically (including the port specified above).
 | /var/lib/neo4j/conf/server-logs.xml
 
