@@ -11,7 +11,7 @@ A self-registering agent is useful in an automated environment such as a Kuberne
 == Run agent 
 To run a self-registering agent, an additional command line option is provided as `-s` for short and `--self-register`.
 
-== Runing as a service
+== Running as a service
 
 To run an agent in service mode means that the agent process runs in the background and monitors the instance.
 The agent lifecycle is handled by the operating system service manager.
@@ -41,9 +41,6 @@ For example, using the Environment options, the override file can look like this
 ----
 [Service]
 Environment="CONFIG_SERVER_ADDRESS=<server grpc address>"
-Environment="CONFIG_TOKEN_URL=<server http login url>"
-Environment="CONFIG_TOKEN_CLIENT_ID=<client id>"
-Environment="CONFIG_TOKEN_CLIENT_SECRET=<client secret>"
 Environment="CONFIG_TLS_TRUSTED_CERTS=</path/to/trusted/certs/pem/file>"
 Environment="CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>"
 Environment="CONFIG_INSTANCE_1_NAME=<instance name>"
@@ -94,9 +91,6 @@ agent service -s install
 [source, terminal, role=noheader]
 ----
 CONFIG_SERVER_ADDRESS=<server grpc address>
-CONFIG_TOKEN_URL=<server http login url>
-CONFIG_TOKEN_CLIENT_ID=<client id>
-CONFIG_TOKEN_CLIENT_SECRET=<client secret>
 CONFIG_TLS_TRUSTED_CERTS=</path/to/the/trusted/certs/pem>
 CONFIG_LOG_FILE=</path/to/nom-agent/log.txt>
 CONFIG_INSTANCE_1_NAME=<instance name>
