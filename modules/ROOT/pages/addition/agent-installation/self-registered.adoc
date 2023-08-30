@@ -168,7 +168,7 @@ This can take a few minutes.
 +
 image::agent-approved-online.png[width=800]
 . If the agent status is not 'Online' then go to where it is running and check the logs.
-. Hover over the newly added agent and click the cog icon to show agent configuration. Check configuration is as expected.
+. Hover over the newly added agent and select "View Configuration" from the menu on the right to show agent configuration. Check configuration is as expected.
 . Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
 . Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.
 
