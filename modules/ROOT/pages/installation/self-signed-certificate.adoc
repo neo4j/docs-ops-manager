@@ -37,6 +37,11 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 ----
 +
 As a result, files `server.key` and `server.cer` are created in the current directory.
++
+Important parameters:
+
+* `-subj "..."`: use to specify the common name
+* `-addext "subjectAltName = ..."`: use to specify alternative DNS name(s) and/or IP address(es)
 . Convert the generated certificate to the PFX format, specifying a password for the certificate store generated in `server.pfx`:
 +
 [source, terminal, role=noheader]
