@@ -9,7 +9,7 @@ Docker does not recommend using compose for production.
 The manual installation, configuring and running of agents on the Neo4j containers is lost if the container is stopped. 
 
 == Prerequisites
-* unix-based operating system
+* Unix-based operating system
 * Docker
 * Docker compose
 
@@ -23,21 +23,18 @@ You need to set up the following host names in your `/etc/hosts` or `C:/windows/
 
 ==  Create persistence DBMS and NOM server
 
-=== Create an empty directory for self-signed certificates
+=== Generate self-signed certificates
 
-Create a directory *`~/.nom/ssc`* on your local machine before running Docker compose.
-The compose file below specifies that:
-
-* This directory will be mounted into the docker container.
-* Self-signed certificates will be generated and saved to the mounted directory during the container start up.
-* The generated certificates are used by the NOM server
-
-These certificates are used by the server itself but are also required to configure the NOM agent. 
-
+. Create a directory *`~/.nom/ssc`* on your local machine before running Docker compose.
+The compose files below specify that this directory will be mounted into the docker container to make the generated certificates available to the NOM server and the agent.
++
 [NOTE]
 ====
 For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
 ====
+. Change to *`~/.nom/ssc`* and generate self-signed certificates as described *xref:installation/self-signed-certificate.adoc[here]*, using `server` as common name (CN) and DNS name and `127.0.0.1` as IP address.
+This will result in `server.cer` and `server.pfx` being created.
+. Use the password applied for the certificate store instead of `<SSC_PASSWORD>` in the next sections.
 
 === Copy docker compose file
 
@@ -46,8 +43,8 @@ Copy this to your local machine as `docker-compose.yaml`.
 
 Edit the yaml as follows:
 
-*  replace all three occurences of <PERSISTENCE_PASSWORD> with a secure password. 
-*  replace all three occurences of <SSC_PASSWORD> with a secure password.
+*  replace all three occurrences of <PERSISTENCE_PASSWORD> with a secure password.
+*  replace all three occurrences of <SSC_PASSWORD> with a secure password.
 
 .docker-compose.yaml
 [source, yaml]
@@ -103,7 +100,7 @@ services:
     entrypoint:
       - "sh"
       - "-c"
-      - "java -jar app.jar ssc -n server -o /certificates -p <SSC_PASSWORD> -d server -i 127.0.0.1 && java -jar app.jar"
+      - "java -jar app.jar"
 ----
 
 Documentation for NOM server docker image is *xref:installation/docker/container.adoc[here]*.
@@ -133,7 +130,7 @@ Full documentation on registering an agent is *xref:addition/index.adoc#register
 Copy compose file below into `docker-compose.instance.yaml` and edit as follows: 
 
 * Replace `<CONFIG_TOKEN_CLIENT_ID from register agent step>` and `<CONFIG_TOKEN_CLIENT_SECRET from register agent step>` with the values shown during the reigister agent step in the NOM UI. 
-* Replace all three occurences of <NEO4J_INSTANCE_PASSWORD> with a secure password. 
+* Replace all three occurrences of <NEO4J_INSTANCE_PASSWORD> with a secure password.
 
 .docker-compose.instance.yaml
 [source, yaml]
@@ -201,5 +198,5 @@ docker compose -f docker-compose.instance.yaml exec sh -c tar -xvf products/neo4
 == Explore NOM UI
 Go to NOM UI and wait for DBMS to appear - this may take a few minutes. 
 You should be able to see that the agent has connected in the agents listing. 
-Once the DBMS is shown in the home page, double click on the name (initially a generated string) to edit it. 
-Double click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS. 
+Once the DBMS is shown in the home page, double-click on the name (initially a generated string) to edit it.
+Double-click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS.
