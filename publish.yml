@@ -1,6 +1,6 @@
 # Use this playbook file when you need to build and publish multuple versions of your content together
 site:
-  title: Neo4j Docs 
+  title: Neo4j Docs
   url: https://neo4j.com/docs
   start_page: ops-manager:ROOT:index.adoc
 
@@ -15,7 +15,7 @@ content:
 
 ui:
   bundle:
-    url: https://s3-eu-west-1.amazonaws.com/static-content.neo4j.com/build/ui-bundle-latest.zip
+    url: https://static-content.neo4j.com/build/ui-bundle-latest.zip
     snapshot: true
   output_dir: /assets
 

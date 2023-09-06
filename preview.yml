@@ -14,7 +14,7 @@ content:
     - '!**/README.adoc'
 ui:
   bundle:
-    url: https://s3-eu-west-1.amazonaws.com/static-content.neo4j.com/build/ui-bundle-latest.zip
+    url: https://static-content.neo4j.com/build/ui-bundle-latest.zip
     snapshot: true
   output_dir: /assets
 
@@ -25,7 +25,7 @@ antora:
   extensions:
   - require: "@neo4j-antora/antora-modify-sitemaps"
     sitemap_version: '1.6'
-    move_sitemaps_to_components: 'true' 
+    move_sitemaps_to_components: 'true'
 
 asciidoc:
   extensions:
