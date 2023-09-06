@@ -52,6 +52,7 @@ openssl pkcs12 -export \
   -out "server.pfx" \
   -password "pass:changeit"
 ----
+
 [IMPORTANT]
 ====
 To avoid specifying the store password on the command line, omit the `-password` option in the previous command to have OpenSSL ask for the password interactively.
