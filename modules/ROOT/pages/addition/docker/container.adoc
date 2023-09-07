@@ -1,4 +1,4 @@
-= Monitor Neo4j instance in standalone Docker
+= Monitor instance in standalone Docker container   
 
 Running additional processes which are not tied to the lifecycle of container process is not a best practice for containerized applications. Nevertheless, it is possible transparently monitor a containerized Neo4j instance in following ways:
 
