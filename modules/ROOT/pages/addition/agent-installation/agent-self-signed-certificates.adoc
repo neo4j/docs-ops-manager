@@ -44,7 +44,7 @@ options (required options marked with *):
 
 If you are generating a certificate for an agent on `localhost`, `localhost` is the primary name set as Subject Name field on the certificate and is also used as the name of generated files. If `CONFIG_AGENT_NAME` is not specified, the Subject Name in agent client certificate along with the host information of agent will be used as the agent name.
 
-In order to generate a self-signed certificate for the above example, execute the following command;
+In order to generate a self-signed certificate for the above example, execute the following command:
 
 [source, terminal, role=noheader]
 ----

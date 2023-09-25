@@ -8,64 +8,54 @@ For production environments, it is advisable to use a trusted certificate issuer
 This section outlines a practical way to generate a self-signed certificate for test and demo purposes.
 ====
 
-The NOM Server contains a utility to generate a self-signed certificate suitable for your environment.
+The following instructions show how a self-signed certificate suitable for a NOM environment can be generated using the OpenSSL library.
+Compatible self-signed certificates, generated using other libraries or online tools also work with NOM.
 
-To invoke the utility and get help on usage, navigate to the NOM Server folder and execute the following command:
-
+. Ensure the OpenSSL library is installed.
++
+Commands used in these instructions were tested with OpenSSL 3.1.1.
+To check the version of OpenSSL, use the following command:
++
 [source, terminal, role=noheader]
 ----
-$> java -jar ./lib/server.jar ssc --help
-
-utility to generate self signed certificate for TEST purposes only
-
-sample usage:
-
-to generate a self signed certificate for 'localhost', which could either be
-accessed through DNS names of 'localhost.localdomain' or 'my.custom.domain', or
-with IP addresses of '127.0.0.1' or '192.168.100.5';
-
-$> java -jar ./lib/server.jar ssc -n localhost -o /tmp -p changeit \
-   -d localhost.localdomain,my.custom.domain \
-   -i 127.0.0.1,192.168.100.5
-
-it creates /tmp/localhost.cer and /tmp/localhost.pfx files upon completion.
-
-options (required options marked with *):
-  -d, --dns=<dns>[,<dns>...]
-                            list of dns names to use to access the
-                              server, eg. --dns=localhost.localdomain,test.
-                              local.domain
-  -i, --ip=<ip>[,<ip>...]   list of IP addresses to use to access the
-                              server, eg. --ip=127.0.0.1,192.168.100.55
-* -n, --name=<name>         common name to use in generated certificate,
-                              eg. --name=localhost
-* -o, --output=<output>     target directory, eg. --output=.
-* -p, --password=<password> password for generated PKCS12 file
-  -h, --help                help
+openssl version
 ----
-
-If you are generating a certificate for running the server on `localhost`, `localhost` is the primary name set as Subject Name field on the certificate and is also used as the name of generated files.
-For the certificate to be identified as valid, it also needs to include alternative names used to access the server.
-Assume there are also a number of virtual machines that access the server through IP addresses `192.168.10.1` and `172.16.10.1`.
-Furthermore, a local DNS alias `nom.example.com` is set up for `localhost`.
-
-In order to generate a self-signed certificate for the above example, execute the following command;
-
+. Create self-signed certificate
++
+Example: to generate a self-signed certificate for common name `localhost`, which could either be accessed through DNS names of 'localhost.localdomain' or 'my.custom.domain', or with IP addresses of '127.0.0.1' or '192.168.100.5':
++
 [source, terminal, role=noheader]
 ----
-java -jar ./lib/server.jar ssc -n localhost \
-	-o ./certificates \
-	-p changeit \
-	-d nom.example.com \
-	-i 192.168.10.1,172.16.10.1
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -subj "/CN=localhost" \
+  -addext "subjectAltName = DNS:localhost.localdomain, DNS:my.custom.domain, IP:127.0.0.1, IP:192.168.100.5" \
+  -addext "keyUsage = critical, digitalSignature, keyEncipherment" \
+  -addext "extendedKeyUsage = serverAuth" \
+  -addext "authorityKeyIdentifier = keyid:always,issuer:always" \
+  -keyout "server.key" \
+  -out "server.cer"
 ----
++
+As a result, files `server.key` and `server.cer` are created in the current directory.
++
+Important parameters:
 
-It generates a key pair and a self-signed certificate and creates `localhost.cer` and `localhost.pfx` files inside `./certificates` directory.
-`localhost.pfx` is assigned the password `changeit` which is provided to the command as an argument.
-
-You can then use these two files to configure the server and agents for TLS encrypted communication.
+* `-subj "..."`: use to specify the common name
+* `-addext "subjectAltName = ..."`: use to specify alternative DNS name(s) and/or IP address(es)
+. Convert the generated certificate to the PFX format, specifying a password for the certificate store generated in `server.pfx`:
++
+[source, terminal, role=noheader]
+----
+openssl pkcs12 -export \
+  -inkey "server.key" \
+  -in "server.cer" \
+  -out "server.pfx" \
+  -password "pass:changeit"
+----
 
 [IMPORTANT]
 ====
-Please note that in the rest of documentation, certificate files are referred to as `server.cer` and `server.pfx`.
+To avoid specifying the store password on the command line, omit the `-password` option in the previous command to have OpenSSL ask for the password interactively.
 ====
+
+You can then use the files `server.cer` and `server.pfx` to configure the server and agents for TLS encrypted communication.
