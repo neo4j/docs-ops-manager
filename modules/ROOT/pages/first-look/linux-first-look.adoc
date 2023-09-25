@@ -40,22 +40,8 @@ Extracted directory is now known as NOM_SERVER_HOME.
 
 === Generate self-signed certificates
 
-Navigate to NOM_SERVER_HOME and run:
-
-[source, terminal]
-----
-java -jar ./lib/server.jar ssc -n localhost \
-        -o ./certificates \
-        -p <PASSWORD> \
-        -d localhost
-----
-
-[IMPORTANT]
-====
-<PASSWORD> appears as a value in this step and twice in the following step; all of these values should be replaced with the same secure password. 
-====
-
-More information on Self Signed certificates *xref:installation/self-signed-certificate.adoc[here]*.
+Generate `server.cer` and `server.pfx` as described *xref:installation/self-signed-certificate.adoc[here]*.
+Use the password applied for the certificate store instead of `<PASSWORD>` in the next section.
 
 === Run NOM server as console application 
 
@@ -141,5 +127,5 @@ Full documentation on configuring an agent is *xref:addition/agent-installation/
 == Explore NOM UI
 Go to NOM UI and wait for DBMS to appear - this may take a few minutes. 
 You should be able to see that the agent has connected in the agents listing. 
-Once the DBMS is shown in the home page, double click on the name (initially a generated string) to edit it. 
-Double click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS. 
+Once the DBMS is shown in the home page, double-click on the name (initially a generated string) to edit it.
+Double-click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS.
