@@ -164,9 +164,9 @@ Documentation for NOM server docker image is *xref:installation/docker/container
 
 Edit `docker-compose.yaml` as follows:
 
-* Replace all occurrences of `SSC_PASSWORD` with the certificate store password applied above.
-* Replace all occurrences of `PERSISTENCE_PASSWORD` with a secure password.
-* Replace all occurrences of `NEO4J_INSTANCE_PASSWORD` with a secure password.
+* Replace all occurrences of `<SSC_PASSWORD>` with the certificate store password applied above.
+* Replace all occurrences of `<PERSISTENCE_PASSWORD>` with a secure password.
+* Replace all occurrences of `<NEO4J_INSTANCE_PASSWORD>` with a secure password.
 
 == Start the docker compose environment
 Run the following command in your `INSTALLATION_ROOT`:
