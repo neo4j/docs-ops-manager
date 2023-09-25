@@ -32,7 +32,7 @@ The compose files below specify that this directory will be mounted into the doc
 ====
 For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
 ====
-. Change to *`~/.nom/ssc`* and generate self-signed certificates as described *xref:installation/self-signed-certificate.adoc[here]*, using `server` as common name (CN) and DNS name and `127.0.0.1` as IP address.
+. Change to *`~/.nom/ssc`* and generate self-signed certificates as described *xref:installation/self-signed-certificate.adoc[here]*, using `server` as common name (CN) and DNS name, and `127.0.0.1` as IP address.
 This will result in `server.cer` and `server.pfx` being created.
 . Use the password applied for the certificate store instead of `<SSC_PASSWORD>` in the next sections.
 
