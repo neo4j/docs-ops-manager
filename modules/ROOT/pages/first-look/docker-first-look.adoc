@@ -6,8 +6,6 @@ Docker compose can be used to provision a set of related containers as services 
 
 Docker does not recommend using compose for production.
 
-The manual installation, configuring and running of agents on the Neo4j containers is lost if the container is stopped. 
-
 == Prerequisites
 * Unix-based operating system
 * Docker
@@ -15,36 +13,48 @@ The manual installation, configuring and running of agents on the Neo4j containe
 
 == Prepare hosts file
 
-You need to set up the following host names in your `/etc/hosts` or `C:/windows/system32/drivers/etc/hosts file`;
+You need to set up the following host names in your `/etc/hosts` file:
 [source,, role=noheader]
 ----
 127.0.0.1   storage server db-single
 ----
 
-==  Create persistence DBMS and NOM server
-
-=== Generate self-signed certificates
+== Generate self-signed certificates
 
 . Create a directory *`~/.nom/ssc`* on your local machine before running Docker compose.
 The compose files below specify that this directory will be mounted into the docker container to make the generated certificates available to the NOM server and the agent.
+. Change to *`~/.nom/ssc`* and generate self-signed certificates using `server` as common name (CN) and DNS name, and `127.0.0.1` as IP address (details see  *xref:installation/self-signed-certificate.adoc[here]*):
 +
+[source, shell]
+----
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -subj "/CN=server" \
+  -addext "subjectAltName = DNS:server, IP:127.0.0.1" \
+  -addext "keyUsage = critical, digitalSignature, keyEncipherment" \
+  -addext "extendedKeyUsage = serverAuth" \
+  -addext "authorityKeyIdentifier = keyid:always,issuer:always" \
+  -keyout "server.key" \
+  -out "server.cer"
+
+openssl pkcs12 -export \
+  -inkey "server.key" \
+  -in "server.cer" \
+  -out "server.pfx" \
+  -password "pass:changeit"
+----
+This results in the creation of `server.cer`, `server.key` and `server.pfx`.
+. Use the password applied for the certificate store (`changeit`) instead of `<SSC_PASSWORD>` in the next sections.
+
 [NOTE]
 ====
-For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
+To keep this example simple, the generated certificates are used for both NOM server and agents.
 ====
-. Change to *`~/.nom/ssc`* and generate self-signed certificates as described *xref:installation/self-signed-certificate.adoc[here]*, using `server` as common name (CN) and DNS name, and `127.0.0.1` as IP address.
-This results in the creation of `server.cer` and `server.pfx`.
-. Use the password applied for the certificate store instead of `<SSC_PASSWORD>` in the next sections.
 
-=== Copy docker compose file
+== Create the docker compose file
 
-Following is a docker compose file that can be used to start up a NOM server and Enerprise Neo4j Persistence system without any customization. 
-Copy this to your local machine as `docker-compose.yaml`.
-
-Edit the yaml as follows:
-
-*  replace all three occurrences of <PERSISTENCE_PASSWORD> with a secure password.
-*  replace all three occurrences of <SSC_PASSWORD> with a secure password.
+Following is a docker compose file that can be used to start up a NOM server including its persistence and a single Neo4j Enterprise instance that will be managed by NOM.
+Create the file `docker-compose.yaml` in an empty directory on your local machine.
+This directory is referenced as `INSTALLATION_ROOT` later in this document.
 
 .docker-compose.yaml
 [source, yaml]
@@ -55,7 +65,7 @@ networks:
 services:
   storage:
     hostname: storage
-    image: neo4j:4.4.8-enterprise
+    image: neo4j:enterprise
     networks:
       - lan
     ports:
@@ -93,6 +103,8 @@ services:
       GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <SSC_PASSWORD>
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*], http://server:[*]"
+      GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION: file:/certificates/server.cer
+      GRPC_SERVER_SECURITY_CLIENT_AUTH: OPTIONAL
     volumes:
       - type: bind
         source: ~/.nom/ssc
@@ -101,55 +113,20 @@ services:
       - "sh"
       - "-c"
       - "java -jar app.jar"
-----
-
-Documentation for NOM server docker image is *xref:installation/docker/container.adoc[here]*.
-
-=== Run docker compose 
-Run the follwing command:
-
-[source, shell]
-----
-docker compose -f docker-compose.yaml up <folder for context, typically current folder>
-----
-
-=== Open NOM UI
-Wait for the server container to start and then go to https://server:8080. 
-Login as admin:passw0rd and accept license terms. 
-
-== Set up instance and agent
-
-=== Register agent 
-In NOM UI - navigate to Agent settings (clicking on the sad robot takes you to the correct page) and add a new agent.
-Copy environment variables that are provided. 
-
-Full documentation on registering an agent is *xref:addition/index.adoc#register[here]*. 
-
-=== Create docker compose file for Neo4j instance (pre-configured for agent)
-
-Copy compose file below into `docker-compose.instance.yaml` and edit as follows: 
-
-* Replace `<CONFIG_TOKEN_CLIENT_ID from register agent step>` and `<CONFIG_TOKEN_CLIENT_SECRET from register agent step>` with the values shown during the reigister agent step in the NOM UI. 
-* Replace all three occurrences of <NEO4J_INSTANCE_PASSWORD> with a secure password.
-
-.docker-compose.instance.yaml
-[source, yaml]
-----
-services:
   db-single:
     hostname: db-single
-    image: neo4j:5.5.0-enterprise
+    image: neo4j:enterprise
     networks:
       - lan
     ports:
       - "10000:10000"
       - "10001:10001"
     environment:
-      CONFIG_SERVER_ADDRESS: "server:9090"
-      CONFIG_TOKEN_URL: "https://server:8080/api/login/agent"
-      CONFIG_TOKEN_CLIENT_ID: "<CONFIG_TOKEN_CLIENT_ID from register agent step>"
-      CONFIG_TOKEN_CLIENT_SECRET: "<CONFIG_TOKEN_CLIENT_SECRET from register agent step>"
+      CONFIG_SERVER_GRPC_ADDRESS: "server:9090"
+      CONFIG_SERVER_HTTP_ADDRESS: "https://server:8080"
       CONFIG_TLS_TRUSTED_CERTS: "/certificates/server.cer"
+      CONFIG_TLS_CLIENT_CERT: "/certificates/server.cer"
+      CONFIG_TLS_CLIENT_KEY: "/certificates/server.key"
       CONFIG_LOG_LEVEL: "debug"
       CONFIG_INSTANCE_1_NAME: "single-instance"
       CONFIG_INSTANCE_1_BOLT_URI: "bolt://db-single:10001"
@@ -170,8 +147,11 @@ services:
       NEO4J_server_metrics_filter: "*"
     volumes:
        - type: bind
-          source: ~/.nom/ssc
-          target: /certificates
+         source: ~/.nom/ssc
+         target: /certificates
+       - type: bind
+         source: agent
+         target: /agent
     healthcheck:
       test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://db-single:10001 -u neo4j -p <NEO4J_INSTANCE_PASSWORD> || exit 1" ]
       interval: 10s
@@ -180,23 +160,70 @@ services:
       start_period: 5s
 ----
 
-=== Run docker compose
-Run the follwing command:
+Documentation for NOM server docker image is *xref:installation/docker/container.adoc[here]*.
+
+Edit `docker-compose.yaml` as follows:
+
+* Replace all occurrences of `SSC_PASSWORD` with the certificate store password applied above.
+* Replace all occurrences of `PERSISTENCE_PASSWORD` with a secure password.
+* Replace all occurrences of `NEO4J_INSTANCE_PASSWORD` with a secure password.
+
+== Start the docker compose environment
+Run the following command in your `INSTALLATION_ROOT`:
 
 [source, shell]
 ----
-docker compose -f docker-compose.instance.yaml up <folder for context, typically current folder>
+docker compose -f docker-compose.yaml up
 ----
 
-=== Run agent
+Watch the output and make sure that docker containers `storage`, `server` and `db-single` are started successfully.
 
+== Download and start the NOM agent
+
+* Download NOM agent binaries TAR from https://neo4j.com/download-center/#ops-manager[here] and execute the following commands in your `INSTALLATION_ROOT`:
++
 [source, shell]
 ----
-docker compose -f docker-compose.instance.yaml exec sh -c tar -xvf products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz && neo4j-ops-manager-agent-*/bin/agent console
+mkdir agent
+tar -xvf <DOWNLOADED_AGENT_BINARIES_TAR> -C agent --strip-components=1
 ----
+* In `INSTALLATION_ROOT`, start the agent in self-registration mode:
++
+[source, shell]
+----
+docker compose -f docker-compose.yaml exec db-single sh -c "/agent/bin/agent console -s"
+----
+
+Full documentation on registering an agent is *xref:addition/agent-installation/index.adoc[here]*.
 
 == Explore NOM UI
-Go to NOM UI and wait for DBMS to appear - this may take a few minutes. 
-You should be able to see that the agent has connected in the agents listing. 
+
+* Wait for the server container to start and then go to https://server:8080.
+* Login as `admin` / `passw0rd` and accept license terms.
+* Click the top right settings icon that redirects you to the global settings.
+* Make sure that the agent is online. Rename the agent if required.
+* Return to the main page and wait for DBMS to appear - this may take a few minutes.
 Once the DBMS is shown in the home page, double-click on the name (initially a generated string) to edit it.
 Double-click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS.
+
+== Controlling docker containers
+
+=== Stopping
+
+* To stop the complete NOM environment, press `Ctrl-C` on the docker compose console and the agent console.
+* To stop a single docker container, issue `docker container stop <CONTAINER_NAME>`.
+To list containers use `docker ps`.
+
+[NOTE]
+====
+Since docker keeps persisted data in container volumes, restarted containers will keep the previous state.
+====
+
+=== Resetting
+
+To start over with an empty Neo4j persistence and empty managed instance, use the following docker command (use `docker ps -a` to find out actual container names):
+
+[source, shell]
+----
+docker container rm -v <STORAGE_CONTAINER_NAME> <SERVER_CONTAINER_NAME> <DB_SNGLE_CONTAINER_NAME>
+----
