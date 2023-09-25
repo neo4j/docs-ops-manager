@@ -14,12 +14,12 @@ For the query log collection feature to work correctly, these configuration sett
 ** `db.logs.query.enabled` is set to `INFO` or `VERBOSE`.
 ** `db.logs.query.threshold` is unset (is defaults to `0`) or set to a reasonable value.
 This setting acts as the execution time lower bound for any completed query to appear in the logs.
-Thus, if this value is set too high, the queries you want to monitor might not get logged.
-Setting this value to zero will log every query.
+Thus, if this value is set too high, the queries you want to monitor may not get logged.
+Setting this value to zero logs every query.
 ** `db.logs.query.annotation_data_format` is unset or set to `CYPHER` (which is the default value).
-Other formats will result in partially or completely missing query log entries in NOM.
+Other formats result in partially or completely missing query log entries in NOM.
 ** `db.logs.query.annotation_data_as_json_enabled` is unset or set to `false` (which is the default value).
-`true` will result in partially or completely missing query log entries in NOM.
+`true` results in partially or completely missing query log entries in NOM.
 
 == Metrics collection
 
