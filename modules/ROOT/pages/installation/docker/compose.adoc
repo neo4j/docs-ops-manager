@@ -63,7 +63,7 @@ NOTE: Self signed certificates can be generated within the container using a ser
 +
 [source, shell, role=noheader]
 ----
-docker compose -f <compose file> up <folder for context, typically current folder>
+docker compose -f <compose file> up
 ----
 
 ====
