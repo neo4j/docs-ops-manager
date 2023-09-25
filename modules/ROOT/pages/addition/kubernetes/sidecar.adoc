@@ -1,11 +1,11 @@
 = NOM agent as a Sidecar
 
-A NOM agent can be deployed as a Sidecar container within the same pod as Neo4j instance in a Kubernetes cluster. Agent sidecar does not need to use a official agent image.
+A NOM agent can be deployed as a Sidecar container within the same pod as Neo4j instance in a Kubernetes cluster. Agent sidecar does not need to use an official agent image.
 An agent can simply be run in a lightweight linux based container such as `alpine`. The agent binary can be either mounted into container or can be extracted from Neo4j image using an init container.
 
 [WARNING]
 ====
-An agent Sidecar container can not access all resources that Neo4j pod uses and the host metrics of the cluster node. For example, for disk usage metrics, agent needs access to file system or peristent volumes that Neo4j pod uses. These need to be mounted to agent Daemon pod. Agent sidecar can only report host metrics of it's own contained environment which is not a complete view of reosurce usage of cluster node.
+An agent Sidecar container can not access all resources that Neo4j pod uses and the host metrics of the cluster node. For example, for disk usage metrics, agent needs access to file system or peristent volumes that Neo4j pod uses. These need to be mounted to agent Daemon pod. Agent sidecar can only report host metrics of its own contained environment which is not a complete view of resource usage of cluster node.
 ====
 
 Following is a sample `values.yaml` file for Neo4j Helm charts with NOM agent sidecar configured:
