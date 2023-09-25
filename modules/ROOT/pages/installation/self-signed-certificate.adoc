@@ -9,7 +9,7 @@ This section outlines a practical way to generate a self-signed certificate for 
 ====
 
 The following instructions show how a self-signed certificate suitable for a NOM environment can be generated using the OpenSSL library.
-Compatible self-signed certificates, generated using other libraries or online tools will also work with NOM.
+Compatible self-signed certificates, generated using other libraries or online tools also work with NOM.
 
 . Ensure the OpenSSL library is installed.
 +
