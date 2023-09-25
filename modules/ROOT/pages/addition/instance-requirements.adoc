@@ -1,8 +1,6 @@
 = Neo4j instance requirements
 
-In order to be managed by NOM, a Neo4j instance **must**:
-
-* be running a Neo4j Enterprise Edition v4.4.0 or higher (including all 5.x versions).
+In order to be managed by NOM, a Neo4j instance **must** be running a Neo4j Enterprise Edition v4.4.2 or higher (including all 5.x versions).
 
 == Query log collection
 
@@ -11,15 +9,21 @@ In order to be managed by NOM, a Neo4j instance **must**:
 Log manager is only compatible with Neo4j version 5+.
 ====
 
-For the query log collection feature to work correctly, `db.logs.query.enabled` needs to be set to `INFO` or `VERBOSE` in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.
-Also, make sure that the config value `db.logs.query.threshold` is set to a reasonable value, `0`, commented out or is removed. 
-This setting acts as an lower bound for any completed query to appear in the logs. 
-Thus, if this value is set too high, the queries you want to monitor might not get logged. 
+For the query log collection feature to work correctly, these configuration settings need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file:
+
+** `db.logs.query.enabled` is set to `INFO` or `VERBOSE`.
+** `db.logs.query.threshold` is unset (is defaults to `0`) or set to a reasonable value.
+This setting acts as the execution time lower bound for any completed query to appear in the logs.
+Thus, if this value is set too high, the queries you want to monitor might not get logged.
 Setting this value to zero will log every query.
+** `db.logs.query.annotation_data_format` is unset or set to `CYPHER` (which is the default value).
+Other formats will result in partially or completely missing query log entries in NOM.
+** `db.logs.query.annotation_data_as_json_enabled` is unset or set to `false` (which is the default value).
+`true` will result in partially or completely missing query log entries in NOM.
 
 == Metrics collection
 
-For the metrics collection feature to work correctly. these configuration values need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file.:
+For the metrics collection feature to work correctly, these configuration settings need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file:
 
 === For 4.4.x versions:
 
