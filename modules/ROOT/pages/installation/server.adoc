@@ -311,7 +311,9 @@ If the NOM Server is required to support self-registered agents, then additional
 
 | `grpc.server.security.clientAuth`
 | `GRPC_SERVER_SECURITY_CLIENT_AUTH`
-| Option to indicate whether to verify client certificates. Required for agent self-registration. (optional)
+| Option to indicate whether to verify client certificates. 
+Required for agent self-registration. 
+Possible values: `OPTIONAL` to simultaneously allow manual registration or `REQUIRE` to only allow mutually authenticated agents.
 | `OPTIONAL`
 
 | `logging.file.name`

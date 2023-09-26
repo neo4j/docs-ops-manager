@@ -9,7 +9,7 @@ NOTE: The query log feature is only available for DBMSs with instances that are 
 == Create persistence DBMS
 
 === Download and extract
-Download latest Neo4j Linux/Mac executable from https://neo4j.com/download-center/#ops-manager[here] and extract the package. 
+Download latest Neo4j Linux/Mac executable from https://neo4j.com/download-center/#current-releases[here] and extract the package.
 Extracted directory location is referred to as NEO4J_HOME form now on.
 
 === Change password

@@ -5,9 +5,15 @@ Docker compose can be used to provision a set of related containers as services 
 
 But Docker doesn't recommend using compose for production.
 
-Following are a set of steps to create a two container compose setup to experiment with NOM server container and an Enterprise Neo4j persistence container as storage:
+Following is a set of steps to create a two container compose setup to experiment with NOM server container and an Enterprise Neo4j persistence container as storage.
 
-* Define a storage service that uses an Enterprise Neo4j image. Follow the below template and replace appropriate user defined values.
+[NOTE]
+====
+Please refer to xref:first-look/docker-first-look.adoc[Docker first look guide] for a complete example of a Docker compose environment with NOM persistence, NOM server and a managed Neo4j instance.
+====
+
+* Define a storage service that uses an Enterprise Neo4j image. 
+Follow the below template and replace appropriate user defined values.
 +
 [source, yaml, role=noheader]
 ----
@@ -45,91 +51,21 @@ storage:
       SPRING_NEO4J_AUTHENTICATION_USERNAME: <username from the storage service defined before>
       SPRING_NEO4J_AUTHENTICATION_PASSWORD: <password from the storage service defined before>
       SERVER_SSL_KEY_STORE_TYPE: PKCS12
-      SERVER_SSL_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
+      SERVER_SSL_KEY_STORE: <path to a self-signed cert file with pfx extension mounted into this container>
       SERVER_SSL_KEY_STORE_PASSWORD: <user defined for mounted certs>
       GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
-      GRPC_SERVER_SECURITY_KEY_STORE: <path to a self signed cert file with pfx extension mounted into this container>
+      GRPC_SERVER_SECURITY_KEY_STORE: <path to a self-signed cert file with pfx extension mounted into this container>
       GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <user defined for mounted certs>
       GRPC_SERVER_SECURITY_CLIENT_AUTH: "OPTIONAL"
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
     volumes:
-      - <path to certs self signed certs>:<mounted path to certs self signed certs>
+      - <path to certs self-signed certs>:<mounted path to certs self-signed certs>
 ----
 +
-NOTE: Self signed certificates can be generated within the container using a server sub command as mentioned here Refer to *xref:../installation/self-signed-certificate.adoc[Installation > Self-Signed-Certificate]*. In this case mounting the certs into the container is not required.
-
 * Once the services are defined and saved to a compose file, run the following command:
 +
 [source, shell, role=noheader]
 ----
-docker compose -f <compose file> up <folder for context, typically current folder>
+docker compose -f <compose file> up
 ----
-
-====
-Following is an example Docker compose file that can be used to start up a NOM server and Enterprise Neo4j Persistence system. You can use it to quickly setup a NOM test environment and add DBMSs for monitoring and customize it with additional configuration:
-
-IMPORTANT: Create a directory *`~/.nom/ssc`* before running Docker compose.
-
-NOTE: Certificates are generated as by-products of running below compose file at *`~/.nom/ssc`* directory which can be used to configure the NOM agent as given xref:addition/index.adoc#configure[here].
-
-NOTE: For *`sudo`* docker compose command, make sure the correct path to *`.nom/ssc`* is set in the bind section below.
-
-.docker-compose.yaml
-[source, yaml]
-----
-networks:
-  lan:
-
-services:
-  storage:
-    hostname: storage
-    image: neo4j:enterprise
-    networks:
-      - lan
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    environment:
-      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
-      NEO4J_AUTH: neo4j/passw0rd
-      NEO4J_dbms_default__advertised__address: storage
-      NEO4J_dbms_connector_http_listen__address: storage:9000
-      NEO4J_dbms_connector_bolt_listen__address: storage:9001
-    healthcheck:
-      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://storage:9001 -u neo4j -p passw0rd || exit 1" ]
-
-  server:
-    hostname: server
-    image: neo4j/neo4j-ops-manager-server:latest
-    depends_on:
-      storage:
-        condition: service_healthy
-    networks:
-      - lan
-    ports:
-      - "8080:8080"
-      - "9090:9090"
-    environment:
-      SPRING_NEO4J_URI: bolt://storage:9001
-      SPRING_NEO4J_AUTHENTICATION_USERNAME: neo4j
-      SPRING_NEO4J_AUTHENTICATION_PASSWORD: passw0rd
-      SERVER_SSL_KEY_STORE_TYPE: PKCS12
-      SERVER_SSL_KEY_STORE: file:/certificates/localhost.pfx
-      SERVER_SSL_KEY_STORE_PASSWORD: changeit
-      GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
-      GRPC_SERVER_SECURITY_KEY_STORE: file:/certificates/localhost.pfx
-      GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: changeit
-      GRPC_SERVER_SECURITY_CLIENT_AUTH: "OPTIONAL"
-      CORS_ALLOWEDHEADERS: "*"
-      CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
-    volumes:
-      - type: bind
-        source: ~/.nom/ssc
-        target: /certificates
-    entrypoint:
-      - "sh"
-      - "-c"
-      - "java -jar app.jar ssc -n localhost -o /certificates -p changeit -d localhost.localdomain -i 127.0.0.1 && java -jar app.jar"
-----
-====
