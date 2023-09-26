@@ -21,6 +21,23 @@ Other formats result in partially or completely missing query log entries in NOM
 ** `db.logs.query.annotation_data_as_json_enabled` is unset or set to `false` (which is the default value).
 `true` results in partially or completely missing query log entries in NOM.
 
+[[server_log_config]]
+=== Finding out the location of server log configuration (server-logs.xml)
+
+The location of server log configuration file is configured in `neo4j.conf` (see documentation on link:https://neo4j.com/docs/operations-manual/current/configuration/configuration-settings/#config_server.logs.config[Operations Manual -> server.logs.config] configuration setting).
+
+The currently effective location of server log configuration can be found out using the following Cypher query:
+
+[source, terminal, role=noheader]
+----
+./cypher-shell "CALL dbms.listConfig() YIELD name, value WHERE name='server.logs.config' RETURN value"
+----
+
+[IMPORTANT]
+====
+Make sure that the server log configuration exists, otherwise NOM agent will not be able to add query log collection configuration to it.
+====
+
 == Metrics collection
 
 For the metrics collection feature to work correctly, these configuration settings need to be set in the link:https://neo4j.com/docs/operations-manual/current/configuration/neo4j-conf/[neo4j.conf] file:

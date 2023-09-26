@@ -5,7 +5,7 @@ configuration, it can be provided as a file on a volume mount. To enable Daemons
 
 [WARNING]
 ====
-An agent Daemon pod can not access all resources that Neo4j pod uses. For example, for disk usage metrics, agent needs access to file system or peristent volumes
+An agent Daemon pod can not access all resources that Neo4j pod uses. For example, for disk usage metrics, agent needs access to file system or persistent volumes
 that Neo4j pod uses. These need to be mounted to agent Daemon pod.
 ====
 
