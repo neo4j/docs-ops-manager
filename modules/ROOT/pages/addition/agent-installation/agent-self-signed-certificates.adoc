@@ -15,11 +15,11 @@ The NOM agent contains a utility to generate a self-signed certificate suitable 
 ----
 $> agent ssc --help
 
-utility to generate self signed certificate for TEST purposes only
+utility to generate self-signed certificate for TEST purposes only
 
 sample usage:
 
-to generate a self signed certificate for 'localhost', which could either be
+to generate a self-signed certificate for 'localhost', which could either be
 accessed through DNS names of 'localhost.localdomain' or 'my.custom.domain', or
 with IP addresses of '127.0.0.1' or '192.168.100.5';
 
