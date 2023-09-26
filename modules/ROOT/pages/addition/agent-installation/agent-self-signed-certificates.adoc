@@ -46,7 +46,7 @@ If you are generating a certificate for an agent on `localhost`, `localhost` is 
 Assume there are also a number of virtual machines that access the server through IP addresses `192.168.10.1` and `172.16.10.1`.
 Furthermore, a local DNS alias `nom.example.com` is set up for `localhost`.
 
-In order to generate a self-signed certificate for the above example, execute the following command;
+In order to generate a self-signed certificate for the above example, execute the following command:
 
 [source, terminal, role=noheader]
 ----
