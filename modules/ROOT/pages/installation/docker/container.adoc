@@ -13,46 +13,18 @@ docker pull neo4j/neo4j-ops-manager-server:latest
 NOM server in a Docker container can be run in several contexts such as a Docker compose environment or a in a Kubernetes cluster etc.
 In this chapter, we only focus on running a standalone NOM server in a Docker container (Henceforth referred as NOM server container).
 
-== Configuration
-NOM server container run configuration involves setting required environment variables or passing them as commandline arguments.
-
-Refer to *xref:../installation/server.adoc#config_ref[Server installation]* for the list of configuration options to be provided to NOM server.
-
-== Security
-NOM server security involves configuring keys and certificates for the TLS connections that the server makes with the UI and the agents. 
-For NOM server container, keys, and certificates should be mounted into the container as shown below:
-
-. As command line options
-+
-[source, shell, role=noheader]
-----
-docker run -v <path/to/pfx/file/on/the/host>:<path/to/pfx/file/on/the/container> \
-    neo4j/neo4j-ops-manager-server \
-    --server.ssl.key-store=<path/to/pfx/file/on/the/container> \
-    --grpc.server.security.key-store=<path/to/pfx/file/on/the/container>
-----
-
-. As environment variables
-+
-[source, shell, role=noheader]
-----
-docker run -v <path/to/pfx/file/on/the/host>:<path/to/pfx/file/on/the/container> \
-    neo4j/neo4j-ops-manager-server \
-    -e "SERVER_SSL_KEY_STORE=<Value>" \
-    -e "GRPC_SERVER_SECURITY_KEY_STORE=<path/to/pfx/file/on/the/container>"
-----
-
-NOTE: NOM server also includes a command to generate self-signed certificates which can be used for testing purpose but not recommended for production.
-This command could be run within the container and generate the certificates for the server.
-Refer to *xref:../installation/self-signed-certificate.adoc[Installation > Self-Signed-Certificate]*
-
 == Running a NOM server in a Docker container
-To successfully start the NOM server container, mandatory runtime parameters should be set. There are two ways these parameters can be provided to the container:
 
-IMPORTANT: Make sure to replace the arguments with values adjusted to your environment (*<Value>*). 
-Refer to *xref:../installation/server.adoc#_unix[Installation > Server Installation]*
+[NOTE]
+====
+Securing NOM server involves configuring keys and certificates for the TLS connections that the server makes with the UI and the agents.
+For testing purposes, self-signed certificates can be used.
+Refer to *xref:../installation/self-signed-certificate.adoc[Installation > Self-Signed-Certificate]* on how to generate self-signed certificates.
+====
 
-IMPORTANT: Make sure ports are set as per the below commands.
+To successfully start the NOM server container, mandatory runtime parameters should be set.
+Refer to *xref:../installation/server.adoc#config_ref[Server installation]* for the complete parameter list.
+There are two ways these parameters can be provided to the container:
 
 . As command line options
 +
@@ -93,6 +65,9 @@ docker run \
     -e "GRPC_SERVER_SECURITY_CLIENT_AUTH=OPTIONAL" \
     neo4j/neo4j-ops-manager-server
 ----
+
+IMPORTANT: Make sure to replace the arguments with values adjusted to your environment (*<Value>*).
+Refer to *xref:../installation/server.adoc#_unix[Installation > Server Installation]*
 
 == Maintenance
 For a standalone NOM server container resource constraints can be set as documented by link:https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources[Docker runtime constraints on resources].
