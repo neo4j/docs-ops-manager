@@ -22,7 +22,7 @@ You need to set up the following host names in your `/etc/hosts` file:
 == Generate self-signed certificates
 
 . Create a directory *`~/.nom/ssc`* on your local machine before running Docker compose.
-The compose files below specify that this directory will be mounted into the docker container to make the generated certificates available to the NOM server and the agent.
+The compose files below specify that this directory will be mounted into the Docker container to make the generated certificates available to the NOM server and the agent.
 . Change to *`~/.nom/ssc`* and generate self-signed certificates using `server` as common name (CN) and DNS name, and `127.0.0.1` as IP address (details see  *xref:installation/self-signed-certificate.adoc[here]*):
 +
 [source, shell]
@@ -50,9 +50,9 @@ This results in the creation of `server.cer`, `server.key` and `server.pfx`.
 To keep this example simple, the generated certificates are used for both NOM server and agents.
 ====
 
-== Create the docker compose file
+== Create the Docker compose file
 
-Following is a docker compose file that can be used to start up a NOM server including its persistence and a single Neo4j Enterprise instance that will be managed by NOM.
+Following is a Docker compose file that can be used to start up a NOM server including its persistence and a single Neo4j Enterprise instance that will be managed by NOM.
 Create the file `docker-compose.yaml` in an empty directory on your local machine.
 This directory is referenced as `INSTALLATION_ROOT` later in this document.
 
@@ -160,7 +160,7 @@ services:
       start_period: 5s
 ----
 
-Documentation for NOM server docker image is *xref:installation/docker/container.adoc[here]*.
+Documentation for NOM server Docker image is *xref:installation/docker/container.adoc[here]*.
 
 Edit `docker-compose.yaml` as follows:
 
@@ -168,7 +168,7 @@ Edit `docker-compose.yaml` as follows:
 * Replace all occurrences of `<PERSISTENCE_PASSWORD>` with a secure password.
 * Replace all occurrences of `<NEO4J_INSTANCE_PASSWORD>` with a secure password.
 
-== Start the docker compose environment
+== Start the Docker compose environment
 Run the following command in your `INSTALLATION_ROOT`:
 
 [source, shell]
@@ -176,7 +176,7 @@ Run the following command in your `INSTALLATION_ROOT`:
 docker compose -f docker-compose.yaml up
 ----
 
-Watch the output and make sure that docker containers `storage`, `server` and `db-single` are started successfully.
+Watch the output and make sure that the Docker containers `storage`, `server` and `db-single` are started successfully.
 
 == Download and start the NOM agent
 
@@ -201,27 +201,28 @@ Full documentation on registering an agent is *xref:addition/agent-installation/
 * Wait for the server container to start and then go to https://server:8080.
 * Login as `admin` / `passw0rd` and accept license terms.
 * Click the top right settings icon that redirects you to the global settings.
-* Make sure that the agent is online. Rename the agent if required.
+* Make sure that the agent is online. 
+Rename the agent if required.
 * Return to the main page and wait for DBMS to appear - this may take a few minutes.
 Once the DBMS is shown in the home page, double-click on the name (initially a generated string) to edit it.
 Double-click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS.
 
-== Controlling docker containers
+== Controlling Docker containers
 
 === Stopping
 
-* To stop the complete NOM environment, press `Ctrl-C` on the docker compose console and the agent console.
-* To stop a single docker container, issue `docker container stop <CONTAINER_NAME>`.
+* To stop the complete NOM environment, press `Ctrl-C` on the Docker compose console and the agent console.
+* To stop a single Docker container, issue `docker container stop <CONTAINER_NAME>`.
 To list containers use `docker ps`.
 
 [NOTE]
 ====
-Since docker keeps persisted data in container volumes, restarted containers will keep the previous state.
+Since Docker keeps persisted data in container volumes, restarted containers will keep the previous state.
 ====
 
 === Resetting
 
-To start over with an empty Neo4j persistence and empty managed instance, use the following docker command (use `docker ps -a` to find out actual container names):
+To start over with an empty Neo4j persistence and empty managed instance, use the following Docker command (use `docker ps -a` to find out actual container names):
 
 [source, shell]
 ----

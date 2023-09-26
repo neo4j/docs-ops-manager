@@ -11,7 +11,7 @@ docker pull neo4j/neo4j-ops-manager-server:latest
 ----
 
 NOM server in a Docker container can be run in several contexts such as a Docker compose environment or a in a Kubernetes cluster etc.
-In this chapter, we only focus on running a standalone NOM server in a Docker container (Henceforth referred as NOM server container).
+This chapter focuses only on running a standalone NOM server in a Docker container (henceforth referred as NOM server container).
 
 == Running a NOM server in a Docker container
 

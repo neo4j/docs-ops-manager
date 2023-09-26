@@ -1,12 +1,12 @@
 = Monitor a Neo4j instance in a standalone Docker container
 
-Running additional processes which are not tied to the lifecycle of container process is not a best practice for containerized applications.
+Running additional processes that are not tied to the lifecycle of the container process is not a best practice for containerized applications.
 Nevertheless, it is possible to transparently monitor a containerized Neo4j instance in following ways:
 
 [NOTE]
 ====
-Both methods below use a bundled NOM agent inside the Neo4j image instead of downloaded agent packages. Replacing `products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz` with
-path to NOM agent package downloaded should give the same results.
+Both methods below use a bundled NOM agent inside the Neo4j image instead of downloaded agent packages.
+Replacing `products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz` with path to NOM agent package downloaded should give the same results.
 ====
 
 . Monitoring a Neo4j instance Running inside a Docker container:

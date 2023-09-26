@@ -9,10 +9,11 @@ Following is a set of steps to create a two container compose setup to experimen
 
 [NOTE]
 ====
-Please refer to xref:first-look/docker-first-look.adoc[Docker first look guide] for a complete example of a docker compose environment with NOM persistence, NOM server and a managed Neo4j instance.
+Please refer to xref:first-look/docker-first-look.adoc[Docker first look guide] for a complete example of a Docker compose environment with NOM persistence, NOM server and a managed Neo4j instance.
 ====
 
-* Define a storage service that uses an Enterprise Neo4j image. Follow the below template and replace appropriate user defined values.
+* Define a storage service that uses an Enterprise Neo4j image. 
+Follow the below template and replace appropriate user defined values.
 +
 [source, yaml, role=noheader]
 ----
