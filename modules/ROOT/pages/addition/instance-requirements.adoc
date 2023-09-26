@@ -20,7 +20,7 @@ Setting this value to zero will log every query.
 [[server_log_config]]
 === Finding out the location of server log configuration (server-logs.xml)
 
-The location of server log configuration file is configured in `neo4j.conf` (see documentation on link:https://neo4j.com/docs/operations-manual/current/configuration/configuration-settings/#config_server.logs.config[server.logs.config] configuration setting).
+The location of server log configuration file is configured in `neo4j.conf` (see documentation on link:https://neo4j.com/docs/operations-manual/current/configuration/configuration-settings/#config_server.logs.config[Operations Manual -> server.logs.config] configuration setting).
 
 The currently effective location of server log configuration can be found out using the following Cypher query:
 
@@ -31,7 +31,7 @@ The currently effective location of server log configuration can be found out us
 
 [IMPORTANT]
 ====
-Check that the server log configuration exists, otherwise NOM agent will not be able to add query log collection configuration to it.
+Make sure that the server log configuration exists, otherwise NOM agent will not be able to add query log collection configuration to it.
 ====
 
 == Metrics collection

@@ -5,7 +5,10 @@ An agent can simply be run in a lightweight linux based container such as `alpin
 
 [WARNING]
 ====
-An agent Sidecar container can not access all resources that Neo4j pod uses and the host metrics of the cluster node. For example, for disk usage metrics, agent needs access to file system or persistent volumes that Neo4j pod uses. These need to be mounted to agent Daemon pod. Agent sidecar can only report host metrics of it's own contained environment which is not a complete view of reosurce usage of cluster node.
+An agent Sidecar container cannot access all resources that Neo4j pod uses and the host-metrics of the cluster node. 
+For example, for disk usage metrics, the agent needs access to the file system or persistent volumes that Neo4j pod uses. 
+These need to be mounted to the agent Daemon pod. 
+The agent Sidecar can only report host metrics of its own contained environment which is not a complete view of resource usage of the cluster node.
 ====
 
 Following is a sample `values.yaml` file for Neo4j Helm charts with NOM agent sidecar configured:
