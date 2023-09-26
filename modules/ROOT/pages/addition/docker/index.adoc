@@ -3,5 +3,5 @@
 
 Apart from monitoring Neo4j instances running on a host or a virtual machine, an agent can be setup to monitor containerized Neo4j instances.
 
-In this section we will list some of the methods to setup agents to monitor containerized Neo4j instances in standalone and Docker compose deployments. For Kubernetes
-deployments of Neo4j instances, checkout xref:addition/kubernetes/index.adoc[this section]
+This section lists some of the methods to set up agents to monitor containerized Neo4j instances in standalone and Docker compose deployments.
+For Kubernetes deployments of Neo4j instances, see xref:addition/kubernetes/index.adoc[this section] for more information.
