@@ -172,7 +172,8 @@ image::agents.png[width=800]
     It may be that the server address is configured incorrectly or the TLS certificates are not correctly specified. 
 . Verify that the agent has a current status of `Online`. 
     ** If the agent is not currently online then go to where it is running and check the logs.
-. Hover over the newly added agent and select "View Configuration" from the menu on the right to show agent configuration. Check configuration is as expected.
+. Hover over the newly added agent and select "View Configuration" from the menu on the right to show agent configuration. 
+Check configuration is as expected.
 . Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
 . Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.
 
@@ -217,7 +218,7 @@ Copy the first four from the `Agent Credentials` dialog in the register step.
 ====
 Since agent-server communication needs to be encrypted, you need to configure the agent so that it trusts the server's certificates.
 The file that contains the trusted certificate list (PEM encoded) can be specified through the `CONFIG_TLS_TRUSTED_CERTS` environment variable.
-While most operating systems default to the system-wide trusted certificates, that's not the case on Windows.
+Most operating systems default to the system-wide trusted certificates, but that is not the case on Windows.
 For that reason, you **must** set this environment variable on Windows.
 ====
 

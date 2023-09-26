@@ -136,6 +136,7 @@ agent console --self-register
 
 [[verify]]
 == Verify agent setup
+
 Ensure agent has contacted NOM server, is online and is reporting DBMS(s) correctly.
 
 . Return to Agents listing in global settings.
@@ -164,7 +165,8 @@ This can take a few minutes.
 +
 image::agent-approved-online.png[width=800]
 . If the agent status is not 'Online' then go to where it is running and check the logs.
-. Hover over the newly added agent and select "View Configuration" from the menu on the right to show agent configuration. Check configuration is as expected.
+. Hover over the newly added agent and select "View Configuration" from the menu on the right to show agent configuration. 
+Check configuration is as expected.
 . Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
 . Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.
 
@@ -197,7 +199,7 @@ image::agent-approved-online.png[width=800]
 ====
 Since agent-server communication needs to be encrypted, you need to configure the agent so that it trusts the server's certificates.
 The file that contains the trusted certificate list (PEM encoded) can be specified through the `CONFIG_TLS_TRUSTED_CERTS` environment variable.
-While most operating systems default to the system-wide trusted certificates, it is not the case on Windows.
+Most operating systems default to the system-wide trusted certificates, but this is not the case on Windows.
 For this reason, you **must** set this environment variable on Windows.
 ====
 
