@@ -32,19 +32,17 @@ it creates /tmp/localhost.cert.pem and /tmp/localhost.key.pem files upon complet
 options (required options marked with *):
   -d, --dns=<dns>[,<dns>...]
                             list of dns names to use to access the
-                              server, eg. --dns=localhost.localdomain,test.
+                              agent host, eg. --dns=localhost.localdomain,test.
                               local.domain
   -i, --ip=<ip>[,<ip>...]   list of IP addresses to use to access the
-                              server, eg. --ip=127.0.0.1,192.168.100.55
+                              agent host, eg. --ip=127.0.0.1,192.168.100.55
 * -n, --name=<name>         common name to use in generated certificate,
                               eg. --name=localhost
 * -o, --output=<output>     target directory, eg. --output=.
   -h, --help                help
 ----
 
-If you are generating a certificate for an agent on `localhost`, `localhost` is the primary name set as Subject Name field on the certificate and is also used as the name of generated files.
-Assume there are also a number of virtual machines that access the server through IP addresses `192.168.10.1` and `172.16.10.1`.
-Furthermore, a local DNS alias `nom.example.com` is set up for `localhost`.
+If you are generating a certificate for an agent on `localhost`, `localhost` is the primary name set as Subject Name field on the certificate and is also used as the name of generated files. If `CONFIG_AGENT_NAME` is not specified, the Subject Name in agent client certificate along with the host information of agent will be used as the agent name.
 
 In order to generate a self-signed certificate for the above example, execute the following command:
 
@@ -58,9 +56,10 @@ agent ssc -n localhost \
 
 It generates a key pair and a self-signed certificate and creates `localhost.cert.pem` and `localhost.key.pem` files inside `./certificates` directory.
 
-You can then use these two files to configure the agents for mTLS authentication with server.
+You can then use these two files to configure the agents for mTLS authentication as specified xref:./self-registered.adoc#agent_mtls[here]. Agent certificates also need to be added
+to NOM server trust-store through `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION` or `grpc.server.security.trustCertCollection` to mutually authenticate.
 
-Similarly, if you need to generate agent specific keys for each agent, use a unique agent name for each agent as Subject Name (agent name will be overridden if `CONFIG_AGENT_NAME` is not set). 
+If you need to generate agent specific keys for each agent, use a unique agent name for each agent as Subject Name (agent name will be overridden if `CONFIG_AGENT_NAME` is not set). 
 
 Following is a simplified command to generate a self-signed certificate tied to an agent's name: 
 
