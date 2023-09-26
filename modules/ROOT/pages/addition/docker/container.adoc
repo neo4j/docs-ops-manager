@@ -1,15 +1,16 @@
 = Monitor instance in standalone Docker container   
 
-Running additional processes which are not tied to the lifecycle of container process is not a best practice for containerized applications. Nevertheless, it is possible transparently monitor a containerized Neo4j instance in following ways:
+Running additional processes that are not tied to the lifecycle of the container process is not a best practice for containerized applications.
+Nevertheless, it is possible to transparently monitor a containerized Neo4j instance in following ways:
 
 [NOTE]
 ====
-All methods below use a bundled NOM agent inside the Neo4j image instead of downloaded agent packages. Replacing `products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz` with 
-path to NOM agent package downloaded should give the same results.
+Both methods below use a bundled NOM agent inside the Neo4j image instead of downloaded agent packages.
+Replacing `products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz` with path to NOM agent package downloaded should give the same results.
 ====
 
-. Monitoring a Neo4j instance Running inside a Docker container;
-
+. Monitoring a Neo4j instance Running inside a Docker container:
++
 [source, shell, role=noheader]
 ----
 docker exec -dit <neo4j container name> /bin/sh 'tar -xzf products/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 \
@@ -29,14 +30,14 @@ CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100" \
 NEO4J_ACCEPT_LICENSE_AGREEMENT="yes" \
 NEO4J_AUTH=neo4j/passw0rd \
 NEO4J_EDITION="enterprise" \
-NEO4J_metrics_prometheus_enabled="true" \
-NEO4J_metrics_prometheus_endpoint="localhost:2004" \
-NEO4J_metrics_filter="*" \
+NEO4J_server_metrics_prometheus_enabled="true" \
+NEO4J_server_metrics_prometheus_endpoint="localhost:2004" \
+NEO4J_server_metrics_filter="*" \
 agent console -s'
 ----
 
-. Start a Neo4j instance Docker container with NOM agent using a custom entry point;
-
+. Start a Neo4j instance Docker container with NOM agent using a custom entry point:
++
 [[entrypoint]]
 .entrypoint.sh
 [source, shell]
@@ -61,12 +62,12 @@ CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100" \
 NEO4J_ACCEPT_LICENSE_AGREEMENT="yes" \
 NEO4J_AUTH=neo4j/passw0rd \
 NEO4J_EDITION="enterprise" \
-NEO4J_metrics_prometheus_enabled="true" \
-NEO4J_metrics_prometheus_endpoint="localhost:2004" \
-NEO4J_metrics_filter="*" \
+NEO4J_server_metrics_prometheus_enabled="true" \
+NEO4J_server_metrics_prometheus_endpoint="localhost:2004" \
+NEO4J_server_metrics_filter="*" \
 agent console -s
 ----
-
++
 [source, shell, role=noheader]
 ----
  docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom $NEO4J_IMAGE
