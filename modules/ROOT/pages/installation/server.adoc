@@ -259,7 +259,7 @@ If the NOM Server is required to support self-registered agents, then additional
 | Type of key store used for HTTP traffic
 | PKCS12
 
-| `server.ssl.key-store=file`
+| `server.ssl.key-store`
 | `SERVER_SSL_KEY_STORE`
 |  Location of key store used for HTTP traffic
 | `file:./../certificates/server.pfx`
@@ -279,7 +279,7 @@ If the NOM Server is required to support self-registered agents, then additional
 | Type of key store used for GRPC traffic
 | PKCS12
 
-| `grpc.server.security.key-store-file`
+| `grpc.server.security.key-store`
 | `GRPC_SERVER_SECURITY_KEY_STORE`
 | Location of key store used for GRPC traffic
 | `file:./../certificates/server.pfx`
