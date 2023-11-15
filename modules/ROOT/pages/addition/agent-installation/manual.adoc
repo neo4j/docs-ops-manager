@@ -37,7 +37,7 @@ Newly created agent will be displayed on the list of agents.
 
 
 [[running-agent]]
-== Runing as a service
+== Running as a service
 To run an agent in service mode means that the agent process runs in the background and monitors the instance.
 The agent lifecycle is handled by the operating system service manager.
 Best practice is to run an agent in service mode.
