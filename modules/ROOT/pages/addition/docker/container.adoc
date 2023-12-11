@@ -108,6 +108,7 @@ agent console -s
 ----
 
 * In service mode
+
 .entrypoint.sh
 [source, shell]
 ----
@@ -149,29 +150,9 @@ docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=
 * Neo4j prometheus endpoint needs to be exposed via port mapping
 [source, shell]
 ----
-#!/bin/bash -eu
-
-/startup/docker-entrypoint.sh neo4j &
-NEO4J_server_metrics_prometheus_enabled="true" \
-NEO4J_server_metrics_prometheus_endpoint="localhost:2004" \
-NEO4J_server_metrics_filter="*" \
-agent console -s
-----
-[source, shell]
-----
 docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom  -v </path/to/local/neo4j/home>:/var/lib/neo4j -p "8884:2004" neo4j/neo4j:latest
 ----
-* Query log port needs to be mapped for log appender
-[source, shell]
-----
-#!/bin/bash -eu
-
-/startup/docker-entrypoint.sh neo4j &
-CONFIG_INSTANCE_1_QUERY_LOG_PORT="9500" \
-CONFIG_INSTANCE_1_LOG_CONFIG_PATH="/var/lib/neo4j/conf/server-logs.xml" \
-CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100" \
-agent console -s
-----
+* Query log port needs to be mapped for log appender to forward query logs
 [source, shell]
 ----
 docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom  -v </path/to/local/neo4j/home>:/var/lib/neo4j -p "9500:9500" neo4j/neo4j:latest
