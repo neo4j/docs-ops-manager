@@ -1,4 +1,5 @@
 = Docker
+:page-aliases: /docker/server/
 :description: This chapter describes the NOM containerization.
 
 * xref:./container.adoc[NOM Server Docker container] -  About running a NOM server Docker container
