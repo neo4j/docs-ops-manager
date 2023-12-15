@@ -14,7 +14,7 @@ Running additional processes that are not tied to the lifecycle of the container
 Following steps describe running a NOM agent in Neo4j container as an additional (daemon) process to monitor the instance:
 
 * Run the Neo4j docker container.
-    ** This https://neo4j.com/docs/operations-manual/current/docker/[operations] document describe various ways to run a Neo4j instance docker container
+    ** This https://neo4j.com/docs/operations-manual/current/docker/[operations] document describe various ways to run a Neo4j instance docker container.
     ** A custom entrypoint script can be mounted to Neo4j container to run the NOM agent at DBMS startup which is described <<entrypoint, below>>
     
 * Install NOM agent - to make `agent` command available to run
