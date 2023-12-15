@@ -19,59 +19,51 @@ Following steps describe running a NOM agent in Neo4j container as an additional
     
 * Install NOM agent in order to make `agent` command available to run.
     ** Bundled
-    
-    NOM agent binaries are bundled in the Neo4j package and reside in the `products` folder of the Neo4j installation directory. 
-    It can be extracted from the package and installed into a system binaries directory for access to `agent` command.
-[source, shell]
-----
-tar -xzf $NEO4J_HOME/products/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.tar.gz --strip-components 1 && mv bin/agent-<NOM_VERSION>-linux-amd64 /bin/agent
-----
+        *** NOM agent binaries are bundled in the Neo4j package and reside in the `products` folder of the Neo4j installation directory. 
+        *** It can be extracted from the package and installed into a system binaries directory for access to `agent` command.
+
+        tar -xzf $NEO4J_HOME/products/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.tar.gz --strip-components 1 && mv bin/agent-<NOM_VERSION>-linux-amd64 /bin/agent
 
     ** Mounted
-    
-    NOM agent binaries can be mounted into the container as a volume mount and installed into a system binaries directory for access to `agent` command.
-[source, shell]
-----
-docker run -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/agent/binary>:/agent/bin neo4j/neo4j:latest --name <neo4j container name>
+        *** NOM agent binaries can be mounted into the container as a volume mount and installed into a system binaries directory for access to `agent` command.
 
-# wait for the container to be ready and then run
-docker exec -it <neo4j container name> -- /bin/sh -c "mv /agent/bin/agent-*-linux-amd64 /bin/agent"
-----
+        docker run -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/agent/binary>:/agent/bin neo4j/neo4j:latest --name <neo4j container name>
+
+        # wait for the container to be ready and then run
+        docker exec -it <neo4j container name> -- /bin/sh -c "mv /agent/bin/agent-*-linux-amd64 /bin/agent"
+
 
     ** Downloaded
-    
-    NOM agent package can be directly downloaded on to Neo4j container and then extracted and installed.
-[source, shell]
----- 
-wget -O /tmp/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.tar.gz https://dist.neo4j.org/ops-manager/<NOM_VERSION>/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.tar.gz
-tar -xzf /tmp/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 && mv bin/agent-*-linux-amd64 /bin/agent
-----
+        *** NOM agent package can be directly downloaded on to Neo4j container and then extracted and installed.
+
+        wget -O /tmp/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.tar.gz https://dist.neo4j.org/ops-manager/<NOM_VERSION>/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.tar.gz
+
+        tar -xzf /tmp/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 && mv bin/agent-*-linux-amd64 /bin/agent
 
 * Run NOM agent, which involves executing the agent binary with appropriate agent configuration.
     ** Agent configuration can be provided as environment variables set during docker `exec` command or as part of container startup command.
     ** Run agent in console mode
-[source, shell, role=noheader]
-----
-docker exec -dit <neo4j container name> -- /bin/sh 'CONFIG_AGENT_NAME="test_local" \
-CONFIG_AGENT_DESCRIPTION="local self-registered agent" \
-CONFIG_SERVER_GRPC_ADDRESS="server:9090" \
-CONFIG_SERVER_HTTP_ADDRESS="https://server:8080" \
-CONFIG_LOG_LEVEL="debug" \
-CONFIG_INSTANCE_1_NAME="test_local" \
-CONFIG_INSTANCE_1_BOLT_URI="bolt://localhost:7687" \
-CONFIG_INSTANCE_1_BOLT_USERNAME="neo4j" \
-CONFIG_INSTANCE_1_BOLT_PASSWORD="passw0rd" \
-CONFIG_INSTANCE_1_QUERY_LOG_PORT="9500" \
-CONFIG_INSTANCE_1_LOG_CONFIG_PATH="/var/lib/neo4j/conf/server-logs.xml" \
-CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100" \
-NEO4J_ACCEPT_LICENSE_AGREEMENT="yes" \
-NEO4J_AUTH=neo4j/passw0rd \
-NEO4J_EDITION="enterprise" \
-NEO4J_server_metrics_prometheus_enabled="true" \
-NEO4J_server_metrics_prometheus_endpoint="localhost:2004" \
-NEO4J_server_metrics_filter="*" \
-agent console -s'
-----
+
+    docker exec -dit <neo4j container name> -- /bin/sh 'CONFIG_AGENT_NAME="test_local" \
+    CONFIG_AGENT_DESCRIPTION="local self-registered agent" \
+    CONFIG_SERVER_GRPC_ADDRESS="server:9090" \
+    CONFIG_SERVER_HTTP_ADDRESS="https://server:8080" \
+    CONFIG_LOG_LEVEL="debug" \
+    CONFIG_INSTANCE_1_NAME="test_local" \
+    CONFIG_INSTANCE_1_BOLT_URI="bolt://localhost:7687" \
+    CONFIG_INSTANCE_1_BOLT_USERNAME="neo4j" \
+    CONFIG_INSTANCE_1_BOLT_PASSWORD="passw0rd" \
+    CONFIG_INSTANCE_1_QUERY_LOG_PORT="9500" \
+    CONFIG_INSTANCE_1_LOG_CONFIG_PATH="/var/lib/neo4j/conf/server-logs.xml" \
+    CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100" \
+    NEO4J_ACCEPT_LICENSE_AGREEMENT="yes" \
+    NEO4J_AUTH=neo4j/passw0rd \
+    NEO4J_EDITION="enterprise" \
+    NEO4J_server_metrics_prometheus_enabled="true" \
+    NEO4J_server_metrics_prometheus_endpoint="localhost:2004" \
+    NEO4J_server_metrics_filter="*" \
+    agent console -s'
+
 
 [[entrypoint]]
 == Start a Neo4j container with NOM agent using a custom entry point
