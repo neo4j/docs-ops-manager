@@ -152,18 +152,16 @@ systemctl start neo4j-ops-manager-agent.service
 NOM agent can be run in either the console or service mode on the Docker host and configured to have access to Neo4j container resources. 
 Following additional configurations to be applied to Neo4j container run config to enable external NOM agent to monitor the instance correctly:
 
-* Neo4j home directory needs to be mounted back on the Docker host to enable access to agent
 [source, shell]
 ----
-docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom  -v </path/to/local/neo4j/home>:/var/lib/neo4j neo4j/neo4j:latest
+docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
+           -v <path/to/custom/entrypoint>:/custom \
+           -v </path/to/local/neo4j/home>:/var/lib/neo4j \ <1>
+           -p "8884:2004" \ <2>
+           -p "9500:9500" \ <3>
+       neo4j/neo4j:latest
 ----
-* Neo4j prometheus endpoint needs to be exposed via port mapping
-[source, shell]
-----
-docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom  -v </path/to/local/neo4j/home>:/var/lib/neo4j -p "8884:2004" neo4j/neo4j:latest
-----
-* Query log port needs to be mapped for log appender to forward query logs
-[source, shell]
-----
-docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom  -v </path/to/local/neo4j/home>:/var/lib/neo4j -p "9500:9500" neo4j/neo4j:latest
-----
+
+<1> Neo4j home directory needs to be mounted back on the Docker host to enable access to agent.
+<2> Neo4j prometheus endpoint port (2004) needs to be exposed via port mapping.
+<3> Query log port (9500) needs to be mapped for log appender to forward query logs.
