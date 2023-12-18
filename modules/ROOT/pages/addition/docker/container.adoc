@@ -14,7 +14,7 @@ Running additional processes that are not tied to the lifecycle of the container
 Following steps describe running a NOM agent in Neo4j container as an additional (daemon) process to monitor the instance:
 
 * Run the Neo4j docker container.
-    ** This https://neo4j.com/docs/operations-manual/current/docker/[operations] document describe various ways to run a Neo4j instance docker container.
+    ** For more information, see this document on https://neo4j.com/docs/operations-manual/current/docker/[how to run a Neo4j instance docker container].
     ** A custom entrypoint script can be mounted to Neo4j container to run the NOM agent at DBMS startup which is described <<entrypoint, further on>>.
     
 * Install NOM agent in order to make `agent` command available to run.
@@ -80,10 +80,10 @@ docker exec -dit <neo4j container name> -- /bin/sh 'CONFIG_AGENT_NAME="test_loca
 [[entrypoint]]
 == Start a Neo4j container with NOM agent using a custom entry point
 
-Neo4j container starts up by running the entrypoint script at `/startup/docker-entrypoint.sh` with command `neo4j`. 
-To run the NOM agent at container startup, this entrypoint needs to be overridden with a custom entrypoint script as shown:
+Neo4j container starts up by running the entrypoint script `/startup/docker-entrypoint.sh` with the command `neo4j`. 
+To run the NOM agent on the container startup, this entrypoint needs to be overridden with a custom entrypoint script as shown:
 
-* In console mode
+* In console mode:
 +
 .entrypoint.sh
 [source, shell]
@@ -116,7 +116,7 @@ agent console -s
  docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom $NEO4J_IMAGE
 ----
 
-* In service mode
+* In service mode:
 +
 .entrypoint.sh
 [source, shell]
@@ -148,10 +148,11 @@ systemctl start neo4j-ops-manager-agent.service
  docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom $NEO4J_IMAGE
 ----
 
-== External Monitoring
+== External monitoring
 
-NOM agent can be run in either the console or service mode on the Docker host and configured to have access to Neo4j container resources. 
-Following additional configurations to be applied to Neo4j container run config to enable external NOM agent to monitor the instance correctly:
+A NOM agent can be run in either the console or service mode on the Docker host.
+It can be configured to have access to Neo4j container resources.
+Apply the following additional configurations to the Neo4j container run config to enable an external NOM agent to monitor the instance correctly:
 
 [source, shell]
 ----
