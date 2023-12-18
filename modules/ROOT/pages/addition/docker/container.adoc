@@ -127,7 +127,8 @@ agent console -s
 agent service install
 cat > neo4j-ops-manager-agent.service <<EOF
 [Service]
-Environment="CONFIG_SERVER_ADDRESS=<server grpc address>"
+Environment="CONFIG_SERVER_GRPC_ADDRESS=<server grpc address>"
+Environment="CONFIG_SERVER_HTTP_ADDRESS=<server http address>"
 Environment="CONFIG_TOKEN_URL=<server http login url>"
 Environment="CONFIG_TOKEN_CLIENT_ID=<client id>"
 Environment="CONFIG_TOKEN_CLIENT_SECRET=<client secret>"
