@@ -34,7 +34,8 @@ tar -xzf $NEO4J_HOME/products/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.
 ----
 docker run -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/agent/binary>:/agent/bin neo4j/neo4j:latest --name <neo4j container name>
 ----
-Wait for the container to be ready and then run:
++
+Wait for the container to be ready and then run :
 +
 [source, shell]
 ----
@@ -60,6 +61,11 @@ docker exec -dit <neo4j container name> -- /bin/sh 'CONFIG_AGENT_NAME="test_loca
     CONFIG_AGENT_DESCRIPTION="local self-registered agent" \
     CONFIG_SERVER_GRPC_ADDRESS="server:9090" \
     CONFIG_SERVER_HTTP_ADDRESS="https://server:8080" \
+    CONFIG_TOKEN_URL=https://server:8080/api/login \
+    CONFIG_TOKEN_CLIENT_ID=rj34hg6456ghrhjthet45hg6 \
+    CONFIG_TOKEN_CLIENT_SECRET=5h346jhrjkthkjthjerhtkrt \
+    CONFIG_TLS_TRUSTED_CERTS=/path/to/trusted/certs/pem/file \
+    CONFIG_LOG_FILE=/path/to/nom-agent/log.txt \
     CONFIG_LOG_LEVEL="debug" \
     CONFIG_INSTANCE_1_NAME="test_local" \
     CONFIG_INSTANCE_1_BOLT_URI="bolt://localhost:7687" \
@@ -68,12 +74,6 @@ docker exec -dit <neo4j container name> -- /bin/sh 'CONFIG_AGENT_NAME="test_loca
     CONFIG_INSTANCE_1_QUERY_LOG_PORT="9500" \
     CONFIG_INSTANCE_1_LOG_CONFIG_PATH="/var/lib/neo4j/conf/server-logs.xml" \
     CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100" \
-    NEO4J_ACCEPT_LICENSE_AGREEMENT="yes" \
-    NEO4J_AUTH=neo4j/passw0rd \
-    NEO4J_EDITION="enterprise" \
-    NEO4J_server_metrics_prometheus_enabled="true" \
-    NEO4J_server_metrics_prometheus_endpoint="localhost:2004" \
-    NEO4J_server_metrics_filter="*" \
     agent console -s'
 ----
 
@@ -95,6 +95,11 @@ CONFIG_AGENT_NAME="test_local" \
 CONFIG_AGENT_DESCRIPTION="local self-registered agent" \
 CONFIG_SERVER_GRPC_ADDRESS="server:9090" \
 CONFIG_SERVER_HTTP_ADDRESS="https://server:8080" \
+CONFIG_TOKEN_URL=https://server:8080/api/login \
+CONFIG_TOKEN_CLIENT_ID=rj34hg6456ghrhjthet45hg6 \
+CONFIG_TOKEN_CLIENT_SECRET=5h346jhrjkthkjthjerhtkrt \
+CONFIG_TLS_TRUSTED_CERTS=/path/to/trusted/certs/pem/file \
+CONFIG_LOG_FILE=/path/to/nom-agent/log.txt \
 CONFIG_LOG_LEVEL="debug" \
 CONFIG_INSTANCE_1_NAME="test_local" \
 CONFIG_INSTANCE_1_BOLT_URI="bolt://localhost:7687" \
@@ -103,14 +108,9 @@ CONFIG_INSTANCE_1_BOLT_PASSWORD="passw0rd" \
 CONFIG_INSTANCE_1_QUERY_LOG_PORT="9500" \
 CONFIG_INSTANCE_1_LOG_CONFIG_PATH="/var/lib/neo4j/conf/server-logs.xml" \
 CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION="100" \
-NEO4J_ACCEPT_LICENSE_AGREEMENT="yes" \
-NEO4J_AUTH=neo4j/passw0rd \
-NEO4J_EDITION="enterprise" \
-NEO4J_server_metrics_prometheus_enabled="true" \
-NEO4J_server_metrics_prometheus_endpoint="localhost:2004" \
-NEO4J_server_metrics_filter="*" \
 agent console -s
 ----
++
 [source, shell, role=noheader]
 ----
  docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom $NEO4J_IMAGE
@@ -142,6 +142,7 @@ Environment="CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to server-logs.xml>"
 EOF
 systemctl start neo4j-ops-manager-agent.service
 ----
++
 [source, shell, role=noheader]
 ----
  docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes -v <path/to/custom/entrypoint>:/custom $NEO4J_IMAGE
