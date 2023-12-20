@@ -2,8 +2,8 @@
 
 A Neo4j instance running in a Docker container can be monitored by a NOM agent in two ways:
  
-- NOM agent can be run as an additional (daemon) process in the Neo4j container
-- NOM agent can be run on the Docker host to externally monitor the Neo4j container
+- The NOM agent can be run as an additional (daemon) process in the Neo4j container
+- The NOM agent can be run on the Docker host to externally monitor the Neo4j container
 
 [NOTE]
 ====
@@ -11,16 +11,16 @@ Running additional processes that are not tied to the lifecycle of the container
 ====
 
 == In-container Monitoring
-Following steps describe running a NOM agent in Neo4j container as an additional (daemon) process to monitor the instance:
+The following steps describe running a NOM agent in Neo4j container as an additional (daemon) process to monitor the instance:
 
 * Run the Neo4j docker container.
-    ** For more information, see this document on https://neo4j.com/docs/operations-manual/current/docker/[how to run a Neo4j instance docker container].
-    ** A custom entrypoint script can be mounted to Neo4j container to run the NOM agent at DBMS startup which is described <<entrypoint, further on>>.
+    ** For more information, see link:https://neo4j.com/docs/operations-manual/current/docker/[Operations Manual -> Docker].
+    ** A custom entrypoint script can be mounted to the Neo4j container to run the NOM agent at DBMS startup which is described <<entrypoint, further on>>.
     
-* Install NOM agent in order to make `agent` command available to run.
+* Install the NOM agent to make the `agent` command available to run.
     ** Bundled
         *** NOM agent binaries are bundled in the Neo4j package and reside in the `products` folder of the Neo4j installation directory. 
-        *** It can be extracted from the package and installed into a system binaries directory for access to `agent` command.
+        *** It can be extracted from the package and installed into a system binaries directory for access to the `agent` command.
 +
 [source, shell]
 ----
@@ -43,7 +43,7 @@ docker exec -it <neo4j container name> -- /bin/sh -c "mv /agent/bin/agent-*-linu
 ----
 
     ** Downloaded
-        *** NOM agent package can be directly downloaded on to Neo4j container and then extracted and installed.
+        *** NOM agent package can be directly downloaded on to the Neo4j container and then extracted and installed.
 +
 [source, shell]
 ----
@@ -51,7 +51,7 @@ wget -O /tmp/neo4j-ops-manager-agent-<NOM_VERSION>-linux-amd64.tar.gz https://di
 tar -xzf /tmp/neo4j-ops-manager-agent-*-linux-amd64.tar.gz --strip-components 1 && mv bin/agent-*-linux-amd64 /bin/agent
 ----
 
-* Run NOM agent, which involves executing the agent binary with appropriate agent configuration.
+* Run the NOM agent, which involves executing the agent binary with appropriate agent configuration.
     ** Agent configuration can be provided as environment variables set during docker `exec` command or as part of container startup command.
     ** Run agent in console mode
 +
@@ -80,7 +80,7 @@ docker exec -dit <neo4j container name> -- /bin/sh 'CONFIG_AGENT_NAME="test_loca
 [[entrypoint]]
 == Start a Neo4j container with NOM agent using a custom entry point
 
-Neo4j container starts up by running the entrypoint script `/startup/docker-entrypoint.sh` with the command `neo4j`. 
+Start the Neo4j container by running the entrypoint script `/startup/docker-entrypoint.sh` with the command `neo4j`. 
 To run the NOM agent on the container startup, this entrypoint needs to be overridden with a custom entrypoint script as shown:
 
 * In console mode:
@@ -155,7 +155,7 @@ A NOM agent can be run in either the console or service mode on the Docker host.
 It can be configured to have access to Neo4j container resources.
 Apply the following additional configurations to the Neo4j container run config to enable an external NOM agent to monitor the instance correctly:
 
-[source, shell]
+[source, shell, role=nocopy]
 ----
 docker run --entrypoint /custom/entrypoint.sh -e NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
            -v <path/to/custom/entrypoint>:/custom \
