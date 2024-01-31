@@ -220,9 +220,24 @@ If you set all the arguments to environment variables, you can shorten the serve
 java -jar .\lib\server.jar
 ----
 
+[[self-registration-config]]
 [NOTE]
 ====
-If the NOM Server is required to support self-registered agents, then additional configuration needs to be provided to above commands as mentioned in the configuration reference table. More about agent self-registration xref:../addition/agent-installation/self-registered.adoc[here]
+If the NOM Server is required to support self-registered agents, then additional configuration needs to be provided to above commands. These include :
+
+```
+GRPC_SERVER_SECURITY_CLIENT_AUTH
+GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION
+
+or
+
+grpc.server.security.clientAuth
+grpc.server.security.trustCertCollection
+```
+
+which are described in the configuration reference table.
+
+More about agent self-registration xref:../addition/agent-installation/self-registered.adoc#agent_mtls[here]
 ====
 
 == Server configuration reference [[config_ref]]
@@ -312,8 +327,7 @@ If the NOM Server is required to support self-registered agents, then additional
 | `grpc.server.security.clientAuth`
 | `GRPC_SERVER_SECURITY_CLIENT_AUTH`
 | Option to indicate whether to verify client certificates. 
-Required for agent self-registration. 
-Possible values: `OPTIONAL` to simultaneously allow manual registration or `REQUIRE` to only allow mutually authenticated agents.
+Required for agent self-registration. (optional)
 | `OPTIONAL`
 
 | `logging.file.name`
