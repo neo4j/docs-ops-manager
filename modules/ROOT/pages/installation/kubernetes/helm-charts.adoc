@@ -14,57 +14,57 @@
 * Following is the reference `values.yaml` for NOM server Helm Chart:
 ----
 # Default values for neo4j-ops-manager-server.
-server:
 
+# Refer to "https://neo4j.com/docs/ops-manager/current/installation/server/#config_ref"
 config:
-  logFileName: "app.log"
+  logFileName: ""
   logLevel: "info"
   maxHeapSize: "8g"
   jwtTTL: "2h"
-  grpc:
-    advertisedHost: ""
+  grpcAdvertisedHost: "" # this needs to be set if a different IP assigned to GRPC
+  grpcAdvertisedPort: "" # this needs to be set if a different IP assigned to GRPC
 
-## An optional reference to a secret that contains some or all values for NOM secrets
-## Secret name and key should be specified
-#secretsFromSecrets:
-#  # storage keys
-#  storageUri:
-#    secretName: ""
-#    key: "" # key in Secret for Storage URI
-#  storageUsername:
-#    secretName: ""
-#    key: "" # key in Secret for Storage username
-#  storagePassword:
-#    secretName: ""
-#    key: "" # key in Secret for Storage URI
-#  # tls keys
-#  tlsPassword:
-#    secretName: ""
-#    key: "" # key in Secret for tls password
-#  # jwt keys
-#  jwtSecret:
-#    secretName: ""
-#    key: "" # key in Secret for jwt secret
+# An optional reference to a secret that contains some or all values for NOM secrets
+# Secret name and key should be specified
+secretsFromSecrets:
+  # storage keys
+  storageUri:
+    secretName: ""
+    key: "" # key in Secret for Storage URI
+  storageUsername:
+    secretName: ""
+    key: "" # key in Secret for Storage username
+  storagePassword:
+    secretName: ""
+    key: "" # key in Secret for Storage URI
+  # tls keys
+  tlsPassword:
+    secretName: ""
+    key: "" # key in Secret for tls password
+  tlsPkcs12CertFileContent:
+    secretName: ""
+    key: "" # key in Secret for tls pkcs12CertFileContent
+  # jwt keys
+  jwtSecret:
+    secretName: ""
+    key: "" # key in Secret for jwt secret
+  # mTls keys
+  mTlsAgentCerts:
+    secretName: ""
+    key: "" # key in Secret for mTls agentCerts
 
 secrets:
-  storage:
-    uri: "" # NOM persistence URI
-    username: "" # NOM persistence user name
-    password: "" # NOM persistence password
-
-#  # jwt secret is optional, NOM server generates a secure cryptographic secret if not set
-#  jwt:
-#    secret: "" # jwt secret as specified in server installation
-
-  tls:
-    password: "" # PKCS12 certificate file password for server TLS config
-    pkcs12CertFileContent: "" # A base64 encoded string of pfx/pkcs12 file content
-
-#  # mTls is optional, uncomment the below to set
-#  mTls:
-#     # string content of PEM encoded list of certificates appended into a .pem file
-#     # used for agent self-registration
-#    agentCerts: ""
+  # storage
+  storageUri: ""
+  storageUsername: ""
+  storagePassword: ""
+  # tls
+  tlsPassword: ""
+  tlsPkcs12CertFileContent: ""
+  # jwt
+  jwtSecret: ""
+  # mTls
+  mTlsAgentCerts: ""
 
 service:
   http:
@@ -73,15 +73,16 @@ service:
     # internal load balancers in Azure Kubernetes Service (AKS) when public external IP addresses are less secure for
     # the K8s environment
     annotations: { }
-    ipAddress: ""
+    port: 443
+    loadBalancerIP: "" # optional static load balancer IP
   grpc:
     # annotations for grpc service
     # For example, `service.beta.kubernetes.io/azure-load-balancer-internal: "true"` is an annotation used to enable
     # internal load balancers in Azure Kubernetes Service (AKS) when public external IP addresses are less secure for
     # the K8s environment
     annotations: { }
-    ipAddress: ""
     port: 9090
+    loadBalancerIP: "" # optional static load balancer IP
 
 image:
   name: neo4j/neo4j-ops-manager-server
@@ -92,6 +93,8 @@ hpa:
     targetCPUUtilizationPercentage: 70
 
 nameOverride:
+
+additionalVolumeMounts:
 
 resources:
   limits:
@@ -142,15 +145,17 @@ config:
     advertisedHost: "https://localhost:9090"
 
 secrets:
-  storage:
-    uri: "neo4j://localhost:7687"
-    username: "neo4j"
-    password: "password"
-    # jwt:
-    #   secret: "<secret>"
-  tls:
-    password: "changeit"
-    pkcs12CertFileContent: "<base64 encoded string of pkcs12 server cert content>"
+  # storage
+  storageUri: "neo4j://localhost:7687"
+  storageUsername: "neo4j"
+  storagePassword: "passw0rd"
+  # tls
+  tlsPassword: "changeit"
+  tlsPkcs12CertFileContent: "<base64 encoded string of pkcs12 server cert content>"
+  # jwt
+  jwtSecret: ""
+  # mTls
+  mTlsAgentCerts: ""
 
 service:
   http:
