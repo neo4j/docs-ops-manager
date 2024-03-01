@@ -18,7 +18,7 @@ The NOM agent version should always match the current NOM server version. Other 
 ====
 
 Every Neo4j Ops Manager release relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
-Following table details the compatibility matrix for NOM:
+The following table details the compatibility matrix for NOM:
 
 [cols="<,<,<",options="header"]
 |===
