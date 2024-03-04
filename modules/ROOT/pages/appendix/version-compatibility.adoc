@@ -14,7 +14,8 @@ Neo4j Ops Manager follows link:https://semver.org/[semantic versioning] for its 
 
 [NOTE]
 ====
-The NOM agent version should always match the current NOM server version. Other configurations may work, but are unsupported.
+The NOM agent version should always match the current NOM server version.
+Other configurations may work, but are unsupported.
 ====
 
 Every Neo4j Ops Manager release relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
