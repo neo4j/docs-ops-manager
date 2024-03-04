@@ -12,62 +12,62 @@ Neo4j Ops Manager follows link:https://semver.org/[semantic versioning] for its 
 
 == Compatibility matrix
 
-Every Neo4j Ops Manager release relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
-Following table details the compatibility matrix for NOM:
+[NOTE]
+====
+The NOM agent version should always match the current NOM server version.
+Other configurations may work, but are unsupported.
+====
 
-[cols="<,<,<,<,<",options="header"]
+Every Neo4j Ops Manager release relies on compatible subsystems and monitored Neo4j DBMSs for optimal functionality.
+The following table details the compatibility matrix for NOM:
+
+[cols="<,<,<",options="header"]
 |===
 | NOM Release
-| NOM Server
-| NOM Agent
 | NOM Persistence (Neo4j Enterprise)
 | Neo4j DBMS
 
 | 1.0.0
-| 1.0.0
-| 1.0.0
 | >4.4.2
 | >4.4.2
 
-| 1.1.0
-| 1.1.0
 | 1.1.0
 | >4.4.2
 | >4.4.2
 
 | 1.1.1
-| 1.1.1
-| 1.1.1
 | >4.4.2
 | >4.4.2
 
-| 1.2.1
-| 1.2.1
 | 1.2.1
 | >4.4.2, 5.1.0
 | >4.4.2, 5.1.0
 
 | 1.3.x
-| 1.3.x
-| 1.3.x
 | >4.4.2, >5.1.0
 | >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0
 
 | 1.4.x
-| 1.4.x
-| 1.4.x
 | >4.4.2, >5.1.0
 | >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0
 
-| 1.5.x
-| 1.5.x
 | 1.5.x
 | >4.4.2, >5.1.0
 | >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from Neo4j 5.4.0 onwards)
 
 | 1.6.x
-| 1.6.x
-| 1.6.x
+| >4.4.2, >5.1.0
+| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
+
+| 1.7.x
+| >4.4.2, >5.1.0
+| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
+
+| 1.8.x
+| >4.4.2, >5.1.0
+| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
+
+| 1.9.x
 | >4.4.2, >5.1.0
 | >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
 
