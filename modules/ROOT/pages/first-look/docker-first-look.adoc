@@ -170,7 +170,7 @@ Edit `docker-compose.yaml` as follows:
 
 == Download the NOM agent
 
-Download NOM agent binaries TAR from https://neo4j.com/download-center/#ops-manager[here] and execute the following commands in your `INSTALLATION_ROOT`:
+Download NOM agent binaries TAR from link:https://neo4j.com/deployment-center/#tools-tab[the Deployment Center] and execute the following commands in your `INSTALLATION_ROOT`:
 
 [source, shell]
 ----
