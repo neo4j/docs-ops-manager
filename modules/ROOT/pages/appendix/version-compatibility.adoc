@@ -71,15 +71,7 @@ The following table details the compatibility matrix for NOM:
 | >4.4.2, >5.1.0
 | >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
 
-| 1.7.x
-| 1.7.x
-| 1.7.x
-| >4.4.2, >5.1.0
-| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
-
-| 1.8.x
-| 1.8.x
-| 1.8.x
+| 1.10.x
 | >4.4.2, >5.1.0
 | >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (Licence alerts feature only available from 5.4.0 onwards)
 
