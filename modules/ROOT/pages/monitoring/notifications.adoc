@@ -75,6 +75,13 @@ image::notifications-webhook-add.png[width=800]
 
 image::notifications-webhook-remove.png[width=800]
 
+.Accessibility of webhook URL
+[NOTE]
+====
+If the network configuration of the NOM server requires it to use a web-proxy to access the webhook URL ensure that the NOM server Java process is started with appropriate options.
+For details, see link:https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html[Java documentation].
+====
+
 == Notifications
 
 Individual notification configurations (notifications) can be configured when at least one channel is set up.
