@@ -75,11 +75,11 @@ image::notifications-webhook-add.png[width=800]
 
 image::notifications-webhook-remove.png[width=800]
 
-.Accessibility of webhook URL
+.Using webhooks behind a proxy
 [NOTE]
 ====
-If the network configuration of the NOM server requires it to use a web-proxy to access the webhook URL ensure that the NOM server Java process is started with appropriate options.
-For details, see link:https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html[Java documentation].
+If the network configuration of the NOM server requires it to use a proxy to access the webhook URL, its JVM must be started with appropriate proxy configuration options.
+For details, see xref:installation/server.adoc#behind_proxy[Running NOM server behind proxy].
 ====
 
 == Notifications
