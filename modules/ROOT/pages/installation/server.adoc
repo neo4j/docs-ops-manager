@@ -225,6 +225,22 @@ java -jar .\lib\server.jar
 If the NOM Server is required to support self-registered agents, then additional configuration needs to be provided to above commands as mentioned in the configuration reference table. More about agent self-registration xref:../addition/agent-installation/self-registered.adoc[here]
 ====
 
+== Running NOM server behind a proxy [[behind_proxy]]
+
+If NOM server is running behind a proxy and is configured to access external web resources, its JVM must be started with appropriate proxy configuration options.
+This configuration is also required for the auto-refresh of available Neo4j and NOM versions.
+
+To pass proxy configuration options to the NOM server JVM, the environment variable `JAVA_OPTS` can be used, as shown in the following example:
+
+[source, terminal, role=noheader]
+----
+JAVA_OPTS=-Dhttp.proxyHost=myproxy.example.com -Dhttp.proxyPort=8080
+----
+
+If running NOM server as a service, the environment variable can be set in the service configuration file.
+
+For details about configuring proxy in Java, see link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/net/doc-files/net-properties.html#proxies-heading[Java documentation].
+
 == Server configuration reference [[config_ref]]
 
 [cols="<,<,<, <",options="header"]
