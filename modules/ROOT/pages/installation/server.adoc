@@ -223,7 +223,8 @@ java -jar .\lib\server.jar
 [[self-registration-config]]
 [NOTE]
 ====
-If the NOM Server is required to support self-registered agents, then additional configuration needs to be provided to above commands. These include :
+If the NOM Server is required to support self-registered agents, then additional configuration properties needs to be provided to above commands. 
+These include:
 
 ```
 GRPC_SERVER_SECURITY_CLIENT_AUTH
