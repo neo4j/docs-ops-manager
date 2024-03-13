@@ -34,7 +34,7 @@ image::upgrades-plan-in-progress.png[width=800]
 == Keeping verison information up to date
 
 === Auto-refresh of available Neo4j and NOM versions.
-NOM server will periodically attempt an auto-refresh of available Neo4j and NOM versions by fetching version information from a central location.
+NOM server periodically attempts an auto-refresh of available Neo4j and NOM versions by fetching version information from a central location.
 
 As this requires access to external web resources, if NOM server is running behind a proxy, its JVM must be started with appropriate proxy configuration options. 
 For details, see xref:installation/server.adoc#behind_proxy[Running NOM server behind proxy].
