@@ -114,13 +114,13 @@ affinity: {}
 * Run the following command to install the NOM server to your Kubernetes cluster
 [source, shell, role=noheader]
 ----
-helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
+helm install -f values.yaml --set secrets.tlsPkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
 ----
 
 * If agents are self-registered, set the additional trusted agent certificates on the server before deploying the agents
 [source, shell, role=noheader]
 ----
-helm install -f values.yaml --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) --set secrets.mTls.agentCerts=$(cat localhost.pem | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
+helm install -f values.yaml --set secrets.tlsPkcs12CertFileContent=$(cat server.pfx | base64) --set secrets.mTlsAgentCerts=$(cat localhost.pem | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
 ----
 
 * If the command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command.
