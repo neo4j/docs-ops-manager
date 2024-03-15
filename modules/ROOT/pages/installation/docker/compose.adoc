@@ -27,11 +27,11 @@ storage:
     environment:
       NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
       NEO4J_AUTH: <user defined username>/<user defined password>
-      NEO4J_dbms_default__advertised__address: <user defined>
-      NEO4J_dbms_connector_http_listen__address: <user defined>
-      NEO4J_dbms_connector_bolt_listen__address: <user defined to be used in the NOM server>
+      NEO4J_server_default__advertised__address: <user defined>
+      NEO4J_server_http_listen__address: <user defined>
+      NEO4J_server_bolt_listen__address: <user defined to be used in the NOM server>
     healthcheck:
-      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a <NEO4J_dbms_connector_bolt_listen__address> -u <user defined username> -p <user defined password> || exit 1" ]
+      test: [ "CMD-SHELL", "echo RETURN 1 | cypher-shell -a bolt://<value of NEO4J_server_bolt_listen__address> -u <user defined username> -p <user defined password> || exit 1" ]
 ----
 
 * Define a server service that uses NOM server image. Follow the below template and replace appropriate user defined values. 
