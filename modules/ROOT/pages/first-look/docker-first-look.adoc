@@ -104,7 +104,6 @@ services:
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*], http://server:[*]"
       GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION: file:/certificates/server.cer
-      GRPC_SERVER_SECURITY_CLIENT_AUTH: OPTIONAL
     volumes:
       - type: bind
         source: ~/.nom/ssc

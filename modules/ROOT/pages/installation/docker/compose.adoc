@@ -56,7 +56,6 @@ storage:
       GRPC_SERVER_SECURITY_KEY_STORE_TYPE: PKCS12
       GRPC_SERVER_SECURITY_KEY_STORE: <path to a self-signed cert file with pfx extension mounted into this container>
       GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD: <user defined for mounted certs>
-      GRPC_SERVER_SECURITY_CLIENT_AUTH: "OPTIONAL"
       CORS_ALLOWEDHEADERS: "*"
       CORS_ALLOWEDORIGINS: "http://localhost:[*],https://localhost:[*]"
     volumes:
