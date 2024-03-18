@@ -231,7 +231,6 @@ GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION
 
 or
 
-grpc.server.security.clientAuth
 grpc.server.security.trustCertCollection
 ```
 
