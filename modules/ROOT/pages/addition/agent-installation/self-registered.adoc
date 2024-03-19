@@ -150,7 +150,7 @@ image::agents.png[width=800]
  ** If the agent is not in the list then go back to where the agent is running and check the logs.
     It may be that the server address is configured incorrectly or the TLS certificates are not correctly specified. 
 +
-. Upon succesful registration, the agent status changes to `Offline` until the agent receives token information and re-connects to NOM server.
+. Upon successful registration, the agent status changes to `Offline` until the agent receives token information and re-connects to NOM server.
 +
 . Wait for agent status to change to `Online` indicating that the agent has successfully re-connected to the NOM server. 
 This can take a few minutes. 
