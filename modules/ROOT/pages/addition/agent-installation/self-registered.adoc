@@ -3,13 +3,13 @@
 
 Agent self-registration omits manually acquiring token information from NOM UI as described in xref:./manual.adoc#register[Manually registering agent].
 Instead, minimal configuration of the NOM server is provided to allow the agent to connect and register itself.
-Authorization is granted either through manual approval of the agent in the UI or through mutual authentication.
+Authorization is granted through mutual authentication.
 
 A self-registering agent is useful in an automated environment such as a Kubernetes cluster of Neo4j instances where instances are dynamically created and managed.
 
 [[running-agent]]
 == Run agent 
-To run a self-registering agent, an additional command line option is provided as `-s` for short and `--self-register`.
+To run a self-registering agent, an additional command line option is provided as `-s`, short for `--self-register`.
 
 == Running as a service
 
@@ -50,6 +50,8 @@ Environment="CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>"
 Environment="CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>"
 Environment="CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>"
 Environment="CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to server-logs.xml>"
+Environment="CONFIG_TLS_CLIENT_CERT=<path to agent TLS cert>"
+Environment="CONFIG_TLS_CLIENT_KEY=<path to agent TLS key>"
 ----
 
 Please refer to the full list of options <<configuration,here>>.
@@ -101,6 +103,8 @@ CONFIG_INSTANCE_1_BOLT_USERNAME=<local instance user name>
 CONFIG_INSTANCE_1_BOLT_PASSWORD=<local instance password>
 CONFIG_INSTANCE_1_QUERY_LOG_PORT=<an available port>
 CONFIG_INSTANCE_1_LOG_CONFIG_PATH=<path to server-logs.xml>
+CONFIG_TLS_CLIENT_CERT=<path to agent TLS cert>
+CONFIG_TLS_CLIENT_KEY=<path to agent TLS key>
 ----
 
 Please refer to the full list of options <<configuration,here>>.
@@ -145,30 +149,18 @@ image::agents.png[width=800]
 . Find self-registered agent in list.
  ** If the agent is not in the list then go back to where the agent is running and check the logs.
     It may be that the server address is configured incorrectly or the TLS certificates are not correctly specified. 
-
-. Approve agent if required.
-** An agent in standby mode shows up in the list of agents in NOM UI with `Unauthorized` status. 
 +
-image::agent-unauthorized.png[width=800]
-To enable the agent to continue its normal execution, the agent needs to be approved from the NOM UI as shown below:
-.. Click on `...` agent action icon and click `Approve Agent`:
+. Upon successful registration, the agent status changes to `Offline` until the agent receives token information and re-connects to NOM server.
 +
-image::agent-action-menu.png[width=800]
-.. Update agent name or description if desired and click 'Approve':
-+
-image::agent-approve.png[width=800]
-.. Upon approval, the agent status changes to `Offline` until the agent receives token information and re-connects to NOM server.
-+
-image::agent-approved-offline.png[width=800]
-.. Wait for agent status to change to `Online` indicating that the agent has successfully re-connected to the NOM server and is in normal execution mode. 
+. Wait for agent status to change to `Online` indicating that the agent has successfully re-connected to the NOM server. 
 This can take a few minutes. 
 +
 image::agent-approved-online.png[width=800]
-. If the agent status is not 'Online' then go to where it is running and check the logs.
+. If the agent status is not `Online` then check for errors in server logs and agent logs respectively.
 . Hover over the newly added agent and select "View Configuration" from the menu on the right to show agent configuration. 
 Check configuration is as expected.
 . Navigate to the home page (if this agent is the first to manage an instance in a DBMS, it may take a few minutes for the DBMS to appear).
-. Select the _Alerts_ tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.
+. Select the **Alerts** tab and make sure that there are no alerts for any of the DBMSs managed by the new agent.
 
 
 [[configuration]]
@@ -203,7 +195,7 @@ Most operating systems default to the system-wide trusted certificates, but this
 For this reason, you **must** set this environment variable on Windows.
 ====
 
-The following optional configuration can be used to specify the location for  xref:./agent-config-file.adoc[agent config file]: 
+Optional configuration to be used to specify the location for  xref:./agent-config-file.adoc[agent config file]: 
 
 [cols="<,<,<,<",options="header"]
 |===
@@ -240,20 +232,12 @@ Agent meta-data can be optionally specified using these configuration parameters
 
 [IMPORTANT]
 ====
-It's recommended to set agent name and description if multiple agents are being self-registered on similar hosts as it would lead to confusion with similarly named agents appearing in UI for approval.
+It's recommended to set agent name and description if multiple agents are being self-registered on similar hosts as it would lead to confusion with similarly named agents appearing in UI.
 ====
 
 [[agent_mtls]]
-==== Additional configuration for mutual authentication (optional)
+==== Configuration for mutual authentication
 
-With only the above configuration, the agent will connect to NOM server, register itself and then enter *Standby mode*.
-
-*Standby mode* is the runtime state of a self-registering agent which is not authorized yet to monitor instances. 
-In this mode agent keeps checking with NOM server for approval status at every preset time interval (__default 30 seconds__).
-
-The agent exits *Standby mode* once it has been manually approved in the UI. 
-
-Mutual authentication eliminates the manual approval step. 
 The NOM server immediately authorizes an agent that registers using a trusted certificate.
 
 The following configuration is required to enable mutual authentication:
@@ -275,12 +259,13 @@ The following configuration is required to enable mutual authentication:
 
 [IMPORTANT]
 ====
-In addition to the above configuration, the NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#config_ref[here].
+In addition to the above configuration, the NOM server also needs to be configured to trust the agent certificates as described xref:/installation/server.adoc#self-registration-config[here]. The client certificate set by `CONFIG_TLS_CLIENT_CERT` should be part of the `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION` file.
 ====
 
 [NOTE]
 ====
 Self-signed certificates for agents in test and demo environments can be generated as documented xref:./agent-self-signed-certificates.adoc[here].
+One agent certificate which is not tied to host IPs of agents can be used to configure multiple agents which will reduce the number of agent certificates to maintain.
 ====
 
 ===  Agent logging configuration
