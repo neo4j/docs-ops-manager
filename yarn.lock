@@ -10,6 +10,7 @@
     "@antora/user-require-helper" "~2.0"
     "@asciidoctor/core" "~2.2"
 
+
 "@antora/cli@^3.1.7":
   version "3.1.7"
   resolved "https://registry.yarnpkg.com/@antora/cli/-/cli-3.1.7.tgz#8d80d83328793281f8f0b525020e761115accb49"
@@ -22,6 +23,7 @@
 "@antora/content-aggregator@3.1.7":
   version "3.1.7"
   resolved "https://registry.yarnpkg.com/@antora/content-aggregator/-/content-aggregator-3.1.7.tgz#7458f428afcbf2bc7b63014349b1305cd14ea60c"
+
   dependencies:
     "@antora/expand-path-helper" "~2.0"
     "@antora/logger" "3.1.7"
