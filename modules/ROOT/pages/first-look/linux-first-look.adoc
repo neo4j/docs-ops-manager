@@ -20,7 +20,7 @@ Navigate to NEO4j_HOME and run:
 ./bin/neo4j-admin dbms set-initial-password lovelypassword
 ----
 
-=== Run Neo4j 
+=== Run Neo4j
 [source, terminal, role=noheader]
 ----
 ./bin/neo4j start
@@ -30,12 +30,12 @@ See link:https://neo4j.com/docs/operations-manual/current/installation/linux/tar
 
 == Server installation
 === Unpack NOM server from Neo4j package
-   
+
 [source, terminal]
 ----
    tar -xzf NEO4J_HOME/products/neo4j-ops-manager-server-*-unix.tar.gz
 ----
-    
+
 Extracted directory is now known as NOM_SERVER_HOME.
 
 === Generate self-signed certificates
@@ -43,12 +43,12 @@ Extracted directory is now known as NOM_SERVER_HOME.
 Generate `server.cer` and `server.pfx` as described *xref:installation/self-signed-certificate.adoc[here]*.
 Use the password applied for the certificate store instead of `<PASSWORD>` in the next section.
 
-=== Run NOM server as console application 
+=== Run NOM server as console application
 
 [source, terminal]
 ----
     java -jar ./lib/server.jar \
-        --spring.neo4j.uri=neo4j: neo4j://localhost:7687\
+        --spring.neo4j.uri=neo4j:neo4j://localhost:7687\
         --spring.neo4j.authentication.username=neo4j \
         --spring.neo4j.authentication.password=lovelypassword \
         --server.port=8080 \
@@ -64,13 +64,13 @@ Use the password applied for the certificate store instead of `<PASSWORD>` in th
 Running as console application on Unix is documented *xref:installation/server.adoc#unix[here]*
 
 === Open NOM UI
-Wait for the server to start and then go to https://localhost:8080. 
-Login as admin:passw0rd and accept license terms. 
+Wait for the server to start and then go to https://localhost:8080.
+Login as admin:passw0rd and accept license terms.
 
 == Set up agent
-=== Register agent 
+=== Register agent
 In NOM UI - navigate to Agent settings (clicking on the sad robot takes you to the correct page) and add a new agent.
-Copy environment variables that are provided. 
+Copy environment variables that are provided.
 
 Full documentation on registering an agent is *xref:addition/agent-installation/index.adoc[here]*.
 
@@ -82,11 +82,11 @@ Full documentation on registering an agent is *xref:addition/agent-installation/
 Extracted directory will now be known as NOM_AGENT_HOME.
 
 === Configure agent
-Edit the export command below as follows: 
+Edit the export command below as follows:
 
-* Replace <OUTPUT_FROM_REGISTER_AGENT> with the four lines shown during the reigister agent step in the NOM UI. 
-* Replace the bolt URIs, usernames and passwords with the correct ones for your cluster. 
-* Remove any instance configurations you don't need or add configurations if you have more than three instances in your cluster. 
+* Replace <OUTPUT_FROM_REGISTER_AGENT> with the four lines shown during the reigister agent step in the NOM UI.
+* Replace the bolt URIs, usernames and passwords with the correct ones for your cluster.
+* Remove any instance configurations you don't need or add configurations if you have more than three instances in your cluster.
 
 [source, terminal]
 ----
@@ -113,7 +113,7 @@ CONFIG_INSTANCE_3_BOLT_PASSWORD=<SERVER_3_BOLT_PASSWORD> \
 CONFIG_INSTANCE_3_QUERY_LOG_PORT=9700 \
 CONFIG_INSTANCE_3_LOG_CONFIG_PATH=<SERVER3_HOME_DIR>/conf/server-logs.xml
 ----
-Run the edited export command. 
+Run the edited export command.
 
 Full documentation on configuring an agent is *xref:addition/agent-installation/index.adoc[here]*.
 
@@ -125,7 +125,7 @@ Full documentation on configuring an agent is *xref:addition/agent-installation/
 ----
 
 == Explore NOM UI
-Go to NOM UI and wait for DBMS to appear - this may take a few minutes. 
-You should be able to see that the agent has connected in the agents listing. 
+Go to NOM UI and wait for DBMS to appear - this may take a few minutes.
+You should be able to see that the agent has connected in the agents listing.
 Once the DBMS is shown in the home page, double-click on the name (initially a generated string) to edit it.
 Double-click on the DBMS to see the metrics, status, security panel, logs and upgrade pages for the DBMS.
