@@ -224,10 +224,10 @@ java -jar .\lib\server.jar
 [[self-registration-config]]
 [NOTE]
 ====
-If the NOM Server is required to support self-registered agents, then additional configuration properties needs to be provided to above commands. 
-These include `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION` or `grpc.server.security.trustCertCollection` which are described in the configuration reference table.
+If the NOM Server is required to support self-registered agents ensure that the configuration property `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION` (or `grpc.server.security.trustCertCollection`) is provided to above commands.
+It is described in the configuration reference table below.
 
-More about agent self-registration xref:../addition/agent-installation/self-registered.adoc#agent_mtls[here]
+Read more about agent self-registration xref:../addition/agent-installation/self-registered.adoc#agent_mtls[here].
 ====
 
 == Running NOM server behind a proxy [[behind_proxy]]
