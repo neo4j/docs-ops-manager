@@ -20,9 +20,10 @@ In any case, please extract the content from the downloaded `.zip` or `.tar.gz` 
 
 == Prerequisites
 
-* Windows or unix-based operating system
+* Windows or Unix-based operating system
 * Java 17
 * Key pair and certificate (as a PKCS12 file) to be used for TLS protected endpoints (see xref:installation/self-signed-certificate.adoc[] for test and demo purposes).
+If key pair and certificate were generated with OpenSSL, ensure that OpenSSL version 3.x or later was used.
 
 [NOTE]
 ====
@@ -223,20 +224,10 @@ java -jar .\lib\server.jar
 [[self-registration-config]]
 [NOTE]
 ====
-If the NOM Server is required to support self-registered agents, then additional configuration properties needs to be provided to above commands. 
-These include:
+If the NOM Server is required to support self-registered agents ensure that the configuration property `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION` (or `grpc.server.security.trustCertCollection`) is provided to above commands.
+It is described in the configuration reference table below.
 
-```
-GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION
-
-or
-
-grpc.server.security.trustCertCollection
-```
-
-which are described in the configuration reference table.
-
-More about agent self-registration xref:../addition/agent-installation/self-registered.adoc#agent_mtls[here]
+Read more about agent self-registration xref:../addition/agent-installation/self-registered.adoc#agent_mtls[here].
 ====
 
 == Running NOM server behind a proxy [[behind_proxy]]
