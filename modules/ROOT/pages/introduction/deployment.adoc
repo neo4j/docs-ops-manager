@@ -10,7 +10,7 @@ Currently, support is available for Linux and Windows using tarball or zip file 
 
 The NOM server can be deployed as a Docker container with newly published images.
 
-Currently, suppport for Kubernetes deployments is available only for NOM server with Helm Charts.
+Currently, support for Kubernetes deployments is available only for NOM server with Helm Charts.
 
 Support for package managers will be added in a later release.
 
@@ -19,7 +19,7 @@ Support for Aura instances and the ability to run NOM as a Service will be provi
 The agent should be deployed as a service on the host operating system of each Neo4j DBMS instance to be managed by NOM.
 Where more than one instance is hosted on the same host, only a single agent is required.
 
-The NOM server should be installed on a server with Java 17. This could be a dedicated server, or a shared application server.
+The NOM server can be installed on a dedicated server, or on a shared application server.
 
 The NOM persistence database should be created on a Neo4j instance.
 Ideally this would be a dedicated single instance for NOM with only the NOM persistence database deployed (in which case a license is supplied).
