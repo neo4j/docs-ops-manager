@@ -17,6 +17,57 @@ Charts allow for zooming/panning by clicking and specifying the area of interest
 To reset zoom in the chart you can double click inside the chart.
 Zoom/reset zoom affects all charts displayed on the page to allow investigating different metrics in a specific time range.
 
+== Metric list
+
+* Host metrics (per host)
+** CPU Usage System
+** CPU Usage User
+** CPU Idle
+** Free Memory and Total Memory
+** Used Memory and Total Memory
+** Swap Used and Limit
+* Instance metrics (per Neo4j instance)
+** Heap Used
+** Heap Committed
+** File Descriptors Open
+** Memory Buffer
+** Page Cache Hit Ratio
+** Page Cache Usage Ratio
+** Disk Used (/Data)
+** Disk Used (/Metrics)
+** Disk Used (/Logs)
+** Disk Used (Home)
+** Disk Used (/Transactions)
+** Bolt Connections Running
+** Bolt Connections Idle
+** Bolt Connections Closed
+** Bolt Connections Opened
+** Garbage Collection Young Gen
+** Garbage Collection Old Gen
+* Database metrics (per Neo4j database)
+** Active Read Transactions
+** Active Write Transactions
+** Committed Transactions
+** Last Transaction ID
+** Peak Concurrent Transactions
+** Transaction Rollbacks
+** Allocated IDs (Properties)
+** Allocated IDs (Relationships)
+** Allocated IDs (Nodes)
+** Replan Events
+** Disk Used (/Data)
+** Disk Used (/Transactions)
+** Store Size (Nodes)
+** Store Size (Properties)
+** Store Size (Relationships)
+** Store Size Total
+** Store Size Database
+** Node Count
+** Relationship Count
+** Checkpoint Events (Count)
+** Checkpoint Events (Cumulative Time)
+** Last Checkpoint (Duration)
+
 == Setting metric thresholds
 
 To inform administrators about noticeable changes in metrics by showing alerts and sending notifications, NOM supports defining metric thresholds directly from the metrics chart.
