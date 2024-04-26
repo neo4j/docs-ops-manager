@@ -8,7 +8,7 @@ image::architecture.png[width=500]
 * *Front end* - The user connects to NOM using a web interface.
 This web application communicates with the NOM Server using GraphQL API requests.
 
-* *NOM Server* - The NOM server is a Java application, packaged in a JAR file which is deployed to a Java server (running Java 17).
+* *NOM Server* - The NOM server is a Java application, packaged in a JAR file which is deployed to a Java server.
 
 * *NOM persistence* - The NOM server requires a Neo4j database (persistence) to store the operational data, and the recommendation is that this is a dedicated Neo4j single instance running just NOM to minimise impact on other databases.
 

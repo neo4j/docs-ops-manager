@@ -20,8 +20,8 @@ In any case, please extract the content from the downloaded `.zip` or `.tar.gz` 
 
 == Prerequisites
 
-* Windows or Unix-based operating system
-* Java 17
+* Windows or unix-based operating system
+* Java 17 or 21
 * Key pair and certificate (as a PKCS12 file) to be used for TLS protected endpoints (see xref:installation/self-signed-certificate.adoc[] for test and demo purposes).
 If key pair and certificate were generated with OpenSSL, ensure that OpenSSL version 3.x or later was used.
 
