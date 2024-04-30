@@ -1,12 +1,12 @@
 = Install agent
 
-* Download platform specific binary: https://neo4j.com/download-center/#ops-manager[Download]
+* Download platform specific binary: https://neo4j.com/deployment-center/?ops-manager[Download]
 +
 [NOTE]
-==== 
+====
 In certain environments, downloading agents is not an option.
 Therefore, NOM agent binaries are also bundled with Neo4j packages.
-NOM agent packages can be found in the `products` folder in the Neo4j home directory. 
+NOM agent packages can be found in the `products` folder in the Neo4j home directory.
 These binaries have support for the Neo4j version that they are bundled with.
 ====
 
