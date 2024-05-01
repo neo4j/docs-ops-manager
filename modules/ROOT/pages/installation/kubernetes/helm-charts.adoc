@@ -52,6 +52,12 @@ secretsFromSecrets:
   mTlsAgentCerts:
     secretName: ""
     key: "" # key in Secret for mTls agentCerts
+  ingressTlsCert:
+    secretName: ""
+    key: "" # key in Secret for mTls agentCerts
+  ingressTlsKey:
+    secretName: ""
+    key: "" # key in Secret for mTls agentCerts
 
 secrets:
   # storage
@@ -64,7 +70,10 @@ secrets:
   # jwt
   jwtSecret: ""
   # mTls
-  mTlsAgentCerts: ""
+  mTlsAgentCerts: "" # pem encoded string
+  # ingress tls
+  ingressTlsCert: "" # pem encoded string
+  ingressTlsKey: "" # pem encoded string
 
 service:
   http:
@@ -84,17 +93,25 @@ service:
     port: 9090
     loadBalancerIP: "" # optional static load balancer IP
 
+ingress:
+  enabled: false
+  sslPassthrough: false
+  ingressClassName: "nginx"
+  annotations: { }
+  httpHostName: ""
+  grpcHostName: ""
+
+nameOverride:
+
+additionalVolumeMounts: []
+
 image:
   name: neo4j/neo4j-ops-manager-server
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 hpa:
   spec:
     targetCPUUtilizationPercentage: 70
-
-nameOverride:
-
-additionalVolumeMounts:
 
 resources:
   limits:
@@ -104,89 +121,12 @@ resources:
     cpu: "0.2"
     memory: "4G"
 
-nodeSelector: {}
-
-tolerations: []
-
 affinity: {}
-----
-
-* Run the following command to install the NOM server to your Kubernetes cluster
-[source, shell, role=noheader]
-----
-helm install -f values.yaml --set secrets.tlsPkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
-----
-
-* If agents are self-registered, set the additional trusted agent certificates on the server before deploying the agents
-[source, shell, role=noheader]
-----
-helm install -f values.yaml --set secrets.tlsPkcs12CertFileContent=$(cat server.pfx | base64) --set secrets.mTlsAgentCerts=$(cat localhost.pem | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
-----
-
-* If the command doesn't report any error, check if the NOM server pod and services are running with `kubectl` command.
-
-* An example `values.yaml` file is given below for quick render tests of the chart using following command:
-[source, shell, role=noheader]
-----
-helm template nom /path/to/neo4j-ops-manager-server-<VERSION>.tgz -f values.yaml
-----
-
-.values.yaml
-[source, yaml]
-----
-server:
-
-config:
-  logFileName: "app.log"
-  logLevel: info
-  maxHeapSize: 8g
-  jwtTTL: 2h
-  grpc:
-    advertisedHost: "https://localhost:9090"
-
-secrets:
-  # storage
-  storageUri: "neo4j://localhost:7687"
-  storageUsername: "neo4j"
-  storagePassword: "passw0rd"
-  # tls
-  tlsPassword: "changeit"
-  tlsPkcs12CertFileContent: "<base64 encoded string of pkcs12 server cert content>"
-  # jwt
-  jwtSecret: ""
-  # mTls
-  mTlsAgentCerts: ""
-
-service:
-  http:
-    ipAddress: "https://localhost:8080"
-  grpc:
-    ipAddress: "https://localhost:9090"
-    port: 9090
-
-image:
-  name: neo4j/neo4j-ops-manager-server
-  pullPolicy: Always
-
-hpa:
-  spec:
-    targetCPUUtilizationPercentage: 70
-
-nameOverride:
-
-resources:
-  limits:
-    cpu: "2"
-    memory: "8G"
-  requests:
-    cpu: "0.2"
-    memory: "4G"
 
 nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
 ----
 
 === Using pre-configured secrets
@@ -222,3 +162,38 @@ To handle such cases it's advised to pass in the references to existing secrets 
 helm install -f values.yaml --set secrets.<NOM secret type such as `storage`>.<NOM secret key such as `password`>=$(kubectl get secret <secretName> -o jsonpath='{.data.<secretKey>}' | base64 -d) --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
 ----
 ====
+
+=== Ingress support
+
+* An Ingress resource can be deployed using the NOM server charts to support domain routing and SSL termination.
+* Enabling ingress support using `values.yaml` with SSL termination:
+[source,yaml]
+----
+secrets:
+  ingressTlsCert: "<cert file conent as PEM encoded string>"
+  ingressTlsKey: "<key file content as PEM encoded string>"
+
+ingress:
+  enabled: true
+  sslPassthrough: false
+  ingressClassName: "<your ingress controller class name e.g nginx>"
+  annotations: { } 
+  httpHostName: "<Hostname/domain for NOM server http endpoints>"
+  grpcHostName: "<Hostname/domain for NOM server grpc endpoints>"
+----
+* Terminating SSL at Ingress means the TLS is handled by the Ingress resource itself. To enable TLS handling, additional secrets need to be configured as shown in the example above. It's common practice to use something like link:https://cert-manager.io/docs/usage/ingress/[Cert Manager] to handle provisioning and renewal of certificate secrets.
+* `annotations` can be used to further customize the Ingress controller based on your requirements.
+
+==== Disabling SSL termination
+
+* If you would not like Ingress resource to handle SSL termination and only use it for domain routing and loadbalancing, Ingress needs to allow SSL passthrough and NOM server needs to be configured with the certiifcates as described above. An example of SSL passthrough:
+[source,yaml]
+----
+ingress:
+  enabled: true
+  sslPassthrough: true
+  ingressClassName: "<your ingress controller class name e.g nginx>"
+  annotations: { } 
+  httpHostName: "<Hostname/domain for NOM server http endpoints>"
+  grpcHostName: "<Hostname/domain for NOM server grpc endpoints>"
+----
