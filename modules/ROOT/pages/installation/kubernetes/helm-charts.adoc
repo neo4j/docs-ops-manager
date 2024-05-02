@@ -166,7 +166,7 @@ helm install -f values.yaml --set secrets.<NOM secret type such as `storage`>.<N
 === Ingress support
 
 * An Ingress resource can be deployed using the NOM server charts to support domain routing and SSL termination.
-* Enabling ingress support using `values.yaml` with SSL termination:
+* Enabling Ingress support using `values.yaml` with SSL termination:
 [source,yaml]
 ----
 secrets:
@@ -181,12 +181,15 @@ ingress:
   httpHostName: "<Hostname/domain for NOM server http endpoints>"
   grpcHostName: "<Hostname/domain for NOM server grpc endpoints>"
 ----
-* Terminating SSL at Ingress means the TLS is handled by the Ingress resource itself. To enable TLS handling, additional secrets need to be configured as shown in the example above. It's common practice to use something like link:https://cert-manager.io/docs/usage/ingress/[Cert Manager] to handle provisioning and renewal of certificate secrets.
+* Terminating SSL at Ingress means the TLS is handled by the Ingress resource itself. 
+To enable TLS handling, additional secrets need to be configured as shown in the previous example. 
+It's common practice to use something like link:https://cert-manager.io/docs/usage/ingress/[Cert Manager] to handle the provisioning and renewal of certificate secrets.
 * `annotations` can be used to further customize the Ingress controller based on your requirements.
 
 ==== Disabling SSL termination
 
-* If you would not like Ingress resource to handle SSL termination and only use it for domain routing and loadbalancing, Ingress needs to allow SSL passthrough and NOM server needs to be configured with the certiifcates as described above. An example of SSL passthrough:
+* If you would not like Ingress resource to handle SSL termination and only use it for domain routing and load balancing, Ingress needs to allow SSL passthrough, and NOM server needs to be configured with the certificates as described previously. 
+An example of SSL passthrough:
 [source,yaml]
 ----
 ingress:
