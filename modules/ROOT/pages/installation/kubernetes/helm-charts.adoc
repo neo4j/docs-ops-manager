@@ -126,7 +126,37 @@ affinity: {}
 nodeSelector: {}
 
 tolerations: []
+----
 
+* After setting required values, install the chart:
+[source,shell]
+----
+helm upgrade --install -f values.yaml <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
+----
+
+=== Using plain secrets
+
+* Secrets can be directly set in the `values.yaml` in appropriate format:
+[source,yaml]
+----
+secrets:
+  # storage
+  storageUri: "neo4j://localhost:7687"
+  storageUsername: "neo4j"
+  storagePassword: "password"
+  mTlsAgentCerts: |
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+----
+* Specifying cryptographic values:
+  - values in binary format like `pfx` or `p12` files need to be base64 encoded
+  - `pem` encoded certificate values need to be passed in as literal strings to maintain singnificant whitespaces as shown in the example above.
+
+* Values can also be passed in as command line parameters to helm `--set` argument: 
+[source,shell]
+----
+helm upgrade --install -f values.yaml --set secrets.tlsPkcs12CertFileContent=$(cat server.pfx | base64 -w0) --set secrets.mTlsAgentCerts=$(cat localhost.pem) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
 ----
 
 === Using pre-configured secrets
@@ -134,7 +164,7 @@ tolerations: []
 Adding senstive information as plain text in `values.yaml` is less secure in some environments.
 Such environments would have secrets being configured externally by privileged users or secure service agents such as link:https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar[Hashicorp Vault agent].
 These securely pre-configured secrets can be used to set sensitive values for NOM server helm chart using `secretsFromSecrets` configuration.
-This value requires a `secretName` and a `key` for a NOM secret value.
+This value requires a `secretName` and a `key` of a pre-configured K8s secret for a NOM secret value.
 Following is an example values snippet that demonstrates this usecase with inline comments:
 
 [source,yaml]
@@ -159,7 +189,7 @@ To handle such cases it's advised to pass in the references to existing secrets 
 
 [source,shell]
 ----
-helm install -f values.yaml --set secrets.<NOM secret type such as `storage`>.<NOM secret key such as `password`>=$(kubectl get secret <secretName> -o jsonpath='{.data.<secretKey>}' | base64 -d) --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
+helm upgrade --install values.yaml --set secrets.<NOM secret key such as `storagePassword`>=$(kubectl get secret <secretName> -o jsonpath='{.data.<secretKey>}' | base64 -d) --set secrets.tls.pkcs12CertFileContent=$(cat server.pfx | base64) <Helm release name> /path/to/neo4j-ops-manager-server-<VERSION>.tgz
 ----
 ====
 
