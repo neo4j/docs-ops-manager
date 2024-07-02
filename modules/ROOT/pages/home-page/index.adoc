@@ -4,7 +4,7 @@
 Once running, Ops Manager can, by default, be accessed by navigating to the following location:
 
 ----
-http(s)://<server>:8080
+https://<server>:8080
 ----
 
 Replace `server` with the hostname of the machine running Ops Manager Server.
