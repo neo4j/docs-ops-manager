@@ -15,9 +15,6 @@ Alternatively, you can download any version of the NOM Server, including the age
 In any case, please extract the content from the downloaded `.zip` or `.tar.gz` file to whichever directory you want to operate NOM from
 (in the following referenced as NOM server-folder).
 
-// [[server-package]]
-// == Server package: Client, server, and APIs
-
 == Prerequisites
 
 * Windows or unix-based operating system
@@ -346,3 +343,6 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | `error`, `warn`, `info`, `debug` or `trace`
 |===
 
+== Accessing Ops Manager
+
+For details on how to access Ops Manager after installation as described in the sections above, please see xref:../home-page/index.adoc[Home page].
