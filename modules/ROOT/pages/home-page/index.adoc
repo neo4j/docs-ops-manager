@@ -1,6 +1,15 @@
 = Home page
 :description: This section describes the Home Page of the Neo4j Ops Manager.
 
+Once running, Ops Manager can, by default, be accessed by navigating to the following location:
+
+----
+https://<server>:8080
+----
+
+Replace `server` with the hostname of the machine running Ops Manager Server.
+If Ops Manager is running on the computer you are reading this on, try `https://localhost:8080`.
+
 The default username is `admin` and the default password is `passw0rd`.
 To change the password from the user interface, click the top right settings icon that redirects you to the global settings.
 Then click *Settings* on the left side where you can find a form to change the password.
