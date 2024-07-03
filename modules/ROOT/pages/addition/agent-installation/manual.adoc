@@ -242,12 +242,12 @@ The following environment variables specify log configuration for the *agent*:
 
 === Monitored instance configuration
 
-For each managed DBMS instance on the host, the following environment variables need to be set to allow the agent to access the instance.
+The following environment variables need to be set to allow the agent to access the instance.
 
 [NOTE]
 ====
 If there is more than one DBMS being monitored by the same agent, repeat and enumerate the configuration of each DBMS by replacing the digit `1` below with `2`, `3`, and so on, for each instance.
-For example, name the first DBMS with `CONFIG_INSTANCE_1_NAME`, and the second with `CONFIG_INSTANCE_2_NAME`.
+For example, name the first DBMS with `CONFIG_INSTANCE_1_NAME`, and the second with `CONFIG_INSTANCE_2_NAME`, and so on.
 ====
 
 [cols="<,<,<",options="header"]
