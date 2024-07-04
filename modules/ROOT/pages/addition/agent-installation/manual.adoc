@@ -242,7 +242,13 @@ The following environment variables specify log configuration for the *agent*:
 
 === Monitored instance configuration
 
-For each managed DBMS instance on the host, the following environment variables need to be set to allow the agent to access the instance:
+The following environment variables need to be set to allow the agent to access the instance.
+
+[IMPORTANT]
+====
+If there is more than one DBMS being monitored by the same agent, repeat and enumerate the configuration of each DBMS by replacing the digit `1` below with `2`, `3`, and so on, for each instance.
+For example, name the first DBMS with `CONFIG_INSTANCE_1_NAME`, and the second with `CONFIG_INSTANCE_2_NAME`, and so on.
+====
 
 [cols="<,<,<",options="header"]
 |===
@@ -250,22 +256,28 @@ For each managed DBMS instance on the host, the following environment variables 
 | Description
 | Example
 
-| `CONFIG_INSTANCE_n_NAME`
-| Name of nth instance
-| my-instance-n
+| `CONFIG_INSTANCE_1_NAME`
+| Name of first instance
+| my-instance-1
 
-| `CONFIG_INSTANCE_n_BOLT_URI`
-| Bolt URI for nth instance with bolt or bolt+s protocol
+| `CONFIG_INSTANCE_1_BOLT_URI`
+| Bolt URI for first instance with bolt or bolt+s protocol
 | bolt://localhost:7687 or bolt+s://localhost:7687 or bolt+ssc://localhost:7687, depending on the local database setup
 
-| `CONFIG_INSTANCE_n_BOLT_USERNAME`
-| Bolt user name for nth instance
+| `CONFIG_INSTANCE_1_BOLT_USERNAME`
+| Bolt username for first instance
 | neo4j
 
-| `CONFIG_INSTANCE_n_BOLT_PASSWORD`
-| Bolt password for nth instance
+| `CONFIG_INSTANCE_1_BOLT_PASSWORD`
+| Bolt password for first instance
 | password
 |===
+
+[NOTE]
+====
+The instance name that you specify for `CONFIG_INSTANCE_n_NAME` will be used to identify your instance in NOM.
+For this reason, it is important that you specify unique names across your cluster.
+====
 
 [[querylog]]
 ==== Query log collection configuration
@@ -276,43 +288,32 @@ For each managed DBMS instance on the host, the following environment variables 
 | Description
 | Example
 
-| `CONFIG_INSTANCE_n_QUERY_LOG_PORT`
+| `CONFIG_INSTANCE_1_QUERY_LOG_PORT`
 | Port for connecting the agent to the Neo4j log4j appender.
 If not set, the query log collection feature is treated as disabled.
 | 9500
 
-| `CONFIG_INSTANCE_n_LOG_CONFIG_PATH`
+| `CONFIG_INSTANCE_1_LOG_CONFIG_PATH`
 | Path to the instance xref:../addition/../addition/instance-requirements.adoc#server_log_config[log4j config file].
 If set, appends the appropriate log appender automatically (including the port specified above).
 | /var/lib/neo4j/conf/server-logs.xml
 
-| `CONFIG_INSTANCE_n_QUERY_LOG_MIN_DURATION`
+| `CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION`
 | Minimum duration in milliseconds for a query to be logged (optional)
 | 100
 
-| `CONFIG_INSTANCE_n_QUERY_LOG_MIN_DURATION_FILTER_ERRORS`
+| `CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION_FILTER_ERRORS`
 | Enable filter for errors under the minimum duration in milliseconds (optional)
 | true
 
-| `CONFIG_INSTANCE_n_QUERY_LOG_DISABLE_OBFUSCATION`
+| `CONFIG_INSTANCE_1_QUERY_LOG_DISABLE_OBFUSCATION`
 | Disable the string literal obfuscation in queries (optional)
 | true
 
-| `CONFIG_INSTANCE_n_QUERY_LOG_INCLUDE_AGENT`
+| `CONFIG_INSTANCE_1_QUERY_LOG_INCLUDE_AGENT`
 | Collect and show queries coming from the NOM agent (optional)
 | true
 |===
-
-[IMPORTANT]
-====
-Environment variable considerations:
-
-* `n` in the above environment variables needs to be replaced with `1`, `2`, etc. for each of the monitored DBMS instances on the same host.
-For example, for a single monitored DBMS, the environment variables must be named as `CONFIG_INSTANCE_1_NAME`, `CONFIG_INSTANCE_1_BOLT_URI`, `CONFIG_INSTANCE_1_BOLT_USERNAME` and `CONFIG_INSTANCE_1_BOLT_PASSWORD`.
-* The instance name that you specify for `CONFIG_INSTANCE_n_NAME` will be used to identify your instance on NOM.
-For this reason, it is important that you specify unique names across your cluster.
-====
-
 
 [NOTE]
 ====
