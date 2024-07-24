@@ -328,6 +328,7 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | `optout.version-check`
 | `OPTOUT_VERSION_CHECK`
 | Set to true to opt out of automatic fetching of version information for NOM and Neo4j (optional)
+| false
 
 | `grpc.server.security.trustCertCollection`
 | `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION`
