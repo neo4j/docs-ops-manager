@@ -325,6 +325,11 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | Set to true to opt out of crash analytics being sent to Neo4j (optional)
 | false
 
+| `optout.version-check`
+| `OPTOUT_VERSION_CHECK`
+| Set to true to opt out of automatic fetching of version information for NOM and Neo4j (optional)
+| false
+
 | `grpc.server.security.trustCertCollection`
 | `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION`
 | File containing list of PEM encoded agent certificates. Required for agent self-registration. (optional)
