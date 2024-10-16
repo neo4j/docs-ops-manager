@@ -21,12 +21,12 @@ The default configuration can be changed with the following server configuration
 | PT20S
 
 | `ratelimiter.limit_for_period`
-| `RATELIMITER_LIMIT\__FOR__PERIOD`
+| `RATELIMITER_LIMIT_FOR_PERIOD`
 | Number of requests permitted (per IP) within the period.
 | 200
 
 | `ratelimiter.timeout_duration`
-| `RATELIMITER_TIMEOUT__DURATION`
+| `RATELIMITER_TIMEOUT_DURATION`
 | When the limit is hit, wait this amount of time and check again.
 | PT10S
 |===
