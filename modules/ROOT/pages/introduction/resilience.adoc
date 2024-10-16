@@ -35,7 +35,7 @@ The default configuration can be changed with the following server configuration
 
 Since query log capture can produce a vast amount of data depending on the workload and agent configuration, a so-called circuit breaker governs the reception of log data on the server side. If the amount of logs being received is vast enough to cause a degradation in handling of other messages, the circuit breaker will temporarily stop processing of query logs and assign full priority to other messages. Query log processing resumes automatically after some time has passed.
 
-The way to configure this behavior is to limit the amount of logs being transmitted by each agent. See *xref:../addition/agent-installation/self-registered.adoc#query_log[Query log collection configuration]*.
+The way to configure this behavior is to limit the amount of logs being transmitted by each agent. See *xref:../addition/agent-installation/self-registered.adoc#querylog[Query log collection configuration]*.
 
 == Data caching
 
