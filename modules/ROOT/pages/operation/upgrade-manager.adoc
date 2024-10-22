@@ -15,8 +15,8 @@ They are not a replacement for reading the documentation, upgrade-planning, and 
 image::upgrades.png[width=800]
 +
 
-. Select a version and request a step by step tailored plan to guide you through the upgrade of the managed DBMS from it’s current version to the selected version.
-Default settings (e.g. backup directory) can be overridden to suit your deploymemt environment and preferences. 
+. Select a version and request a step-by-step tailored plan to guide you through the upgrade of the managed DBMS from its current version to the selected version.
+Default settings (e.g. backup directory) can be overridden to suit your deployment environment and preferences.
 + 
 image::upgrades-choose-plan.png[width=800]
 +
@@ -31,7 +31,7 @@ image::upgrades-plan-in-progress.png[width=800]
 + 
 
 
-== Keeping verison information up to date
+== Keeping version information up to date
 
 === Auto-refresh of available Neo4j and NOM versions.
 NOM server periodically attempts an auto-refresh of available Neo4j and NOM versions by fetching version information from a central location.
@@ -40,9 +40,9 @@ As this requires access to external web resources, if NOM server is running behi
 For details, see xref:installation/server.adoc#behind_proxy[Running NOM server behind proxy].
 
 === Manual upload of version information
-If it is not feasible for NOM server to be configured to access extrernal web resources then versions can be refreshed by: 
+If it is not feasible for NOM server to be configured to access external web resources, then the available versions can be refreshed by:
 
-.  Downloading versions file from https://storage.googleapis.com/production-ops-manager-frontend-bucket/supported-neo4j-versions.yml 
+.  Downloading the latest version manifest file from https://storage.googleapis.com/production-ops-manager-frontend-bucket/supported-neo4j-versions.yml
 .  Uploading file to NOM manually
 
 image::version-fetch-error.png[width=800]

@@ -1,0 +1,60 @@
+= Resilience
+:description: This section describes the resilience features of Ops Manager.
+
+Neo4j Ops Manager is equipped with multiple features to ensure resilient service.
+
+== Rate limiting
+To avoid the server being overloaded by one or a few clients, a rate limit is applied per IP address. This helps ensure that the server is always available to respond to requests by putting a limit on the load an individual connection is allowed to place on the system.
+
+The default configuration can be changed with the following server configuration parameters.
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Default value
+
+| `ratelimiter.period`
+| `RATELIMITER_PERIOD`
+| The amount time before the rate limiter resets the number of requests.
+| PT20S
+
+| `ratelimiter.limit_for_period`
+| `RATELIMITER_LIMIT_FOR_PERIOD`
+| Number of requests permitted (per IP) within the period.
+| 200
+
+| `ratelimiter.timeout_duration`
+| `RATELIMITER_TIMEOUT_DURATION`
+| When the limit is hit, wait this amount of time and check again.
+| PT10S
+|===
+
+== Circuit breaker
+
+Since query log capture can produce a vast amount of data depending on the workload and agent configuration, a so-called circuit breaker governs the reception of log data on the server side. If the amount of logs being received is vast enough to cause a degradation in handling of other messages, the circuit breaker will temporarily stop processing of query logs and assign full priority to other messages. Query log processing resumes automatically after some time has passed.
+
+The circuit breaker is automatically configured and cannot be disabled. If there are problems, please reduce the amount of logs being sent by each agent. See *xref:../addition/agent-installation/self-registered.adoc#querylog[Query log collection configuration]*.
+
+[NOTE]
+====
+Best practices dictate the use of a minimum duration filter which greatly cuts down on the volume of logs to be processed, while preserving queries of interest. The built-in obfuscation functionality also helps by reducing query text cardinality.
+====
+
+== Data caching
+
+If the communication between the agent and server is interrupted, some amount of data will be cached on the agent-side and retransmitted once the connection is reestablished.
+
+[cols="<,<",options="header"]
+|===
+| Type of data
+| Cache size
+
+| Metrics
+| *Up to* 50 minutes (18 minutes if the query cache is full)
+
+| Query logs
+| 32 minutes or 32,768 unique queries, whichever happens first.
+
+|===
