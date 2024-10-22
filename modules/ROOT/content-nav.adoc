@@ -3,6 +3,7 @@
 * Introduction
 ** xref:introduction/overview.adoc[]
 ** xref:introduction/architecture.adoc[]
+** xref:introduction/resilience.adoc[]
 ** xref:introduction/deployment.adoc[]
 ** xref:introduction/versions.adoc[]
 
