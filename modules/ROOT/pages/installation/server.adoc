@@ -315,6 +315,11 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | Random string used for JWT signing (optional)
 | please-set-a-random-secret-string-here-for-jwt-signing
 
+| `jwt.time-to-live`
+| `JWT_TIME_TO_LIVE`
+| JWT time to live, configures the session expiration time. For syntax, see https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.conversion.durations[Spring documentation] (optional)
+| 1h
+
 | `optout.crash-analytics`
 | `OPTOUT_CRASH_ANALYTICS`
 | Set to true to opt out of product analytics being sent to Neo4j (optional)
