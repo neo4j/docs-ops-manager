@@ -66,7 +66,7 @@ For the metrics collection feature to work correctly, these configuration settin
 
 ** `server.metrics.filter=*`
 
-** Discovery service v2 *or* `server.metrics.jmx.enabled=true` (JMX)
+** Discovery service v2 *or* `server.metrics.jmx.enabled=true` (JMX metrics)
 
 [NOTE]
 ====
