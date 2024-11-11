@@ -70,7 +70,8 @@ For the metrics collection feature to work correctly, these configuration settin
 
 [NOTE]
 ====
-For Neo4j versions prior to 5.23, enabling link:https://neo4j.com/docs/java-reference/current/jmx-metrics/[JMX] is a requirement. For versions 5.23 or newer, it is recommended to leave JMX disabled and instead use link:https://neo4j.com/docs/operations-manual/current/clustering/setup/discovery/[discovery service v2].
+For Neo4j versions prior to 5.23, enabling link:https://neo4j.com/docs/java-reference/current/jmx-metrics/[JMX metrics] is a requirement.
+For versions 5.23 or newer, it is recommended to leave JMX metrics disabled and instead use link:https://neo4j.com/docs/operations-manual/current/clustering/setup/discovery/[discovery service v2].
 ====
 
 == User privileges
