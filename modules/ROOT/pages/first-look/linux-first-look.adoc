@@ -9,7 +9,7 @@ NOTE: The query log feature is only available for DBMSs with instances that are 
 == Create persistence DBMS
 
 === Download and extract
-Download latest Neo4j Linux/Mac executable from https://neo4j.com/deployement-center/?current-releases[here] and extract the package.
+Download latest Neo4j Linux/Mac executable from https://neo4j.com/deployment-center/?current-releases[here] and extract the package.
 Extracted directory location is referred to as NEO4J_HOME form now on.
 
 === Change password
@@ -29,11 +29,13 @@ Navigate to NEO4j_HOME and run:
 See link:https://neo4j.com/docs/operations-manual/current/installation/linux/tarball/[Neo4j Linux installation documentation] for more details about installing and running Neo4j.
 
 == Server installation
-=== Unpack NOM server from Neo4j package
+=== Download and unpack NOM server from the package
+
+Download latest NOM server Linux/Mac executable from https://neo4j.com/deployment-center/?current-releases#tools-tab[here] and extract the package.
 
 [source, terminal]
 ----
-   tar -xzf NEO4J_HOME/products/neo4j-ops-manager-server-*-unix.tar.gz
+   tar -xzf neo4j-ops-manager-server-*-unix.tar.gz
 ----
 
 Extracted directory is now known as NOM_SERVER_HOME.
