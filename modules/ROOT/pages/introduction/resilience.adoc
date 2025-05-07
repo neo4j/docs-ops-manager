@@ -52,9 +52,21 @@ If the communication between the agent and server is interrupted, some amount of
 | Cache size
 
 | Metrics
-| *Up to* 50 minutes (18 minutes if the query cache is full)
+| At least 20 minutes
 
 | Query logs
-| 32 minutes or 32,768 unique queries, whichever happens first.
+| Approximately 30 minutes, but at most 32,768 unique queries
+|===
 
+The metrics buffer can be adjusted by changing the outgoing message buffer size using the following agent configuration parameter.
+
+[cols="<,<,<",options="header"]
+|===
+| Variable
+| Description
+| Default
+
+| `CONFIG_OUTGOING_BUFFER_SIZE`
+| The maximum number of outgoing messages to buffer (optional)
+| 200
 |===
