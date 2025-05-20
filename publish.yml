@@ -22,6 +22,13 @@ ui:
 urls:
   html_extension_style: indexify
 
+antora:
+  extensions:
+  - require: "@neo4j-antora/antora-modify-sitemaps"
+    sitemap_version: '1.13'
+    sitemap_loc_version: 'current'
+    move_sitemaps_to_components: true
+
 asciidoc:
   extensions:
   - "@neo4j-documentation/remote-include"
@@ -42,6 +49,6 @@ asciidoc:
     includePDF: false
     nonhtmloutput: ""
     experimental: ''
-    copyright: 2024
+    copyright: 2025
     common-license-page-uri: https://neo4j.com/docs/license/
     check-mark: icon:check[]
