@@ -98,7 +98,7 @@ Define a name, select the DBMSs and alert levels in scope, select the channels, 
 
 +
 Email notifications can be sent to email addresses of NOM users as well as to external email addresses.
-Enter external email address in the "Notify to" field and confirm it with "Create".
+Enter an external email address in the "Notify to" field and confirm with "Create".
 Previously used external email addresses are saved and can be selected from the dropdown.
 
 image::notifications-notification-configure.png[width=800]
