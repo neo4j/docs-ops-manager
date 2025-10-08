@@ -19,14 +19,14 @@ NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to
 
 === Install and prepare
 
-Refer to the link:{neo4j-docs-base-uri}/operations-manual/current/installation[Operations Manual -> Installation] for information on how to install Neo4j.
+Refer to the link:https://neo4j.com/docs/operations-manual/current/installation/)[Operations Manual -> Installation] for information on how to install Neo4j.
 
 Ensure that the Neo4j database to be used for NOM persistence fulfills the following requirements:
 
 * The database is empty and does not contain any indexes or constraints.
 * Cypher 5 is selected as default language for this database. 
 For example, this can be done by executing the statement `ALTER DATABASE neo4j SET DEFAULT LANGUAGE CYPHER 5`. 
-For more details see link:{neo4j-docs-base-uri}/cypher-manual/current/queries/select-version/#select-default-cypher-version[Cypher Manual -> Select Cypher version].
+For more details see link:https://neo4j.com/docs/cypher-manual/current/queries/select-version/[Cypher Manual -> Select Cypher version].
 
 NOM server installation requires specifying credentials of a Neo4j user. 
 Ensure that it fulfills the following requirements:
