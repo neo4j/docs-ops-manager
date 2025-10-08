@@ -8,22 +8,35 @@ The NOM persistence DBMS is used to store all NOM data (topology, metrics, etc.)
 The DBMS and the NOM Server need to be running simultaneously, or the NOM Server will not work.
 
 
-== Self managed DBMS
+== Self-managed DBMS
 
 NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to 16 GB of RAM for the use as NOMs persistence.
 
 === Specifications
-* Neo4j Enterprise Edition 4.4 or 5.x
+* Neo4j Enterprise Edition 4.4, 5.x, or 2025.x
 * At least 10 GB free disk space
 * For minimum requirements, see also link:/docs/operations-manual/current/installation/requirements/[Operations Manual -> System requirements].
 
 === Install and prepare
 
+<<<<<<< HEAD
 Refer to the link:https://neo4j.com/docs/operations-manual/current/installation/[Operations Manual -> Installation] for information on how to install Neo4j.
+=======
+Refer to the link:https://neo4j.com/docs/operations-manual/current/installation/)[Operations Manual -> Installation] for information on how to install Neo4j.
+>>>>>>> 71c47d9 (Document using Cypher 5 for NOM persistence (#262) (#265))
 
-* Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
-Be aware that that user needs full admin access.
-The login to the NOM Server is needed for server installation.
+Ensure that the Neo4j database to be used for NOM persistence fulfills the following requirements:
+
+* The database is empty and does not contain any indexes or constraints.
+* Cypher 5 is selected as default language for this database. 
+For example, this can be done by executing the statement `ALTER DATABASE neo4j SET DEFAULT LANGUAGE CYPHER 5`. 
+For more details see link:https://neo4j.com/docs/cypher-manual/current/queries/select-version/[Cypher Manual -> Select Cypher version].
+
+NOM server installation requires specifying credentials of a Neo4j user. 
+Ensure that it fulfills the following requirements:
+
+* If a built-in admin user (`neo4j`) is used, ensure it has a secure password.
+* If a new user is created, ensure it has full admin access.
 
 == AuraDB
 
