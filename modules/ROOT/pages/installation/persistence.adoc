@@ -19,7 +19,7 @@ NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to
 
 === Install and prepare
 
-Refer to the link:https://neo4j.com/docs/operations-manual/current/installation/)[Operations Manual -> Installation] for information on how to install Neo4j.
+Refer to the link:https://neo4j.com/docs/operations-manual/current/installation/[Operations Manual -> Installation] for information on how to install Neo4j.
 
 Ensure that the Neo4j database to be used for NOM persistence fulfills the following requirements:
 
