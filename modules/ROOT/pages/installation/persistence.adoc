@@ -19,7 +19,7 @@ NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to
 
 === Install and prepare
 
-* Please refer to the link:/docs/operations-manual/current/installation[Operations Manual -> Installation] for information on how to install Neo4j.
+Refer to the link:https://neo4j.com/docs/operations-manual/current/installation/[Operations Manual -> Installation] for information on how to install Neo4j.
 
 * Make sure to set a secure password for the built-in admin (`neo4j`) and/or create a specific user for the NOM Server.
 Be aware that that user needs full admin access.
@@ -45,7 +45,7 @@ This is done via `MATCH (n) RETURN count(n)` which should return 0.
 This is done via `SHOW INDEXES` and `SHOW CONSTRAINTS`.
 
 
-The default database for a user is either the home database for that user if it is set or the default database for the DBMS. 
+The default database for a user is either the home database for that user if it is set or the default database for the DBMS.
 The default database for the DBMS is 'neo4j' if not explicitly configured.
 ====
 
