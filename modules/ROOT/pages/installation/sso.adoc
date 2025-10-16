@@ -53,12 +53,12 @@ Using the `app.username-password-login.enabled` property,
 | `app.sso.configurations.<CONFIG>.admin-check`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ADMIN_CHECK`
 | SpEL expression to check if the user should be assigned the NOM ADMIN role in NOM. See below for details.
-| ['groups']?.contains('b5c63d30-70c3-4181-8c19-1b58e613f55b')
+| ['groups']?.contains('aaa63d30-70c3-4181-8c19-1b58e613f55b')
 
 | `app.sso.configurations.<CONFIG>.read-only-user-check`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK`
 | SpEL expression to check if the user should be assigned the NOM READ_ONLY_USER role in NOM. See below for details.
-| ['groups']?.contains('1f72c5c5-a181-458a-a933-8ea7339d1310')
+| ['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')
 |===
 
 The `admin-check` and `read-only-user-check` properties are SpEL expressions that are evaluated against the claims in the access token obtained from the IdP.
@@ -117,33 +117,33 @@ The following table describes additional configuration properties required for s
 | `app.sso.configurations.<CONFIG>.scopes`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
 | Comma-separated list of scopes to request during authentication. The scope should contain the application ID URI followed by the scope name created in the previous step.
-| api://8930e55f-5f3e-4da8-9002-2830225aae1b/nomserver
+| api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver
 
 | `app.sso.configurations.<CONFIG>.authority`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
 | Authority URL of the Entra ID tenant. It can be found in the "Endpoints" section of the application page.
-| https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f
+| https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f
 
 | `app.sso.configurations.<CONFIG>.issuer`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
 | Issuer URL for validating the access token.
-| https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
+| https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
 |===
 
 
-In the example below, the group membership in `b5c63d30-70c3-4181-8c19-1b58e613f55b` would result in the user being assigned the `ADMIN` role in NOM, while membership in `1f72c5c5-a181-458a-a933-8ea7339d1310` would result in the `READ_ONLY_USER` role.
+In the example below, the group membership in `aaa63d30-70c3-4181-8c19-1b58e613f55b` would result in the user being assigned the `ADMIN` role in NOM, while membership in `bbb2c5c5-a181-458a-a933-8ea7339d1310` would result in the `READ_ONLY_USER` role.
 
 [source,shell]
 ----
 export APP_SSO_ACTIVE_CONFIGURATIONS=ENTRA
 export APP_SSO_CONFIGURATIONS_ENTRA_IDP_TYPE=ENTRA_ID
 export APP_SSO_CONFIGURATIONS_ENTRA_DISPLAY_NAME="Login with Entra ID"
-export APP_SSO_CONFIGURATIONS_ENTRA_CLIENT_ID=8930e55f-5f3e-4da8-9002-2830225aae1b
-export APP_SSO_CONFIGURATIONS_ENTRA_ISSUER=https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
-export APP_SSO_CONFIGURATIONS_ENTRA_SCOPES=api://8930e55f-5f3e-4da8-9002-2830225aae1b/nomserver
-export APP_SSO_CONFIGURATIONS_ENTRA_AUTHORITY=https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f
-export APP_SSO_CONFIGURATIONS_ENTRA_ADMIN_CHECK="['groups']?.contains('b5c63d30-70c3-4181-8c19-1b58e613f55b')"
-export APP_SSO_CONFIGURATIONS_ENTRA_READ_ONLY_USER_CHECK="['groups']?.contains('1f72c5c5-a181-458a-a933-8ea7339d1310')"
+export APP_SSO_CONFIGURATIONS_ENTRA_CLIENT_ID=ccc0e55f-5f3e-4da8-9002-2830225aae1b
+export APP_SSO_CONFIGURATIONS_ENTRA_ISSUER=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
+export APP_SSO_CONFIGURATIONS_ENTRA_SCOPES=api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver
+export APP_SSO_CONFIGURATIONS_ENTRA_AUTHORITY=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f
+export APP_SSO_CONFIGURATIONS_ENTRA_ADMIN_CHECK="['groups']?.contains('aaa63d30-70c3-4181-8c19-1b58e613f55b')"
+export APP_SSO_CONFIGURATIONS_ENTRA_READ_ONLY_USER_CHECK="['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')"
 ----
 
 == Troubleshooting
