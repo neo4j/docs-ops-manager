@@ -351,6 +351,62 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | `LOGGING_LEVEL_COM_NEO4J`
 | Log level of the `com.neo4j` logger (its output corresponds to what NOM server itself logs). Default: `info`. (optional)
 | `error`, `warn`, `info`, `debug` or `trace`
+
+| `logging.level.com.neo4j`
+| `LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG`
+| Log level of the configuration logger. Setting it to `debug` is useful for troubleshooting SSO issues. Default: `info`. (optional)
+| `error`, `warn`, `info`, `debug` or `trace`
+
+| `app.sso.active-configurations`
+| `APP_SSO_ACTIVE_CONFIGURATIONS`
+| Lists comma-separated names of configurations that should be offered as login options on the NOM login page.
+| `myConfig1,myconfig2`
+
+| `app.username-password-login.enabled`
+| `APP_USERNAME_PASSWORD_LOGIN_ENABLED`
+| Username/password login can be enabled or disabled, enabling SSO login either be offered additionally or to be the only login method. If disabled, the pages "NOM Administrators" and "Profile" will not be available in the NOM UI.
+| `false`
+
+| `app.sso.configurations.<CONFIG>.idp-type`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE`
+| Type of the Identity Provider (IdP). Currently only `ENTRA_ID`, `GOOGLE_IDENTITY` and `OKTA` are supported.
+| `ENTRA_ID`
+
+| `app.sso.configurations.<CONFIG>.display-name`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_DISPLAY_NAME`
+| Display name of the login option on the NOM login page.
+| `Login with Entra ID`
+
+| `app.sso.configurations.<CONFIG>.admin-check`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ADMIN_CHECK`
+| SpEL expression to check if the user should be assigned the NOM ADMIN role in NOM. See below for details.
+| `['groups']?.contains('aaa63d30-70c3-4181-8c19-1b58e613f55b')`
+
+| `app.sso.configurations.<CONFIG>.read-only-user-check`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK`
+| SpEL expression to check if the user should be assigned the NOM READ_ONLY_USER role in NOM. See below for details.
+| `['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')`
+
+| `app.sso.configurations.<CONFIG>.client-id`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
+| Client ID of the Entra ID application.
+| `ccc0e55f-5f3e-4da8-9002-2830225aae1b`
+
+| `app.sso.configurations.<CONFIG>.scopes`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
+| Comma-separated list of scopes to request during authentication. The scope should contain the application ID URI followed by the scope name created in the previous step.
+| `api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver`
+
+| `app.sso.configurations.<CONFIG>.authority`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
+| For Entra ID and Okta IdP. Authority URL of the Entra ID tenant. It can be found in the "Endpoints" section of the application page.
+| `https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f`
+
+| `app.sso.configurations.<CONFIG>.issuer`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
+| For Entra ID and Okta IdP. Issuer URL for validating the access token. Currently, it is the same as the authority URL with `/v2.0` appended to it.
+| `https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0`
+
 |===
 
 == Accessing Ops Manager
