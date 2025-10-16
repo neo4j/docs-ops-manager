@@ -126,7 +126,7 @@ The following table describes additional configuration properties required for s
 
 | `app.sso.configurations.<CONFIG>.issuer`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
-| Issuer URL for validating the access token.
+| Issuer URL for validating the access token. Currently, it is the same as the authority URL with `/v2.0` appended to it.
 | https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
 |===
 
