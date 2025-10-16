@@ -3,25 +3,23 @@
 
 == Overview
 
-
+TODO
 
 
 == Configuration
 
-One or more SSO configs can be set up containing the properties needed to perform SSO authentication with an external Identity Provider (IdP).
+One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
 
 Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
 The name can contain only letters and digits. In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used.
 
-The configuration contains properties needed to obtain an access token on the NOM frontend side, validate the access token on the NOM backend side and assign a NOM role to the SSO user.
-Only the properties needed for obtaining the token are send to the frontend.
+The configuration contains options needed to obtain an access token on the NOM frontend side, validate the access token on the NOM backend side and assign a NOM role to the SSO user.
+Only the options needed for obtaining the token are send to the frontend.
 
 Configurations are validated during the startup of NOM server.
 If a configuration is invalid, the errors are reported in the logs.
 
-Using the `app.username-password-login.enabled` property,
-
-=== Common properties
+=== Common options
 
 [cols="<,<,<, <",options="header"]
 |===
@@ -61,12 +59,47 @@ Using the `app.username-password-login.enabled` property,
 | ['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')
 |===
 
-The `admin-check` and `read-only-user-check` properties are SpEL expressions that are evaluated against the claims in the access token obtained from the IdP.
+==== Role assignment
+
+The `admin-check` and `read-only-user-check` options are https://docs.spring.io/spring-framework/reference/core/expressions/language-ref.html[SpEL expressions] that are evaluated against the claims in the access token obtained from the IdP.
+
+The claims object is available as the root object in the expression context.
+
 The expressions should evaluate to `true` or `false`.
 If the `admin-check` expression evaluates to `true`, the user is assigned the NOM Admin role in NOM.
 Otherwise, the read-only-user-check expression is evaluated.
 If it evaluates to `true`, the user is assigned the read-only role in NOM.
 If both expressions evaluate to `false`, the user is denied access to NOM.
+
+The permissions of the read-only role include:
+
+* Viewing DBMS status
+* Viewing DBMS metrics
+* Viewing and downloading DBMS query logs
+* Viewing agents and their details
+* Viewing the Upgrades page
+* Read-only access to the DBMS Security page
+
+To debug issues with role assignment, enable debug logging by setting the NOM server config option `logging.level.com.neo4j.opsmanager.server.config` to `debug`.
+With this setting, the evaluated results of the role assignment expressions are logged during user login, starting with a log line containing `SsoConfig tracing expression`.
+Example:
+
+[source,log]
+----
+2025-10-16T12:26:45.602+02:00 DEBUG 191053 --- [or-http-epoll-4] c.n.opsmanager.server.config.SsoConfigs  :
+SsoConfig tracing expression ['groups']?.contains('xb5c63d30-70c3-4181-8c19-1b58e613f55b') && ['groups']?.contains('aaa63d30-a181-458a-a933-8ea7339d1310')
+on the claims object
+{
+  sub=...,
+  ...
+  groups=[aaa63d30-a181-458a-a933-8ea7339d1310, ..., ...],
+  ...
+}
+2025-10-16T12:26:45.607+02:00 DEBUG 191053 --- [or-http-epoll-4] c.n.opsmanager.server.config.SsoConfigs  :
+Method call: [aaa63d30-a181-458a-a933-8ea7339d1310, ..., ...]}.contains}([aaa63d30-a181-458a-a933-8ea7339d1310]}) -> true}
+...
+----
+
 
 === Microsoft Entra ID
 
@@ -99,7 +132,7 @@ image::entra-id-add-groups-claim.png[width=400]
 
 ==== Configure NOM server for SSO
 
-The following table describes additional configuration properties required for setting up SSO with Entra ID.
+The following table describes additional configuration options required for setting up SSO with Entra ID.
 
 
 [cols="<,<,<, <",options="header"]
@@ -130,12 +163,20 @@ The following table describes additional configuration properties required for s
 | https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
 |===
 
+==== Example configuration
 
-In the example below, the group membership in `aaa63d30-70c3-4181-8c19-1b58e613f55b` would result in the user being assigned the `ADMIN` role in NOM, while membership in `bbb2c5c5-a181-458a-a933-8ea7339d1310` would result in the `READ_ONLY_USER` role.
+The following is an example configuration using environment variables to set up a single SSO configuration named `ENTRA` and disable username/password login.
+
+[IMPORTANT]
+====
+Make to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
+This depends on the shell you are using.
+====
 
 [source,shell]
 ----
 export APP_SSO_ACTIVE_CONFIGURATIONS=ENTRA
+export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
 export APP_SSO_CONFIGURATIONS_ENTRA_IDP_TYPE=ENTRA_ID
 export APP_SSO_CONFIGURATIONS_ENTRA_DISPLAY_NAME="Login with Entra ID"
 export APP_SSO_CONFIGURATIONS_ENTRA_CLIENT_ID=ccc0e55f-5f3e-4da8-9002-2830225aae1b
@@ -148,4 +189,7 @@ export APP_SSO_CONFIGURATIONS_ENTRA_READ_ONLY_USER_CHECK="['groups']?.contains('
 
 == Troubleshooting
 
+TODO
+
 logging.level.com.neo4j.opsmanager.server.config=debug
+
