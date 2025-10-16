@@ -391,7 +391,6 @@ See xref:/installation/sso.adoc#_role_assignment[Role assignment] for details.
 See xref:/installation//sso.adoc#_role_assignment[Role assignment] for details.
 | `['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')`
 
-
 | `app.sso.configurations.<CONFIG>.client-id`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
 | Client ID of the Entra ID application.
@@ -400,7 +399,7 @@ See xref:/installation//sso.adoc#_role_assignment[Role assignment] for details.
 | `app.sso.configurations.<CONFIG>.scopes`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
 | Comma-separated list of scopes to request during authentication.
-The scope should contain the application ID URI followed by the scope name created in the previous step.
+The scope should contain the "Application ID URI" followed by the scope name created in the previous step.
 | `api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver`
 
 | `app.sso.configurations.<CONFIG>.authority`
@@ -418,7 +417,7 @@ It is usually derived from "Directory (tenant) ID" of the Entra ID app.
 | `app.sso.configurations.<CONFIG>.audience`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
 | Audience for validating the access token.
-It is usually the same as the client ID (for tokens of version 1.0 it is prefixed by `api://`. (optional)
+It is usually the same as the "Application ID URI" shown on the "Expose an API" page in Entra ID. (optional)
 | `api://ccc0e55f-5f3e-4da8-9002-2830225aae1b` (v1.0 tokens) or `ccc0e55f-5f3e-4da8-9002-2830225aae1b` (v2.0 tokens)
 
 |===
