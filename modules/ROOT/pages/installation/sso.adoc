@@ -1,0 +1,151 @@
+= Single Sign-On (SSO) Configuration
+:description: This section describes the configuration steps to enable Single Sign-On (SSO) for NOM server
+
+== Overview
+
+
+
+
+== Configuration
+
+One or more SSO configs can be set up containing the properties needed to perform SSO authentication with an external Identity Provider (IdP).
+
+Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
+The name can contain only letters and digits. In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used.
+
+The configuration contains properties needed to obtain an access token on the NOM frontend side, validate the access token on the NOM backend side and assign a NOM role to the SSO user.
+Only the properties needed for obtaining the token are send to the frontend.
+
+Configurations are validated during the startup of NOM server.
+If a configuration is invalid, the errors are reported in the logs.
+
+Using the `app.username-password-login.enabled` property,
+
+=== Common properties
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.active-configurations`
+| `APP_SSO_ACTIVE_CONFIGURATIONS`
+| Lists comma-separated names of configurations that should be offered as login options on the NOM login page.
+| myConfig1,myconfig2
+
+| `app.username-password-login.enabled`
+| `APP_USERNAME_PASSWORD_LOGIN_ENABLED`
+| Username/password login can be enabled or disabled, enabling SSO login either be offered additionally or to be the only login method.
+| false
+
+| `app.sso.configurations.<CONFIG>.idp-type`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE`
+| Type of the Identity Provider (IdP). Currently only `ENTRA_ID`, `GOOGLE_IDENTITY` and `OKTA` are supported.
+| ENTRA_ID
+
+| `app.sso.configurations.<CONFIG>.display-name`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_DISPLAY_NAME`
+| Display name of the login option on the NOM login page.
+| Login with Entra ID
+
+| `app.sso.configurations.<CONFIG>.admin-check`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ADMIN_CHECK`
+| SpEL expression to check if the user should be assigned the NOM ADMIN role in NOM. See below for details.
+| ['groups']?.contains('b5c63d30-70c3-4181-8c19-1b58e613f55b')
+
+| `app.sso.configurations.<CONFIG>.read-only-user-check`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK`
+| SpEL expression to check if the user should be assigned the NOM READ_ONLY_USER role in NOM. See below for details.
+| ['groups']?.contains('1f72c5c5-a181-458a-a933-8ea7339d1310')
+|===
+
+The `admin-check` and `read-only-user-check` properties are SpEL expressions that are evaluated against the claims in the access token obtained from the IdP.
+The expressions should evaluate to `true` or `false`.
+If the `admin-check` expression evaluates to `true`, the user is assigned the NOM Admin role in NOM.
+Otherwise, the read-only-user-check expression is evaluated.
+If it evaluates to `true`, the user is assigned the read-only role in NOM.
+If both expressions evaluate to `false`, the user is denied access to NOM.
+
+=== Microsoft Entra ID
+
+NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID (formerly Azure Active Directory) using implicit authentication flow.
+
+==== Set up Entra ID Application
+
+* Go to Azure Services: https://portal.azure.com/#home
+* Navigate to "App registrations", create a new App registration:
+** Assign a name to it, e.g. "NOM SSO".
+** Enter https://your_nom_server:port/entra-id-callback as a "Single-page application (SPA)" callback URL.
+** Click "Register".
++
+image::entra-id-register-application.png[width=800]
+
+* On the application page, open the link "Expose an API".
+** Click "Add a scope", leaving the Application ID URI as is and confirming with "Save and continue".
++
+image::entra-id-add-a-scope.png[width=800]
+** In the "Add a scope" form, choose a scope name, e.g. "nomserver", and fill in the required fields.
+** Confirm with "Add scope".
++
+image::entra-id-add-a-scope-form.png[width=400]
+
+* On the application page, open the link "Token configuration"
+** Click "Add groups claim".
+Specify group types needed to assign the NOM role and how they should be included in the token claims and confirm with "Add".
++
+image::entra-id-add-groups-claim.png[width=400]
+
+==== Configure NOM server for SSO
+
+The following table describes additional configuration properties required for setting up SSO with Entra ID.
+
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.configurations.<CONFIG>.client-id`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
+| Client ID of the Entra ID application.
+|
+
+| `app.sso.configurations.<CONFIG>.scopes`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
+| Comma-separated list of scopes to request during authentication. The scope should contain the application ID URI followed by the scope name created in the previous step.
+| api://8930e55f-5f3e-4da8-9002-2830225aae1b/nomserver
+
+| `app.sso.configurations.<CONFIG>.authority`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
+| Authority URL of the Entra ID tenant. It can be found in the "Endpoints" section of the application page.
+| https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f
+
+| `app.sso.configurations.<CONFIG>.issuer`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
+| Issuer URL for validating the access token.
+| https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
+|===
+
+
+In the example below, the group membership in `b5c63d30-70c3-4181-8c19-1b58e613f55b` would result in the user being assigned the `ADMIN` role in NOM, while membership in `1f72c5c5-a181-458a-a933-8ea7339d1310` would result in the `READ_ONLY_USER` role.
+
+[source,shell]
+----
+export APP_SSO_ACTIVE_CONFIGURATIONS=ENTRA
+export APP_SSO_CONFIGURATIONS_ENTRA_IDP_TYPE=ENTRA_ID
+export APP_SSO_CONFIGURATIONS_ENTRA_DISPLAY_NAME="Login with Entra ID"
+export APP_SSO_CONFIGURATIONS_ENTRA_CLIENT_ID=8930e55f-5f3e-4da8-9002-2830225aae1b
+export APP_SSO_CONFIGURATIONS_ENTRA_ISSUER=https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
+export APP_SSO_CONFIGURATIONS_ENTRA_SCOPES=api://8930e55f-5f3e-4da8-9002-2830225aae1b/nomserver
+export APP_SSO_CONFIGURATIONS_ENTRA_AUTHORITY=https://login.microsoftonline.com/54e85725-ed2a-49a4-a19e-11c8d29f9a0f
+export APP_SSO_CONFIGURATIONS_ENTRA_ADMIN_CHECK="['groups']?.contains('b5c63d30-70c3-4181-8c19-1b58e613f55b')"
+export APP_SSO_CONFIGURATIONS_ENTRA_READ_ONLY_USER_CHECK="['groups']?.contains('1f72c5c5-a181-458a-a933-8ea7339d1310')"
+----
+
+== Troubleshooting
+
+logging.level.com.neo4j.opsmanager.server.config=debug
