@@ -128,28 +128,13 @@ NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID
 
 ==== Set up Entra ID Application
 
-* Go to Azure Services: https://portal.azure.com/#home
-* Navigate to "App registrations", create a new App registration:
-** Assign a name to it, e.g. "NOM SSO".
-** Enter https://your_nom_server:port/entra-id-callback as a "Single-page application (SPA)" callback URL.
-** Click "Register".
-+
-image::entra-id-register-application.png[width=800]
+The actual setup can vary depending on customer-specific organisation.
 
-* On the application page, open the link "Expose an API".
-** Click "Add a scope", leaving the Application ID URI as is and confirming with "Save and continue".
-+
-image::entra-id-add-a-scope.png[width=800]
-** In the "Add a scope" form, choose a scope name, e.g. "nomserver", and fill in the required fields.
-** Confirm with "Add scope".
-+
-image::entra-id-add-a-scope-form.png[width=400]
+Following are the minimum requirements for a compatible Entra ID App registration:
 
-* On the application page, open the link "Token configuration"
-** Click "Add groups claim".
-Specify group types needed to assign the NOM role and how they should be included in the token claims and confirm with "Add".
-+
-image::entra-id-add-groups-claim.png[width=400]
+* Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>>/entra-id-callback` (omit the port if using default 443).
+* An API with a defined scope is exposed by the Entra ID app.
+* User JWT claims contain information needed for role assignment in NOM. It can be done by including group claims in the token.
 
 ==== Configure NOM server for SSO
 
