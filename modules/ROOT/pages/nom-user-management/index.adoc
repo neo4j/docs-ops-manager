@@ -4,6 +4,7 @@
 *User Management* allows creation and management of NOM users enabling persons who manage the Neo4j estate to be assigned appropriate access levels according to their role. 
 The effective access levels of a NOM user are reflected in the NOM UI appropriately.
 
+[#_roles_of_nom_users]
 == Roles of NOM users
 
 [%noheader]
@@ -16,6 +17,9 @@ The effective access levels of a NOM user are reflected in the NOM UI appropriat
 |Administrator
 |Has access to features of NOM as configured by NOM Admin.
 Can not administer NOM users.
+
+|read-only Administrator (for SSO-user only)
+| Has view-only access to the following features of NOM: DBMS status, metrics and logs, as well as agents and the upgrades page.
 |===
 
 [NOTE]

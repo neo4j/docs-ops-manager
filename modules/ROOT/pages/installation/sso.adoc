@@ -14,11 +14,11 @@ When both methods are enabled, users can choose the login method on the NOM logi
 One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
 
 Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
-The name can contain only letters and digits. In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used.
+The name can be freely chosen, but should only contain letters and digits.
 
-The configuration contains options needed to obtain an access token on the NOM frontend side, validate the access token on the NOM backend side and map token claims to an SSO user in NOM, including assign a NOM role to the SSO user.
+The configuration contains options needed to obtain, validate and map access tokens to SSO users in NOM, including assigning NOM roles to SSO users.
 
-Only the options needed for obtaining the token are send to the frontend.
+Only the options needed for obtaining the token are sent to the frontend.
 
 Configurations are validated during the startup of NOM server.
 If a configuration is invalid, the errors are reported in the logs.
@@ -42,10 +42,21 @@ If a configuration is invalid, the errors are reported in the logs.
 | Username/password login can be enabled or disabled, enabling SSO login either be offered additionally or to be the only login method.
 If disabled, the pages "NOM Administrators" and "Profile" will not be available in the NOM UI.
 | `false`
+|===
+
+In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used (e.g. "myConfig1").
+
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
 
 | `app.sso.configurations.<CONFIG>.idp-type`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE`
-| Type of the Identity Provider (IdP). Currently only `ENTRA_ID`, `GOOGLE_IDENTITY` and `OKTA` are supported.
+| Type of the Identity Provider (IdP). Currently `ENTRA_ID`, `GOOGLE_IDENTITY` and `OKTA` are supported.
 | `ENTRA_ID`
 
 | `app.sso.configurations.<CONFIG>.display-name`
@@ -94,19 +105,10 @@ The `admin-check` and `read-only-user-check` options are https://docs.spring.io/
 The claims object is available as the root object in the expression context.
 
 The expressions should evaluate to `true` or `false`.
-If the `admin-check` expression evaluates to `true`, the user is assigned the NOM Admin role in NOM.
+If the `admin-check` expression evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[NOM Admin role].
 Otherwise, the read-only-user-check expression is evaluated.
-If it evaluates to `true`, the user is assigned the read-only role in NOM.
+If it evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[read-only Administrator] role.
 If both expressions evaluate to `false`, the user is denied access to NOM.
-
-The permissions of the read-only role include:
-
-* Viewing DBMS status
-* Viewing DBMS metrics
-* Viewing and downloading DBMS query logs
-* Viewing agents and their details
-* Viewing the Upgrades page
-* Read-only access to the DBMS Security page
 
 To debug issues with role assignment, see the xref:_troubleshooting[Troubleshooting section] below.
 
@@ -196,7 +198,7 @@ The following is an example configuration using environment variables to set up 
 
 [IMPORTANT]
 ====
-Make to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
+Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
 This depends on the shell you are using.
 ====
 

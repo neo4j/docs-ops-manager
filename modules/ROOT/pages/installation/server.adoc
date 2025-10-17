@@ -368,6 +368,17 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | Username/password login can be enabled or disabled, enabling SSO login either be offered additionally or to be the only login method.
 If disabled, the pages "NOM Administrators" and "Profile" will not be available in the NOM UI.
 | `false`
+|===
+
+In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used (e.g. "myConfig1").
+
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
 
 | `app.sso.configurations.<CONFIG>.idp-type`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE`
