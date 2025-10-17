@@ -352,7 +352,7 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | Log level of the `com.neo4j` logger (its output corresponds to what NOM server itself logs). Default: `info`. (optional)
 | `error`, `warn`, `info`, `debug` or `trace`
 
-| `logging.level.com.neo4j`
+| `logging.level.com.neo4j.opsmanager.server.config`
 | `LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG`
 | Log level of the configuration logger. Setting it to `debug` is useful for troubleshooting SSO issues. Default: `info`. (optional)
 | `error`, `warn`, `info`, `debug` or `trace`
