@@ -16,7 +16,8 @@ One or more SSO configs can be set up containing the options needed to perform S
 Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
 The name can contain only letters and digits. In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used.
 
-The configuration contains options needed to obtain an access token on the NOM frontend side, validate the access token on the NOM backend side and assign a NOM role to the SSO user.
+The configuration contains options needed to obtain an access token on the NOM frontend side, validate the access token on the NOM backend side and map token claims to an SSO user in NOM, including assign a NOM role to the SSO user.
+
 Only the options needed for obtaining the token are send to the frontend.
 
 Configurations are validated during the startup of NOM server.
@@ -63,6 +64,26 @@ See xref:_role_assignment[Role assignment] for details.
 | SpEL expression to check if the user should be assigned the NOM READ_ONLY_USER role in NOM.
 See xref:_role_assignment[Role assignment] for details.
 | `['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')`
+
+| `app.sso.configurations.<CONFIG>.username-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_USERNAME_CLAIM`
+| SpEL expression to override the default field for the username in the token claims.
+| `['unique_name']`
+
+| `app.sso.configurations.<CONFIG>.email-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_EMAIL_CLAIM`
+| SpEL expression to override the default field for the email in the token claims.
+| `['verified_email']`
+
+| `app.sso.configurations.<CONFIG>.firstname-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_FIRSTNAME_CLAIM`
+| SpEL expression to override the default field for the first name in the token claims.
+| `['given_name']`
+
+| `app.sso.configurations.<CONFIG>.lastname-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_LASTNAME_CLAIM`
+| SpEL expression to override the default field for the last name in the token claims.
+| `['family_name']`
 |===
 
 [#_role_assignment]
@@ -88,6 +109,16 @@ The permissions of the read-only role include:
 * Read-only access to the DBMS Security page
 
 To debug issues with role assignment, see the xref:_troubleshooting[Troubleshooting section] below.
+
+==== Overriding claim fields
+
+By default, IdP specific fields in the token claims are used to create or update the SSO user fields in NOM.
+It is possible to override the default fields by providing SpEL expressions using the options `username-claim`, `email-claim`, `firstname-claim` and `lastname-claim`.
+
+The expressions should evaluate to a string value and are evaluated against the claims object in the access token.
+If an expression evaluates to `null` or if there are errors during evaluation, the corresponding user field is set according to the default behavior.
+
+Debugging issues with claim field extraction can be done as described in the xref:_troubleshooting[Troubleshooting section] below.
 
 === Microsoft Entra ID
 
@@ -217,9 +248,9 @@ The same configuration can be provided as command line arguments when starting t
 Set `admin-check` and `read-only-user-check` to `true` to verify that SSO authentication works in principle.
 If this does not work, check the configuration options for typos and verify that the callback URL configured in the IdP matches the one used in NOM server.
 
-=== Debugging role assignment issues
+=== Debugging role assignment and custom claim issues
 
-Enable debug logging by setting the NOM server config option `logging.level.com.neo4j.opsmanager.server.config` to `debug`.
+Enable debug logging by setting the NOM server config option `xref:./server.adoc#config_ref[logging.level.com.neo4j.opsmanager.server.config]` to `debug`.
 With this setting, the evaluated role assignment expressions and the claims object are logged during user login, starting with a log line containing `SsoConfig tracing expression`.
 Example:
 
