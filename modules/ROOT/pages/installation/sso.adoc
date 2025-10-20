@@ -132,7 +132,7 @@ The actual setup can vary depending on customer-specific organisation.
 
 Following are the minimum requirements for a compatible Entra ID App registration:
 
-* Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>>/entra-id-callback` (omit the port if using default 443).
+* Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>>/entra-id-callback` (omit the port if using default 443).
 * An API with a defined scope is exposed by the Entra ID app.
 * User JWT claims contain information needed for role assignment in NOM. It can be done by including group claims in the token.
 
