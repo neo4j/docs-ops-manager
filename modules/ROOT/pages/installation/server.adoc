@@ -437,13 +437,13 @@ The scope should contain the "Application ID URI" followed by the scope name cre
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
 | Authority URL of the Entra ID tenant.
 It can be found in the "Endpoints" section of the application page.
-| `https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f`
+| `\https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f`
 
 | `app.sso.configurations.<CONFIG>.issuer`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
 | Issuer URL for validating the access token.
 It is usually derived from "Directory (tenant) ID" of the Entra ID app.
-| `https://sts.windows.net/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/` (v1.0 tokens) or `https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0` (v2.0 tokens)
+| `\https://sts.windows.net/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/` (v1.0 tokens) or `\https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0` (v2.0 tokens)
 
 | `app.sso.configurations.<CONFIG>.audience`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
