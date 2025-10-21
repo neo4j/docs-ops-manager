@@ -14,7 +14,7 @@ When both methods are enabled, users can choose the login method on the NOM logi
 One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
 
 Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
-The name can be freely chosen, but should only contain letters and digits.
+The name can be freely chosen, but must consist only of alphanumeric characters.
 
 The configuration contains options needed to obtain, validate and map access tokens to SSO users in NOM, including assigning NOM roles to SSO users.
 

@@ -18,8 +18,8 @@ The effective access levels of a NOM user are reflected in the NOM UI appropriat
 |Has access to features of NOM as configured by NOM Admin.
 Can not administer NOM users.
 
-|read-only Administrator (for SSO-user only)
-| Has view-only access to the following features of NOM: DBMS status, metrics and logs, as well as agents and the upgrades page.
+|Read-only Administrator (for SSO-user only)
+| Has view-only access to all features and DBMSs.
 |===
 
 [NOTE]
