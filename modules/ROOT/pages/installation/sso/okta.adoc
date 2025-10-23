@@ -48,7 +48,7 @@ The following table describes additional configuration options required for sett
 
 | `app.sso.configurations.<CONFIG>.client-secret`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET`
-| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` and `PKCE` Grant types.
+| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` and `PKCE` grant types.
 | `<secret>`
 
 | `app.sso.configurations.<CONFIG>.scopes`
