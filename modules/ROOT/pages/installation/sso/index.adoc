@@ -1,0 +1,7 @@
+= Single Sign-On (SSO)
+:description: this chapter describes SSO configuration in NOM
+
+* xref:./configuration.adoc[Single Sign-On (SSO) Configuration] - NOM server configuration for SSO
+* xref:./entra-id.adoc[Microsoft Entra ID Support] - Entra ID identity provider setup & correspoding NOM server configuration examples
+* xref:./google-identity.adoc[Google Identity Support] - Google identity provider setup & correspoding NOM server configuration examples
+* xref:./okta.adoc[Okta Support] -Okta identity provider setup & correspoding NOM server configuration examples

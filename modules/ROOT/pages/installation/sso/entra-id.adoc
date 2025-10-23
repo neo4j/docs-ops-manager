@@ -1,0 +1,101 @@
+= Microsoft Entra ID Support
+
+NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID (formerly Azure Active Directory) using implicit authentication flow.
+
+== Set up Entra ID Application
+
+The actual setup can vary depending on customer-specific organisation.
+
+Following are the minimum requirements for a compatible Entra ID App registration:
+
+* Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>>/entra-id-callback` (omit the port if using default 443).
+* An API with a defined scope is exposed by the Entra ID app.
+* User JWT claims contain information needed for role assignment in NOM. It can be done by including group claims in the token.
+
+== Configure NOM server for SSO
+
+The following table describes additional configuration options required for setting up SSO with Entra ID.
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.configurations.<CONFIG>.client-id`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
+| Client ID for the NOM SSO client configured in the IdP. Required for all Grant types.
+| `ccc0e55f-5f3e-4da8-9002-2830225aae1b`
+
+| `app.sso.configurations.<CONFIG>.client-secret`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET`
+| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` and `PKCE` Grant types.
+| `<secret>`
+
+| `app.sso.configurations.<CONFIG>.scopes`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
+| Comma-separated list of scopes to request during authentication.
+The scope should contain the "Application ID URI" followed by the scope name created in the previous step.
+| `api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver`
+
+| `app.sso.configurations.<CONFIG>.authority`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
+| Authority URL of the Entra ID tenant.
+It can be found in the "Endpoints" section of the application page.
+| `\https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f`
+
+| `app.sso.configurations.<CONFIG>.issuer`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
+| Issuer URL for validating the access token.
+It is usually derived from "Directory (tenant) ID" of the Entra ID app.
+| `\https://sts.windows.net/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/` (v1.0 tokens) or `\https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0` (v2.0 tokens)
+
+| `app.sso.configurations.<CONFIG>.audience`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
+| Audience for validating the access token.
+It is usually the same as the "Application ID URI" shown on the "Expose an API" page in Entra ID. (optional)
+| `api://ccc0e55f-5f3e-4da8-9002-2830225aae1b` (v1.0 tokens) or `ccc0e55f-5f3e-4da8-9002-2830225aae1b` (v2.0 tokens)
+|===
+
+== Example configuration
+
+The following is an example configuration using environment variables to set up a single SSO configuration named `ENTRA` and disable username/password login.
+
+[IMPORTANT]
+====
+Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
+This depends on the shell you are using.
+====
+
+[source,shell]
+----
+export APP_SSO_ACTIVE_CONFIGURATIONS=ENTRA
+export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
+export APP_SSO_CONFIGURATIONS_ENTRA_IDP_TYPE=ENTRA_ID
+export APP_SSO_CONFIGURATIONS_ENTRA_DISPLAY_NAME="Login with Entra ID"
+export APP_SSO_CONFIGURATIONS_ENTRA_CLIENT_ID=ccc0e55f-5f3e-4da8-9002-2830225aae1b
+export APP_SSO_CONFIGURATIONS_ENTRA_ISSUER=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
+export APP_SSO_CONFIGURATIONS_ENTRA_SCOPES=api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver
+export APP_SSO_CONFIGURATIONS_ENTRA_AUTHORITY=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f
+export APP_SSO_CONFIGURATIONS_ENTRA_ADMIN_CHECK="['groups']?.contains('aaa63d30-70c3-4181-8c19-1b58e613f55b')"
+export APP_SSO_CONFIGURATIONS_ENTRA_READ_ONLY_USER_CHECK="['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')"
+export LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG=DEBUG
+----
+
+The same configuration can be provided as command line arguments when starting the NOM server, a fragment is shown below.
+
+[source,shell]
+----
+--app.sso.active-configurations=ENTRA \
+--app.username-password-login.enabled=false \
+--app.sso.configurations.ENTRA.idp-type=ENTRA_ID \
+--app.sso.configurations.ENTRA.display-name="Login with Entra ID" \
+--app.sso.configurations.ENTRA.client-id=ccc0e55f-5f3e-4da8-9002-2830225aae1b \
+--app.sso.configurations.ENTRA.issuer=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0 \
+--app.sso.configurations.ENTRA.scopes=api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver \
+--app.sso.configurations.ENTRA.authority=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f \
+--app.sso.configurations.ENTRA.admin-check="['groups']?.contains('aaa63d30-70c3-4181-8c19-1b58e613f55b')" \
+--app.sso.configurations.ENTRA.read-only-user-check="['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')" \
+--logging.level.com.neo4j.opsmanager.server.config=debug
+----

@@ -393,13 +393,13 @@ In the reference below, the placeholder `<CONFIG>` is used to indicate where the
 | `app.sso.configurations.<CONFIG>.admin-check`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ADMIN_CHECK`
 | SpEL expression to check if the user should be assigned the NOM ADMIN role in NOM.
-See xref:/installation/sso.adoc#_role_assignment[Role assignment] for details.
+See xref:/installation/sso/configuration.adoc#_role_assignment[Role assignment] for details.
 | `['groups']?.contains('aaa63d30-70c3-4181-8c19-1b58e613f55b')`
 
 | `app.sso.configurations.<CONFIG>.read-only-user-check`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK`
 | SpEL expression to check if the user should be assigned the NOM READ_ONLY_USER role in NOM.
-See xref:/installation//sso.adoc#_role_assignment[Role assignment] for details.
+See xref:/installation//sso/configuration.adoc#_role_assignment[Role assignment] for details.
 | `['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')`
 
 | `app.sso.configurations.<CONFIG>.username-claim`
