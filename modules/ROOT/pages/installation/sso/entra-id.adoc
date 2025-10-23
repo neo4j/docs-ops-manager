@@ -91,6 +91,7 @@ The same configuration can be provided as command line arguments when starting t
 --app.sso.active-configurations=ENTRA \
 --app.username-password-login.enabled=false \
 --app.sso.configurations.ENTRA.idp-type=ENTRA_ID \
+--app.sso.configurations.ENTRA.grant-type=IMPLICIT \
 --app.sso.configurations.ENTRA.display-name="Login with Entra ID" \
 --app.sso.configurations.ENTRA.client-id=ccc0e55f-5f3e-4da8-9002-2830225aae1b \
 --app.sso.configurations.ENTRA.issuer=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0 \
