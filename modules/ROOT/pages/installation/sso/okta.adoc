@@ -76,10 +76,10 @@ It is the audience configured for custom Okta `Authorization Server`. If using d
 
 == Example configuration
 
-The following is an example configuration using environment variables to set up a single SSO configuration named `okta1` with `AUTHORIZATION_CODE` Grant type
+The following is an example configuration using environment variables to set up a single SSO configuration named `okta1` with `AUTHORIZATION_CODE` grant type
 and disable username/password login.
 
-If configuring for `IMPLICIT` Grant type, don't set `client-secret`.
+If configuring for `IMPLICIT` grant type, don't set `client-secret`.
 
 [IMPORTANT]
 ====
