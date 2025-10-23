@@ -18,8 +18,8 @@ Following is a typical process of setting up NOM SSO Client Application in Okta:
 * Configure the new app integration with the following:
     ** Choose the _Grant type_ as `Implicit` or `Authorization Code`.
     ** For `Authorization Code` _Grant type_, enable `Client Credentials` as we require Client ID & Secret for this flow.
-    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URIs`.
-    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URIs`.
+    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URI`.
+    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URI`.
 * Configure an `Authentication Policy` meeting your organization security requirements and add the NOM app integration created previously to the policy.
 * We recommend to create/assign 2 user `Groups` to be mapped to NOM's Admin & User roles to keep the NOM server configuration simple.
 * Assign `Groups` of the `Users` to the NOM app integration.
