@@ -398,7 +398,7 @@ See xref:/installation/sso/configuration.adoc#_role_assignment[Role assignment] 
 
 | `app.sso.configurations.<CONFIG>.read-only-user-check`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK`
-| SpEL expression to check if the user should be assigned the NOM READ_ONLY_USER role in NOM.
+| SpEL expression to check if the user should be assigned the NOM Read-only administrator role in NOM.
 See xref:/installation//sso/configuration.adoc#_role_assignment[Role assignment] for details.
 | `['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')`
 
