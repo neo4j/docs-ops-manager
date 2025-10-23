@@ -43,7 +43,7 @@ The following table describes additional configuration options required for sett
 
 | `app.sso.configurations.<CONFIG>.client-id`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
-| Client ID for the NOM SSO client configured in the IdP. Required for all Grant types.
+| Client ID for the NOM SSO client configured in the IdP. Required for all grant types.
 | `0oaw54wd6rJQ8lReH697`
 
 | `app.sso.configurations.<CONFIG>.client-secret`
