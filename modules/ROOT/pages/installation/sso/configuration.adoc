@@ -115,6 +115,23 @@ Otherwise, the read-only-user-check expression is evaluated.
 If it evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[read-only Administrator] role.
 If both expressions evaluate to `false`, the user is denied access to NOM.
 
+*Examples of expressions*
+
+|===
+| Goal |Expression
+
+|Check that a list contains _all_ required values
+|`['groups']?.containsAll({'nom_group1', 'nom_group2'})`
+
+|Check that a list contains _at least one_ of the required values (with a logical expression)
+|`['groups']?.contains('nom_group1') or ['groups']?.contains('nom_group2')`
+
+|Check that a list contains _at least one_ of the required values (with a SpEL predicate expression)
+|`['groups'].?[ {'nom_group1', 'nom_group2'}.contains(#this) ].size() > 0`
+
+|===
+
+
 To debug issues with role assignment, see the xref:_troubleshooting[Troubleshooting section] below.
 
 ==== Overriding claim fields
@@ -124,6 +141,9 @@ It is possible to override the default fields by providing SpEL expressions usin
 
 The expressions should evaluate to a string value and are evaluated against the claims object in the access token.
 If an expression evaluates to `null` or if there are errors during evaluation, the corresponding user field is set according to the default behavior.
+
+For example, to use the JWT claim `verified_email` as user email address, use the config option `app.sso.configurations.<CONFIG>.email-claim=['verified_email']`.
+This expression evaluates to the value of the key `verified_email` in the JWT claims `Map`.
 
 Debugging issues with claim field extraction can be done as described in the xref:_troubleshooting[Troubleshooting section] below.
 
