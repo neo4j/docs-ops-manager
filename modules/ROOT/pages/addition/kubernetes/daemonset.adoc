@@ -88,7 +88,7 @@ server:
 #   clientCert: "/path/to/agent/cert"
 instances:
   - name: daemonset-agent
-    boltURI: neo4j://localhost:7687
+    boltURI: bolt://localhost:7687
     boltUsername: neo4j
     boltPassword: passw0rd
     queryLogPort: "9500"
