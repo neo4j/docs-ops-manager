@@ -76,7 +76,7 @@ podSpec:
         - name: CONFIG_INSTANCE_1_NAME 
           value: "side-car-agent"
         - name: CONFIG_INSTANCE_1_BOLT_URI 
-          value: "neo4j://localhost:7687"
+          value: "bolt://localhost:7687"
         - name: CONFIG_INSTANCE_1_BOLT_USERNAME 
           value: "neo4j"
         - name: CONFIG_INSTANCE_1_BOLT_PASSWORD 
