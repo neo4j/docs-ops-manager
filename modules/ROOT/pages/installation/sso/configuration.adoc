@@ -149,7 +149,7 @@ This expression evaluates to the value of the key `verified_email` in the JWT cl
 [NOTE]
 ====
 Claim field values for email address, first and last names default to an empty string if they evaluate to `null`, resulting in a warning being logged.
-We recommended using non-empty claim field values for better user experience.
+It is recommended using non-empty claim field values for better user experience.
 Username claim field evaluation must result in a non-blank string otherwise authentication will be aborted with an error.
 ====
 
