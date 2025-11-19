@@ -35,8 +35,8 @@ The following table describes additional configuration options required for sett
 
 | `app.sso.configurations.<CONFIG>.scopes`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
-| Comma-separated list of scopes to request during authentication.
-The scope should contain the "Application ID URI" followed by the scope name created in the previous step.
+| Comma-separated list of scope URIs for the authentication request.
+A scope URI usually starts with the Entra Application ID URI followed by the scope name.
 | `api://ccc0e55f-5f3e-4da8-9002-2830225aae1b/nomserver`
 
 | `app.sso.configurations.<CONFIG>.authority`
