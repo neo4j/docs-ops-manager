@@ -4,19 +4,19 @@
 == Overview
 
 NOM supports SSO for authentication using external Identity Providers (IdP) that support OAuth2/OIDC implicit authentication flow.
-Currently, Microsoft Entra ID (formerly Azure Active Directory), Google Identity and Okta are supported.
+Currently, Microsoft Entra ID (formerly Azure Active Directory), Google Identity, and Okta are supported.
 More IdP types and alternative authentication flows may be added in future NOM releases.
 SSO can be used as the only authentication method or in combination with username/password login.
-When both methods are enabled, users can choose the login method on the NOM login page.
+When both methods are enabled, users can select login method on the NOM login page.
 
 == Configuration
 
 One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
 
 Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
-The name can be freely chosen, but must consist only of alphanumeric characters.
+The name can be chosen freely, but *must* consist only of alphanumeric characters.
 
-The configuration contains options needed to obtain, validate and map access tokens to SSO users in NOM, including assigning NOM roles to SSO users.
+The configuration contains options needed to obtain, validate, and map access tokens to SSO users in NOM, including assigning NOM roles to SSO users.
 
 Only the options needed for obtaining the token are sent to the frontend.
 

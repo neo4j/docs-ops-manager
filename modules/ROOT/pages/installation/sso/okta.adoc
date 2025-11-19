@@ -12,16 +12,16 @@ with following grant types:
 
 This document assumes user has access to an Okta Admin portal to setup the SSO Client Application.
 
-Following is a typical process of setting up NOM SSO Client Application in Okta:
+The following is a typical process of setting up NOM SSO Client Application in Okta:
 
 * Create a new app integration with _Sign-in method_ `OIDC - OpenID Connect` and _Application type_ `Single-Page Application`.
 * Configure the new app integration with the following:
     ** Choose the _Grant type_ as `Implicit` or `Authorization Code`.
-    ** For `Authorization Code` _Grant type_, enable `Client Credentials` as we require Client ID & Secret for this flow.
+    ** For `Authorization Code` _Grant type_, enable `Client Credentials` as Client ID & Secret are required for this flow.
     ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URI`.
     ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URI`.
 * Configure an `Authentication Policy` meeting your organization security requirements and add the NOM app integration created previously to the policy.
-* We recommend to create/assign 2 user `Groups` to be mapped to NOM's Admin and Read-only administrator roles to keep the NOM server configuration simple.
+* It is recommended to create/assign two user `Groups` to be mapped to NOM's Admin and Read-only administrator roles to keep the NOM server configuration simple.
 * Assign `Groups` of the `Users` to the NOM app integration.
 * Create a new `Authorization Server` with NOM Client application as the audience.
     ** If there are restrictions to create dedicated `Authorization Server`, the default one can be used.

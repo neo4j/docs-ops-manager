@@ -4,7 +4,7 @@ NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID
 
 == Set up Entra ID Application
 
-The actual setup can vary depending on customer-specific organisation.
+The actual setup can vary depending on customer-specific organization.
 
 Following are the minimum requirements for a compatible Entra ID App registration:
 
@@ -42,19 +42,19 @@ A scope URI usually starts with the Entra Application ID URI followed by the sco
 | `app.sso.configurations.<CONFIG>.authority`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
 | Authority URL of the Entra ID tenant.
-It can be found in the "Endpoints" section of the application page.
+It can be found in the _Endpoints_ section of the application page.
 | `\https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f`
 
 | `app.sso.configurations.<CONFIG>.issuer`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
 | Issuer URL for validating the access token.
-It is usually derived from "Directory (tenant) ID" of the Entra ID app.
+It is usually derived from _Directory (tenant) ID_ of the Entra ID app.
 | `\https://sts.windows.net/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/` (v1.0 tokens) or `\https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0` (v2.0 tokens)
 
 | `app.sso.configurations.<CONFIG>.audience`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
 | Audience for validating the access token.
-It is usually the same as the "Application ID URI" shown on the "Expose an API" page in Entra ID. (optional)
+It is usually the same as the _Application ID URI_ shown on the "Expose an API" page in Entra ID. (optional)
 | `api://ccc0e55f-5f3e-4da8-9002-2830225aae1b` (v1.0 tokens) or `ccc0e55f-5f3e-4da8-9002-2830225aae1b` (v2.0 tokens)
 |===
 
