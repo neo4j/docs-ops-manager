@@ -145,6 +145,14 @@ If an expression evaluates to `null` or if there are errors during evaluation, t
 For example, to use the JWT claim `verified_email` as user email address, use the config option `app.sso.configurations.<CONFIG>.email-claim=['verified_email']`.
 This expression evaluates to the value of the key `verified_email` in the JWT claims `Map`.
 
+
+[NOTE]
+====
+Claim field values for email address, first and last names default to an empty string if they evaluate to `null`, resulting in a warning being logged.
+We recommended using non-empty claim field values for better user experience.
+Username claim field evaluation must result in a non-blank string otherwise authentication will be aborted with an error.
+====
+
 Debugging issues with claim field extraction can be done as described in the xref:_troubleshooting[Troubleshooting section] below.
 
 [#_troubleshooting]
