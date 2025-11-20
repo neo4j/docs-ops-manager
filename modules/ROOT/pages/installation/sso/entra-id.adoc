@@ -65,7 +65,7 @@ The following is an example configuration using environment variables to set up 
 [IMPORTANT]
 ====
 Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
-This depends on the shell you are using.
+Follow the escaping rules appropriate to the shell you are using.
 ====
 
 [source,shell]
