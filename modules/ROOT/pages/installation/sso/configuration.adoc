@@ -145,7 +145,7 @@ It is possible to override the default fields by providing SpEL expressions usin
 The expressions should evaluate to a string value and are evaluated against the claims object in the access token.
 If an expression evaluates to `null` or if there are errors during evaluation, the corresponding user field is set according to the default behavior.
 
-For example, to use the JWT claim `verified_email` as user email address, use the config option `app.sso.configurations.<CONFIG>.email-claim=['verified_email']`.
+For example, to use the JWT claim `verified_email` as user email address, use the configuration option `app.sso.configurations.<CONFIG>.email-claim=['verified_email']`.
 This expression evaluates to the value of the key `verified_email` in the JWT claims `Map`.
 
 
@@ -176,7 +176,7 @@ If this does not work, check the configuration options for typos and verify that
 
 === Debugging role assignment and custom claim issues
 
-Enable debug logging by setting the NOM server config option `xref:../installation/server.adoc#config_ref[logging.level.com.neo4j.opsmanager.server.config]` to `debug`.
+Enable debug logging by setting the NOM server configuration option `xref:../installation/server.adoc#config_ref[logging.level.com.neo4j.opsmanager.server.config]` to `debug`.
 With this setting, the evaluated role assignment expressions and the claims object are logged during user login, starting with a log line containing `SsoConfig tracing expression`.
 Example:
 
