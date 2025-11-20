@@ -16,6 +16,7 @@
 *** xref:installation/sso/entra-id.adoc[]
 *** xref:installation/sso/google-identity.adoc[]
 *** xref:installation/sso/okta.adoc[]
+*** xref:installation/sso/auth0.adoc[]
 ** xref:installation/docker/index.adoc[]
 *** xref:installation/docker/container.adoc[]
 *** xref:installation/docker/compose.adoc[]

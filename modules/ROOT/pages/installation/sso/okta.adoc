@@ -2,11 +2,11 @@
 :description: Describes Okta IdP support in NOM SSO
 
 NOM server supports Single Sign-On (SSO) authentication using Okta Identity Provider (IdP)
-with following grant types:
+with following OAuth2 Grant types:
 
-* Implicit
-* Authorization code
-* PKCE (Authorization code based)
+* Implicit flow
+* Authorization code flow
+* PKCE flow
 
 == Configure Okta Identity Provider (IdP) for SSO
 
@@ -21,7 +21,7 @@ The following is a typical process of setting up NOM SSO Client Application in O
     ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URI`.
     ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URI`.
 * Configure an `Authentication Policy` meeting your organization security requirements and add the NOM app integration created previously to the policy.
-* It is recommended to create/assign two user `Groups` to be mapped to NOM's Admin and Read-only administrator roles to keep the NOM server configuration simple.
+* It is recommended to create/assign two user `Groups` to be mapped to NOM's Admin and Read-only user roles to keep the NOM server configuration simple.
 * Assign `Groups` of the `Users` to the NOM app integration.
 * Create a new `Authorization Server` with NOM Client application as the audience.
     ** If there are restrictions to create dedicated `Authorization Server`, the default one can be used.
@@ -94,14 +94,14 @@ export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
 export APP_SSO_CONFIGURATIONS_OKTA1_IDP_TYPE=ENTRA_ID
 export APP_SSO_CONFIGURATIONS_OKTA1_GRANT_TYPE=AUTHORIZATION_CODE
 export APP_SSO_CONFIGURATIONS_OKTA1_DISPLAY_NAME="Login with Okta"
-export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_ID=0oawiporadVQNl1Zn697
-export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_SECRET=<SECRET>
+export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_ID=<OKTA_CLIENT_ID>
+export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_SECRET=<OKTA_CLIENT_SECRET>
 export APP_SSO_CONFIGURATIONS_OKTA1_ISSUER=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>
+export APP_SSO_CONFIGURATIONS_OKTA1_AUDIENCE=nom-app-url
 export APP_SSO_CONFIGURATIONS_OKTA1_SCOPES=openid,email,profile
 export APP_SSO_CONFIGURATIONS_OKTA1_AUTHORITY=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>
 export APP_SSO_CONFIGURATIONS_OKTA1_ADMIN_CHECK="['groups']?.contains('NOM Admins')"
 export APP_SSO_CONFIGURATIONS_OKTA1_READ_ONLY_USER_CHECK="['groups']?.contains('NOM Users')"
-export LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG=DEBUG
 ----
 
 The same configuration can be provided as command line arguments when starting the NOM server, a fragment is shown below.
@@ -115,12 +115,11 @@ The same configuration can be provided as command line arguments when starting t
 --app.sso.configurations.okta1.grant-type=AUTHORIZATION_CODE \
 --app.sso.configurations.okta1.issuer=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID> \
 --app.sso.configurations.okta1.authority=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>  \
---app.sso.configurations.okta1.client-id=0oawiporadVQNl1Zn697 \
---app.sso.configurations.okta1.client-secret=<SECRET> \
+--app.sso.configurations.okta1.client-id=<OKTA_CLIENT_ID> \
+--app.sso.configurations.okta1.client-secret=<OKTA_CLIENT_SECRET> \
 --app.sso.configurations.okta1.scopes=openid,email,profile \
 --app.sso.configurations.okta1.audience=nom-app-url \
 --app.sso.configurations.okta1.admin-check="['groups']?.contains('NOM Admins')" \
 --app.sso.configurations.okta1.read-only-user-check="['groups']?.contains('NOM Users')" \
---logging.level.com.neo4j.opsmanager.server.config=debug
 ----
 

@@ -8,3 +8,4 @@
 ** xref:./entra-id.adoc[Microsoft Entra ID]
 ** xref:./google-identity.adoc[Google Identity]
 ** xref:./okta.adoc[Okta]
+** xref:./auth0.adoc[Auth0]

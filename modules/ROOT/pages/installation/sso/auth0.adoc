@@ -1,0 +1,161 @@
+= Auth0 Support
+:description: Describes Auth0 IdP support in NOM SSO
+
+NOM server supports Single Sign-On (SSO) authentication using Auth0 Identity Provider (IdP)
+with following grant types:
+
+* Implicit flow
+* Authorization code flow
+* PKCE flow
+
+== Configure Auth0 Identity Provider (IdP) for SSO
+
+This document assumes user has access to an Auth0 Management dashboard to setup the SSO Client Application.
+
+Following is a typical process of setting up NOM SSO Client Application in Auth0:
+
+* Create a new __Application__ by choosing `Single Page Web Application` as application type.
+* Copy details _Domain_ , _Client ID_ , _Client Secret_ from `Basic Information` section of __Application Settings__.
+* Configure __Application URIs__ :
+    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/login` (omit the port if using default 443) as the only `Application Login URI`.
+    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/auth0-callback` (omit the port if using default 443) as the only `Allowed Callback URLs`.
+    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Allowed Logout URLs`.
+* Under __Advanced Settings__, select following _Grant Types_:
+    ** Implicit
+    ** Authorization Code
+    ** Refresh token
+* Configure other settings like Connections & Login Experience according to your tenant setup
+* We recommend creating 2 user roles to be mapped to NOM’s Admin and Read-only user roles to keep NOM server configuration simple. 
+If your tenant has complex user roles that need to be mapped to NOM roles, please use the SpEL expressions as described xref:./configuration.adoc#_role_assignment[here].
+* To map the profile data as custom token claims in Auth0, add a custom action to the __Actions__ _Library_.
+    ** Under Library, click _Create Action_ & select _Create Custom Action_.
+    ** Select the _Login / Post Login_ trigger, meaning the claims get added to the token after successful login.
+    ** Create the action with a handler that maps the custom claims similarly as below:
+[source, javascript, role=noheader]
+----
+        exports.onExecutePostLogin = async (event, api) => {
+        const namespace = 'https://localhost:3000';
+        if (event.user.name) {
+            const nameParts = event.user.name.split(" ");
+            const firstName = nameParts[0];
+            api.accessToken.setCustomClaim(`${namespace}/firstName`, firstName);
+            if (nameParts.length > 1) {
+            const lastName = event.user.name.split(" ")[1];
+            api.accessToken.setCustomClaim(`${namespace}/lastName`, lastName);
+            }
+        }
+
+        if (event.user.email) {
+            api.accessToken.setCustomClaim(`${namespace}/email`, event.user.email);
+        }
+
+        if (event.authorization) {
+            api.accessToken.setCustomClaim(`${namespace}/roles`, event.authorization.roles);
+        }
+        };
+----
+    ** Save & test the handler to see if the custom claims are mapped with sandbox data.
+    ** Deploy the custom action & setup a _post-login_ trigger in the __Login__ flow to excute the handler after successful login.
+
+== Configure NOM server for SSO with Auth0 IdP
+
+The following table describes additional configuration options required for setting up SSO with Auth0.
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.configurations.<CONFIG>.client-id`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
+| Client ID for the NOM SSO client configured in the IdP. Required for all grant types.
+| `0oaw54wd6rJQ8lReH697`
+
+| `app.sso.configurations.<CONFIG>.client-secret`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET`
+| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` and `PKCE` grant types.
+| `<secret>`
+
+| `app.sso.configurations.<CONFIG>.scopes`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
+| Comma-separated list of scopes to request during authentication.
+The scope should contain the enabled scopes in the Auth0 `Authorization Server`.
+| `email,profile,openid`
+
+| `app.sso.configurations.<CONFIG>.authority`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
+| Issuer URL of the Auth0 `Authorization Server` which includes the `Authorization Server` ID.
+| `\https://<ORG>.Auth0.com/oauth2/<AUTHORIZATION_SERVER_ID>`
+
+| `app.sso.configurations.<CONFIG>.issuer`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
+| Issuer URL of the Auth0 `Authorization Server` which includes the `Authorization Server` ID.
+| `\https://<ORG>.Auth0.com/oauth2/<AUTHORIZATION_SERVER_ID>`
+
+| `app.sso.configurations.<CONFIG>.audience`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
+| Audience for validating the access token.
+It is the audience configured for custom Auth0 `Authorization Server`. If using default server, it would be `api://default`.
+| `<NOM_APP_URL>`
+|===
+
+== Example configuration
+
+The following is an example configuration using environment variables to set up a single SSO configuration named `auth01` with `AUTHORIZATION_CODE` grant type
+and disable username/password login.
+
+If configuring for `IMPLICIT` grant type, don't set `client-secret`.
+
+[IMPORTANT]
+====
+Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
+This depends on the shell you are using.
+====
+
+[source,shell]
+----
+export APP_SSO_ACTIVE_CONFIGURATIONS=auth01
+export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
+export APP_SSO_CONFIGURATIONS_AUTH01_IDP_TYPE=AUTH0
+export APP_SSO_CONFIGURATIONS_AUTH01_DISPLAY_NAME="Login with Auth0 Authorization code"
+export APP_SSO_CONFIGURATIONS_AUTH01_GRANT_TYPE=AUTHORIZATION_CODE
+export APP_SSO_CONFIGURATIONS_AUTH01_CLIENT_ID=<AUTH0_CLIENT_ID>
+export APP_SSO_CONFIGURATIONS_AUTH01_CLIENT_SECRET=<AUTH0_CLIENT_SECRET>
+export APP_SSO_CONFIGURATIONS_AUTH01_ISSUER=https://<AUTH0_TENANT>.auth0.com/
+export APP_SSO_CONFIGURATIONS_AUTH01_AUTHORITY=https://<AUTH0_TENANT>.auth0.com/
+export APP_SSO_CONFIGURATIONS_AUTH01_AUDIENCE=https://<AUTH0_TENANT>.auth0.com/api/v2/
+export APP_SSO_CONFIGURATIONS_AUTH01_SCOPES=openid,email,profile
+export APP_SSO_CONFIGURATIONS_AUTH01_EMAIL_CLAIM="['https://localhost:3000/email']"
+export APP_SSO_CONFIGURATIONS_AUTH01_USERNAME_CLAIM="['https://localhost:3000/email']"
+export APP_SSO_CONFIGURATIONS_AUTH01_FIRSTNAME_CLAIM="['https://localhost:3000/firstName']"
+export APP_SSO_CONFIGURATIONS_AUTH01_LASTNAME_CLAIM="['https://localhost:3000/lastName']"
+export APP_SSO_CONFIGURATIONS_AUTH01_ADMIN_CHECK="['https://localhost:3000/roles']?.contains('NOM Admin')"
+export APP_SSO_CONFIGURATIONS_AUTH01_READ_ONLY_USER_CHECK="['https://localhost:3000/roles']?.contains('NOM User')"
+export LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG=DEBUG
+----
+
+The same configuration can be provided as command line arguments when starting the NOM server, a fragment is shown below.
+
+[source,shell]
+----
+--app.sso.active-configurations=auth01 \
+--app.username-password-login.enabled=false \
+--app.sso.configurations.auth01.display-name="Login with Auth0 Authorization code" \
+--app.sso.configurations.auth01.idp-type=AUTH0 \
+--app.sso.configurations.auth01.grant-type=AUTHORIZATION_CODE \
+--app.sso.configurations.auth01.client-id=<AUTH0_CLIENT_ID> \
+--app.sso.configurations.auth01.client-secret=<AUTH0_CLIENT_SECRET> \
+--app.sso.configurations.auth01.issuer=https://<AUTH0_TENANT>.auth0.com/ \
+--app.sso.configurations.auth01.authority=https://<AUTH0_TENANT>.auth0.com/ \
+--app.sso.configurations.auth01.scopes=email,profile,openid \
+--app.sso.configurations.auth01.audience=https://<AUTH0_TENANT>.auth0.com/api/v2/ \
+--app.sso.configurations.auth01.email-claim="['https://localhost:3000/email']" \
+--app.sso.configurations.auth01.username-claim="['https://localhost:3000/email']" \
+--app.sso.configurations.auth01.firstname-claim="['https://localhost:3000/firstName']" \
+--app.sso.configurations.auth01.lastname-claim="['https://localhost:3000/lastName']" \
+--app.sso.configurations.auth01.admin-check="['https://localhost:3000/roles']?.contains('NOM Admin')" \
+--app.sso.configurations.auth01.read-only-user-check="['https://localhost:3000/roles']?.contains('NOM User')" \
+----
+

@@ -1,6 +1,10 @@
 = Microsoft Entra ID Support
 
-NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID (formerly Azure Active Directory) using implicit authentication flow.
+NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID (formerly Azure Active Directory)
+with following OAuth2 Grant types:
+
+* Implicit flow
+* Authorization code flow
 
 == Set up Entra ID Application
 
