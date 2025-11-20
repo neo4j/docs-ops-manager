@@ -1,4 +1,4 @@
-= Configuration
+= SSO Configuration
 :description: This section describes the configuration steps to enable Single Sign-On (SSO) for NOM server
 
 == Overview
@@ -9,7 +9,7 @@ More IdP types and alternative authentication flows may be added in future NOM r
 SSO can be used as the only authentication method or in combination with username/password login.
 When both methods are enabled, users can select login method on the NOM login page.
 
-== Configuration
+== Configuration options
 
 One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
 
@@ -47,6 +47,8 @@ If set to `false`, the page "NOM Administrators" will not be available in the NO
 
 In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used (e.g. "myConfig1").
 
+Some configuration options require specifying SpEL (Spring Expression Language) expressions.
+For further details see https://docs.spring.io/spring-framework/reference/core/expressions/language-ref.html[Spring documentation] and the chapters below the table.
 
 [cols="<,<,<, <",options="header"]
 |===
