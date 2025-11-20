@@ -1,11 +1,42 @@
 = SSO Configuration
 :description: This section describes the configuration steps to enable Single Sign-On (SSO) for NOM server
+:icons: font
 
 == Overview
 
-NOM supports SSO for authentication using external Identity Providers (IdP) that support OAuth2/OIDC implicit authentication flow.
-Currently, Microsoft Entra ID (formerly Azure Active Directory), Google Identity, and Okta are supported.
+NOM supports SSO for authentication & authorization using external Identity Providers (IdP) that support OAuth2/OIDC authentication standard.
+
+Currently, following IdPs & OAuth2 https://oauth.net/2/grant-types/[Grant types] are supported:
+[cols="<,<,<, <", options="header"]
+|===
+| IdPs / Grant types
+| Implicit flow
+| Authorization code flow
+| PKCE flow
+
+| **Microsoft Entra ID (formerly Azure Active Directory)**
+| Yes
+| Yes
+| No
+
+| **Google Identity**
+| Yes
+| No
+| No
+
+| **Okta**
+| Yes
+| Yes
+| Yes
+
+| **Auth0**
+| Yes
+| Yes
+| Yes
+|===
+
 More IdP types and alternative authentication flows may be added in future NOM releases.
+
 SSO can be used as the only authentication method or in combination with username/password login.
 When both methods are enabled, users can select login method on the NOM login page.
 
@@ -14,13 +45,16 @@ When both methods are enabled, users can select login method on the NOM login pa
 One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
 
 Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
-The name can be chosen freely, but *must* consist only of alphanumeric characters.
+The configuration name *must* only contain alphanumeric characters.
 
 The configuration contains options needed to obtain, validate, and map access tokens to SSO users in NOM, including assigning NOM roles to SSO users.
 
-Only the options needed for obtaining the token are sent to the frontend.
+[IMPORTANT]
+====
+Only the options needed to obtain the __access token__ or __authorization code__ from the IdP are sent to the UI.
+====
 
-Configurations are validated during the startup of NOM server.
+Configurations are validated during the NOM server startup.
 If a configuration is invalid, the errors are reported in the logs.
 
 === Common options
@@ -59,7 +93,7 @@ For further details see https://docs.spring.io/spring-framework/reference/core/e
 
 | `app.sso.configurations.<CONFIG>.idp-type`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE`
-| Type of the Identity Provider (IdP). Currently `ENTRA_ID`, `GOOGLE_IDENTITY` and `OKTA` are supported.
+| Type of the Identity Provider (IdP). Currently `ENTRA_ID`, `GOOGLE_IDENTITY`, `OKTA` & `AUTH0` are supported.
 | `ENTRA_ID`
 
 | `app.sso.configurations.<CONFIG>.grant-type`
@@ -86,22 +120,22 @@ See xref:_role_assignment[Role assignment] for details.
 
 | `app.sso.configurations.<CONFIG>.username-claim`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_USERNAME_CLAIM`
-| SpEL expression to override the default field for the username in the token claims.
+| SpEL expression to optionally map the username or unique user identifier in the token claims to NOM user name. See xref:_claim_mapping[Mapping token claims] for details.
 | `['unique_name']`
 
 | `app.sso.configurations.<CONFIG>.email-claim`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_EMAIL_CLAIM`
-| SpEL expression to override the default field for the email in the token claims.
+| SpEL expression to optionally map the the email in the token claims to NOM user email. See xref:_claim_mapping[Mapping token claims] for details.
 | `['verified_email']`
 
 | `app.sso.configurations.<CONFIG>.firstname-claim`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_FIRSTNAME_CLAIM`
-| SpEL expression to override the default field for the first name in the token claims.
+| SpEL expression to optionally map the the first name in the token claims to NOM user first name. See xref:_claim_mapping[Mapping token claims] for details.
 | `['given_name']`
 
 | `app.sso.configurations.<CONFIG>.lastname-claim`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_LASTNAME_CLAIM`
-| SpEL expression to override the default field for the last name in the token claims.
+| SpEL expression to optionally map the the last name in the token claims to NOM user last name. See xref:_claim_mapping[Mapping token claims] for details.
 | `['family_name']`
 |===
 
@@ -137,13 +171,14 @@ If both expressions evaluate to `false`, the user is denied access to NOM.
 
 To debug issues with role assignment, see the xref:_troubleshooting[Troubleshooting section] below.
 
-==== Overriding claim fields
+[#_claim_mapping]
+==== Mapping token claims
 
-By default, IdP specific fields in the token claims are used to create or update the SSO user fields in NOM.
-It is possible to override the default fields by providing SpEL expressions using the options `username-claim`, `email-claim`, `firstname-claim` and `lastname-claim`.
+By default, IdP specific token claims are used to create or update the SSO user profile details in NOM.
+It is possible to override the default claim mapping by providing SpEL expressions using the options `username-claim`, `email-claim`, `firstname-claim` and `lastname-claim`.
 
 The expressions should evaluate to a string value and are evaluated against the claims object in the access token.
-If an expression evaluates to `null` or if there are errors during evaluation, the corresponding user field is set according to the default behavior.
+If an expression evaluates to `null` or if there are errors during evaluation, the corresponding user profile data is set according to the default behavior.
 
 For example, to use the JWT claim `verified_email` as user email address, use the configuration option `app.sso.configurations.<CONFIG>.email-claim=['verified_email']`.
 This expression evaluates to the value of the key `verified_email` in the JWT claims `Map`.
@@ -151,12 +186,12 @@ This expression evaluates to the value of the key `verified_email` in the JWT cl
 
 [NOTE]
 ====
-Claim field values for email address, first and last names default to an empty string if they evaluate to `null`, resulting in a warning being logged.
-It is recommended using non-empty claim field values for better user experience.
-Username claim field evaluation must result in a non-blank string otherwise authentication will be aborted with an error.
+Claim mapped values for email address, first and last names default to an empty string if they evaluate to `null`, resulting in a warning being logged.
+It is recommended using non-empty claim values for better user experience.
+Username claim mapping evaluation must result in a non-blank string otherwise authentication will be aborted with an error.
 ====
 
-Debugging issues with claim field extraction can be done as described in the xref:_troubleshooting[Troubleshooting section] below.
+Debugging issues with claim mapping can be done as described in the xref:_troubleshooting[Troubleshooting section] below.
 
 [#_troubleshooting]
 == Troubleshooting
@@ -174,7 +209,7 @@ Debugging issues with claim field extraction can be done as described in the xre
 Set `admin-check` and `read-only-user-check` to `true` to verify that SSO authentication works in principle.
 If this does not work, check the configuration options for typos and verify that the callback URL configured in the IdP matches the one used in NOM server.
 
-=== Debugging role assignment and custom claim issues
+=== Debugging role assignment and custom claim mapping issues
 
 Enable debug logging by setting the NOM server configuration option `xref:../installation/server.adoc#config_ref[logging.level.com.neo4j.opsmanager.server.config]` to `debug`.
 With this setting, the evaluated role assignment expressions and the claims object are logged during user login, starting with a log line containing `SsoConfig tracing expression`.
