@@ -365,8 +365,9 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 
 | `app.username-password-login.enabled`
 | `APP_USERNAME_PASSWORD_LOGIN_ENABLED`
-| Username/password login can be enabled or disabled, enabling SSO login either be offered additionally or to be the only login method.
-If disabled, the pages "NOM Administrators" and "Profile" will not be available in the NOM UI.
+| Username/password login can be enabled or disabled.
+This allows SSO login to be used additionally to username/password login or to be the only login method.
+If set to `false`, the page "NOM Administrators" will not be available in the NOM UI.
 | `false`
 |===
 
