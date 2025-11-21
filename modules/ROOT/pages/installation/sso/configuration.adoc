@@ -150,7 +150,7 @@ The claims object is available as the root object in the expression context.
 The expressions should evaluate to `true` or `false`.
 If the `admin-check` expression evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[NOM Admin role].
 Otherwise, the read-only-user-check expression is evaluated.
-If it evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[read-only Administrator] role.
+If it evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[read-only user] role.
 If both expressions evaluate to `false`, the user is denied access to NOM.
 
 *Examples of expressions*
