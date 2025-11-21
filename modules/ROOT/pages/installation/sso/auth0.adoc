@@ -84,11 +84,6 @@ In addition to the xref:./configuration.adoc#_common_options[common options], th
 The scope should contain the enabled scopes in the Auth0 `Authorization Server`.
 | `email,profile,openid`
 
-| `app.sso.configurations.<CONFIG>.authority`
-| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
-| Issuer URL of the Auth0 `Authorization Server` which includes the `Authorization Server` ID.
-| `\https://<ORG>.Auth0.com/oauth2/<AUTHORIZATION_SERVER_ID>`
-
 | `app.sso.configurations.<CONFIG>.issuer`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
 | Issuer URL of the Auth0 `Authorization Server`.
@@ -124,7 +119,6 @@ export APP_SSO_CONFIGURATIONS_AUTH01_GRANT_TYPE=AUTHORIZATION_CODE
 export APP_SSO_CONFIGURATIONS_AUTH01_CLIENT_ID=<AUTH0_CLIENT_ID>
 export APP_SSO_CONFIGURATIONS_AUTH01_CLIENT_SECRET=<AUTH0_CLIENT_SECRET>
 export APP_SSO_CONFIGURATIONS_AUTH01_ISSUER=https://<AUTH0_TENANT>.auth0.com/
-export APP_SSO_CONFIGURATIONS_AUTH01_AUTHORITY=https://<AUTH0_TENANT>.auth0.com/
 export APP_SSO_CONFIGURATIONS_AUTH01_AUDIENCE=https://<AUTH0_TENANT>.auth0.com/api/v2/
 export APP_SSO_CONFIGURATIONS_AUTH01_SCOPES=openid,email,profile
 export APP_SSO_CONFIGURATIONS_AUTH01_EMAIL_CLAIM="['https://localhost:3000/email']"
@@ -148,7 +142,6 @@ The same configuration can be provided as command line arguments when starting t
 --app.sso.configurations.auth01.client-id=<AUTH0_CLIENT_ID> \
 --app.sso.configurations.auth01.client-secret=<AUTH0_CLIENT_SECRET> \
 --app.sso.configurations.auth01.issuer=https://<AUTH0_TENANT>.auth0.com/ \
---app.sso.configurations.auth01.authority=https://<AUTH0_TENANT>.auth0.com/ \
 --app.sso.configurations.auth01.scopes=email,profile,openid \
 --app.sso.configurations.auth01.audience=https://<AUTH0_TENANT>.auth0.com/api/v2/ \
 --app.sso.configurations.auth01.email-claim="['https://localhost:3000/email']" \

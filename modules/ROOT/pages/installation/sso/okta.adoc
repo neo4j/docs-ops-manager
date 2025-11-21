@@ -57,11 +57,6 @@ In addition to the xref:./configuration.adoc#_common_options[common options], th
 The scope should contain the enabled scopes in the Okta `Authorization Server`.
 | `email,profile,openid`
 
-| `app.sso.configurations.<CONFIG>.authority`
-| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY`
-| Issuer URL of the Okta `Authorization Server` which includes the `Authorization Server` ID.
-| `\https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>`
-
 | `app.sso.configurations.<CONFIG>.issuer`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
 | Issuer URL of the Okta `Authorization Server` which includes the `Authorization Server` ID.
@@ -99,7 +94,6 @@ export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_SECRET=<OKTA_CLIENT_SECRET>
 export APP_SSO_CONFIGURATIONS_OKTA1_ISSUER=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>
 export APP_SSO_CONFIGURATIONS_OKTA1_AUDIENCE=nom-app-url
 export APP_SSO_CONFIGURATIONS_OKTA1_SCOPES=openid,email,profile
-export APP_SSO_CONFIGURATIONS_OKTA1_AUTHORITY=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>
 export APP_SSO_CONFIGURATIONS_OKTA1_ADMIN_CHECK="['groups']?.contains('NOM Admins')"
 export APP_SSO_CONFIGURATIONS_OKTA1_READ_ONLY_USER_CHECK="['groups']?.contains('NOM Users')"
 ----
@@ -114,7 +108,6 @@ The same configuration can be provided as command line arguments when starting t
 --app.sso.configurations.okta1.idp-type=OKTA \
 --app.sso.configurations.okta1.grant-type=AUTHORIZATION_CODE \
 --app.sso.configurations.okta1.issuer=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID> \
---app.sso.configurations.okta1.authority=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>  \
 --app.sso.configurations.okta1.client-id=<OKTA_CLIENT_ID> \
 --app.sso.configurations.okta1.client-secret=<OKTA_CLIENT_SECRET> \
 --app.sso.configurations.okta1.scopes=openid,email,profile \
