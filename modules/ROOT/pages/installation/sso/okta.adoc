@@ -18,8 +18,8 @@ The following is a typical process of setting up NOM SSO Client Application in O
 * Configure the new app integration with the following:
     ** Choose the _Grant type_ as `Implicit` or `Authorization Code`.
     ** For `Authorization Code` _Grant type_, enable `Client Credentials` as Client ID & Secret are required for this flow.
-    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URI`.
-    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URI`.
+    ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URI`.
+    ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URI`.
 * Configure an `Authentication Policy` meeting your organization security requirements and add the NOM app integration created previously to the policy.
 * It is recommended to create/assign two user `Groups` to be mapped to NOM's Admin and Read-only user roles to keep the NOM server configuration simple.
 * Assign `Groups` of the `Users` to the NOM app integration.
@@ -32,7 +32,7 @@ The following is a typical process of setting up NOM SSO Client Application in O
 
 == Configure NOM server for SSO with Okta IdP
 
-The following table describes additional configuration options required for setting up SSO with Okta.
+In addition to the xref:./configuration.adoc#_common_options[common options], the following additional configuration options are required for setting up SSO with Okta.
 
 [cols="<,<,<, <",options="header"]
 |===
@@ -121,5 +121,6 @@ The same configuration can be provided as command line arguments when starting t
 --app.sso.configurations.okta1.audience=nom-app-url \
 --app.sso.configurations.okta1.admin-check="['groups']?.contains('NOM Admins')" \
 --app.sso.configurations.okta1.read-only-user-check="['groups']?.contains('NOM Users')" \
+--logging.level.com.neo4j.opsmanager.server.config=debug
 ----
 

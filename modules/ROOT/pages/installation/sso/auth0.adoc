@@ -17,9 +17,9 @@ Following is a typical process of setting up NOM SSO Client Application in Auth0
 * Create a new __Application__ by choosing `Single Page Web Application` as application type.
 * Copy details _Domain_ , _Client ID_ , _Client Secret_ from `Basic Information` section of __Application Settings__.
 * Configure __Application URIs__ :
-    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/login` (omit the port if using default 443) as the only `Application Login URI`.
-    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/auth0-callback` (omit the port if using default 443) as the only `Allowed Callback URLs`.
-    ** Add `https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Allowed Logout URLs`.
+    ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/login` (omit the port if using default 443) as the only `Application Login URI`.
+    ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/auth0-callback` (omit the port if using default 443) as the only `Allowed Callback URLs`.
+    ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Allowed Logout URLs`.
 * Under __Advanced Settings__, select following _Grant Types_:
     ** Implicit
     ** Authorization Code
@@ -59,7 +59,7 @@ If your tenant has complex user roles that need to be mapped to NOM roles, pleas
 
 == Configure NOM server for SSO with Auth0 IdP
 
-The following table describes additional configuration options required for setting up SSO with Auth0.
+In addition to the xref:./configuration.adoc#_common_options[common options], the following additional configuration options are required for setting up SSO with Auth0.
 
 [cols="<,<,<, <",options="header"]
 |===
@@ -157,5 +157,6 @@ The same configuration can be provided as command line arguments when starting t
 --app.sso.configurations.auth01.lastname-claim="['https://localhost:3000/lastName']" \
 --app.sso.configurations.auth01.admin-check="['https://localhost:3000/roles']?.contains('NOM Admin')" \
 --app.sso.configurations.auth01.read-only-user-check="['https://localhost:3000/roles']?.contains('NOM User')" \
+--logging.level.com.neo4j.opsmanager.server.config=debug
 ----
 

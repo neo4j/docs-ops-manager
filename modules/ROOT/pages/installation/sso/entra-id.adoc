@@ -8,17 +8,17 @@ with following OAuth2 Grant types:
 
 == Set up Entra ID Application
 
-The actual setup can vary depending on customer-specific organization.
+The actual setup process depends on your Entra ID configuration.
 
 Following are the minimum requirements for a compatible Entra ID App registration:
 
-* Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>>/entra-id-callback` (omit the port if using default 443).
+* Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/entra-id-callback` (omit the port if using default 443).
 * An API with a defined scope is exposed by the Entra ID app.
 * User JWT claims contain information needed for role assignment in NOM. It can be done by including group claims in the token.
 
 == Configure NOM server for SSO
 
-The following table describes additional configuration options required for setting up SSO with Entra ID.
+In addition to the xref:./configuration.adoc#_common_options[common options], the following additional configuration options are required for setting up SSO with Entra ID.
 
 [cols="<,<,<, <",options="header"]
 |===

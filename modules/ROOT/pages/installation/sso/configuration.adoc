@@ -57,6 +57,7 @@ Only the options needed to obtain the __access token__ or __authorization code__
 Configurations are validated during the NOM server startup.
 If a configuration is invalid, the errors are reported in the logs.
 
+[#_common_options]
 === Common options
 
 [cols="<,<,<, <",options="header"]
