@@ -91,14 +91,14 @@ The scope should contain the enabled scopes in the Auth0 `Authorization Server`.
 
 | `app.sso.configurations.<CONFIG>.issuer`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
-| Issuer URL of the Auth0 `Authorization Server` which includes the `Authorization Server` ID.
-| `\https://<ORG>.Auth0.com/oauth2/<AUTHORIZATION_SERVER_ID>`
+| Issuer URL of the Auth0 `Authorization Server`.
+| `\https://<ORG>.auth0.com/oauth2/`
 
 | `app.sso.configurations.<CONFIG>.audience`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
 | Audience for validating the access token.
 It is the audience configured for custom Auth0 `Authorization Server`. If using default server, it would be `api://default`.
-| `<NOM_APP_URL>`
+| `https://<ORG>.auth0.com/api/v2/`
 |===
 
 == Example configuration
