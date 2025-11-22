@@ -33,26 +33,29 @@ If your tenant has complex user roles that need to be mapped to NOM roles, pleas
     ** Create the action with a handler that maps the custom claims similarly as below:
 [source, javascript, role=noheader]
 ----
-        exports.onExecutePostLogin = async (event, api) => {
-        const namespace = 'https://localhost:3000';
-        if (event.user.name) {
-            const nameParts = event.user.name.split(" ");
-            const firstName = nameParts[0];
-            api.accessToken.setCustomClaim(`${namespace}/firstName`, firstName);
-            if (nameParts.length > 1) {
-            const lastName = event.user.name.split(" ")[1];
-            api.accessToken.setCustomClaim(`${namespace}/lastName`, lastName);
-            }
-        }
+exports.onExecutePostLogin = async (event, api) => {
+  const namespace = 'https://localhost:3000';
 
-        if (event.user.email) {
-            api.accessToken.setCustomClaim(`${namespace}/email`, event.user.email);
-        }
+  if (event.client.client_id === "<NOM_APP_CLIENT_ID>") {
+    if (event.user.name) {
+      const nameParts = event.user.name.split(" ");
+      const firstName = nameParts[0];
+      api.accessToken.setCustomClaim(`${namespace}/firstName`, firstName);
+      if (nameParts.length > 1) {
+        const lastName = event.user.name.split(" ")[1];
+        api.accessToken.setCustomClaim(`${namespace}/lastName`, lastName);
+      }
+    }
 
-        if (event.authorization) {
-            api.accessToken.setCustomClaim(`${namespace}/roles`, event.authorization.roles);
-        }
-        };
+    if (event.user.email) {
+        api.accessToken.setCustomClaim(`${namespace}/email`, event.user.email);
+    }
+
+    if (event.authorization) {
+      api.accessToken.setCustomClaim(`${namespace}/roles`, event.authorization.roles);
+    }
+  }
+};
 ----
     ** Save & test the handler to see if the custom claims are mapped with sandbox data.
     ** Deploy the custom action & setup a _post-login_ trigger in the __Login__ flow to excute the handler after successful login.
