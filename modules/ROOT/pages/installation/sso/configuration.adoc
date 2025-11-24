@@ -141,7 +141,7 @@ See xref:_role_assignment[Role assignment] for details.
 |===
 
 [#_role_assignment]
-==== Role assignment
+=== Role assignment
 
 The `admin-check` and `read-only-user-check` options are https://docs.spring.io/spring-framework/reference/core/expressions/language-ref.html[SpEL expressions] that are evaluated against the claims in the access token obtained from the IdP.
 
@@ -175,7 +175,7 @@ If both expressions evaluate to `false`, the user is denied access to NOM.
 To debug issues with role assignment, see the xref:_troubleshooting[Troubleshooting section] below.
 
 [#_claim_mapping]
-==== Mapping token claims
+=== Mapping token claims
 
 By default, IdP specific token claims are used to create or update the SSO user profile details in NOM.
 It is possible to override the default claim mapping by providing SpEL expressions using the options `username-claim`, `email-claim`, `firstname-claim` and `lastname-claim`.
