@@ -10,7 +10,7 @@ with following OAuth2 Grant types:
 
 The actual setup process depends on your Entra ID configuration.
 
-Following are the minimum requirements for a compatible Entra ID App registration:
+The following are the minimum requirements for a compatible Entra ID App registration:
 
 * Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/entra-id-callback` (omit the port if using default 443).
 * An API with a defined scope is exposed by the Entra ID app.
@@ -18,7 +18,7 @@ Following are the minimum requirements for a compatible Entra ID App registratio
 
 == Configure NOM server for SSO
 
-In addition to the xref:./configuration.adoc#_common_options[common options], the following additional configuration options are required for setting up SSO with Entra ID.
+In addition to the xref:./configuration.adoc#_common_options[common options], the following supplemental configuration options are required for setting up SSO with Entra ID.
 
 [cols="<,<,<, <",options="header"]
 |===

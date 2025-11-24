@@ -1,7 +1,7 @@
 = Okta Support
 :description: Describes Okta IdP support in NOM SSO
 
-NOM server supports Single Sign-On (SSO) authentication using Okta Identity Provider (IdP)
+The NOM server supports Single Sign-On (SSO) authentication using Okta Identity Provider (IdP)
 with following OAuth2 Grant types:
 
 * Implicit flow
@@ -10,7 +10,7 @@ with following OAuth2 Grant types:
 
 == Configure Okta Identity Provider (IdP) for SSO
 
-This document assumes user has access to an Okta Admin portal to setup the SSO Client Application.
+The content of this page assumes you have access to an Okta Admin portal to setup the SSO Client Application.
 
 The following is a typical process of setting up NOM SSO Client Application in Okta:
 
@@ -32,7 +32,7 @@ The following is a typical process of setting up NOM SSO Client Application in O
 
 == Configure NOM server for SSO with Okta IdP
 
-In addition to the xref:./configuration.adoc#_common_options[common options], the following additional configuration options are required for setting up SSO with Okta.
+In addition to the xref:./configuration.adoc#_common_options[common options], the following supplemental configuration options are required for setting up SSO with Okta.
 
 [cols="<,<,<, <",options="header"]
 |===
@@ -71,8 +71,7 @@ It is the audience configured for custom Okta `Authorization Server`. If using d
 
 == Example configuration
 
-The following is an example configuration using environment variables to set up a single SSO configuration named `okta1` with `AUTHORIZATION_CODE` grant type
-and disable username/password login.
+The following is an example configuration using environment variables to set up a single SSO configuration named `okta1` with `AUTHORIZATION_CODE` grant type and disable username/password login.
 
 If configuring for `IMPLICIT` grant type, don't set `client-secret`.
 

@@ -10,9 +10,9 @@ with following grant types:
 
 == Configure Auth0 Identity Provider (IdP) for SSO
 
-This document assumes user has access to an Auth0 Management dashboard to setup the SSO Client Application.
+The content on this page assumes that you have access to an Auth0 Management dashboard to setup the SSO Client Application.
 
-Following is a typical process of setting up NOM SSO Client Application in Auth0:
+The following is a typical process of setting up NOM SSO Client Application in Auth0:
 
 * Create a new __Application__ by choosing `Single Page Web Application` as application type.
 * Copy details _Domain_ , _Client ID_ , _Client Secret_ from `Basic Information` section of __Application Settings__.
@@ -25,7 +25,7 @@ Following is a typical process of setting up NOM SSO Client Application in Auth0
     ** Authorization Code
     ** Refresh token
 * Configure other settings like Connections & Login Experience according to your tenant setup
-* We recommend creating 2 user roles to be mapped to NOM’s Admin and Read-only user roles to keep NOM server configuration simple. 
+* It is recommended to create 2 user roles to be mapped to NOM’s Admin and Read-only user roles to keep NOM server configuration simple. 
 If your tenant has complex user roles that need to be mapped to NOM roles, please use the SpEL expressions as described xref:./configuration.adoc#_role_assignment[here].
 * To map the profile data as custom token claims in Auth0, add a custom action to the __Actions__ _Library_.
     ** Under Library, click _Create Action_ & select _Create Custom Action_.
@@ -108,8 +108,8 @@ If configuring for `IMPLICIT` or `PKCE` grant type, there is no need to set `cli
 
 [IMPORTANT]
 ====
-Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
-This depends on the shell you are using.
+Make sure to quote variable values containing special characters such as `?`.
+Otherwise the shell may interpret them, but it depends on which shell you are using.
 ====
 
 [source,shell]

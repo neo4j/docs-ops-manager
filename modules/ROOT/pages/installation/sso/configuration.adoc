@@ -45,7 +45,7 @@ When both methods are enabled, users can select login method on the NOM login pa
 One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
 
 Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
-The configuration name *must* only contain alphanumeric characters.
+The configuration name *must only* contain alphanumeric characters.
 
 The configuration contains options needed to obtain, validate, and map access tokens to SSO users in NOM, including assigning NOM roles to SSO users.
 
@@ -156,7 +156,8 @@ If both expressions evaluate to `false`, the user is denied access to NOM.
 *Examples of expressions*
 
 |===
-| Goal |Expression
+|Goal 
+|Expression
 
 |Check that a list contains _all_ required values
 |`['groups']?.containsAll({'nom_group1', 'nom_group2'})`
@@ -188,7 +189,7 @@ This expression evaluates to the value of the key `verified_email` in the JWT cl
 [NOTE]
 ====
 Claim mapped values for email address, first and last names default to an empty string if they evaluate to `null`, resulting in a warning being logged.
-It is recommended using non-empty claim values for better user experience.
+Using non-empty claim values is considered best practice.
 Username claim mapping evaluation must result in a non-blank string otherwise authentication will be aborted with an error.
 ====
 
