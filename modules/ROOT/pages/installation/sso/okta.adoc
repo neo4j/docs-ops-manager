@@ -5,8 +5,8 @@ NOM server supports Single Sign-On (SSO) authentication using Okta Identity Prov
 with following OAuth2 Grant types:
 
 * Implicit flow
-* Authorization code flow (_with PKCE verification_)
-* PKCE flow (_Back channel token retrieval_)
+* Authorization code flow
+* PKCE flow (_Back channel token retrieval with PKCE verification_)
 
 == Configure Okta Identity Provider (IdP) for SSO
 
