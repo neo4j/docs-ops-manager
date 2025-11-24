@@ -155,8 +155,9 @@ If both expressions evaluate to `false`, the user is denied access to NOM.
 
 *Examples of expressions*
 
+[cols="<, <",options="header"]
 |===
-|Goal 
+|Goal
 |Expression
 
 |Check that a list contains _all_ required values
