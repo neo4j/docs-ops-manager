@@ -78,7 +78,7 @@ If configuring for `IMPLICIT` grant type, don't set `client-secret`.
 [IMPORTANT]
 ====
 Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
-Follow the escaping rules of the shell you are using.
+Otherwise the shell may interpret them, but it depends on which shell you are using.
 ====
 
 [source,shell]
