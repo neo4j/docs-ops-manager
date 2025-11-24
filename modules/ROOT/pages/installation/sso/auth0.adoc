@@ -6,7 +6,7 @@ with following grant types:
 
 * Implicit flow
 * Authorization code flow
-* PKCE flow
+* PKCE flow (_Front channel token retrieval_)
 
 == Configure Auth0 Identity Provider (IdP) for SSO
 
@@ -78,7 +78,7 @@ In addition to the xref:./configuration.adoc#_common_options[common options], th
 
 | `app.sso.configurations.<CONFIG>.client-secret`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET`
-| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` and `PKCE` grant types.
+| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` grant type.
 | `<secret>`
 
 | `app.sso.configurations.<CONFIG>.scopes`
@@ -104,7 +104,7 @@ It is the audience configured for custom Auth0 `Authorization Server`. If using 
 The following is an example configuration using environment variables to set up a single SSO configuration named `auth01` with `AUTHORIZATION_CODE` grant type
 and disable username/password login.
 
-If configuring for `IMPLICIT` grant type, don't set `client-secret`.
+If configuring for `IMPLICIT` or `PKCE` grant type, there is no need to set `client-secret`.
 
 [IMPORTANT]
 ====
