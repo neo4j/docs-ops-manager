@@ -6,7 +6,7 @@ with following OAuth2 Grant types:
 
 * Implicit flow
 * Authorization code flow
-* PKCE flow (_Back channel token retrieval with PKCE verification_)
+* PKCE flow (_Front channel token retrieval_)
 
 == Configure Okta Identity Provider (IdP) for SSO
 
@@ -16,7 +16,8 @@ The following is a typical process of setting up NOM SSO Client Application in O
 
 * Create a new app integration with _Sign-in method_ `OIDC - OpenID Connect` and _Application type_ `Single-Page Application`.
 * Configure the new app integration with the following:
-    ** Choose the _Grant type_ as `Implicit` or `Authorization Code`.
+    ** Choose the _Grant type_ as `Implicit` or `Authorization Code`. For `Implicit` _Client Authentication_ should be `None`.
+    ** Optionally enable `PKCE` verification for each either grant type.
     ** For `Authorization Code` _Grant type_, enable `Client Credentials` as Client ID & Secret are required for this flow.
     ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URI`.
     ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URI`.
@@ -48,7 +49,7 @@ In addition to the xref:./configuration.adoc#_common_options[common options], th
 
 | `app.sso.configurations.<CONFIG>.client-secret`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET`
-| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` and `PKCE` grant types.
+| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` grant type.
 | `<secret>`
 
 | `app.sso.configurations.<CONFIG>.scopes`
@@ -73,7 +74,7 @@ It is the audience configured for custom Okta `Authorization Server`. If using d
 
 The following is an example configuration using environment variables to set up a single SSO configuration named `okta1` with `AUTHORIZATION_CODE` grant type and disable username/password login.
 
-If configuring for `IMPLICIT` grant type, don't set `client-secret`.
+If configuring for `IMPLICIT` or `PKCE` grant types, don't set `client-secret`.
 
 [IMPORTANT]
 ====
@@ -85,7 +86,7 @@ Otherwise the shell may interpret them, but it depends on which shell you are us
 ----
 export APP_SSO_ACTIVE_CONFIGURATIONS=okta1
 export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
-export APP_SSO_CONFIGURATIONS_OKTA1_IDP_TYPE=ENTRA_ID
+export APP_SSO_CONFIGURATIONS_OKTA1_IDP_TYPE=OKTA
 export APP_SSO_CONFIGURATIONS_OKTA1_GRANT_TYPE=AUTHORIZATION_CODE
 export APP_SSO_CONFIGURATIONS_OKTA1_DISPLAY_NAME="Login with Okta"
 export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_ID=<OKTA_CLIENT_ID>
