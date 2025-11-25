@@ -3,18 +3,19 @@
 NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID (formerly Azure Active Directory)
 with following OAuth2 Grant types:
 
-* Implicit flow
 * Authorization code flow
+* PKCE flow (_Front channel token retrieval_)
 
 == Set up Entra ID Application
 
 The actual setup process depends on your Entra ID configuration.
 
-The following are the minimum requirements for a compatible Entra ID App registration:
+The following are the minimum requirements for an Entra ID App registration for use with PKCE token flow:
 
-* Support of implicit token flow with a "Single-page application (SPA)" callback URL in the form `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/entra-id-callback` (omit the port if using default 443).
-* An API with a defined scope is exposed by the Entra ID app.
-* User JWT claims contain information needed for role assignment in NOM. It can be done by including group claims in the token.
+* A "Single-page application (SPA)" callback URL is configured in the form `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/entra-id-callback` (omit the port if using default 443).
+* An API with a named scope is exposed by the Entra ID App.
+* JWT claims contain information needed for xref:./configuration.adoc#_role_assignment[role assignment] in NOM.
+For example, this can be achieved by adding group claims to the JWT.
 
 == Configure NOM server for SSO
 
@@ -34,7 +35,7 @@ In addition to the xref:./configuration.adoc#_common_options[common options], th
 
 | `app.sso.configurations.<CONFIG>.client-secret`
 | `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET`
-| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` and `PKCE` grant types.
+| Client Secret for the NOM SSO client configured in the IdP for the `AUTHORIZATION_CODE` grant type.
 | `<secret>`
 
 | `app.sso.configurations.<CONFIG>.scopes`
@@ -77,7 +78,7 @@ Otherwise the shell may interpret them, but it depends on which shell you are us
 export APP_SSO_ACTIVE_CONFIGURATIONS=ENTRA
 export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
 export APP_SSO_CONFIGURATIONS_ENTRA_IDP_TYPE=ENTRA_ID
-export APP_SSO_CONFIGURATIONS_ENTRA_GRANT_TYPE=IMPLICIT
+export APP_SSO_CONFIGURATIONS_ENTRA_GRANT_TYPE=PKCE
 export APP_SSO_CONFIGURATIONS_ENTRA_DISPLAY_NAME="Login with Entra ID"
 export APP_SSO_CONFIGURATIONS_ENTRA_CLIENT_ID=ccc0e55f-5f3e-4da8-9002-2830225aae1b
 export APP_SSO_CONFIGURATIONS_ENTRA_ISSUER=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0
@@ -95,7 +96,7 @@ The same configuration can be provided as command line arguments when starting t
 --app.sso.active-configurations=ENTRA \
 --app.username-password-login.enabled=false \
 --app.sso.configurations.ENTRA.idp-type=ENTRA_ID \
---app.sso.configurations.ENTRA.grant-type=IMPLICIT \
+--app.sso.configurations.ENTRA.grant-type=PKCE \
 --app.sso.configurations.ENTRA.display-name="Login with Entra ID" \
 --app.sso.configurations.ENTRA.client-id=ccc0e55f-5f3e-4da8-9002-2830225aae1b \
 --app.sso.configurations.ENTRA.issuer=https://login.microsoftonline.com/ddd85725-ed2a-49a4-a19e-11c8d29f9a0f/v2.0 \

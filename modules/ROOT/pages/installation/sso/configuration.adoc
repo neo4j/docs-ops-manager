@@ -15,9 +15,9 @@ Currently, following IdPs & OAuth2 https://oauth.net/2/grant-types/[Grant types]
 | PKCE flow
 
 | **Microsoft Entra ID (formerly Azure Active Directory)**
-| Yes
-| Yes
 | No
+| Yes
+| Yes
 
 | **Google Identity**
 | Yes
