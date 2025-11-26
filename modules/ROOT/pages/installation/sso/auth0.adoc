@@ -26,7 +26,7 @@ The following is a typical process of setting up NOM SSO Client Application in A
     ** Refresh token
 * Configure other settings like Connections & Login Experience according to your tenant setup
 * It is recommended to create 2 user roles to be mapped to NOM’s Admin and Read-only user roles to keep NOM server configuration simple. 
-If your tenant has complex user roles that need to be mapped to NOM roles, please use the SpEL expressions as described xref:./configuration.adoc#_role_assignment[here].
+If your Auth0 tenant has complex user roles that need to be mapped to NOM roles, please use the SpEL expressions as described xref:./configuration.adoc#_role_assignment[here].
 * To map the profile data as custom token claims in Auth0, add a custom action to the __Actions__ _Library_.
     ** Under Library, click _Create Action_ & select _Create Custom Action_.
     ** Select the _Login / Post Login_ trigger, meaning the claims get added to the token after successful login.
