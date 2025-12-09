@@ -186,6 +186,109 @@ To enable TLS handling, additional secrets need to be configured as shown in the
 It's common practice to use something like link:https://cert-manager.io/docs/usage/ingress/[Cert Manager] to handle the provisioning and renewal of certificate secrets.
 * `annotations` can be used to further customize the Ingress controller based on your requirements.
 
+=== Single Sign-on configuration
+
+NOM server now provides Single Sign-on support for select few Identity providers (Refer to xref:../installation/sso/configuration.adoc[SSO Configuration]).
+To simplify configuring NOM server in the chart, following values can be set in `values.yaml` under `ssoConfigs` to be translated to NOM srver SSO configuration:
+
+NOTE: Each SSO configuration is added as a key in `ssoConfigs` map referred here as `<CONFIG>`.
+
+[cols="<, <, <",options="header"]
+|===
+| Key
+| Type
+| Target SSO Config
+
+| `isActive`
+| boolean
+| If true adds the SSO <CONFIG> name to APP_SSO_ACTIVE_CONFIGURATIONS
+
+| `displayName`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_DISPLAY_NAME
+
+| `idpType`
+| enum (`ENTRA_ID`, `GOOGLE_IDENTITY`, `OKTA`, `AUTH0`)
+| APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE
+
+| `grantType`
+| enum (`IMPLICIT`, `AUTHORIZATION_CODE`, `PKCE`)
+| APP_SSO_CONFIGURATIONS_<CONFIG>_GRANT_TYPE
+
+| `adminCheck`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_ADMIN_CHECK
+
+| `readOnlyUserCheck`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK
+
+| `usernameClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_USERNAME_CLAIM
+
+| `emailClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_EMAIL_CLAIM
+
+| `firstnameClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_FIRSTNAME_CLAIM
+
+| `lastnameClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_LASTNAME_CLAIM
+
+| `clientId`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID
+
+| `clientSecret`
+| string or dict (Can be mapped from an existing secret)
+| APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET
+
+| `issuer`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER
+
+| `authority`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY
+
+| `scopes`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES
+
+| `audience`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE
+|===
+
+An example SSO configuration for `ENTRA_ID` based SSO:
+[source, yaml]
+----
+ssoConfigs:
+  entraid1:
+    isActive: true
+    displayName: "Entra ID PKCE"
+    idpType: "ENTRA_ID"
+    grantType: "PKCE"
+    adminCheck: "['groups'].?[ {'group-id-1', 'group-id-2'}.contains(#this) ].size() > 0"
+    readOnlyUserCheck: "['groups']?.contains('group-id-1')"
+    usernameClaim: "['unique_name']"
+    emailClaim: "['email']"
+    firstnameClaim: "['given_name']"
+    lastnameClaim: "['family_name']"
+    clientId: "client-id"
+    clientSecret:
+      secretName: "nom-secrets"
+      key: "password"
+    issuer: "https://login.microsoftonline.com/tenant-id/v2.0"
+    authority: "https://login.microsoftonline.com/tenant-id"
+    scopes: "api://client-id/nomserver"
+    audience: "client-id"
+----
+
 ==== Disabling SSL termination
 
 * If you would not like Ingress resource to handle SSL termination and only use it for domain routing and load balancing, Ingress needs to allow SSL passthrough, and NOM server needs to be configured with the certificates as described previously. 
