@@ -23,6 +23,14 @@ config:
   jwtTTL: "2h"
   grpcAdvertisedHost: "" # this needs to be set if a different IP assigned to GRPC
   grpcAdvertisedPort: "" # this needs to be set if a different IP assigned to GRPC
+  corsAllowedOrigins: ""
+  corsAllowedHeaders: ""
+  usernamePasswordLoginEnabled: "true"
+  # overrides for any environment variable
+  overrides: {}
+
+# Single Sign-On configurations. Refer to "https://neo4j.com/docs/ops-manager/current/installation/server/#sso_configuration"
+ssoConfigs: {}
 
 # An optional reference to a secret that contains some or all values for NOM secrets
 # Secret name and key should be specified
@@ -127,6 +135,12 @@ nodeSelector: {}
 
 tolerations: []
 
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 7474
+  runAsGroup: 7474
+  fsGroup: 7474
+
 ----
 
 === Using pre-configured secrets
@@ -199,4 +213,120 @@ ingress:
   annotations: { } 
   httpHostName: "<Hostname/domain for NOM server http endpoints>"
   grpcHostName: "<Hostname/domain for NOM server grpc endpoints>"
+----
+
+=== Single Sign-on configuration
+
+NOM server now provides Single Sign-on support for select few Identity providers (Refer to xref:../installation/sso/configuration.adoc[SSO Configuration]).
+To simplify configuring NOM server in the chart, following values can be set in `values.yaml` under `ssoConfigs` to be translated to NOM server SSO configuration:
+
+NOTE: Each SSO configuration is added as a key in `ssoConfigs` map referred here as `<CONFIG>`.
+
+[cols="<, <, <",options="header"]
+|===
+| Key
+| Type
+| Target SSO Config
+
+| `isActive`
+| boolean
+| If true adds the SSO <CONFIG> name to APP_SSO_ACTIVE_CONFIGURATIONS
+
+| `displayName`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_DISPLAY_NAME
+
+| `idpType`
+| enum (`ENTRA_ID`, `GOOGLE_IDENTITY`, `OKTA`, `AUTH0`)
+| APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE
+
+| `grantType`
+| enum (`IMPLICIT`, `AUTHORIZATION_CODE`, `PKCE`)
+| APP_SSO_CONFIGURATIONS_<CONFIG>_GRANT_TYPE
+
+| `adminCheck`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_ADMIN_CHECK
+
+| `readOnlyUserCheck`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK
+
+| `usernameClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_USERNAME_CLAIM
+
+| `emailClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_EMAIL_CLAIM
+
+| `firstnameClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_FIRSTNAME_CLAIM
+
+| `lastnameClaim`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_LASTNAME_CLAIM
+
+| `clientId`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID
+
+| `clientSecret`
+| string or dict (Can be mapped from an existing secret)
+| APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET
+
+| `issuer`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER
+
+| `authority`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_AUTHORITY
+
+| `scopes`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES
+
+| `audience`
+| string
+| APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE
+|===
+
+An example SSO configuration for `ENTRA_ID` based SSO:
+[source, yaml]
+----
+ssoConfigs:
+  entraid1:
+    isActive: true
+    displayName: "Entra ID PKCE"
+    idpType: "ENTRA_ID"
+    grantType: "PKCE"
+    adminCheck: "['groups'].?[ {'group-id-1', 'group-id-2'}.contains(#this) ].size() > 0"
+    readOnlyUserCheck: "['groups']?.contains('group-id-1')"
+    usernameClaim: "['unique_name']"
+    emailClaim: "['email']"
+    firstnameClaim: "['given_name']"
+    lastnameClaim: "['family_name']"
+    clientId: "client-id"
+    clientSecret:
+      secretName: "nom-secrets"
+      key: "password"
+    issuer: "https://login.microsoftonline.com/tenant-id/v2.0"
+    authority: "https://login.microsoftonline.com/tenant-id"
+    scopes: "api://client-id/nomserver"
+    audience: "client-id"
+----
+
+NOTE: The default username & password login can be disabled by setting `config.usernamePasswordLoginEnabled` to `false`.
+
+=== Configuration overrides
+
+You can now override arbitrary NOM server confgiuration with `vlaues.yaml` using the new `config.overrides` section
+to set overrides as enviroment values. For example:
+[source,yaml]
+----
+config:
+  LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG: "DEBUG"
+  APP_USERNAME_PASSWORD_LOGIN_ENABLED: false
 ----

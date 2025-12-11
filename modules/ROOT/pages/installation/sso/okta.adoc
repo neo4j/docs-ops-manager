@@ -1,0 +1,119 @@
+= Okta Support
+:description: Describes Okta IdP support in NOM SSO
+
+The NOM server supports Single Sign-On (SSO) authentication using Okta Identity Provider (IdP)
+with following OAuth2 Grant types:
+
+* Implicit flow
+* Authorization code flow
+* PKCE flow (_Front channel token retrieval_)
+
+== Configure Okta Identity Provider (IdP) for SSO
+
+The content of this page assumes you have access to an Okta Admin portal to setup the SSO Client Application.
+
+The following is a typical process of setting up NOM SSO Client Application in Okta:
+
+* Create a new app integration with _Sign-in method_ `OIDC - OpenID Connect` and _Application type_ `Single-Page Application`.
+* Configure the new app integration with the following:
+    ** Choose the _Grant type_ as `Implicit` or `Authorization Code`. For `Implicit` _Client Authentication_ should be `None`.
+    ** Optionally enable `PKCE` verification for each either grant type.
+    ** For `Authorization Code` _Grant type_, enable `Client Credentials` as Client ID & Secret are required for this flow.
+    ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>/okta-callback` (omit the port if using default 443) as the only `Sign-in redirect URI`.
+    ** Add `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>` as the only `Sign-out redirect URI`.
+* Configure an `Authentication Policy` meeting your organization security requirements and add the NOM app integration created previously to the policy.
+* It is recommended to create/assign two user `Groups` to be mapped to NOM's Admin and Read-only user roles to keep the NOM server configuration simple.
+* Assign `Groups` of the `Users` to the NOM app integration.
+* Create a new `Authorization Server` with NOM Client application as the audience.
+    ** If there are restrictions to create dedicated `Authorization Server`, the default one can be used.
+    ** Enable OIDC scopes such as `openid`, `profile` and `email`
+    ** Add a custom claim to the `Authorization Server` to include user groups in the Access token.
+    ** If needed, add custom claims to map User profile data such as `firstName`, `lastName`, `email`.
+
+
+== Configure NOM server for SSO with Okta IdP
+
+In addition to the xref:./configuration.adoc#_common_options[common options], the following supplemental configuration options are required for setting up SSO with Okta.
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.configurations.<CONFIG>.client-id`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
+| Client ID for the NOM SSO client configured in the IdP. Required for all grant types.
+| `0oaw54wd6rJQ8lReH697`
+
+| `app.sso.configurations.<CONFIG>.client-secret`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_SECRET`
+| Client Secret for the NOM SSO client configured in the IdP for `AUTHORIZATION_CODE` grant type.
+| `<secret>`
+
+| `app.sso.configurations.<CONFIG>.scopes`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
+| Comma-separated list of scopes to request during authentication.
+The scope should contain the enabled scopes in the Okta `Authorization Server`.
+| `email,profile,openid`
+
+| `app.sso.configurations.<CONFIG>.issuer`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ISSUER`
+| Issuer URL of the Okta `Authorization Server` which includes the `Authorization Server` ID.
+| `\https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>`
+
+| `app.sso.configurations.<CONFIG>.audience`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
+| Audience for validating the access token.
+It is the audience configured for custom Okta `Authorization Server`. If using default server, it would be `api://default`.
+| `<NOM_APP_URL>`
+|===
+
+== Example configuration
+
+The following is an example configuration using environment variables to set up a single SSO configuration named `okta1` with `AUTHORIZATION_CODE` grant type and disable username/password login.
+
+If configuring for `IMPLICIT` or `PKCE` grant types, don't set `client-secret`.
+
+[IMPORTANT]
+====
+Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
+Otherwise the shell may interpret them, but it depends on which shell you are using.
+====
+
+[source,shell]
+----
+export APP_SSO_ACTIVE_CONFIGURATIONS=okta1
+export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
+export APP_SSO_CONFIGURATIONS_OKTA1_IDP_TYPE=OKTA
+export APP_SSO_CONFIGURATIONS_OKTA1_GRANT_TYPE=AUTHORIZATION_CODE
+export APP_SSO_CONFIGURATIONS_OKTA1_DISPLAY_NAME="Login with Okta"
+export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_ID=<OKTA_CLIENT_ID>
+export APP_SSO_CONFIGURATIONS_OKTA1_CLIENT_SECRET=<OKTA_CLIENT_SECRET>
+export APP_SSO_CONFIGURATIONS_OKTA1_ISSUER=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID>
+export APP_SSO_CONFIGURATIONS_OKTA1_AUDIENCE=nom-app-url
+export APP_SSO_CONFIGURATIONS_OKTA1_SCOPES=openid,email,profile
+export APP_SSO_CONFIGURATIONS_OKTA1_ADMIN_CHECK="['groups']?.contains('NOM Admins')"
+export APP_SSO_CONFIGURATIONS_OKTA1_READ_ONLY_USER_CHECK="['groups']?.contains('NOM Users')"
+----
+
+The same configuration can be provided as command line arguments when starting the NOM server, a fragment is shown below.
+
+[source,shell]
+----
+--app.sso.active-configurations=okta1 \
+--app.username-password-login.enabled=false \
+--app.sso.configurations.okta1.display-name="Login with Okta" \
+--app.sso.configurations.okta1.idp-type=OKTA \
+--app.sso.configurations.okta1.grant-type=AUTHORIZATION_CODE \
+--app.sso.configurations.okta1.issuer=https://<ORG>.okta.com/oauth2/<AUTHORIZATION_SERVER_ID> \
+--app.sso.configurations.okta1.client-id=<OKTA_CLIENT_ID> \
+--app.sso.configurations.okta1.client-secret=<OKTA_CLIENT_SECRET> \
+--app.sso.configurations.okta1.scopes=openid,email,profile \
+--app.sso.configurations.okta1.audience=nom-app-url \
+--app.sso.configurations.okta1.admin-check="['groups']?.contains('NOM Admins')" \
+--app.sso.configurations.okta1.read-only-user-check="['groups']?.contains('NOM Users')" \
+--logging.level.com.neo4j.opsmanager.server.config=debug
+----
+

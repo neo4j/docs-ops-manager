@@ -1,0 +1,89 @@
+= Google Identity Support
+
+NOM server supports Single Sign-On (SSO) authentication using Google Identity.
+
+[NOTE]
+====
+Currently, only the grant type `IMPLICIT` is supported.
+====
+
+== Set up Google Identity Application
+
+To perform SSO with Google Identity, a Google Identity Application needs to be configured:
+
+* Under "APIs & Services", enable the *Google+ API* (for user profile information) and the *Google Identity*.
+* Configure the *OAuth consent screen*.
+* Create credentials of type *OAuth Client ID* for application type *Web application*, having *Authorized JavaScript origins* and *Authorized redirect URIs* set to `\https://<NOM_SERVER_HOSTNAME>:<NOM_SERVER_PORT>`. Record the resulting *Client ID*.
+
+
+
+== Configure NOM server for SSO
+
+In addition to the xref:./configuration.adoc#_common_options[common options], the following additional configuration options are required for setting up SSO with Google Identity.
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.configurations.<CONFIG>.client-id`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_CLIENT_ID`
+| Client ID of the Google Identity Application.
+| `1234-abc.apps.googleusercontent.com`
+
+| `app.sso.configurations.<CONFIG>.scopes`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_SCOPES`
+| Comma-separated list of scopes for the authentication request.
+| `email,profile,openid`
+
+| `app.sso.configurations.<CONFIG>.audience`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_AUDIENCE`
+| Audience for validating the access token.
+It is usually the same as the client ID.
+| `1234-abc.apps.googleusercontent.com`
+`ccc0e55f-5f3e-4da8-9002-2830225aae1b` (v2.0 tokens)
+|===
+
+== Example configuration
+
+The following is an example configuration using environment variables to set up a single SSO configuration named `GOOGLE` and disable username/password login.
+
+[IMPORTANT]
+====
+Make sure to quote variable values containing special characters such as `?` to prevent the shell from interpreting them.
+Otherwise the shell may interpret them, but it depends on which shell you are using.
+====
+
+[source,shell]
+----
+export APP_SSO_ACTIVE_CONFIGURATIONS=GOOGLE
+export APP_USERNAME_PASSWORD_LOGIN_ENABLED=false
+export APP_SSO_CONFIGURATIONS_GOOGLE_IDP_TYPE=GOOGLE_IDENTITY
+export APP_SSO_CONFIGURATIONS_GOOGLE_GRANT_TYPE=IMPLICIT
+export APP_SSO_CONFIGURATIONS_GOOGLE_DISPLAY_NAME="Login with Google"
+export APP_SSO_CONFIGURATIONS_GOOGLE_CLIENT_ID=1234-abc.apps.googleusercontent.com
+export APP_SSO_CONFIGURATIONS_GOOGLE_SCOPES=email,profile,openid
+export APP_SSO_CONFIGURATIONS_GOOGLE_AUDIENCE=1234-abc.apps.googleusercontent.com
+export APP_SSO_CONFIGURATIONS_GOOGLE_ADMIN_CHECK="email.contains('admins.my-org.com')"
+export APP_SSO_CONFIGURATIONS_GOOGLE_READ_ONLY_USER_CHECK="email.contains('users.my-org.com')"
+export LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG=DEBUG
+----
+
+The same configuration can be provided as command line arguments when starting the NOM server, a fragment is shown below.
+
+[source,shell]
+----
+--app.sso.active-configurations=GOOGLE \
+--app.username-password-login.enabled=false \
+--app.sso.configurations.GOOGLE.idp-type=GOOGLE_IDENTITY \
+--app.sso.configurations.GOOGLE.grant-type=IMPLICIT \
+--app.sso.configurations.GOOGLE.display-name="Login with Google" \
+--app.sso.configurations.GOOGLE.client-id=1234-abc.apps.googleusercontent.com \
+--app.sso.configurations.GOOGLE.scopes=email,profile,openid \
+--app.sso.configurations.GOOGLE.audience=1234-abc.apps.googleusercontent.com \
+--app.sso.configurations.GOOGLE.admin-check="email.contains('admins.my-org.com')" \
+--app.sso.configurations.GOOGLE.read-only-user-check="email.contains('users.my-org.com')" \
+--logging.level.com.neo4j.opsmanager.server.config=debug
+----

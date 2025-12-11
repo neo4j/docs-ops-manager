@@ -1,0 +1,235 @@
+= SSO Configuration
+:description: This section describes the configuration steps to enable Single Sign-On (SSO) for NOM server
+:icons: font
+
+== Overview
+
+NOM supports SSO for authentication & authorization using external Identity Providers (IdP) that support OAuth2/OIDC authentication standard.
+
+Currently, following IdPs & OAuth2 https://oauth.net/2/grant-types/[Grant types] are supported:
+[cols="<,<,<, <", options="header"]
+|===
+| IdPs / Grant types
+| Implicit flow
+| Authorization code flow
+| PKCE flow
+
+| **Microsoft Entra ID (formerly Azure Active Directory)**
+| No
+| Yes
+| Yes
+
+| **Google Identity**
+| Yes
+| No
+| No
+
+| **Okta**
+| Yes
+| Yes
+| Yes
+
+| **Auth0**
+| Yes
+| Yes
+| Yes
+|===
+
+More IdP types and alternative authentication flows may be added in future NOM releases.
+
+SSO can be used as the only authentication method or in combination with username/password login.
+When both methods are enabled, users can select login method on the NOM login page.
+
+== Configuration options
+
+One or more SSO configs can be set up containing the options needed to perform SSO authentication with an external Identity Provider (IdP).
+
+Configurations are identified by a name, which is used to reference the configuration in the environment variable names or command line arguments.
+The configuration name *must only* contain alphanumeric characters.
+
+The configuration contains options needed to obtain, validate, and map access tokens to SSO users in NOM, including assigning NOM roles to SSO users.
+
+[IMPORTANT]
+====
+Only the options needed to obtain the __access token__ or __authorization code__ from the IdP are sent to the UI.
+====
+
+Configurations are validated during the NOM server startup.
+If a configuration is invalid, the errors are reported in the logs.
+
+[#_common_options]
+=== Common options
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.active-configurations`
+| `APP_SSO_ACTIVE_CONFIGURATIONS`
+| Lists comma-separated names of configurations that should be offered as login options on the NOM login page.
+| `myConfig1,myconfig2`
+
+| `app.username-password-login.enabled`
+| `APP_USERNAME_PASSWORD_LOGIN_ENABLED`
+| Username/password login can be enabled or disabled.
+This allows SSO login to be used additionally to username/password login or to be the only login method.
+If set to `false`, the page "NOM Administrators" will not be available in the NOM UI.
+| `false`
+|===
+
+In the reference below, the placeholder `<CONFIG>` is used to indicate where the configuration name should be used (e.g. "myConfig1").
+
+Some configuration options require specifying SpEL (Spring Expression Language) expressions.
+For further details see https://docs.spring.io/spring-framework/reference/core/expressions/language-ref.html[Spring documentation] and the chapters below the table.
+
+[cols="<,<,<, <",options="header"]
+|===
+| Command line argument
+| Environment variable name
+| Description
+| Example value
+
+| `app.sso.configurations.<CONFIG>.idp-type`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_IDP_TYPE`
+| Type of the Identity Provider (IdP). Currently `ENTRA_ID`, `GOOGLE_IDENTITY`, `OKTA` & `AUTH0` are supported.
+| `ENTRA_ID`
+
+| `app.sso.configurations.<CONFIG>.grant-type`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_GRANT_TYPE`
+| Type of the OAuth authorization grant or flow to use. Currently `IMPLICIT`, `AUTHORIZATION_CODE` and `PKCE` are supported.
+| `IMPLICIT`
+
+| `app.sso.configurations.<CONFIG>.display-name`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_DISPLAY_NAME`
+| Display name of the login option on the NOM login page.
+| `Login with Entra ID`
+
+| `app.sso.configurations.<CONFIG>.admin-check`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_ADMIN_CHECK`
+| SpEL expression to check if the user should be assigned the NOM ADMIN role in NOM.
+See xref:_role_assignment[Role assignment] for details.
+| `['groups']?.contains('aaa63d30-70c3-4181-8c19-1b58e613f55b')`
+
+| `app.sso.configurations.<CONFIG>.read-only-user-check`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_READ_ONLY_USER_CHECK`
+| SpEL expression to check if the user should be assigned the NOM READ_ONLY_USER role in NOM.
+See xref:_role_assignment[Role assignment] for details.
+| `['groups']?.contains('bbb2c5c5-a181-458a-a933-8ea7339d1310')`
+
+| `app.sso.configurations.<CONFIG>.username-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_USERNAME_CLAIM`
+| SpEL expression to optionally map the username or unique user identifier in the token claims to NOM user name. See xref:_claim_mapping[Mapping token claims] for details.
+| `['unique_name']`
+
+| `app.sso.configurations.<CONFIG>.email-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_EMAIL_CLAIM`
+| SpEL expression to optionally map the the email in the token claims to NOM user email. See xref:_claim_mapping[Mapping token claims] for details.
+| `['verified_email']`
+
+| `app.sso.configurations.<CONFIG>.firstname-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_FIRSTNAME_CLAIM`
+| SpEL expression to optionally map the the first name in the token claims to NOM user first name. See xref:_claim_mapping[Mapping token claims] for details.
+| `['given_name']`
+
+| `app.sso.configurations.<CONFIG>.lastname-claim`
+| `APP_SSO_CONFIGURATIONS_<CONFIG>_LASTNAME_CLAIM`
+| SpEL expression to optionally map the the last name in the token claims to NOM user last name. See xref:_claim_mapping[Mapping token claims] for details.
+| `['family_name']`
+|===
+
+[#_role_assignment]
+=== Role assignment
+
+The `admin-check` and `read-only-user-check` options are https://docs.spring.io/spring-framework/reference/core/expressions/language-ref.html[SpEL expressions] that are evaluated against the claims in the access token obtained from the IdP.
+
+The claims object is available as the root object in the expression context.
+
+The expressions should evaluate to `true` or `false`.
+If the `admin-check` expression evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[NOM Admin role].
+Otherwise, the read-only-user-check expression is evaluated.
+If it evaluates to `true`, the user is assigned the xref:../nom-user-management/index.adoc#_roles_of_nom_users[read-only user] role.
+If both expressions evaluate to `false`, the user is denied access to NOM.
+
+*Examples of expressions*
+
+[cols="<, <",options="header"]
+|===
+|Goal
+|Expression
+
+|Check that a list contains _all_ required values
+|`['groups']?.containsAll({'nom_group1', 'nom_group2'})`
+
+|Check that a list contains _at least one_ of the required values (with a logical expression)
+|`['groups']?.contains('nom_group1') or ['groups']?.contains('nom_group2')`
+
+|Check that a list contains _at least one_ of the required values (with a SpEL predicate expression)
+|`['groups'].?[ {'nom_group1', 'nom_group2'}.contains(#this) ].size() > 0`
+
+|===
+
+
+To debug issues with role assignment, see the xref:_troubleshooting[Troubleshooting section] below.
+
+[#_claim_mapping]
+=== Mapping token claims
+
+By default, IdP specific token claims are used to create or update the SSO user profile details in NOM.
+It is possible to override the default claim mapping by providing SpEL expressions using the options `username-claim`, `email-claim`, `firstname-claim` and `lastname-claim`.
+
+The expressions should evaluate to a string value and are evaluated against the claims object in the access token.
+If an expression evaluates to `null` or if there are errors during evaluation, the corresponding user profile data is set according to the default behavior.
+
+For example, to use the JWT claim `verified_email` as user email address, use the configuration option `app.sso.configurations.<CONFIG>.email-claim=['verified_email']`.
+This expression evaluates to the value of the key `verified_email` in the JWT claims `Map`.
+
+
+[NOTE]
+====
+Claim mapped values for email address, first and last names default to an empty string if they evaluate to `null`, resulting in a warning being logged.
+Using non-empty claim values is considered best practice.
+Username claim mapping evaluation must result in a non-blank string otherwise authentication will be aborted with an error.
+====
+
+Debugging issues with claim mapping can be done as described in the xref:_troubleshooting[Troubleshooting section] below.
+
+[#_troubleshooting]
+== Troubleshooting
+
+=== General tips
+
+* Test in a private/incognito browser window to avoid issues with cached tokens or cookies.
+* Check the NOM server logs for errors during startup or user login (lines containing "SecurityLogger").
+* Verify that the callback URL configured in the IdP matches the one used in NOM server.
+* Ensure that the system time on the NOM server host is synchronized with a time server, as time discrepancies can cause token validation to fail.
+* Ensure that the NOM server can reach the IdP endpoints (authority, token, userinfo) over the network.
+
+=== Start with a simple configuration
+
+Set `admin-check` and `read-only-user-check` to `true` to verify that SSO authentication works in principle.
+If this does not work, check the configuration options for typos and verify that the callback URL configured in the IdP matches the one used in NOM server.
+
+=== Debugging role assignment and custom claim mapping issues
+
+Enable debug logging by setting the NOM server configuration option `xref:../installation/server.adoc#config_ref[logging.level.com.neo4j.opsmanager.server.config]` to `debug`.
+With this setting, the evaluated role assignment expressions and the claims object are logged during user login, starting with a log line containing `SsoConfig tracing expression`.
+Example:
+
+[source,log]
+----
+2025-10-16T12:26:45.602+02:00 DEBUG 191053 --- [or-http-epoll-4] c.n.opsmanager.server.config.SsoConfigs  :
+SsoConfig tracing expression ['groups']?.contains('xb5c63d30-70c3-4181-8c19-1b58e613f55b') && ['groups']?.contains('aaa63d30-a181-458a-a933-8ea7339d1310')
+on the claims object
+{
+  sub=...,
+  ...
+  groups=[aaa63d30-a181-458a-a933-8ea7339d1310, ..., ...],
+  ...
+}
+2025-10-16T12:26:45.607+02:00 DEBUG 191053 --- [or-http-epoll-4] c.n.opsmanager.server.config.SsoConfigs  :
+Method call: [aaa63d30-a181-458a-a933-8ea7339d1310, ..., ...]}.contains}([aaa63d30-a181-458a-a933-8ea7339d1310]}) -> true}
+...
+----
