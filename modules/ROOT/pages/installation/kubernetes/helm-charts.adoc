@@ -9,9 +9,29 @@
 - Access to a Kubernetes enviroment (cloud, on-prem, or local with a `LoadBalancer` resource implementation).
 
 == NOM server Helm Chart
-* Download the NOM server Helm Chart from link:https://neo4j.com/deployment-center/?ops-manager[Neo4j Deployment Center].
+* Add the NOM Helm chart repository.
+[source, shell]
+----
+helm repo add nom https://dist.neo4j.org/ops-manager/helm-charts/
+----
+* Update the repository.
+[source, shell]
+----
+helm repo update nom
+----
+* Check available versions of NOM charts.
+[source, shell]
+-----
+helm search repo nom/ --versions
+-----
+* Install the chart from repo:
+[source, shell]
+----
+helm install my-nom-server nom/neo4j-ops-manager-server -f values.yaml
+----
+* Alternatively, you can download the NOM server Helm Chart from link:https://neo4j.com/deployment-center/?ops-manager[Neo4j Deployment Center].
 
-* Following is the reference `values.yaml` for NOM server Helm Chart:
+=== Reference `values.yaml`
 ----
 # Default values for neo4j-ops-manager-server.
 
