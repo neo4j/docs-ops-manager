@@ -221,7 +221,7 @@ java -jar .\lib\server.jar
 [[self-registration-config]]
 [NOTE]
 ====
-If the NOM Server is required to support self-registered agents ensure that the configuration property `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION` (or `grpc.server.security.trustCertCollection`) is provided to above commands.
+If the NOM Server is required to support self-registered agents ensure that the configuration option `GRPC_SERVER_SECURITY_TRUST_CERT_COLLECTION` (or `grpc.server.security.trustCertCollection`) is provided to above commands.
 It is described in the configuration reference table below.
 
 Read more about agent self-registration xref:../addition/agent-installation/self-registered.adoc#agent_mtls[here].
@@ -351,7 +351,14 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | `LOGGING_LEVEL_COM_NEO4J`
 | Log level of the `com.neo4j` logger (its output corresponds to what NOM server itself logs). Default: `info`. (optional)
 | `error`, `warn`, `info`, `debug` or `trace`
+
+| `logging.level.com.neo4j.opsmanager.server.config`
+| `LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG`
+| Log level of the configuration logger. Setting it to `debug` is useful for troubleshooting SSO issues. Default: `info`. (optional)
+| `error`, `warn`, `info`, `debug` or `trace`
 |===
+
+See xref:./sso/configuration.adoc[SSO Configuration] for SSO-related configuration options.
 
 == Accessing Ops Manager
 
