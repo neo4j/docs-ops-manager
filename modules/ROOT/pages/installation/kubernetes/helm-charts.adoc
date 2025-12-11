@@ -218,7 +218,7 @@ ingress:
 === Single Sign-on configuration
 
 NOM server now provides Single Sign-on support for select few Identity providers (Refer to xref:../installation/sso/configuration.adoc[SSO Configuration]).
-To simplify configuring NOM server in the chart, following values can be set in `values.yaml` under `ssoConfigs` to be translated to NOM srver SSO configuration:
+To simplify configuring NOM server in the chart, following values can be set in `values.yaml` under `ssoConfigs` to be translated to NOM server SSO configuration:
 
 NOTE: Each SSO configuration is added as a key in `ssoConfigs` map referred here as `<CONFIG>`.
 
