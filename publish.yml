@@ -7,7 +7,7 @@ site:
 content:
   sources:
   - url: ./
-    branches: ['1.10', '1.11', '1.12', '1.13', 'dev']
+    branches: ['1.10', '1.11', '1.12', '1.13', '1.14']
     exclude:
     - '!**/_includes/*'
     - '!**/readme.adoc'
