@@ -93,13 +93,13 @@ Individual notification configurations (notifications) can be configured when at
 When an alert of type [*WARNING*, *ERROR*] is raised inside [*CS Cluster Prod*, *CS Single Prod*] notify NOM users [*nom-admin@neo4j.com*] and webhooks [*Slack#test*, *Generic#prod-errors*].
 ====
 
-* To configure a notification use the *"Add notification"* button from the Notifications section to open the creation modal. 
+* To configure a notification use the *"Add notification"* button from the Notifications section to open the creation modal.
 Define a name, select the DBMSs and alert levels in scope, select the channels, and  *"Confirm"*.
 
-[NOTE]
-====
-Email notifications can only be sent to email addresses of NOM users.
-====
++
+Email notifications can be sent to email addresses of NOM users as well as to external email addresses.
+Enter an external email address in the "Notify to" field and confirm with "Create".
+Previously used external email addresses are saved and can be selected from the dropdown.
 
 image::notifications-notification-configure.png[width=800]
 
