@@ -13,7 +13,7 @@ The DBMS and the NOM Server need to be running simultaneously, or the NOM Server
 NOM comes with a license to run a Neo4j DBMS with up to 4 cores of CPU and up to 16 GB of RAM for the use as NOMs persistence.
 
 === Specifications
-* Neo4j Enterprise Edition 4.4, 5.x, or 2025.x
+* Neo4j Enterprise Edition 5 LTS, 2025.x or later
 * At least 10 GB free disk space
 * For minimum requirements, see also link:/docs/operations-manual/current/installation/requirements/[Operations Manual -> System requirements].
 
