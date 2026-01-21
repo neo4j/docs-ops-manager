@@ -29,11 +29,11 @@ The following table details the compatibility matrix for NOM:
 
 | 1.15.x
 | >5.26.x (LTS), 2025.x, 2026.x
-| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (License alerts feature only available from 5.4.0 onwards), >2025.05.01
+| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (License alerts feature only available from 5.4.0 onwards), 2025.x, 2026.x
 
 | 1.13.x, 1.14.x
 | >4.4.2, >5.1.0
-| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (License alerts feature only available from 5.4.0 onwards), >2025.05.01
+| >4.4.2 (Query log feature not available for 4.4.x DBMSs), >5.1.0 (License alerts feature only available from 5.4.0 onwards), 2025.x, 2026.x
 
 | 1.10.x, 1.11.x, 1.12.x
 | >4.4.2, >5.1.0
