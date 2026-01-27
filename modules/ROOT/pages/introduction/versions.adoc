@@ -25,7 +25,7 @@ The agent(s) could be upgraded either before or after the server, but there may 
 NOM makes use of a Neo4j database for persisting the monitoring and management data.
 Ideally this is a dedicated single instance for NOM, but could also be a dedicated database on a licensed machine elsewhere in the enterprise, or even an Aura Professional or Enterprise instance.
 
-NOM persistence should be deployed using Neo4j Enterprise Edition 4.4.x or later, although we would recommend using the latest version and keeping this upgraded where possible.
+NOM persistence should be deployed using Neo4j Enterprise Edition 5 LTS or later, although we would recommend using the latest version and keeping this upgraded where possible.
 
 == NOM-managed DBMS
 
