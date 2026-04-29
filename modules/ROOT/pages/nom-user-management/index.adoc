@@ -1,7 +1,7 @@
 = NOM user management
 :description: This section describes the user management in Neo4j Ops Manager.
 
-*User Management* allows creation and management of NOM users enabling persons who manage the Neo4j estate to be assigned appropriate access levels according to their role. 
+*User Management* allows creation and management of NOM users enabling persons who manage the Neo4j estate to be assigned appropriate access levels according to their role.
 The effective access levels of a NOM user are reflected in the NOM UI appropriately.
 
 [#_roles_of_nom_users]
@@ -30,7 +30,7 @@ The default NOM user `admin` has the role *NOM Admin* and can therefore be used 
 == Scope of NOM users
 
 NOM users can only be used to access the functionality of the NOM server.
-They are not related to users of other systems (NOM persistence, monitored Neo4j DBMSs, operating systems etc). 
+They are not related to users of other systems (NOM persistence, monitored Neo4j DBMSs, operating systems etc).
 
 == NOM user administration tasks
 
@@ -76,7 +76,7 @@ See the following table for permission description.
 |No access, view, edit
 |Access to the *"Security panel"* page for assigned DBMS(s).
 
-|*Status*
+|*Logs*
 |No access, view
 |Access to the *"Logs"* page for assigned DBMS(s).
 
@@ -135,13 +135,13 @@ It can be accessed by pressing the *"..."* button next to *"Assign DBMSs"* butto
 
 image::nom-administrators-copy-others-access.png[width=800]
 
-This function appends permissions of another user (selected in the popup) to the permissions of the current user. 
+This function appends permissions of another user (selected in the popup) to the permissions of the current user.
 Permissions already assigned are not appended.
 
 === Modifying a user
 
-Locate the user to be modified, and use the tabs *"User info"* and *"DBMS access control"* to modify user. 
-All modifications performed are persisted when the *"Save"* button is clicked. 
+Locate the user to be modified, and use the tabs *"User info"* and *"DBMS access control"* to modify user.
+All modifications performed are persisted when the *"Save"* button is clicked.
 Clicking *"Cancel"* removes the modifications.
 This also applies to removing assigned DBMS or DBMS glob patterns from the table in *"DBMS access control"*.
 Until being saved or cancelled, removed entries are marked visually (grayed out).
