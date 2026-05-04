@@ -166,7 +166,7 @@ Should user modification or removal result in DBMS globs patterns being unused (
 
 == Password encryption
 
-A users' password is hashed using the *Argon2id* algorithm, a widely used standard for securely storing passwords.
+A user's password is hashed using the *Argon2id* algorithm, a widely used standard for securely storing passwords.
 For more information on the algorithm, see link:https://www.rfc-editor.org/rfc/rfc9106[RFC 9106] documentation.
 
 It is not possible to configure which algorithm to use.
