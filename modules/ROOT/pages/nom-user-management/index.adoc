@@ -40,17 +40,17 @@ image::nom-administrators-section.png[width=800]
 
 === Creating a user
 
-Click on *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
+Use *"Create user"* button to open the sidebar containing the tabs *"User info"* and *"DBMS access control"*.
 Fill in user details including specifying if role *"NOM Admin"* should be assigned to them.
 
 [IMPORTANT]
 ====
-New users will be automatically redirected to the password change page after the login.
+New users are automatically redirected to the password change page after the login.
 ====
 
 image::nom-administrators-create-user.png[width=800]
 
-If the new user will have the role *NOM Admin*, no further details must be specified.
+If the new user is assigned the role *NOM Admin*, no further details must be specified.
 Use the *"Create"* button to confirm user creation.
 
 Access levels for global features can be set on the *"User info"* tab.
@@ -59,7 +59,7 @@ Applicable access levels are: *"No access"*, *"view"*, *"edit"*.
 
 ==== Assigning access levels on DBMS specific features
 
-For users having the role *Administrator* (checkbox *NOM Admin* on the *"User info"* tab is *OFF*), access to every DBMS specific feature can be configured in the *"DBMS access control"* tab.
+For users with the role *Administrator* (checkbox *NOM Admin* on the *"User info"* tab is *OFF*), access to every DBMS specific feature can be configured in the *"DBMS access control"* tab.
 
 image::nom-administrators-dbms-access-control.png[width=800]
 
@@ -117,8 +117,6 @@ For a description of how these wildcards work see for example https://en.wikiped
 Glob patterns are created by using the "Assign DBMSs" pop-up and can be reused for several NOM users.
 To verify the set of DBMSs that match the glob pattern, use the icon next to the glob pattern in the permission table.
 
-[NOTE]
-====
 *Rules for multiple permissions on a DBMS:*
 
 . If several glob patterns match a DBMS, the permissions of all the matching globs are combined in a way that for every feature the most restrictive access level is applied.
@@ -126,7 +124,7 @@ To verify the set of DBMSs that match the glob pattern, use the icon next to the
 User's resulting access level to the feature "Security" is "View", since it is more restrictive.
 . If permissions are explicitly assigned to a DBMS, they always *as a whole* take precedence over permissions assigned to a glob pattern that matches this DBMS name.
 This means that the permissions assigned to a glob pattern are *ignored* completely.
-====
+
 
 ==== Duplicating permissions of another user
 
@@ -148,24 +146,27 @@ Until being saved or cancelled, removed entries are marked visually (grayed out)
 
 [IMPORTANT]
 ====
-If the user's password is changed, they will be automatically redirected to the password change page after the login.
+If the user's password is changed, they are automatically redirected to the password change page after the login.
 ====
 
-[NOTE]
-====
-A user with role *NOM Admin* cannot degrade their role to *Administrator*.
-====
+
+Note that a user with role *NOM Admin* cannot degrade their role to *Administrator*.
+
 
 === Removing a user
 
 Locate the user to be removed, click it and press the "Remove user" button at the bottom of the sidebar.
+Users *cannot* remove themselves.
 
-[NOTE]
-====
-Users cannot remove themselves.
-====
 
 [NOTE]
 ====
 Should user modification or removal result in DBMS globs patterns being unused (e.g. not referenced by other users), these globs are removed as well.
 ====
+
+== Password hashing
+
+A user's password is hashed using the *Argon2id* algorithm, a widely used standard for securely storing passwords.
+For more information on the algorithm, see link:https://www.rfc-editor.org/rfc/rfc9106[RFC 9106] documentation.
+
+It is not possible to configure which algorithm to use.
