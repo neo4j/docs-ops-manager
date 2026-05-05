@@ -18,6 +18,7 @@ on:
 # in some cases, PROD_BRANCH and DEV_BRANCH may be the same branch
 env:
   PROD_BRANCH: '1.15'
+  DEV_BRANCH: 'dev'
 
 jobs:
 
