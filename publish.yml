@@ -22,8 +22,6 @@ ui:
 urls:
   html_extension_style: indexify
 
-<<<<<<< HEAD
-=======
 antora:
   extensions:
     - "@neo4j-antora/aliases-redirects"
@@ -31,7 +29,6 @@ antora:
     - "@neo4j-antora/table-footnotes"
     - "@neo4j-antora/xref-hash-validator"
 
->>>>>>> 8d47700 (add and update workflows and fix xref (#300))
 asciidoc:
   extensions:
     - "@neo4j-documentation/remote-include"
