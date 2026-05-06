@@ -65,7 +65,7 @@ docker run \
 ----
 
 IMPORTANT: Make sure to replace the arguments with values adjusted to your environment (*<Value>*).
-Refer to *xref:../installation/server.adoc#_unix[Installation > Server Installation]*
+Refer to *xref:../installation/server.adoc#unix[Installation > Server Installation]*
 
 == Maintenance
 For a standalone NOM server container resource constraints can be set as documented by link:https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources[Docker runtime constraints on resources].
