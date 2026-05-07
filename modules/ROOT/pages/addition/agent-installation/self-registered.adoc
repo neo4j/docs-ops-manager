@@ -1,6 +1,8 @@
 = Self-registering agent
 :description: this page describes NOM agent self-registering setup.
 
+label:new[Introduced in 1.5]
+
 Agent self-registration omits manually acquiring token information from NOM UI as described in xref:./manual.adoc#register[Manually registering agent].
 Instead, minimal configuration of the NOM server is provided to allow the agent to connect and register itself.
 Authorization is granted through mutual authentication.
