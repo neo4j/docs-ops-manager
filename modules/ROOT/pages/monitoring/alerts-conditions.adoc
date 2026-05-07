@@ -20,6 +20,8 @@ Information about alerts is regularly updated.
 [#_managing_alerts]
 == Managing alerts
 
+label:new[Introduced in 1.6]
+
 Alert details can be shown in the alerts tab of the Alerts page of the selected DBMS.
 
 [NOTE]
