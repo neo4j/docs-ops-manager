@@ -4,6 +4,9 @@
 Neo4j Ops Manager is equipped with multiple features to ensure resilient service.
 
 == Rate limiting
+
+label:new[Introduced in 1.4]
+
 To avoid the server being overloaded by one or a few clients, a rate limit is applied per IP address. This helps ensure that the server is always available to respond to requests by putting a limit on the load an individual connection is allowed to place on the system.
 
 The default configuration can be changed with the following server configuration parameters.
@@ -32,6 +35,8 @@ The default configuration can be changed with the following server configuration
 |===
 
 == Circuit breaker
+
+label:new[Introduced in 1.4]
 
 Since query log capture can produce a vast amount of data depending on the workload and agent configuration, a so-called circuit breaker governs the reception of log data on the server side. If the amount of logs being received is vast enough to cause a degradation in handling of other messages, the circuit breaker will temporarily stop processing of query logs and assign full priority to other messages. Query log processing resumes automatically after some time has passed.
 
