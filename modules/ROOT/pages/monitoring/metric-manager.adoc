@@ -70,6 +70,8 @@ Zoom/reset zoom affects all charts displayed on the page to allow investigating 
 
 == Setting metric thresholds
 
+label:new[Introduced in 1.6]
+
 To inform administrators about noticeable changes in metrics by showing alerts and sending notifications, NOM supports defining metric thresholds directly from the metrics chart.
 This can be accomplished using "Threshold" menu item of the  "..." menu of the metric chart.
 

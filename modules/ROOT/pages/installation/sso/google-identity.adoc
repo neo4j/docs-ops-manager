@@ -1,5 +1,7 @@
 = Google Identity Support
 
+label:new[Introduced in 1.14]
+
 NOM server supports Single Sign-On (SSO) authentication using Google Identity.
 
 [NOTE]

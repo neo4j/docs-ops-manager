@@ -282,6 +282,8 @@ For this reason, it is important that you specify unique names across your clust
 [[querylog]]
 ==== Query log collection configuration
 
+label:new[Introduced in 1.3]
+
 [cols="<,<,<",options="header"]
 |===
 | Variable
