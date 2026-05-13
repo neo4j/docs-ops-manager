@@ -4,6 +4,8 @@ In order to be managed by NOM, a Neo4j instance **must** be running a Neo4j Ente
 
 == Query log collection
 
+label:new[Introduced in 1.3]
+
 [NOTE]
 ====
 Log manager is only compatible with Neo4j version 5+.

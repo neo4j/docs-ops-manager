@@ -1,6 +1,8 @@
 = Auth0 Support
 :description: Describes Auth0 IdP support in NOM SSO
 
+label:new[Introduced in 1.14]
+
 NOM server supports Single Sign-On (SSO) authentication using Auth0 Identity Provider (IdP)
 with following grant types:
 
