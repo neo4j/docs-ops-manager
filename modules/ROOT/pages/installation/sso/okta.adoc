@@ -1,6 +1,8 @@
 = Okta Support
 :description: Describes Okta IdP support in NOM SSO
 
+label:new[Introduced in 1.14]
+
 The NOM server supports Single Sign-On (SSO) authentication using Okta Identity Provider (IdP)
 with following OAuth2 Grant types:
 

@@ -1,7 +1,6 @@
 = Alerts and conditions
 :description: This section describes how to manage alerts and conditions in Neo4j Ops Manager.
 
-
 == Alerts on the Home page
 
 Home page aggregates the alerts for your individual monitored systems.
@@ -21,6 +20,8 @@ Information about alerts is regularly updated.
 [#_managing_alerts]
 == Managing alerts
 
+label:new[Introduced in 1.6]
+
 Alert details can be shown in the alerts tab of the Alerts page of the selected DBMS.
 
 [NOTE]
@@ -35,6 +36,8 @@ After the dismissal time the alert will reappear in the Alerts table.
 
 [#_managing_conditions]
 == Managing conditions
+
+label:new[Introduced in 1.6]
 
 Conditions defined in the scope of the selected DBMS can be managed in the conditions tab of the Alerts page of the selected DBMS.
 

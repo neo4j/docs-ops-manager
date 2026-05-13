@@ -317,17 +317,20 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | JWT time to live, configures the session expiration time. For syntax, see https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.conversion.durations[Spring documentation] (optional)
 | 1h
 
-| `optout.crash-analytics`
+| label:new[Introduced in 1.5]
+`optout.crash-analytics`
 | `OPTOUT_CRASH_ANALYTICS`
 | Set to true to opt out of product analytics being sent to Neo4j (optional)
 | false
 
-| `optout.product-analytics`
+| label:new[Introduced in 1.5]
+`optout.product-analytics`
 | `OPTOUT_PRODUCT_ANALYTICS`
 | Set to true to opt out of crash analytics being sent to Neo4j (optional)
 | false
 
-| `optout.version-check`
+| label:new[Introduced in 1.10]
+`optout.version-check`
 | `OPTOUT_VERSION_CHECK`
 | Set to true to opt out of automatic fetching of version information for NOM and Neo4j (optional)
 | false

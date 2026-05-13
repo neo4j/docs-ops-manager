@@ -1,6 +1,8 @@
 = Single Sign-On (SSO)
 :description: this chapter describes SSO configuration in NOM
 
+label:new[Introduced in 1.14]
+
 * xref:./configuration.adoc[Common  configuration guide]
 
 * Provider-specific configuration guides

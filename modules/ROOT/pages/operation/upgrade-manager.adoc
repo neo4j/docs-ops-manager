@@ -1,6 +1,8 @@
 = Upgrade manager
 :description: This section describes the upgrade manager in Neo4j Ops Manager.
 
+label:new[Introduced in 1.2]
+
 Upgrade manager supports you in upgrading or migrating your managed DBMSs. 
 
 
@@ -32,6 +34,8 @@ image::upgrades-plan-in-progress.png[width=800]
 
 
 == Keeping version information up to date
+
+label:new[Introduced in 1.10]
 
 === Auto-refresh of available Neo4j and NOM versions.
 NOM server periodically attempts an auto-refresh of available Neo4j and NOM versions by fetching version information from a central location.

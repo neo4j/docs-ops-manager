@@ -2,6 +2,8 @@
 :description: This section describes the configuration steps to enable Single Sign-On (SSO) for NOM server
 :icons: font
 
+label:new[Introduced in 1.14]
+
 == Overview
 
 NOM supports SSO for authentication & authorization using external Identity Providers (IdP) that support OAuth2/OIDC authentication standard.

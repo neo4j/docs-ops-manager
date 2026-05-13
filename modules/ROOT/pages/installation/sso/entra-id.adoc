@@ -1,5 +1,7 @@
 = Microsoft Entra ID Support
 
+label:new[Introduced in 1.14]
+
 NOM server supports Single Sign-On (SSO) authentication using Microsoft Entra ID (formerly Azure Active Directory)
 with following OAuth2 Grant types:
 

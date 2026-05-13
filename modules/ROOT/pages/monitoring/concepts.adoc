@@ -5,6 +5,8 @@ This section describes important concepts for understanding how to optimally use
 
 == Conditions
 
+label:new[Introduced in 1.6]
+
 A **condition** specifies the constraints when the monitored entity reaches a certain state.
 Conditions are periodically evaluated, and evaluation results are persisted.
 
@@ -41,6 +43,8 @@ In case there are alerts in the managed system, Ops Manager provides following i
 See xref:./alerts-conditions.adoc#_managing_conditions[Managing conditions] on how to manage alerts.
 
 == Notifications
+
+label:new[Introduced in 1.6]
 
 While alerts are only displayed in the NOM browser page, notifications enable sending information about triggered conditions to external systems, such as email servers or other messaging systems.
 
