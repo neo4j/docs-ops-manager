@@ -344,8 +344,9 @@ NOTE: The default username & password login can be disabled by setting `config.u
 
 === Configuration overrides
 
-You can now override arbitrary NOM server confgiuration with `vlaues.yaml` using the new `config.overrides` section
-to set overrides as enviroment values. For example:
+You can now override arbitrary NOM server configuration with `values.yaml` using the new `config.overrides` section to set overrides as environment values.
+For example:
+
 [source,yaml]
 ----
 config:
