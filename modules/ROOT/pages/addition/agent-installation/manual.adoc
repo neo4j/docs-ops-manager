@@ -301,11 +301,14 @@ If set, appends the appropriate log appender automatically (including the port s
 | /var/lib/neo4j/conf/server-logs.xml
 
 | `CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION`
-| Minimum duration in milliseconds for a query to be logged (optional)
+| Minimum duration in milliseconds for a query to be logged.
+Only queries whose elapsed time is greater than or equal to this value are ingested.
+Default: `50`. Set to `0` to forward all queries. (optional)
 | 100
 
 | `CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION_FILTER_ERRORS`
-| Enable filter for errors under the minimum duration in milliseconds (optional)
+| Enable filter for errors under the minimum duration in milliseconds.
+Queries that produced an error bypass the minimum duration filter, unless this is set to `true`. (optional)
 | true
 
 | `CONFIG_INSTANCE_1_QUERY_LOG_DISABLE_OBFUSCATION`
@@ -316,6 +319,11 @@ If set, appends the appropriate log appender automatically (including the port s
 | Collect and show queries coming from the NOM agent (optional)
 | true
 |===
+
+[NOTE]
+====
+For guidance on tuning query log ingestion in high-throughput deployments, including how to remediate query log buffer overflow warnings, see *xref:/operation/large-installations.adoc#querylog-ingestion[Large installations]*.
+====
 
 [NOTE]
 ====

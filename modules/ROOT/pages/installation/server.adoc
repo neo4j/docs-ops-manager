@@ -359,9 +359,36 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | `LOGGING_LEVEL_COM_NEO4J_OPSMANAGER_SERVER_CONFIG`
 | Log level of the configuration logger. Setting it to `debug` is useful for troubleshooting SSO issues. Default: `info`. (optional)
 | `error`, `warn`, `info`, `debug` or `trace`
+
+| `metrics.aggregation.schedule`
+| `METRICS_AGGREGATION_SCHEDULE`
+| Cron expression that controls how often raw metric nodes are aggregated into hourly summaries. Default: `0 05 * * * *`. (optional)
+| `0 0/30 * * * *`
+
+| `metrics.aggregation.single-retention-time`
+| `METRICS_AGGREGATION_SINGLE_RETENTION_TIME`
+| ISO-8601 duration. Raw metric nodes older than this are eligible for aggregation. Default: `P3D`. (optional)
+| `P1D`
+
+| `metrics.cleanup.schedule`
+| `METRICS_CLEANUP_SCHEDULE`
+| Cron expression that controls how often aggregated metric nodes older than the retention time are deleted. Default: `0 0 2 * * *`. (optional)
+| `0 0 3 * * *`
+
+| `metrics.cleanup.retention-time`
+| `METRICS_CLEANUP_RETENTION_TIME`
+| ISO-8601 duration. Aggregated metric nodes older than this are deleted. Default: `P31D`. (optional)
+| `P14D`
+
+| `metrics.cleanup.batch-size`
+| `METRICS_CLEANUP_BATCH_SIZE`
+| Number of nodes deleted per transaction during cleanup. Default: `3000`. (optional)
+| 1000
 |===
 
 See xref:./sso/configuration.adoc[SSO Configuration] for SSO-related configuration options.
+
+See xref:../operation/large-installations.adoc#metrics-aggregation[Large installations] for guidance on tuning the metric aggregation and cleanup settings for high-throughput deployments.
 
 == Accessing Ops Manager
 

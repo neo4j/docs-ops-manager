@@ -90,6 +90,7 @@
 // ** xref:operation/backup-manager.adoc[]
 // ** xref:operation/performance-manager.adoc[]
 ** xref:operation/upgrade-manager.adoc[]
+** xref:operation/large-installations.adoc[]
 //** xref:operation/admin-manager.adoc[]
 
 // * Integration

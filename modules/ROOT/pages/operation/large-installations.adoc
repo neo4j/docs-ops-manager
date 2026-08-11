@@ -1,0 +1,165 @@
+= Large installations
+:description: This section describes the configuration options that are relevant when running Neo4j Ops Manager with Neo4j deployments that have a high query or metric throughput.
+
+NOM agents and NOM server are designed to cope with the load of a typical Neo4j deployment without any additional configuration.
+This section documents the configuration options that are relevant when running NOM against Neo4j deployments with a high query or metric throughput.
+
+All of the settings described here are optional.
+The defaults are safe for typical deployments and only need to be adjusted when you observe signs of overload, such as buffer overflow warnings in the server or agent logs, or a NOM persistence database that grows rapidly.
+
+[[querylog-ingestion]]
+== Query log ingestion
+
+NOM agents listen on a local TCP port for Neo4j query log events and forward them in batches to NOM server, which writes them to the NOM persistence database.
+Under high query load, either the incoming buffer of the agent or the server-side processing queue can overflow.
+
+[[querylog-min-duration]]
+=== Limiting the query log volume with a minimum duration
+
+The most effective lever for controlling the query log volume is the minimum duration filter, `CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION`.
+Only queries whose elapsed time is greater than or equal to this value, in milliseconds, are ingested.
+
+* The default is `50` ms, which means that queries shorter than 50 ms are discarded by the agent before they are forwarded.
+* Setting the value to `0` means that all queries are forwarded, without any filtering.
+* A good starting point for high-load environments is `100` ms.
+Lower the threshold gradually once you have confirmed that NOM server can keep up.
+* Errors, that is, queries that produced a failure reason in the Neo4j query log, bypass the duration filter by default, so they are always ingested regardless of their elapsed time.
+To filter errors by duration as well, set `CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION_FILTER_ERRORS` to `true`.
+
+The minimum duration can be set in either of the following ways:
+
+[cols="<,<",options="header"]
+|===
+| Where set
+| How to set
+
+| Agent environment variable
+| `CONFIG_INSTANCE_1_QUERY_LOG_MIN_DURATION=50`
+
+| Agent configuration file
+| `queryLogMinDuration: "50"`
+|===
+
+For the complete list of agent query log variables, see xref:addition/agent-installation/manual.adoc#querylog[Query log collection configuration].
+For the agent configuration file, see xref:addition/agent-installation/agent-config-file.adoc[Agent configuration file].
+
+[TIP]
+====
+*Use parameterized queries.*
+If a workload issues many structurally identical queries with different literal values, for example `MATCH (n) WHERE n.id = 42`, switching to parameterized queries, for example `MATCH (n) WHERE n.id = $id`, reduces the number of distinct query log entries that NOM needs to store, and makes the aggregated statistics more meaningful.
+====
+
+[[querylog-buffer-overflow]]
+=== Query log buffer overflow warnings
+
+When the incoming message buffer of the agent reaches 80% of its capacity, that is `13107` of `16384` slots, the agent emits a `WARN` level log entry:
+
+[source, role=noheader]
+----
+Query log message buffer is nearly full (N/16384). Consider increasing CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION to reduce ingestion rate.
+----
+
+When the buffer is completely full, the agent drops the incoming message and enters a 60-second cooldown, during which all further messages are discarded.
+An agent event, `FAILED_QUERYLOG_INCOMING_OVERFLOW`, is also raised and is visible in the NOM UI.
+
+On the NOM server side, a similar buffer of `128` pending message batches exists.
+When it reaches 80% of its capacity, that is `102` batches or more, NOM server logs:
+
+[source, role=noheader]
+----
+QueryLogReceiverService buffer is nearly full (N/128)! Consider increasing CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION on the agent to reduce query log ingestion rate.
+----
+
+When the buffer is full, that is `128` batches or more, the incoming batches from that agent are dropped:
+
+[source, role=noheader]
+----
+QueryLogReceiverService buffer overflow (N/128) - dropping message. Consider increasing CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION on the agent to reduce query log ingestion rate.
+----
+
+In both cases, the recommended remediation is to raise `CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION` on the agent, as described in <<querylog-min-duration,Limiting the query log volume with a minimum duration>>.
+The server-side protection against query log overload is described in xref:introduction/resilience.adoc[Resilience].
+
+=== Query log retention
+
+Individual query executions older than 30 days are deleted from the NOM persistence database automatically.
+Aggregated query statistics, which are rolled up per query fingerprint per day, are retained for an additional 30 days after the individual executions are removed.
+
+For more information about how query logs are presented and aggregated, see xref:monitoring/log-manager.adoc[Log manager].
+
+[[metrics-aggregation]]
+== Metrics aggregation and cleanup
+
+Raw metric data points emitted by the monitored Neo4j instances are stored as individual `:Metric` nodes in the NOM persistence database.
+To prevent unbounded growth, NOM periodically aggregates them into hourly `:Metric:Aggregate` nodes and then deletes the raw nodes.
+
+=== How aggregation works
+
+* Aggregation runs on a cron schedule, by default five minutes past every hour (`0 05 * * * *`).
+* Raw metric nodes are retained for three days (`P3D`) after they are written.
+Once a metric node is older than three days, the next aggregation run includes it in the hourly rollup and then deletes the original.
+* The resulting `:Metric:Aggregate` nodes are retained for 31 days (`P31D`).
+A separate cleanup job, running daily at 02:00 (`0 0 2 * * *`), deletes the aggregate nodes that are older than this window.
+
+For a description of how the aggregated metrics are presented, see xref:monitoring/metric-manager.adoc[Metric manager].
+
+=== Aggregation and cleanup configuration reference
+
+All of the schedules and retention windows above are configurable through NOM server properties.
+They can be set in `application.properties`, as environment variables, or as command line arguments to `java -jar server.jar`, in the same way as any other server property.
+See xref:installation/server.adoc#config_ref[Server configuration reference].
+
+[cols="<,<,<,<",options="header"]
+|===
+| Property
+| Environment variable
+| Default
+| Description
+
+| `metrics.aggregation.schedule`
+| `METRICS_AGGREGATION_SCHEDULE`
+| `0 05 * * * *`
+| Cron expression that controls how often the hourly aggregation runs.
+
+| `metrics.aggregation.single-retention-time`
+| `METRICS_AGGREGATION_SINGLE_RETENTION_TIME`
+| `P3D`
+| ISO-8601 duration. Raw metric nodes older than this are eligible for aggregation.
+
+| `metrics.cleanup.schedule`
+| `METRICS_CLEANUP_SCHEDULE`
+| `0 0 2 * * *`
+| Cron expression that controls how often the deletion of old aggregate nodes runs.
+
+| `metrics.cleanup.retention-time`
+| `METRICS_CLEANUP_RETENTION_TIME`
+| `P31D`
+| ISO-8601 duration. Aggregated metric nodes older than this are deleted.
+
+| `metrics.cleanup.batch-size`
+| `METRICS_CLEANUP_BATCH_SIZE`
+| `3000`
+| Number of nodes deleted per transaction during cleanup.
+|===
+
+The following example passes overrides as Java arguments:
+
+[source, terminal, role=noheader]
+----
+java -jar server.jar \
+  --metrics.cleanup.retention-time=P14D \
+  --metrics.aggregation.single-retention-time=P1D \
+  --metrics.aggregation.schedule="0 0/30 * * * *"
+----
+
+=== Tuning guidance for large deployments
+
+* If you observe that the NOM persistence database grows rapidly, consider reducing `metrics.cleanup.retention-time`, for example to `P14D`, and `metrics.aggregation.single-retention-time`, for example to `P1D`, to keep the number of raw and aggregate nodes lower.
+* If individual cleanup transactions are too large and cause contention, reduce `metrics.cleanup.batch-size`, for example to `1000`.
+This makes each transaction smaller, at the cost of more round trips.
+* Running aggregation more frequently, for example every 30 minutes with `0 0/30 * * * *`, reduces the number of raw nodes that accumulate between runs, which in turn makes each aggregation pass faster.
+
+[NOTE]
+====
+Cron expressions follow the Spring Framework six-field format: `seconds minutes hours day-of-month month day-of-week`.
+====

@@ -45,6 +45,7 @@ The circuit breaker is automatically configured and cannot be disabled. If there
 [NOTE]
 ====
 Best practices dictate the use of a minimum duration filter which greatly cuts down on the volume of logs to be processed, while preserving queries of interest. The built-in obfuscation functionality also helps by reducing query text cardinality.
+For the minimum duration filter and its default value, see *xref:../operation/large-installations.adoc#querylog-min-duration[Limiting the query log volume with a minimum duration]*.
 ====
 
 == Data caching
@@ -75,3 +76,6 @@ The metrics buffer can be adjusted by changing the outgoing message buffer size 
 | The maximum number of outgoing messages to buffer (optional)
 | 200
 |===
+
+If the incoming query log buffer of the agent, or the corresponding buffer on the server side, overflows, warnings are written to the agent and server logs.
+These warnings and their remediation are described in *xref:../operation/large-installations.adoc#querylog-buffer-overflow[Query log buffer overflow warnings]*.
