@@ -80,6 +80,16 @@ QueryLogReceiverService buffer overflow (N/128) - dropping message. Consider inc
 In both cases, the recommended remediation is to raise `CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION` on the agent, as described in <<querylog-min-duration,Limiting the query log volume with a minimum duration>>.
 The server-side protection against query log overload is described in xref:introduction/resilience.adoc[Resilience].
 
+[NOTE]
+====
+Older versions of NOM might only tell you when the buffer overflow happens with a message like this:
+
+[source, role=noheader]
+----
+QueryLogReceiverService buffer overflow - dropping message
+----
+====
+
 === Query log retention
 
 Individual queries are retained for 24 hours, after which they are aggregated into one-hour blocks.
