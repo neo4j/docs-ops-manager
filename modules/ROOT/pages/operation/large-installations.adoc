@@ -82,8 +82,9 @@ The server-side protection against query log overload is described in xref:intro
 
 === Query log retention
 
-Individual query executions older than 30 days are deleted from the NOM persistence database automatically.
-Aggregated query statistics, which are rolled up per query fingerprint per day, are retained for an additional 30 days after the individual executions are removed.
+Individual queries are retained for 24 hours, after which they are aggregated into one-hour blocks.
+You can still view information, such as the average time to execute the query and how many times it was executed within the time window.
+After 7 days, the queries are further aggregated into 24-hour blocks and retained for an additional 30 days.
 
 For more information about how query logs are presented and aggregated, see xref:monitoring/log-manager.adoc[Log manager].
 
