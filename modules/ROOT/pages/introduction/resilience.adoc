@@ -78,4 +78,4 @@ The metrics buffer can be adjusted by changing the outgoing message buffer size 
 |===
 
 If the incoming query log buffer of the agent, or the corresponding buffer on the server side, overflows, warnings are written to the agent and server logs.
-These warnings and their remediation are described in *xref:../operation/large-installations.adoc#querylog-buffer-overflow[Query log buffer overflow warnings]*.
+These warnings and their remediation are described in *xref:../operation/large-installations.adoc#querylog-min-duration[Limiting the query log volume with a minimum duration]*.
