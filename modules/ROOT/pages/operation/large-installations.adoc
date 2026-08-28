@@ -25,6 +25,7 @@ Only queries whose elapsed time is greater than or equal to this value, in milli
 Lower the threshold gradually once you have confirmed that NOM server can keep up.
 * Errors, that is, queries that produced a failure reason in the Neo4j query log, bypass the duration filter by default, so they are always ingested regardless of their elapsed time.
 To filter errors by duration as well, set `CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION_FILTER_ERRORS` to `true`.
+Make sure to replace `N` with the number of the dbms on your system you want to monitor
 
 The minimum duration can be set in either of the following ways:
 
@@ -49,46 +50,12 @@ For the agent configuration file, see xref:addition/agent-installation/agent-con
 If a workload issues many structurally identical queries with different literal values, for example `MATCH (n) WHERE n.id = 42`, switching to parameterized queries, for example `MATCH (n) WHERE n.id = $id`, reduces the number of distinct query log entries that NOM needs to store, and makes the aggregated statistics more meaningful.
 ====
 
-[[querylog-buffer-overflow]]
-=== Query log buffer overflow warnings
-
-When the incoming message buffer of the agent reaches 80% of its capacity, that is `13107` of `16384` slots, the agent emits a `WARN` level log entry:
-
-[source, role=noheader]
-----
-Query log message buffer is nearly full (N/16384). Consider increasing CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION to reduce ingestion rate.
-----
-
-When the buffer is completely full, the agent drops the incoming message and enters a 60-second cooldown, during which all further messages are discarded.
-An agent event, `FAILED_QUERYLOG_INCOMING_OVERFLOW`, is also raised and is visible in the NOM UI.
-
-On the NOM server side, a similar buffer of `128` pending message batches exists.
-When it reaches 80% of its capacity, that is `102` batches or more, NOM server logs:
-
-[source, role=noheader]
-----
-QueryLogReceiverService buffer is nearly full (N/128)! Consider increasing CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION on the agent to reduce query log ingestion rate.
-----
-
-When the buffer is full, that is `128` batches or more, the incoming batches from that agent are dropped:
-
-[source, role=noheader]
-----
-QueryLogReceiverService buffer overflow (N/128) - dropping message. Consider increasing CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION on the agent to reduce query log ingestion rate.
-----
-
-In both cases, the recommended remediation is to raise `CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION` on the agent, as described in <<querylog-min-duration,Limiting the query log volume with a minimum duration>>.
-The server-side protection against query log overload is described in xref:introduction/resilience.adoc[Resilience].
-
-[NOTE]
-====
-Older versions of NOM might only tell you when the buffer overflow happens with a message like this:
-
+If you see the agent log with the following message, it means that the query log ingestion rate is too high for the agent to keep up:
 [source, role=noheader]
 ----
 QueryLogReceiverService buffer overflow - dropping message
 ----
-====
+Seeing this message means you should adjust the `CONFIG_INSTANCE_N_QUERY_LOG_MIN_DURATION` setting on the agent to reduce the ingestion rate.
 
 === Query log retention
 
@@ -116,7 +83,7 @@ For a description of how the aggregated metrics are presented, see xref:monitori
 
 === Aggregation and cleanup configuration reference
 
-All of the schedules and retention windows above are configurable through NOM server properties.
+All the schedules and retention windows above are configurable through NOM server properties.
 They can be set in `application.properties`, as environment variables, or as command line arguments to `java -jar server.jar`, in the same way as any other server property.
 See xref:installation/server.adoc#config_ref[Server configuration reference].
 
@@ -130,7 +97,7 @@ See xref:installation/server.adoc#config_ref[Server configuration reference].
 | `metrics.aggregation.schedule`
 | `METRICS_AGGREGATION_SCHEDULE`
 | `0 05 * * * *`
-| Cron expression that controls how often the hourly aggregation runs.
+| Cron expression that controls how often the aggregation runs.
 
 | `metrics.aggregation.single-retention-time`
 | `METRICS_AGGREGATION_SINGLE_RETENTION_TIME`
@@ -162,6 +129,11 @@ java -jar server.jar \
   --metrics.aggregation.single-retention-time=P1D \
   --metrics.aggregation.schedule="0 0/30 * * * *"
 ----
+
+[NOTE]
+====
+In some versions of Neo4j Ops Manager, changing `metrics.aggregation.schedule` will take effect, but the corresponding log line might still refer to it as `Running scheduled hourly metrics aggregation.`.
+====
 
 === Tuning guidance for large deployments
 
