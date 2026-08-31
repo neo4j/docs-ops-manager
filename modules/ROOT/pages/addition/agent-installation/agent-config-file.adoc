@@ -30,3 +30,6 @@ token:
     clientId: "<agent client ID>"
     clientSecret: "<agent client secret>" 
 ----
+
+Instance-level query log options can also be expressed in the configuration file, for example the minimum query duration as `queryLogMinDuration: "50"`, which is the equivalent of the `CONFIG_INSTANCE_n_QUERY_LOG_MIN_DURATION` environment variable.
+For guidance on choosing a value in deployments with a high query throughput, see xref:/operation/large-installations.adoc#querylog-ingestion[Large installations].
