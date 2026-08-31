@@ -6,7 +6,10 @@ The time window for displayed data can be switched on top left of the metrics pa
 
 [NOTE]
 ====
-To allow efficient metric storage, metrics data older than 3 days is aggregated to hourly summary.
+To allow efficient metric storage, by default the metrics data older than 3 days is aggregated to hourly summary, and the raw data points are then deleted.
+The aggregated data is retained for 31 days.
+Both retention windows, as well as the schedules of the aggregation and cleanup jobs, are configurable.
+For details, see *xref:../operation/large-installations.adoc#metrics-aggregation[Large installations]*.
 ====
 
 The "Show Resources" button in the *Host* tab and *Instance* tab shows a table with static data for managed DBMSs, like the number CPU cores of the system (physical and logical) and memory/disk capacities.
