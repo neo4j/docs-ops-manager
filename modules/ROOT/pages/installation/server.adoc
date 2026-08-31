@@ -367,7 +367,7 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 
 | `metrics.cleanup.retention-time`
 | `METRICS_CLEANUP_RETENTION_TIME`
-| ISO-8601 duration. Aggregated metric nodes older than this are deleted. Default: `P31D`. (optional)
+| ISO-8601 duration. Aggregated metric nodes older than this are deleted. Default: `P31D`. (optional). `P31D` is the maximum retention time supported by the UI.
 | `P14D`
 
 | `metrics.cleanup.batch-size`

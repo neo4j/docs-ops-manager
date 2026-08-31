@@ -102,7 +102,7 @@ See xref:installation/server.adoc#config_ref[Server configuration reference].
 | `metrics.cleanup.retention-time`
 | `METRICS_CLEANUP_RETENTION_TIME`
 | `P31D`
-| ISO-8601 duration. Aggregated metric nodes older than this are deleted.
+| ISO-8601 duration. Aggregated metric nodes older than this are deleted. `P31D` is the maximum retention time supported by the UI.
 
 | `metrics.cleanup.batch-size`
 | `METRICS_CLEANUP_BATCH_SIZE`
