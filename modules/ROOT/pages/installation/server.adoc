@@ -360,16 +360,6 @@ For details about configuring proxy in Java, see link:https://docs.oracle.com/en
 | Log level of the configuration logger. Setting it to `debug` is useful for troubleshooting SSO issues. Default: `info`. (optional)
 | `error`, `warn`, `info`, `debug` or `trace`
 
-| `metrics.aggregation.schedule`
-| `METRICS_AGGREGATION_SCHEDULE`
-| Cron expression that controls how often raw metric nodes are aggregated into hourly summaries. Default: `0 05 * * * *`. (optional)
-| `0 0/30 * * * *`
-
-| `metrics.aggregation.single-retention-time`
-| `METRICS_AGGREGATION_SINGLE_RETENTION_TIME`
-| ISO-8601 duration. Raw metric nodes older than this are eligible for aggregation. Default: `P3D`. (optional)
-| `P1D`
-
 | `metrics.cleanup.schedule`
 | `METRICS_CLEANUP_SCHEDULE`
 | Cron expression that controls how often aggregated metric nodes older than the retention time are deleted. Default: `0 0 2 * * *`. (optional)

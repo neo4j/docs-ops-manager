@@ -94,16 +94,6 @@ See xref:installation/server.adoc#config_ref[Server configuration reference].
 | Default
 | Description
 
-| `metrics.aggregation.schedule`
-| `METRICS_AGGREGATION_SCHEDULE`
-| `0 05 * * * *`
-| Cron expression that controls how often the aggregation runs.
-
-| `metrics.aggregation.single-retention-time`
-| `METRICS_AGGREGATION_SINGLE_RETENTION_TIME`
-| `P3D`
-| ISO-8601 duration. Raw metric nodes older than this are eligible for aggregation.
-
 | `metrics.cleanup.schedule`
 | `METRICS_CLEANUP_SCHEDULE`
 | `0 0 2 * * *`
@@ -125,19 +115,11 @@ The following example passes overrides as Java arguments:
 [source, terminal, role=noheader]
 ----
 java -jar server.jar \
-  --metrics.cleanup.retention-time=P14D \
-  --metrics.aggregation.single-retention-time=P1D \
-  --metrics.aggregation.schedule="0 0/30 * * * *"
+  --metrics.cleanup.retention-time=P14D
 ----
-
-[NOTE]
-====
-In some versions of Neo4j Ops Manager, changing `metrics.aggregation.schedule` will take effect, but the corresponding log line might still refer to it as `Running scheduled hourly metrics aggregation.`.
-====
 
 === Tuning guidance for large deployments
 
-* If you observe that the NOM persistence database grows rapidly, consider reducing `metrics.cleanup.retention-time`, for example to `P14D`, and `metrics.aggregation.single-retention-time`, for example to `P1D`, to keep the number of raw and aggregate nodes lower.
 * If individual cleanup transactions are too large and cause contention, reduce `metrics.cleanup.batch-size`, for example to `1000`.
 This makes each transaction smaller, at the cost of more round trips.
 * Running aggregation more frequently, for example every 30 minutes with `0 0/30 * * * *`, reduces the number of raw nodes that accumulate between runs, which in turn makes each aggregation pass faster.
