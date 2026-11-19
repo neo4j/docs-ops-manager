@@ -84,7 +84,7 @@ Save and exit — `systemctl` edit creates `/etc/systemd/system/neo4j-ops-manage
 sudo systemctl restart neo4j-ops-manager-server
 ----
 
-==== Verify it took effect
+==== Verify the effect
 [source, terminal, role=noheader]
 ----
 systemctl show neo4j-ops-manager-server -p Environment
