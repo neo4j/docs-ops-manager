@@ -75,7 +75,7 @@ In the editor, add:
 Environment="JAVA_OPTS=-XX:-UseBASE64Intrinsics"
 ----
 
-Save and exit — `systemctl` edit creates `/etc/systemd/system/neo4j-ops-manager-server.service.d/override.conf` and reloads systemd automatically.
+Save and exit — `systemctl` edit creates `/etc/systemd/system/neo4j-ops-manager-server.service.d/override.conf` and reloads `systemd` automatically.
 
 ==== Restart the service
 
