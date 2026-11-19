@@ -1,0 +1,142 @@
+= Java4Shell (CVE-2026-114938) mitigations for Neo4j Ops Manager Server
+
+Updating to a patched Java version is the best mitigation.
+
+If this is not possible then it is advised to add `-XX:-UseBASE64Intrinsics` as a Java Option.
+The following examples show how this can be done for different installation modalities.
+
+[IMPORTANT]
+====
+The latest (1.15.7) version of neo4j/neo4j-ops-manager-server image does not contain a patched version of Java.
+If you are using this image - please follow the instructions on this page to mitigate the CVE.
+====
+
+== Running with docker
+=== NOM Server Docker container
+
+==== Add the option
+
+Add `-e "JAVA_TOOL_OPTIONS=-XX:-UseBASE64Intrinsics"` to your docker run command.
+e.g.
+
+. With command line options
++
+[source, shell, role=noheader]
+----
+docker run -e "JAVA_TOOL_OPTIONS=-XX:-UseBASE64Intrinsics" neo4j/neo4j-ops-manager-server \
+    --spring.neo4j.uri=<Value> \
+    --spring.neo4j.authentication.username=<Value> \
+    --spring.neo4j.authentication.password=<Value> \
+    --server.port=8080 \
+    --server.ssl.key-store-type=PKCS12 \
+    --server.ssl.key-store=<Value> \
+    --server.ssl.key-store-password=<Value> \
+    --grpc.server.port=9090 \
+    --grpc.server.security.key-store-type=PKCS12 \
+    --grpc.server.security.key-store=<Value> \
+    --grpc.server.security.key-store-password=<Value> \
+----
+
+. With environment variables
++
+[source, shell, role=noheader]
+----
+docker run \
+    -e "JAVA_TOOL_OPTIONS=-XX:-UseBASE64Intrinsics" \
+    -e "SPRING_NEO4J_URI=<Value>" \
+    -e "SPRING_NEO4J_USERNAME=<Value>" \
+    -e "SPRING_NEO4J_PASSWORD=<Value>" \
+    -e "SERVER_PORT=8080" \
+    -e "SERVER_SSL_KEY_STORE_TYPE=PKCS12" \
+    -e "SERVER_SSL_KEY_STORE=<Value>" \
+    -e "SERVER_SSL_KEY_STORE_PASSWORD=<Value>" \
+    -e "GRPC_SERVER_PORT=9090" \
+    -e "GRPC_SERVER_SECURITY_KEY_STORE_TYPE=PKCS12" \
+    -e "GRPC_SERVER_SECURITY_KEY_STORE=<Value>" \
+    -e "GRPC_SERVER_SECURITY_KEY_STORE_PASSWORD=<Value>" \
+    neo4j/neo4j-ops-manager-server
+----
+
+[[service]]
+== Running as a service
+
+=== Linux (systemd)
+==== Add the option
+[source, terminal, role=noheader]
+----
+sudo systemctl edit neo4j-ops-manager-server
+----
+
+In the editor, add:
+
+[source, terminal, role=noheader]
+----
+[Service]
+Environment="JAVA_OPTS=-XX:-UseBASE64Intrinsics"
+----
+
+Save and exit — `systemctl` edit creates `/etc/systemd/system/neo4j-ops-manager-server.service.d/override.conf` and reloads `systemd` automatically.
+
+==== Restart the service
+
+[source, terminal, role=noheader]
+----
+sudo systemctl restart neo4j-ops-manager-server
+----
+
+==== Verify the effect
+[source, terminal, role=noheader]
+----
+systemctl show neo4j-ops-manager-server -p Environment
+PID=$(pgrep -f 'org.springframework.boot.loader.launch.JarLauncher')
+$JAVA_HOME/bin/jcmd "$PID" VM.flags | tr ' ' '\n' | grep -i Base64
+----
+Expected:
+-XX:-UseBASE64Intrinsics
+
+Also visible directly on the process command line, since the launcher execs java:
+[source, terminal, role=noheader]
+----
+ps -o args= -p "$(pgrep -f JarLauncher)"
+----
+
+=== Windows
+==== Add the option
+Edit C:\neo4j-ops-manager-server\bin\server.xml and add the flag to the start of <arguments>, before -jar:
+[source, terminal, role=noheader]
+----
+    <!-- Arguments, which should be passed to the executable. -->
+    <arguments>-XX:-UseBASE64Intrinsics -jar %BASE%\..\lib\server.jar
+        --spring.neo4j.uri=neo4j://localhost:7687
+        ...
+    </arguments>
+----
+JVM options must come before `-jar` on the command line; anything after the jar name is handed to the application instead.
+
+==== Restart the service
+[source, terminal, role=noheader]
+----
+cd /d C:\neo4j-ops-manager-server\bin
+server.exe stop
+server.exe start
+----
+
+==== Verify the effect
+
+[source, terminal, role=noheader]
+----
+sc query neo4j-ops-manager-server
+----
+Then confirm the flag reached the JVM — check the actual process command line:
+[source, terminal, role=noheader]
+----
+Get-CimInstance Win32_Process -Filter "name='java.exe'" | Select-Object -ExpandProperty CommandLine
+----
+Or query the running JVM directly:
+[source, terminal, role=noheader]
+----
+$pid2 = (Get-CimInstance Win32_Process -Filter "name='java.exe'").ProcessId
+& "$env:JAVA_HOME\bin\jcmd.exe" $pid2 VM.flags | Select-String -Pattern Base64
+----
+Expected:
+`-XX:-UseBASE64Intrinsics`
