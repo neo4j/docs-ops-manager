@@ -5,10 +5,10 @@ Updating to a patched Java version is the best mitigation.
 If this is not possible then it is advised to add `-XX:-UseBASE64Intrinsics` as a Java Option.
 The following examples show how this can be done for different installation modalities.
 
-[IMPORTANT]
+[NOTE]
 ====
-The latest (1.15.7) version of neo4j/neo4j-ops-manager-server image does not contain a patched version of Java.
-If you are using this image - please follow the instructions on this page to mitigate the CVE.
+The latest (1.15.8) version of neo4j/neo4j-ops-manager-server image contains a patched version of Java.
+If you are using an image with a lower version - please follow the instructions on this page to mitigate the CVE.
 ====
 
 == Running with docker
