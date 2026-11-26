@@ -102,7 +102,7 @@ ps -o args= -p "$(pgrep -f JarLauncher)"
 
 === Windows
 ==== Add the option
-Edit C:\neo4j-ops-manager-server\bin\server.xml and add the flag to the start of <arguments>, before -jar:
+Edit _C:\neo4j-ops-manager-server\bin\server.xml_ and add the flag to the start of `<arguments>`, before `-jar`:
 [source, terminal, role=noheader]
 ----
     <!-- Arguments, which should be passed to the executable. -->
